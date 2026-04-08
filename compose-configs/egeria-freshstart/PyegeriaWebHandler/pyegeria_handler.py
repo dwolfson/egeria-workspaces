@@ -23,12 +23,11 @@ os.environ.setdefault("EGERIA_OUTBOX_PATH", "dr-egeria-outbox")
 EGERIA_USER = os.environ.get("EGERIA_USER", "erinoverview")
 EGERIA_USER_PASSWORD = os.environ.get("EGERIA_USER_PASSWORD", "secret")
 
-import dr_egeria_md
-
+from pyegeria.md_processing.dr_egeria import process_md_file
 
 app = FastAPI(
     title="Dr. Egeria Markdown Processor API",
-    description="POST an instruction to process a Markdown file via dr_egeria_md.process_markdown_file and get the console output back.",
+    description="POST an instruction to process a Markdown file via process_md_file and get the console output back.",
     version="1.0.0",
 )
 
@@ -55,14 +54,12 @@ def _run_and_capture(func: Callable, *args, **kwargs) -> str:
     """Run a callable capturing both stdout and stderr and return the combined text."""
     stdout_buf = io.StringIO()
     stderr_buf = io.StringIO()
-    # Ensure environment variables expected by dr_egeria_md are available
-    # (these provide defaults but we allow explicit args to override)
-    # Not strictly required, but harmless if present.
+    # Ensure environment variables expected are available
     with redirect_stdout(stdout_buf), redirect_stderr(stderr_buf):
         try:
             func(*args, **kwargs)
         except SystemExit:
-            # In case click decorators try to exit, ignore for direct call
+            # In case wrappers try to exit, ignore for direct call
             pass
     out = stdout_buf.getvalue()
     err = stderr_buf.getvalue()
@@ -70,12 +67,8 @@ def _run_and_capture(func: Callable, *args, **kwargs) -> str:
 
 
 def _invoke_processor(req: ProcessRequest) -> str:
-    # Click wraps the function; use the callback when present and pass kwargs
-    cmd = dr_egeria_md.process_md_file
-    func = getattr(cmd, "callback", cmd)
-
     return _run_and_capture(
-        func,
+        process_md_file,
         input_file=req.input_file,
         output_folder=req.output_folder or "",
         directive=req.directive,

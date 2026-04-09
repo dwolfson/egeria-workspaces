@@ -23,7 +23,7 @@ os.environ.setdefault("EGERIA_OUTBOX_PATH", "dr-egeria-outbox")
 EGERIA_USER = os.environ.get("EGERIA_USER", "erinoverview")
 EGERIA_USER_PASSWORD = os.environ.get("EGERIA_USER_PASSWORD", "secret")
 
-from pyegeria.md_processing.dr_egeria import process_md_file
+from md_processing.dr_egeria import process_md_file
 
 app = FastAPI(
     title="Dr. Egeria Markdown Processor API",

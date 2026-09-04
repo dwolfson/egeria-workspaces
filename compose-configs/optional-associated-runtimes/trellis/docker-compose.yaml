@@ -52,7 +52,8 @@
 #     name, never the raw CLI.
 #   - `resource-explorer worker` exists (worker.py; advisory-lock leader
 #     election per loop), and `web` takes --embed-worker/--workers.
-#   - EA reads ADVISOR_MODEL_TIER (dev | demo-gpu | demo-cpu), which sets the
+#   - Both apps read a model tier (EA: ADVISOR_MODEL_TIER, RE: EXPLORER_MODEL_TIER;
+#     one TRELLIS_MODEL_TIER in .env feeds both; dev | demo-gpu | demo-cpu), which sets the
 #     per-slot models, num_ctx and the RAG context budget app-side.
 #   Not yet: the A2A role has no auth and is not exposed here; the run queue
 #   (plan step 2b) is pending, so a long survey still runs in the process
@@ -114,6 +115,7 @@ services:
       # 2026-09-04 fix for the orphaned-ephemeral-server incident; only
       # meaningful if the optional prefect runtime is also brought up. ────
       PREFECT_ENABLED: "false"
+      EXPLORER_MODEL_TIER: "${TRELLIS_MODEL_TIER:-demo-cpu}"
 
       OBSERVABILITY__MLFLOW__ENABLED: "false"
       OBSERVABILITY__PHOENIX__ENABLED: "false"
@@ -155,6 +157,7 @@ services:
       LLM__OLLAMA__BASE_URL: http://ollama:11434
       LLM__OLLAMA__MODEL: "${TRELLIS_MODEL_GENERAL:-llama3.1:8b}"
       PREFECT_ENABLED: "false"
+      EXPLORER_MODEL_TIER: "${TRELLIS_MODEL_TIER:-demo-cpu}"
     extra_hosts:
       - "host.docker.internal:${HOST_GATEWAY_IP:-host-gateway}"
     depends_on:
@@ -174,7 +177,7 @@ services:
       # no tier concept yet). Included as a forward-compat placeholder;
       # the model actually loaded today is OLLAMA_MODEL/OLLAMA_CODE_MODEL
       # and advisor.yaml's per-slot models. ────────────────────────────────
-      ADVISOR_MODEL_TIER: "${ADVISOR_MODEL_TIER:-demo-cpu}"
+      ADVISOR_MODEL_TIER: "${TRELLIS_MODEL_TIER:-demo-cpu}"
 
       PGVECTOR_HOST: egeria-shared-postgres
       PGVECTOR_PORT: "5442"

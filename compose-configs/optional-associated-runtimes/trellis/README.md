@@ -44,7 +44,7 @@ docker compose \
   up -d
 ```
 
-### trevor, once its NVIDIA driver + nvidia-container-toolkit are installed — `demo-gpu` tier
+### trevor (RTX 2070 SUPER, driver + toolkit installed 2026-09-04; needs native Docker Engine) — `demo-gpu` tier, 8B in every slot
 
 ```bash
 docker compose \
@@ -55,7 +55,7 @@ docker compose \
   up -d
 ```
 
-### cray, or trevor before its driver is installed — `demo-cpu` tier
+### cray — `demo-cpu` tier (no LLM-interactive demos; see the plan's measurements)
 
 ```bash
 docker compose \
@@ -69,7 +69,7 @@ There's no `docker-compose.ollama-cpu.yaml` overlay — `../ollama/docker-compos
 CPU-only (`ollama/ollama:latest`, no GPU stanza), so the CPU path is just the base file with no
 overlay, as in the command above.
 
-Set `ADVISOR_MODEL_TIER` (and `TRELLIS_MODEL_CODE`) in `.env` per box first — copy
+Set `ADVISOR_MODEL_TIER` (and `TRELLIS_MODEL_CODE`) in `.env` per box first. Owner's decision 2026-09-04: trevor runs the 8B model in every slot including code, because codellama:13b (7.4 GB) does not fit beside llama3.1:8b in 8 GB of VRAM; hedwig can afford the 13B. Copy
 `.env.example` to `.env` in this directory and see its tier table.
 
 ## Pulling models

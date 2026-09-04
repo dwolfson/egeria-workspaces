@@ -128,6 +128,11 @@ services:
 
   trellis-re-worker:
     image: trellis/resource-explorer:local
+    # The image HEALTHCHECK curls the web port; the worker role serves no HTTP,
+    # so that check would mark a healthy worker unhealthy. Liveness for the
+    # worker is its advisory-lock ownership (see `make ps` / pg_locks).
+    healthcheck:
+      disable: true
     volumes:
       - trellis-re-data:/app/data
     container_name: trellis-re-worker

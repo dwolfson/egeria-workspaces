@@ -61,6 +61,8 @@
 services:
   trellis-re-web:
     image: trellis/resource-explorer:local
+    volumes:
+      - trellis-re-data:/app/data
     container_name: trellis-re-web
     command: ["web"]
     networks:
@@ -126,6 +128,8 @@ services:
 
   trellis-re-worker:
     image: trellis/resource-explorer:local
+    volumes:
+      - trellis-re-data:/app/data
     container_name: trellis-re-worker
     command: ["worker"]
     networks:
@@ -157,6 +161,8 @@ services:
 
   trellis-ea-web:
     image: trellis/egeria-advisor:local
+    volumes:
+      - trellis-ea-data:/app/data
     container_name: trellis-ea-web
     command: ["web"]
     networks:
@@ -165,6 +171,7 @@ services:
       - "8880:8880"
     restart: unless-stopped
     environment:
+      ADVISOR_DATA_PATH: /app/data
       # ── Model tier (target state — see header note; inert today, EA has
       # no tier concept yet). Included as a forward-compat placeholder;
       # the model actually loaded today is OLLAMA_MODEL/OLLAMA_CODE_MODEL
@@ -213,3 +220,10 @@ networks:
   egeria_network:
     name: egeria_network
     external: true
+
+volumes:
+  # Writable runtime data for the non-root image user (/app/data in both images):
+  # RE's cloned survey checkouts and caches (shared by web and worker), EA's
+  # caches, feedback and per-user document namespaces.
+  trellis-re-data:
+  trellis-ea-data:

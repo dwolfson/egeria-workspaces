@@ -12,6 +12,24 @@ and an Ollama optional runtime. Design background:
 (`make re-web`, `make ea-web` in the trellis repo) against the same shared-infra containers —
 see `docker-compose.yaml`'s header comment for why containerizing the dev loop is dropped.
 
+## Host-native Ollama (Mac dev profile, and trevor's first try)
+
+When inference runs natively on the box (Metal on a Mac; a native CUDA or ROCm Ollama on Linux),
+skip the ollama runtime entirely and use the host overlay, which points the apps at
+`host.docker.internal:11434` (host Ollama must listen on `0.0.0.0`):
+
+```bash
+docker compose \
+  -f ../../shared-infra/shared-infra.yaml \
+  -f docker-compose.yaml \
+  -f docker-compose.ollama-host.yaml \
+  up -d trellis-re-web trellis-re-worker trellis-ea-web
+```
+
+`docker-compose.ollama-container.yaml` is the counterpart for the containerized variants: it joins
+the optional ollama service to the shared network and must be in the stack whenever
+`../ollama/docker-compose.yaml` is.
+
 ## Status
 
 As of 2026-09-04 (trellis branch `re/docs-consolidation-part-2`) everything this runtime references
@@ -39,6 +57,7 @@ Ollama on top of them.
 docker compose \
   -f ../../shared-infra/shared-infra.yaml \
   -f ../ollama/docker-compose.yaml \
+  -f docker-compose.ollama-container.yaml \
   -f docker-compose.ollama-rocm.yaml \
   -f docker-compose.yaml \
   up -d
@@ -50,6 +69,7 @@ docker compose \
 docker compose \
   -f ../../shared-infra/shared-infra.yaml \
   -f ../ollama/docker-compose.yaml \
+  -f docker-compose.ollama-container.yaml \
   -f docker-compose.ollama-nvidia.yaml \
   -f docker-compose.yaml \
   up -d
@@ -61,6 +81,7 @@ docker compose \
 docker compose \
   -f ../../shared-infra/shared-infra.yaml \
   -f ../ollama/docker-compose.yaml \
+  -f docker-compose.ollama-container.yaml \
   -f docker-compose.yaml \
   up -d
 ```

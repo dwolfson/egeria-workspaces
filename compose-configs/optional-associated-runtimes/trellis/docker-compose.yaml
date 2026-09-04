@@ -121,12 +121,8 @@ services:
       OBSERVABILITY__PHOENIX__ENABLED: "false"
     extra_hosts:
       - "host.docker.internal:${HOST_GATEWAY_IP:-host-gateway}"
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:8810/"]
-      interval: 15s
-      timeout: 10s
-      retries: 10
-      start_period: 30s
+    # healthcheck: inherited from the image (curl against /health/ready or /health);
+    # the slim images have no wget, so do not override it here.
 
   trellis-re-worker:
     image: trellis/resource-explorer:local
@@ -206,12 +202,8 @@ services:
       PHOENIX_ENABLE: "false"
     extra_hosts:
       - "host.docker.internal:${HOST_GATEWAY_IP:-host-gateway}"
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:8880/"]
-      interval: 15s
-      timeout: 10s
-      retries: 10
-      start_period: 30s
+    # healthcheck: inherited from the image (curl against /health/ready or /health);
+    # the slim images have no wget, so do not override it here.
 
 networks:
   # Shared network created by ../../shared-infra/shared-infra.yaml; this file is

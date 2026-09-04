@@ -9,11 +9,7 @@
 # Host Ollama must listen on all interfaces (OLLAMA_HOST=0.0.0.0:11434) or at
 # least on the Docker bridge; the default 127.0.0.1 is unreachable from a container.
 #
-#   docker compose \
-#     -f ../../shared-infra/shared-infra.yaml \
-#     -f docker-compose.yaml \
-#     -f docker-compose.ollama-host.yaml \
-#     up -d trellis-re-web trellis-re-worker trellis-ea-web
+#   docker compose -f docker-compose.yaml -f docker-compose.ollama-host.yaml --env-file .env up -d
 services:
   trellis-re-web:
     environment:

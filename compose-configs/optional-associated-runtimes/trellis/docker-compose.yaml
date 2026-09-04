@@ -127,8 +127,6 @@ services:
       timeout: 10s
       retries: 10
       start_period: 30s
-    depends_on:
-      - postgres
 
   trellis-re-worker:
     image: trellis/resource-explorer:local
@@ -160,8 +158,6 @@ services:
       EXPLORER_MODEL_TIER: "${TRELLIS_MODEL_TIER:-demo-cpu}"
     extra_hosts:
       - "host.docker.internal:${HOST_GATEWAY_IP:-host-gateway}"
-    depends_on:
-      - postgres
 
   trellis-ea-web:
     image: trellis/egeria-advisor:local
@@ -216,5 +212,12 @@ services:
       timeout: 10s
       retries: 10
       start_period: 30s
-    depends_on:
-      - postgres
+
+networks:
+  # Shared network created by ../../shared-infra/shared-infra.yaml; this file is
+  # brought up on its own (like ../prefect and ../ollama), never together with
+  # shared-infra.yaml, so it can never recreate the live infrastructure
+  # containers. Postgres/Kroki are reached by container name on this network.
+  egeria_network:
+    name: egeria_network
+    external: true

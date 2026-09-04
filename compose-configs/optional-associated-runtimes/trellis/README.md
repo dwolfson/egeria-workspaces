@@ -20,10 +20,9 @@ skip the ollama runtime entirely and use the host overlay, which points the apps
 
 ```bash
 docker compose \
-  -f ../../shared-infra/shared-infra.yaml \
   -f docker-compose.yaml \
   -f docker-compose.ollama-host.yaml \
-  up -d trellis-re-web trellis-re-worker trellis-ea-web
+  --env-file .env up -d
 ```
 
 `docker-compose.ollama-container.yaml` is the counterpart for the containerized variants: it joins
@@ -55,35 +54,32 @@ Ollama on top of them.
 
 ```bash
 docker compose \
-  -f ../../shared-infra/shared-infra.yaml \
   -f ../ollama/docker-compose.yaml \
   -f docker-compose.ollama-container.yaml \
   -f docker-compose.ollama-rocm.yaml \
   -f docker-compose.yaml \
-  up -d
+  --env-file .env up -d
 ```
 
 ### trevor (RTX 2070 SUPER, driver + toolkit installed 2026-09-04; needs native Docker Engine) — `demo-gpu` tier, 8B in every slot
 
 ```bash
 docker compose \
-  -f ../../shared-infra/shared-infra.yaml \
   -f ../ollama/docker-compose.yaml \
   -f docker-compose.ollama-container.yaml \
   -f docker-compose.ollama-nvidia.yaml \
   -f docker-compose.yaml \
-  up -d
+  --env-file .env up -d
 ```
 
 ### cray — `demo-cpu` tier (no LLM-interactive demos; see the plan's measurements)
 
 ```bash
 docker compose \
-  -f ../../shared-infra/shared-infra.yaml \
   -f ../ollama/docker-compose.yaml \
   -f docker-compose.ollama-container.yaml \
   -f docker-compose.yaml \
-  up -d
+  --env-file .env up -d
 ```
 
 There's no `docker-compose.ollama-cpu.yaml` overlay — `../ollama/docker-compose.yaml` is already
@@ -118,7 +114,7 @@ docker exec ollama ollama pull codellama:13b
 
 ## Building the images
 
-Build the images from the trellis repo with `make images` (single-arch for the host) or pull the multi-arch images CI publishes to ghcr.io/dwolfson/trellis-resource-explorer and trellis-egeria-advisor and switch `image:` accordingly.
+Bring shared-infra up first on its own (`docker compose -f ../../shared-infra/shared-infra.yaml up -d`), then this runtime from this directory with `--env-file .env`; this file never includes shared-infra.yaml, the same way ../prefect and ../ollama attach to the external `egeria_network`. Build the images from the trellis repo with `make images` (single-arch for the host) or pull the multi-arch images CI publishes to ghcr.io/dwolfson/trellis-resource-explorer and trellis-egeria-advisor and switch `image:` accordingly.
 
 1. Add a Dockerfile per package (multi-stage, matching the ONNX-vs-torch decision
    `runtime-architecture-plan.md`'s sequencing step 1/3 calls for), and a `make images` target

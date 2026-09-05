@@ -71,6 +71,12 @@ services:
       - "8810:8810"
     restart: unless-stopped
     environment:
+      # Shared app-JWT secret: one value for every trellis process on this box, or a
+      # session minted by one container (CLI run, worker, web replica) is invalid in
+      # another (each derives a per-hostname secret when unset).
+      TRELLIS_JWT_SECRET: "${TRELLIS_JWT_SECRET:?set TRELLIS_JWT_SECRET in .env (openssl rand -hex 32)}"
+      # GitHub API token for RE surveys/discovery; unauthenticated calls hit the 60/h limit within one survey.
+      GITHUB_TOKEN: "${GITHUB_TOKEN:-}"
       # ── Process role (target state — see header note; inert today) ───────
       WORKERS: "${TRELLIS_RE_WEB_WORKERS:-2}"
       EMBED_WORKER: "false"
@@ -143,6 +149,12 @@ services:
     deploy:
       replicas: 1
     environment:
+      # Shared app-JWT secret: one value for every trellis process on this box, or a
+      # session minted by one container (CLI run, worker, web replica) is invalid in
+      # another (each derives a per-hostname secret when unset).
+      TRELLIS_JWT_SECRET: "${TRELLIS_JWT_SECRET:?set TRELLIS_JWT_SECRET in .env (openssl rand -hex 32)}"
+      # GitHub API token for RE surveys/discovery; unauthenticated calls hit the 60/h limit within one survey.
+      GITHUB_TOKEN: "${GITHUB_TOKEN:-}"
       PGVECTOR_HOST: egeria-shared-postgres
       PGVECTOR_PORT: "5442"
       PGVECTOR_DBNAME: egeria_advisor
@@ -176,6 +188,10 @@ services:
       - "8880:8880"
     restart: unless-stopped
     environment:
+      # Shared app-JWT secret: one value for every trellis process on this box, or a
+      # session minted by one container (CLI run, worker, web replica) is invalid in
+      # another (each derives a per-hostname secret when unset).
+      TRELLIS_JWT_SECRET: "${TRELLIS_JWT_SECRET:?set TRELLIS_JWT_SECRET in .env (openssl rand -hex 32)}"
       ADVISOR_DATA_PATH: /app/data
       # ── Model tier (target state — see header note; inert today, EA has
       # no tier concept yet). Included as a forward-compat placeholder;

@@ -71,6 +71,9 @@ services:
       - "8810:8810"
     restart: unless-stopped
     environment:
+      # Portal SSO: the same shared secret the Portal signs its handoff token with
+      # (EGERIA_ADVISOR_SSO_SECRET on the quickstart side); RE exchanges it at /api/auth/portal.
+      TRELLIS_PORTAL_SECRET: "${ADVISOR_PORTAL_SECRET:-}"
       # Shared app-JWT secret: one value for every trellis process on this box, or a
       # session minted by one container (CLI run, worker, web replica) is invalid in
       # another (each derives a per-hostname secret when unset).

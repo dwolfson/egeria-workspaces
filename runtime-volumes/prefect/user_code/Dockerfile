@@ -1,4 +1,4 @@
-FROM prefecthq/prefect:3-python3.12@sha256:6c0dc14195cae814eddeb66104a8333810a0a9886a5d7f0c45443136f167b3e0
+FROM prefecthq/prefect:3.8.6-python3.12@sha256:ec9e58deaf30002dd65ebb755ca3d9eb5f169902882abf18c79261a4aa95bfe3
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \

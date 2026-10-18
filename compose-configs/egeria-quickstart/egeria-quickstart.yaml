@@ -394,7 +394,10 @@ services:
     networks:
       - egeria_network
     ports:
-      - "${EGERIA_BIND_IP:-127.0.0.1}:8820:8020"
+      # Loopback-only, whatever EGERIA_BIND_IP says: Apache proxies /my-egeria to
+      # quickstart-my-profile:8020 over egeria_network, and a direct path from
+      # outside would skip Apache (and the demo's CSP and TLS).
+      - "127.0.0.1:8820:8020"
     logging:
       driver: "json-file"
       options:

@@ -851,7 +851,7 @@ echo "  - Effective KAFKA_CLUSTER_ID: ${KAFKA_CLUSTER_ID_PRINT}"
 echo "  - Effective EGERIA_MEM_LIMIT: ${EGERIA_MEM_LIMIT_PRINT}"
 echo "  - Effective EGERIA_CPU_LIMIT: ${EGERIA_CPU_LIMIT_PRINT}"
 echo "  - Egeria (platform): https://${HOST_FQDN_PRINT:-localhost}:9443"
-echo "  - JupyterHub:        http://${HOST_FQDN_PRINT:-localhost}:8888  (password: egeria)"
+echo "  - JupyterHub:        http://localhost:8888  (password: egeria; loopback-only -- from another machine use ssh -L 8888:localhost:8888 <host>)"
 echo "  - Obsidian (local):  http://localhost:8860  (WebRTC works on localhost only)"
 echo "  - Obsidian (remote): bound to ${OBSIDIAN_BIND_ADDR:-127.0.0.1} -- use ssh -L 8860:localhost:8860 <host>, or see demo-mode.md"
 if [[ "$SKIP_UNITY_CATALOG" -eq 0 ]]; then

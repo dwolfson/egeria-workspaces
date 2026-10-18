@@ -15,8 +15,11 @@ services:
     networks:
       - egeria_network
     ports:
-      - "${EGERIA_BIND_IP:-127.0.0.1}:7888:7888"
-      - "${EGERIA_BIND_IP:-127.0.0.1}:7889:5678"
+      # Loopback-only, whatever EGERIA_BIND_IP says: Jupyter runs code for anyone
+      # who logs in (shared password), and Apache does not proxy it. From another
+      # machine use an SSH tunnel: ssh -L 7888:localhost:7888 -L 7889:localhost:7889 <host>
+      - "127.0.0.1:7888:7888"
+      - "127.0.0.1:7889:5678"
     logging:
       driver: "json-file"
       options:

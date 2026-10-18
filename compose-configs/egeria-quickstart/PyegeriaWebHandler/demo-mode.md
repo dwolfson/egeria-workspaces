@@ -38,7 +38,7 @@ Once started, the following services are running:
 - HTTP portal (301-redirects to HTTPS): `http://<HOST_FQDN>:8885`
 - HTTPS portal: `https://<HOST_FQDN>` (port 443)
 - Login: `https://<HOST_FQDN>/login`
-- Jupyter: `http://<HOST_FQDN>:8888` (password: `egeria`)
+- Jupyter: `http://localhost:8888` (password: `egeria`). Loopback-only; from another machine use `ssh -L 8888:localhost:8888 <host>`.
 - Obsidian — see [Obsidian browser container](#obsidian-browser-container) below
 
 On first startup the container creates the admin account from the bootstrap credentials. If an admin already exists those values are ignored, so it is safe to leave them set.

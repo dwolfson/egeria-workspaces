@@ -155,7 +155,12 @@ services:
       context: ./PyegeriaWebHandler
       dockerfile: ./Dockerfile-fast-api
     ports:
-      - "${EGERIA_BIND_IP:-127.0.0.1}:7800:8000"
+      # Loopback-only, whatever EGERIA_BIND_IP says: Apache reaches this container
+      # over egeria_network and serves it over TLS on 7843; this plain-HTTP port
+      # acts with the server's Egeria credentials, so it stays on this machine.
+      # Apache does not proxy /sse, so a remote MCP client needs an SSH tunnel:
+      # ssh -L 7800:localhost:7800 <host>
+      - "127.0.0.1:7800:8000"
     logging:
       driver: "json-file"
       options:

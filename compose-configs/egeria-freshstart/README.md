@@ -168,6 +168,7 @@ The freshstart environment supports Dr. Egeria processing on port `7800` (MCP/RE
 
 - **Obsidian Plugins**: See the [Obsidian Plugins README](../../obsidian-plugins/call-dr-egeria/README.md) for details on the **Call Dr. Egeria** plugin (MCP-based, over SSE).
 - **MCP Server**: The backend (port 7800/sse) exposes Dr. Egeria commands as MCP tools.
+- **Loopback-only**: port `7800` is bound to `127.0.0.1` even when `EGERIA_BIND_IP=0.0.0.0`. From another machine use Apache on `https://<host>:7843` for the web pages, or an SSH tunnel (`ssh -L 7800:localhost:7800 <host>`) for MCP/SSE, which Apache does not proxy.
 - **Configuring Profiles**: Use `fs-view-server` and `https://localhost:8443` in your plugin settings.
 
 ----

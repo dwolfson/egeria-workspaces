@@ -291,3 +291,6 @@ compose-configs/*/.env.pyegeria
 .claude/worktrees/
 .claude/projects/
 .claude/scheduled_tasks.lock
+
+# Node dependencies (install with `npm ci`; platform-specific binaries must not be committed)
+node_modules/

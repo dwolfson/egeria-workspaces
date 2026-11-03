@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Data Mesh uses the shared relationship components** from `static/egeria-shared-ui.js` instead of private copies, so its rows also show each related element's description. Its detail pane uses the shared resize hook, so it can be dragged up to the window width minus 200px (it stopped at 640px) and remembers its width.
 - **The `pyegeria` floor is now 6.2.11** in the pyegeria-web and Jupyter/my-egeria images (quickstart and freshstart). It adds the Business Capability commands, routes deprecated wrappers of removed Egeria endpoints to their replacements, and makes `get_platform_organization` read `/api/public/app/info`.
 - **`call-dr-egeria` Obsidian plugin dependencies updated** (`npm audit` now reports 0 vulnerabilities, down from 8 advisories including 1 critical); the committed `node_modules` and bundled `main.js` were rebuilt. Supersedes Dependabot PRs #650, #665, #678, #689, #690, #696 and #697.
+- **`call-dr-egeria` no longer tracks `node_modules`**: the ~4,600 committed dependency files (including macOS-only esbuild binaries that broke `npm run build` on Linux) are untracked and `node_modules/` is in `.gitignore`. Run `npm ci` in `obsidian-plugins/call-dr-egeria` before building; the bundled `main.js` is still committed.
 - **README**: the OpenSSF Scorecard badge now links to this repository's scorecard (it pointed at `odpi/egeria`), the license badge points at this repository, and the Airflow/Marquez and Unity Catalog startup flags are documented.
 
 ### Fixed

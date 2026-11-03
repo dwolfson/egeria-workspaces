@@ -23,9 +23,11 @@ For full setup and configuration details see the primary guide:
 
 ```bash
 cd obsidian-plugins/call-dr-egeria
-npm install
+npm ci
 npm run build
 ```
+
+`node_modules/` is not committed (it holds platform-specific binaries), so run `npm ci` on each machine before building. The bundled `main.js` is committed.
 
 ## Deploy
 

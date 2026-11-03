@@ -283,3 +283,6 @@ coco-workbooks/1. coco-data-hub/mapping-the-systems/supply-chain-lineage-report.
 
 # pyegeria version pin written by quick-start-local/fresh-start-local --pyegeria-version
 compose-configs/*/.env.pyegeria
+
+# Node dependencies (install with `npm ci`; platform-specific binaries must not be committed)
+node_modules/

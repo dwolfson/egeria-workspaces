@@ -10,7 +10,7 @@ Access it from the portal tile (🗂️ Local Dashboards) or directly at `/local
 
 The landing page lists every Dashboard Sheet that exists. Selecting one renders its Placements in order — each Report placement runs live against Egeria and renders the result inline (table, chart, or whatever the underlying Report Spec produces); a nested Dashboard Sheet placement renders that sheet inline too.
 
-Because Report placements resolve live, a sheet always reflects Egeria's current state — there's no separate "refresh the dashboard" step, and no stale cached snapshot to worry about.
+Each placement runs its report against Egeria as the person viewing the sheet. To make a revisit quick, the Portal keeps each viewer's recent results for a few minutes (five by default). Within that time a revisit is instant; after it, you see the previous result straight away while a fresh one is fetched in the background. A viewer's **refresh** skips the saved result and runs now. Results are never shared between people, and a failed or refused run is never saved. See [Portal caches](../Internals/portal-caches.md).
 
 ---
 

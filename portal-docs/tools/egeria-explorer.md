@@ -73,6 +73,16 @@ Read-only reference material; most don't require a live server connection.
 
 ---
 
+## As of: viewing the past
+
+Views that list or open elements carry an **As of** slider. Move it left to see the estate as Egeria held it at an earlier time; leave it at the right edge for now. The slider works in **Information Supply Chains**, **Glossary**, **Digital Products**, **Collections**, **Perspectives**, **Actors** (profiles, roles and identities), **Community**, **Business Capability** and **Projects**, and in [Lineage Explorer](lineage-explorer.md#time-slider).
+
+"As of" means Egeria's own point-in-time query: lists, details, members and relationships are all read as they were at that moment. An element created after that time is not there, and an element you opened before moving the slider shows **"This … did not exist at <time>."** instead of an error. Relationships added or removed since then change the members you see: a capability can have 7 members now and 6 as of last week.
+
+Some secondary panels are not yet time-aware and always show the current state, even with a past time set: the diagram (Mermaid) sections, the "Where is this used?" assigned-elements list, the raw JSON viewer, and the feedback and comments widgets.
+
+---
+
 ## Reports: what a report spec will do
 
 The **Reports** tab shows what pyegeria knows about every report spec *before* you run it. pyegeria resolves each spec when it loads, and the Portal shows that answer: it does not re-check anything itself. The screenshots below were taken from the deployed Portal on **2026-11-09** (pyegeria 6.2.28, quickstart).
@@ -130,6 +140,10 @@ None of the built-in routines declares `viewer`, a reader or a subject today.
 
 This was checked against the code on 2026-11-09. When the browser starts sending a token, the server already uses it (the client then holds no password, and an expired token is refused with the 401 words below), but no page does that yet.
 
+### Where report specs come from
+
+The specs in the list come from three places, and when two use the same name the higher one wins: **local** (your own JSON files or code registered in your environment) over **held in Egeria** over **built-in**. The built-in specs ship inside pyegeria as packaged JSON, so a fresh install has them with no setup. A local spec with the same name as a built-in replaces it, and pyegeria logs one warning saying so; the original stays reachable as `builtin:<name>`. See [Where pyegeria looks for user specs](https://github.com/odpi/egeria-python/blob/main/docs/output-formats-and-report-specs.md#where-pyegeria-looks-for-user-specs).
+
 ### Running a spec, and when it refuses
 
 **▶ Run** is disabled, with the reason beside it, when it cannot work: `Required: <param>` for a required parameter left blank, or `Cannot run:` followed by the resolver's words for a spec it refused. The Resource Explorer curation-coverage routine, for one, needs its `slug` filled in before Run is enabled. **▶ Run** posts to the Portal, which calls pyegeria. A refusal comes back as a non-2xx response, and the Portal shows the server's own words verbatim in a box labelled by the status:
@@ -147,7 +161,7 @@ This was checked against the code on 2026-11-09. When the browser starts sending
 
 Two refusals you may meet on pyegeria 6.2.28:
 
-- **`*` with no type, or with `OpenMetadataRoot` or `Referenceable`** is refused (`give a search string or a narrower type`). `*` with a real type lists at most 100 elements of that type per call.
+- **`*` with no type, or with `OpenMetadataRoot` or `Referenceable`** is refused in plain words (`give a search string or a narrower type`): a `*` search over every element would list the whole estate. Nothing is sent to Egeria. Give a search string, or pick a narrower type; `*` with a real type lists at most 100 elements of that type per call. pyegeria logs this refusal as a warning, not an error.
 - **A find method that is not on the allowlist** is refused with words. Specs held in Egeria may name only the find methods on pyegeria's positive allowlist (`FIND_METHOD_ALLOWLIST`), whatever the method's prefix. pyegeria loads such specs when it is set up to; the Portal lists whatever pyegeria has loaded and does not mark where a spec came from, and none of the 440 on the quickstart on 2026-11-09 has an `egeria:` name.
 
 ### Technology parameter and type filters

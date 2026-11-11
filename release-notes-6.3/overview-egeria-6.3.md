@@ -13,7 +13,7 @@ Egeria 6.3 is delivered by several projects that work together:
 |---|---|---|
 | **Egeria platform** | The metadata server and its connectors. | Everyone, underneath. |
 | **Egeria Workspaces** (`odpi/egeria-workspaces`) | A ready-to-run environment: the platform, shared infrastructure, demo content for the fictional Coco Pharmaceuticals, and the **Portal**, a set of browser apps for exploring and governing metadata. | Anyone who wants to try Egeria or run it locally. |
-| **Resource Explorer** and **Egeria Advisor** (`dwolfson/trellis`) | Two AI-assisted applications. Resource Explorer surveys resources that are not yet catalogued and helps you decide what to catalog. Egeria Advisor is a conversational assistant for Egeria. | Data stewards, analysts and developers. |
+| **Resource Explorer** and **Egeria Advisor** (`dwolfson/trellis`, 6.3 Tech Preview) | Two AI-assisted applications. Resource Explorer surveys resources that are not yet catalogued and helps you decide what to catalog. Egeria Advisor is a conversational assistant for Egeria. | Data stewards, analysts and developers. |
 | **pyegeria** (`odpi/egeria-python`) | The Python client for Egeria, plus Dr.Egeria (metadata written as Markdown) and My Egeria (a terminal app). | Developers, notebook users, automation. |
 
 ## The story of this release
@@ -29,7 +29,8 @@ else. A spec says what it needs before it runs, and if it can't run, it says why
 measured, a capped list says it was capped, and totals cover the whole repository. This matters most when an AI
 reads the numbers and repeats them.
 
-**3. From preview to everyday use.** Resource Explorer now publishes what it finds into Egeria, zoned and checked, and
+**3. A Tech Preview you can use.** Resource Explorer and Egeria Advisor are released together as the **6.3 Tech
+Preview**: still changing quickly, and shaped by your feedback. Resource Explorer now publishes what it finds into Egeria, zoned and checked, and
 its surveys run on Egeria's own engine. It analyses databases, files and open-data repositories more deeply, and it
 learns from feedback: a rating can say why, an administrator triages it, and the document index can be rebuilt and
 rolled back. Egeria Advisor reads and authors the same Egeria-held dashboards as the Portal.
@@ -50,7 +51,8 @@ dashboards, and Resource Explorer has a six-part tutorial.
 ## Try it
 
 - **Live demo**, nothing to install: [egeria.pdr-associates.com](https://egeria.pdr-associates.com). Sign up, choose a
-  Coco Pharmaceuticals persona, and open **Local Dashboards** or **Egeria Explorer**.
+  Coco Pharmaceuticals persona, and open **Local Dashboards**, **Egeria Explorer**, **Resource Explorer** or
+  **Egeria Advisor**.
 - **Run it yourself:** [Egeria Workspaces](https://github.com/odpi/egeria-workspaces#getting-started) with Docker or
   Podman; add Resource Explorer and Egeria Advisor with [Deploying Trellis with the
   QuickStart](https://github.com/dwolfson/trellis/blob/main/docs/deploying-trellis-with-quickstart.md).

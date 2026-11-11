@@ -3,8 +3,9 @@
      releases, and REMOVE the 6.2 file's "## Since 6.2 (unreleased, on main)" section (folded in below).
      Move 6.2's "Report specs held in Egeria are read from the Portal's consumer folder" upgrade note here
      (it describes 6.3 behaviour). Stats are from 903e8eeb (#619, 2026-10-09) to 48c94577 (#830, 2026-11-11);
-     refresh them at the cut. TODO: release date, and whether a v6.2 tag gets created retroactively
-     (no v6.2 tag exists; the compare link below assumes one). -->
+     refresh them at the cut. Release tentatively Monday 2026-11-16, alongside Egeria 6.3 (owner, 2026-11-11);
+     v6.2 is tagged at 903e8eeb. These notes are also our piece of the Egeria project's 6.3 release notes.
+     Resource Explorer and Egeria Advisor ship as the "6.3 Tech Preview" (dwolfson/trellis). -->
 
 # Egeria Workspaces 6.3
 
@@ -116,7 +117,7 @@ tracks the **Egeria 6.3** builds and **pyegeria 6.2.36**. **This is the 6.3 rele
   ([#823](https://github.com/odpi/egeria-workspaces/pull/823)).
 - **Tutorials and worked examples** for saved queries, analytic functions, report specs and local dashboards
   ([#825](https://github.com/odpi/egeria-workspaces/pull/825)).
-- **Egeria Advisor** gets its own service account, `egeriaadvisornpa` ([#828](https://github.com/odpi/egeria-workspaces/pull/828)).
+- **Egeria Advisor** (6.3 Tech Preview) gets its own service account, `egeriaadvisornpa` ([#828](https://github.com/odpi/egeria-workspaces/pull/828)).
 
 ## Underneath all of it
 

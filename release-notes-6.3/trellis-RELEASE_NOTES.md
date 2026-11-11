@@ -1,12 +1,13 @@
 <!-- DRAFT: new file RELEASE_NOTES.md at the root of dwolfson/trellis, mirroring egeria-workspaces' RELEASE_NOTES.md.
      Range b74b07f9 (2026-10-09) to c9892ec2 (#1078, 2026-11-11). Refresh the stats at the cut.
-     TODO (owner): release label (see the CHANGELOG draft's note); whether RE and EA are reachable on the public demo
-     (the "Try it" list assumes not, and points at running them with the quickstart). -->
+     Owner decisions 2026-11-11: label "6.3 Tech Preview", tagged/released with Egeria 6.3 (tentatively Monday
+     2026-11-16); RE and EA are on the public demo. -->
 
-# Trellis 6.3: Resource Explorer and Egeria Advisor
+# Trellis 6.3 Tech Preview: Resource Explorer and Egeria Advisor
 
 Five weeks, about 500 merged PRs, and two early previews that now publish to Egeria, run their surveys through it,
-and learn from the people who use them.
+and learn from the people who use them. They are still a **Tech Preview**: changing quickly, and shaped by your
+feedback.
 
 In the October 2026 Egeria newsletter, Resource Explorer and Egeria Advisor were "early previews". Since then the
 work has been about three things: putting what Resource Explorer finds **into Egeria** (published, zoned, read back,
@@ -15,10 +16,12 @@ and surveyed by Egeria's own engine host); making every answer say **what it est
 rebuilt and rolled back. Egeria Advisor now reads and authors the same Egeria-held dashboards and report specs as the
 Portal. It ships with **Egeria 6.3** and requires **pyegeria 6.2.36**.
 
-**6.3** &middot; **1,140** commits &middot; **~515** PRs &middot; **12** packages &middot; **5** weeks
+**6.3 Tech Preview** &middot; **1,140** commits &middot; **~515** PRs &middot; **12** packages &middot; **5** weeks
 
 ## Try it
 
+- **Live demo, no install**: **[egeria.pdr-associates.com](https://egeria.pdr-associates.com)**. Register free,
+  pick a Coco Pharmaceuticals persona, and open Resource Explorer or Egeria Advisor from their tiles on the Portal home page.
 - **Run it with Egeria Workspaces**: [Deploying Trellis with the QuickStart](docs/deploying-trellis-with-quickstart.md)
   and [QUICKSTART.md](QUICKSTART.md). Both applications open from tiles on the Egeria Workspaces Portal home page.
 - **Learn Resource Explorer**: the six-part [tutorial](packages/resource-explorer/docs/tutorial/).
@@ -105,4 +108,4 @@ Portal. It ships with **Egeria 6.3** and requires **pyegeria 6.2.36**.
 
 The full list by section is in [CHANGELOG.md](CHANGELOG.md). Design notes are under `docs/`.
 
-*trellis 6.3 &middot; b74b07f9 (2026-10-09) → 6.3 &middot; compiled from git history*
+*trellis 6.3 Tech Preview &middot; b74b07f9 (2026-10-09) → v6.3-tech-preview &middot; compiled from git history*

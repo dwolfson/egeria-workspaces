@@ -1,8 +1,8 @@
 <!-- DRAFT: new file CHANGELOG.md at the root of dwolfson/trellis.
      Baseline b74b07f9 (2026-10-09, the October 2026 newsletter) to c9892ec2 (#1078, 2026-11-11).
-     TODO (owner): the release label. trellis has no tags and its packages are mostly still 0.1.x
-     (resource-explorer 0.1.0, egeria-advisor 0.1.2, unchanged since the baseline). This draft uses "6.3" to match
-     the Egeria release it ships with; package versions could be bumped instead, or as well. -->
+     Owner decision 2026-11-11: the release is "6.3 Tech Preview", tagged and released (GitHub release) to coincide
+     with the Egeria 6.3 release, tentatively Monday 2026-11-16. Proposed tag name: v6.3-tech-preview (TODO: confirm).
+     Package versions (resource-explorer 0.1.0, egeria-advisor 0.1.2, ...) are left as they are. -->
 
 # Changelog
 
@@ -14,9 +14,9 @@ Egeria release they ship with. Pull requests are `#N` in this repository.
 
 ## [Unreleased]
 
-## [6.3] - 2026-11-DD
+## [6.3 Tech Preview] - 2026-11-16
 
-First recorded release. It covers everything merged since the October 2026 Egeria newsletter, which introduced
+First recorded release, a Tech Preview released with Egeria 6.3. It covers everything merged since the October 2026 Egeria newsletter, which introduced
 Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the narrative.
 
 ### Added
@@ -116,5 +116,5 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 - Design notes: files, open data, quality, extensibility, local dashboards, OSI metric exchange, feedback extraction,
   closed loop, re-index, hardware acceleration (#785, #786, #889, #939, #978, #984, #1011, #1016, #1035, #1072).
 
-[Unreleased]: https://github.com/dwolfson/trellis/compare/v6.3...HEAD
-[6.3]: https://github.com/dwolfson/trellis/compare/b74b07f9...v6.3
+[Unreleased]: https://github.com/dwolfson/trellis/compare/v6.3-tech-preview...HEAD
+[6.3 Tech Preview]: https://github.com/dwolfson/trellis/compare/b74b07f9...v6.3-tech-preview

@@ -8,7 +8,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
    ```markdown
    ## [Unreleased]
 
-   ## [6.3] - 2026-11-DD
+   ## [6.3] - 2026-11-16
 
    Aligns with Egeria 6.3 and pyegeria 6.2.36. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the narrative summary.
    ```
@@ -23,8 +23,8 @@ The current `[Unreleased]` section was written as items landed and stops around 
    [6.3]: https://github.com/odpi/egeria-workspaces/compare/v6.2...v6.3
    ```
 
-   **TODO (owner):** there is no `v6.2` tag (the newest is `v6.1`), so the existing `[6.2]` compare link and these
-   links are broken until `v6.2` (at `903e8eeb`, #619) and `v6.3` are tagged. Otherwise use commit ranges.
+   `v6.2` is tagged at `903e8eeb` (#619), as the owner agreed on 2026-11-11. Tag `v6.3` at the release commit, on the
+   release date (tentatively Monday 2026-11-16, alongside Egeria 6.3).
 
 5. Remove the "Since 6.2 (unreleased, on `main`)" section from RELEASE_NOTES.md, since the new 6.3 section covers it.
 

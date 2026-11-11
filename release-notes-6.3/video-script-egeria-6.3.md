@@ -1,7 +1,7 @@
 <!-- DRAFT video script, made from overview-egeria-6.3.md. Target length about 7 minutes.
-     Every screen is on the live demo (egeria.pdr-associates.com) or a local quickstart with Trellis.
-     Before recording: sign in as a Coco persona with access to the dashboards folders (TODO: which persona;
-     Jules Keeper, the CDO, has the CDO dashboard); check the four "useful" sheets and the consumer folders are seeded;
+     Every screen, Resource Explorer and Egeria Advisor included, is on the live demo (egeria.pdr-associates.com).
+     Before recording: sign in as Erin Overview (owner's choice 2026-11-11); check Erin can see the dashboards
+     folders and the specs used in Scene 3; check the four "useful" sheets and the consumer folders are seeded;
      check Resource Explorer has at least one surveyed PostgreSQL database and one published result.
      Timings are rough and cumulative. Narration is about 140 words a minute. -->
 
@@ -80,7 +80,7 @@ Explorer and Egeria Advisor tiles.
 7. Switch the Look to Paper, then Light.
 
 **Narration:**
-> In October, Resource Explorer was an early preview. Now it surveys a resource, helps you decide what matters, and
+> In October, Resource Explorer was an early preview. In 6.3 it's a Tech Preview: it surveys a resource, helps you decide what matters, and
 > publishes the result into Egeria.
 > Its surveys are registered with Egeria and run on Egeria's own engine, so each one has a history, and you can
 > cancel it.
@@ -97,7 +97,7 @@ Explorer and Egeria Advisor tiles.
 2. Ask it to show one sheet; show the same sheet as in Scene 3.
 
 **Narration:**
-> Egeria Advisor is a conversational assistant for Egeria. It now reads and authors the same dashboards as the Portal,
+> Egeria Advisor, also in Tech Preview, is a conversational assistant for Egeria. It now reads and authors the same dashboards as the Portal,
 > so a dashboard built in one appears in the other. It acts as you, with your access, never as a service account.
 
 ## Scene 7: Easier to read, safer to run (5:50–6:30)
@@ -127,7 +127,7 @@ Explorer and Egeria Advisor tiles.
 Slack · YouTube.
 
 **Narration:**
-> You can try all of this in your browser, with nothing to install. The links are below. Tell us what works and what
+> You can try all of this in your browser, with nothing to install, Resource Explorer and Egeria Advisor included. The links are below. Tell us what works and what
 > doesn't. Egeria grows through the people who use it. Thanks for watching.
 
 ---

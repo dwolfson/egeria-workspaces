@@ -1,7 +1,12 @@
 <!-- DRAFT for egeria-docs: site/docs/release-notes/november-2026.md
      Status: draft 2026-11-11, from release-notes-6.3/RELEASE-NOTES-NEXT.md.
      Open points are marked TODO. Also add the page to site/mkdocs.yml (nav), as fb489c6b did for October.
-     Screenshots: none taken yet; each TODO-IMAGE says what to capture. -->
+     Screenshots: none taken yet; each TODO-IMAGE says what to capture.
+     Owner decision 2026-11-11: this is OUR PIECE of the Egeria project's 6.3 release notes/newsletter, not the whole
+     newsletter. The project supplies the opening, the core Egeria 6.3 platform sections, the link to the full 6.3
+     release notes and upgrade notes. The opening paragraph, "Future plans" and "Connecting with the project" below are
+     placeholders in October's wording, for the project to keep, replace or merge.
+     Release: tentatively Monday 2026-11-16, alongside Egeria 6.3. Resource Explorer and Egeria Advisor are "6.3 Tech Preview". -->
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 <!-- Copyright Contributors to the Egeria project. -->
 
@@ -9,13 +14,12 @@
 
 Welcome to the Egeria community's November 2026 newsletter. Since our [last newsletter](https://egeria-project.org/release-notes/october-2026/) we have been working towards **Egeria 6.3**. This newsletter covers what has changed in Egeria Workspaces, Resource Explorer, Egeria Advisor and pyegeria over those five weeks.
 
-<!-- TODO (owner/Egeria team): the October newsletter led with core platform features (Bitol, OpenLineage, Darwin, Mendel...).
-     Should this one have a section on the core Egeria 6.3 platform release? Nothing here covers the platform itself
-     except where our tools depend on it (report specs, measurements and dashboards as Egeria elements; boxed properties;
-     information supply chain graphs; lineage hop limits; statements of applicability; the zone access rule).
-     If yes, the Egeria team needs to supply that section and the link to the 6.3 release notes. -->
+<!-- PROJECT SECTIONS GO HERE: the core Egeria 6.3 platform "What's new" and the link to the full 6.3 release notes.
+     Platform features our tools depend on, which the project's sections may want to mention: report specs,
+     measurements and dashboards as Egeria elements; relationship purposes; boxed properties; information supply
+     chain graphs; lineage hop limits; statements of applicability; the zone access rule. -->
 
-In October we said that AI agents and applications are only as trustworthy as the context they work from. This release applies that idea to our own tools. A number on a dashboard now says what it counted, or says that it was not measured. The reports and dashboards people rely on are kept in Egeria, so they are governed like any other metadata. And Resource Explorer and Egeria Advisor have grown well beyond the early previews we showed in October.
+In October we said that AI agents and applications are only as trustworthy as the context they work from. This release applies that idea to our own tools. A number on a dashboard now says what it counted, or says that it was not measured. The reports and dashboards people rely on are kept in Egeria, so they are governed like any other metadata. And Resource Explorer and Egeria Advisor, the early previews we showed in October, are now a Tech Preview.
 
 <!-- TODO-IMAGE: Portal Local Dashboards, folder tree on the left, one of the "useful" sheets open
      (for example the repository trends sheet), signed in as a Coco persona. File: november-2026-local-dashboards.png -->
@@ -75,9 +79,9 @@ Egeria Workspaces, our ready-to-run environment, now tracks the Egeria 6.3 build
 
 You can [try the live demo](https://egeria.pdr-associates.com){target=blank} without installing anything (signing up takes a minute), or run [Egeria Workspaces](https://egeria-project.org/egeria-workspaces/) locally with Docker or Podman.
 
-## Resource Explorer and Egeria Advisor
+## Tech Preview: Resource Explorer and Egeria Advisor
 
-In October we shared these two [Trellis](https://egeria-project.org/concepts/trellis/) applications as early previews. Thank you to everyone who tried them. Five weeks and more than 500 changes later, they are no longer previews.<!-- TODO (owner): how strongly to put this; the running draft says "much closer to a product". --> They still run alongside Egeria Workspaces as an optional add-on.
+In October we shared these two [Trellis](https://egeria-project.org/concepts/trellis/) applications as early previews. Thank you to everyone who tried them. Five weeks and more than 500 changes later, they are released together as the **6.3 Tech Preview**. They still run alongside Egeria Workspaces as an optional add-on, and both are available on the [live demo](https://egeria.pdr-associates.com){target=blank}: open them from their tiles on the Portal home page.
 
 **Resource Explorer** surveys resources that are not yet in the catalog and helps you decide what to catalog. In this release:
 
@@ -95,10 +99,10 @@ In October we shared these two [Trellis](https://egeria-project.org/concepts/tre
 
 <!-- TODO-IMAGE: Egeria Advisor showing a dashboard sheet it read from Egeria. File: november-2026-egeria-advisor.png -->
 
-Both applications keep changing quickly, and your feedback still shapes them. Try them, use the feedback buttons, and tell us what you would like next.
+Both applications are still a Tech Preview: they keep changing quickly, and your feedback shapes them. Try them, use the feedback buttons, and tell us what you would like next.
 
 Learn more in the [Trellis repository](https://github.com/dwolfson/trellis) and the [Resource Explorer tutorial](https://github.com/dwolfson/trellis/tree/main/packages/resource-explorer/docs/tutorial).
-<!-- TODO: confirm the Trellis repository link is the one to publish (dwolfson/trellis is public). -->
+<!-- TODO: confirm the Trellis repository link is the one to publish (dwolfson/trellis is public); link the 6.3 Tech Preview release once tagged. -->
 
 ## pyegeria
 

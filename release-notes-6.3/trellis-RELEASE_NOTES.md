@@ -1,11 +1,11 @@
 <!-- DRAFT: new file RELEASE_NOTES.md at the root of dwolfson/trellis, mirroring egeria-workspaces' RELEASE_NOTES.md.
-     Range b74b07f9 (2026-10-09) to c9892ec2 (#1078, 2026-11-11). Refresh the stats at the cut.
+     Range b74b07f9 (2026-10-09) to 73738df8 (#1086, 2026-11-12). Refresh the stats at the cut.
      Owner decisions 2026-11-11: label "6.3 Tech Preview", tagged/released with Egeria 6.3 (tentatively Monday
      2026-11-16); RE and EA are on the public demo. -->
 
 # Trellis 6.3 Tech Preview: Resource Explorer and Egeria Advisor
 
-Five weeks, about 500 merged PRs, and two early previews that now publish to Egeria, run their surveys through it,
+Five weeks, more than 500 merged PRs, and two early previews that now publish to Egeria, run their surveys through it,
 and learn from the people who use them. They are still a **Tech Preview**: changing quickly, and shaped by your
 feedback.
 
@@ -14,9 +14,9 @@ work has been about three things: putting what Resource Explorer finds **into Eg
 and surveyed by Egeria's own engine host); making every answer say **what it established and what it did not**; and
 **closing the loop** with the people who use it, through shared feedback, triage and a document index that can be
 rebuilt and rolled back. Egeria Advisor now reads and authors the same Egeria-held dashboards and report specs as the
-Portal. It ships with **Egeria 6.3** and requires **pyegeria 6.2.36**.
+Portal. It ships with **Egeria 6.3** and requires **pyegeria 6.2.39**.
 
-**6.3 Tech Preview** &middot; **1,140** commits &middot; **~515** PRs &middot; **12** packages &middot; **5** weeks
+**6.3 Tech Preview** &middot; **1,151** commits &middot; **~523** PRs &middot; **12** packages &middot; **5** weeks
 
 ## Try it
 
@@ -65,14 +65,15 @@ Portal. It ships with **Egeria 6.3** and requires **pyegeria 6.2.36**.
 - **A zone with no access control is private**, matching Egeria (#1043); a dead token is answered the same way
   everywhere (#997); the certifi floor excludes the emSign ECC G3 root (#989).
 
-## Nov 8–11: closing the loop, and Egeria Advisor on Egeria-held dashboards
+## Nov 8–12: closing the loop, and Egeria Advisor on Egeria-held dashboards
 
 - **`trellis-feedback`**, a shared feedback library (0.1 to 0.3): ratings carry a cause and evidence, an admin triages
   them, and a diagnosis can be routed to a gap in the documents (#1012, #1013, #1017, #1018, #1019, #1031, #1032, #1034).
 - **Re-index**: the document index can be rebuilt, swapped in and rolled back; a held rebuild says "held", and admins
   can cancel it (#1037 to #1041, #1053, #1054).
 - **Evidence has an as-of date** on every compiled section (#1021, #1024).
-- **Egeria Advisor**: Dashboards read and authored in Egeria, at parity with the Portal (#1042, #1067, #1068, #1070);
+- **Egeria Advisor**: Dashboards read and authored in Egeria, at parity with the Portal; large tables scroll in
+  their tile, and capped tables and unreadable folders say why (#1042, #1067, #1068, #1070, #1084, #1086);
   report specs synced from, published to and withdrawn from Egeria (#1033, #1060); perspectives from Egeria (#1059);
   one fail-closed admin gate (#1050, #1052); Dr.Egeria runs as the signed-in user and calls with no credentials are
   refused (#1045, #1046); feedback through the shared library (#1069, #1078); Egeria being down at sign-in is
@@ -82,25 +83,26 @@ Portal. It ships with **Egeria 6.3** and requires **pyegeria 6.2.36**.
 
 ## Underneath all of it
 
-- **pyegeria** floor from 6.1.15 to 6.2.36 in sixteen steps (#593 … #1076).
+- **pyegeria** floor from 6.1.15 to 6.2.39, step by step (#593 … #1083).
 - **CI**: Resource Explorer tests run on main and PRs; image builds only when their inputs change (#1075); tests write
   no tracked files and ratchet against silent success (#595, #1048); a pyegeria contract test (#1056).
 - **Docs**: user and admin guides, and design notes for files, open data, quality, extensibility, local dashboards,
   OSI metric exchange, feedback, re-index and hardware acceleration.
 
-**Commits by author:** 1,125 — Dan Wolfson &middot; 16 — dependabot[bot]
+**Commits by author:** 1,135 — Dan Wolfson &middot; 16 — dependabot[bot]
 
 ---
 
 ## Upgrade notes
 
-- **pyegeria 6.2.36 or later is required** by Resource Explorer and Egeria Advisor (#1076).
+- **pyegeria 6.2.39 or later is required** by Resource Explorer and Egeria Advisor (#1083).
 - **Database credentials must be in the secrets store.** The plaintext fallback is gone (#823).
 - **Only JWT bearer tokens are accepted at login** (#827).
 - **Zones**: a zone with no access control is private, as in Egeria (#1043). Content in such zones is visible only to
   its owner.
 - **Private resources** no longer offer an Egeria-dispatched survey (#991).
 - **The Analytic Library comes from PyPI** (`egeria-trellis-analytics` 0.2.0) instead of the in-repo package (#996).
+- **`EMBEDDING_DEVICE` is gone** from Egeria Advisor's settings; it was never read (#1080).
 - **Egeria Advisor runs as its own service account**, `egeriaadvisornpa`, in the Egeria Workspaces quickstart
   (odpi/egeria-workspaces#828).
 

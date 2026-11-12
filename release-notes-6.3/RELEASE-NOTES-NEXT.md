@@ -8,9 +8,9 @@ All three baselines are the state of each repo on **2026-10-09**, the date the O
 
 | Repo | Baseline | Date | Head | How chosen |
 |---|---|---|---|---|
-| egeria-workspaces (`odpi/egeria-workspaces`) | `903e8eeb`, merge of #619 "prepare 6.2" | 2026-10-09 | `48c94577` (2026-11-11) | The 6.2 release-prep merge. No `v6.2` tag exists (newest tag is `v6.1`). 195 first-parent entries since. |
-| pyegeria (`odpi/egeria-python`) | tag `v6.2.0` = `c9dc7a43` | 2026-10-08 | `v6.2.36` = `e2f048d8` (2026-11-11) | Newest tag not after 2026-10-09. The next tag, `v6.2.1`, is dated 2026-10-10. 36 releases (6.2.1 to 6.2.36), 143 first-parent commits. `upstream/main` has nothing beyond 6.2.36. |
-| trellis (`dwolfson/trellis`) | `b74b07f9` "RE: baseline the best-effort client close in the data-class rules lookup" | 2026-10-09 17:31 -0500 | `c9892ec2` (2026-11-11, #1078) | Last commit at or before 2026-10-09 23:59 UTC (`git rev-list -1 --before=...`). The repo has no tags or CHANGELOG. 515 distinct PR numbers and 1,140 non-merge commits since. |
+| egeria-workspaces (`odpi/egeria-workspaces`) | `903e8eeb`, merge of #619 "prepare 6.2" | 2026-10-09 | `3b8ac7e2` (2026-11-12, #857) | The 6.2 release-prep merge, tagged `v6.2` on 2026-11-11. 217 first-parent entries since. |
+| pyegeria (`odpi/egeria-python`) | tag `v6.2.0` = `c9dc7a43` | 2026-10-08 | `d757cb2c` (2026-11-12, #592; `v6.2.39` = `18178917`) | Newest tag not after 2026-10-09. The next tag, `v6.2.1`, is dated 2026-10-10. 39 releases (6.2.1 to 6.2.39; 6.2.38 tagged but not on PyPI). `upstream/main` is one docs PR beyond 6.2.39. |
+| trellis (`dwolfson/trellis`) | `b74b07f9` "RE: baseline the best-effort client close in the data-class rules lookup" | 2026-10-09 17:31 -0500 | `73738df8` (2026-11-12, #1086) | Last commit at or before 2026-10-09 23:59 UTC (`git rev-list -1 --before=...`). The repo has no tags or CHANGELOG. About 523 distinct PR numbers and 1,151 non-merge commits since. |
 
 Notes:
 - trellis PRs are `dwolfson/trellis#N`. About 20 odpi-side Dependabot bumps (#80 to #107) reached it through the sync merge #112 and are not itemised.
@@ -22,6 +22,7 @@ Notes:
 | When (UTC) | workspaces upstream | pyegeria upstream | trellis origin | Folded in |
 |---|---|---|---|---|
 | 2026-11-11 | `48c94577` (#830), nothing new | `e2f048d8` (v6.2.36), nothing new | `c9892ec2` | trellis #1076 (pyegeria floor 6.2.36 for RE and EA), #1077 (EA: Egeria 5xx at Portal SSO is "unreachable", not "rejected"), #1078 (EA feedback: a changed vote supersedes the earlier one; the recorded intent is the routed intent) |
+| 2026-11-12 | `3b8ac7e2` (#857): #831–#857 (22 first-parent entries, 8 of them Dependabot) | `d757cb2c`: 6.2.37 (#589), 6.2.38 (#590, not on PyPI), 6.2.39 (#591), docs #592 | `73738df8` (#1086): #1079–#1086 | All of them, in every variation: workspaces 6.3 section (new Nov 8–12 bullets, upgrade notes, stats 377/217), CHANGELOG cut (Added/Fixed), trellis CHANGELOG and notes (floor 6.2.39, EA tables/folders/count tile), pyegeria overview (6.2.37–6.2.39 themes, behaviour changes, release table), overview and newsletter numbers |
 
 ---
 
@@ -90,26 +91,26 @@ In the October newsletter these were "early previews". Since then they have been
 **Shared packages.** New `trellis-feedback` (0.1 to 0.3), `trellis-ui`, and a `trellis-accel` package for choosing a compute device (work in progress). The Analytic Library moved out as `egeria-trellis-analytics` 0.2.0 on PyPI.
 Learn more: `docs/feedback-closed-loop-design.md`, `docs/hardware-acceleration-proposal.md`, `docs/context-compilation-usage.md`.
 
-# pyegeria (6.2.0 to 6.2.36)
+# pyegeria (6.2.0 to 6.2.39)
 
-36 releases in five weeks (about 4 a week). Grouped by theme, with the first version where a notable item landed.
+39 releases in five weeks (about 4 a week). Grouped by theme, with the first version where a notable item landed.
 
-- **Report specs and analytic functions.** Found by registered name and the `pyegeria.report_specs` entry points (6.2.16 to 6.2.18); every routine has a declaration (6.2.24); every spec resolved at load, unrunnable ones listed with reasons (6.2.25); specs held in Egeria and run from plain pyegeria (6.2.28); consumer folders (6.2.33); restricted specs (6.2.35).
+- **Report specs and analytic functions.** Found by registered name and the `pyegeria.report_specs` entry points (6.2.16 to 6.2.18); every routine has a declaration (6.2.24); every spec resolved at load, unrunnable ones listed with reasons (6.2.25); specs held in Egeria and run from plain pyegeria (6.2.28); consumer folders (6.2.33); restricted specs (6.2.35); DOCUMENT output with validators and the DCAT Catalog spec, structured TABLE and native DICT, per-column render intents (6.2.37); DCAT Catalog by search string (6.2.38).
 - **Dashboards and measurements (Egeria 6.3).** Client and Dr.Egeria commands for report specs, measurements and dashboards (6.2.24); Dashboard Sheets read from and held in Egeria with an owner (6.2.28, 6.2.31); sheets in Egeria folders (by 6.2.34); Collection Members by qualifiedName and `saved_query` reports (6.2.34); report parameters on dashboard Reports (6.2.35).
 - **Overview metrics that say what they measured.** `None` instead of 0 when unmeasured (6.2.22); `asset_composition` routine (6.2.23); whole-repository counts by default (6.2.27); `population=` replaces `scope=` (6.2.24); stale-asset counting fixed (6.2.29).
-- **Dr.Egeria.** Reference Data authoring and Valid Metadata split (6.2.3); credentials resolved at run time with one precedence chain, Postgres secrets store (6.2.9); updates no longer reset properties the document doesn't set (6.2.10); Business Capability commands (6.2.11); Security Officer statements of applicability, survey report and security finding commands (6.2.12, 6.2.13); link/detach commands that reported success but sent nothing fixed (6.2.28); Zone Membership in Basic templates (6.2.30); Parent ID keeps memberships, templates ship as package data (6.2.32).
+- **Dr.Egeria.** Reference Data authoring and Valid Metadata split (6.2.3); credentials resolved at run time with one precedence chain, Postgres secrets store (6.2.9); updates no longer reset properties the document doesn't set (6.2.10); Business Capability commands (6.2.11); Security Officer statements of applicability, survey report and security finding commands (6.2.12, 6.2.13); link/detach commands that reported success but sent nothing fixed (6.2.28); Zone Membership in Basic templates (6.2.30); Parent ID keeps memberships, templates ship as package data (6.2.32); a bullet in a list attribute is one item, commas and all (6.2.39).
 - **Egeria 6.3 compatibility.** Boxed properties and a raising bearer-token request (6.2.13); information supply chain graphs (6.2.14); lineage `maxHops`/`skipRelationships` (6.2.20); configurable TLS verification (6.2.22); all graph keys (6.2.29).
 - **My Egeria / My Profile.** One key-binding convention and discoverable My Team (6.2.4 to 6.2.7); rename to `my_egeria.py` (6.2.12); Edit Profile saves to Egeria (6.2.19); promoted to a production package (6.2.33 timeframe).
 - **Correctness.** Five update methods that sent no body (6.2.7); request fields silently dropped SDK-wide (6.2.10); link methods return relationship GUIDs (6.2.19); caller-supplied tokens are not re-authenticated (6.2.15); runs without `nest_asyncio` so it works on Python 3.14 (6.2.16); collection members and folder walks page properly (6.2.36, ISSUE-185).
 - **Security.** certifi floor excluding the distrusted emSign G3 root and tornado 6.6 (6.2.21).
 
-### Unreleased since v6.2.36
-- None merged. `upstream/main` is at `e2f048d8` (the 6.2.36 tag).
+### Unreleased since v6.2.39
+- Docs only: report specs after 6.2.37 (complex values, render intents, DOCUMENT, surfaces) (#592).
 
-### Queued (in progress, not merged)
-- **SD-1**: DOCUMENT output type and a validator registry.
-- **SD-2**: DCAT exporter for Assets.
-- **New dependencies**: rdflib, pyshacl, jsonschema. The wheel grows by about 3 MB.
+### Released since the first draft (2026-11-12 merge check)
+- **6.2.37** (#589): SD-1 DOCUMENT output and validators, SD-2 DCAT Catalog export, structured TABLE, native DICT, render intents. New dependencies rdflib, pyshacl, jsonschema. **Rendered text changes.**
+- **6.2.38** (#590): DCAT Catalog runs with a search string; My Egeria domain selection passes the GUID. Tagged, not published to PyPI.
+- **6.2.39** (#591): Dr.Egeria keeps one list item per bullet (behaviour change for "- a, b"); carries the 6.2.38 fixes.
 
 ### Fixed in 6.2.36, for reference
 - **ISSUE-185**: `get_collection_members` paging; `saved_query` counts distinct elements; folder walks now page every folder.
@@ -179,7 +180,7 @@ Learn more: `docs/feedback-closed-loop-design.md`, `docs/hardware-acceleration-p
 - Look: Paper kept for one release alongside the Portal's Dark and Light (dwolfson/trellis#763).
 
 ### Dependencies
-- pyegeria floor raised from 6.1.15 to 6.2.1, then step by step to 6.2.36 (dwolfson/trellis#593, #651, #728, #806, #819, #834, #853, #951, #959, #974, #987, #1005, #1028, #1036, #1061, #1071, #1076).
+- pyegeria floor raised from 6.1.15 to 6.2.1, then step by step to 6.2.39 (dwolfson/trellis#593, #651, #728, #806, #819, #834, #853, #951, #959, #974, #987, #1005, #1028, #1036, #1061, #1071, #1076, #1082, #1083).
 - certifi floor excludes the emSign ECC G3 root (dwolfson/trellis#989).
 - Analytic Library from PyPI: `egeria-trellis-analytics` 0.2.0 (dwolfson/trellis#996).
 - About 20 odpi-side Dependabot bumps (notebook, jupyterlab, mlflow, aiohttp, authlib, pypdf and others) via the sync (dwolfson/trellis#112).
@@ -206,18 +207,19 @@ Per-release detail is in the themes above; the appendix is the same list by sect
 - Dr.Egeria: Business Capability, statement of applicability, survey report, security findings, Reference Data (6.2.3, 6.2.11 to 6.2.13).
 - Security annotation models and findings/posture reports (6.2.13).
 - Governance Engine client for the engine-action operations Egeria moved (6.2.5).
+- DOCUMENT output, DCAT Catalog export, structured TABLE and native DICT (6.2.37).
 
 ### Fixed
-- Five update methods that sent no body (6.2.7); fields silently dropped SDK-wide (6.2.10); link/detach reporting success without sending (6.2.28); caller token re-authentication (6.2.15); collection and folder paging (6.2.36).
+- Five update methods that sent no body (6.2.7); fields silently dropped SDK-wide (6.2.10); link/detach reporting success without sending (6.2.28); caller token re-authentication (6.2.15); collection and folder paging (6.2.36); DCAT Catalog by search string, My Egeria domain GUID (6.2.38).
 
 ### Changed / behaviour changes
-- `population=` replaces `scope=` (6.2.24); unmeasured is `None`, not 0 (6.2.22); absence word `nothing_found` (6.2.23); a failed bearer-token request now raises (6.2.13); `page_size` default now applies with `body=` and no paging on 19 methods (6.2.36); 403 not 401 (6.2.34).
+- `population=` replaces `scope=` (6.2.24); unmeasured is `None`, not 0 (6.2.22); absence word `nothing_found` (6.2.23); a failed bearer-token request now raises (6.2.13); `page_size` default now applies with `body=` and no paging on 19 methods (6.2.36); 403 not 401 (6.2.34); rendered text changes (6.2.37); one list item per bullet (6.2.39).
 
 ### Dependencies
 - certifi floor and tornado 6.6 (6.2.21); codeql-action and action-gh-release bumps; multidict 6.9.1.
 
 ### Ops/CI
-- Release process: 36 tagged releases; Scorecard workflow fix.
+- Release process: 39 tagged releases (6.2.38 not published to PyPI); Scorecard workflow fix.
 
 ### Docs
 - Issue tracker brought up to date and re-sorted in several passes; analytic function resolution documented (ISSUE-169 to ISSUE-172).
@@ -238,6 +240,7 @@ Per-release detail is in the themes above; the appendix is the same list by sect
 - Portal Insights saved queries refresh (#823); Collections grouped by type (#816, #817).
 - Overview: Trellis perspectives, `asset_composition`, background measurement (#788, #793, #790).
 - Mermaid Expand viewer (#781).
+- Classifications grouped by classification purpose (#831); one renderer for pyegeria's structured TABLE (#855, #856); result notes under every result (#852); DCAT support and an OpenLineage log store notebook (#849, #847); `egeria-upgrade-reset` with a shared-infra health check and a last-reset panel (#851, #854); hand-run seeds heal after a reset (#850).
 - Relationship purposes, Type Explorer inheritance, Data Mesh link and property columns (#752, #753, #756, #775, #774).
 - Resizable widths (#754).
 - Lineage Explorer hop limit and cut markers (#749).
@@ -251,7 +254,8 @@ Per-release detail is in the themes above; the appendix is the same list by sect
 - Bootstrap: recursive batches, per-file run-as user (#618); heal primes valid metadata (#801).
 
 ### Fixed
-- Credential leak: platform-URL allowlist (#819); service-user impersonation (#715).
+- Credential leak: platform-URL allowlist (#819); service-user impersonation (#715); `/api/types` routes no longer take `user_id` (#831).
+- Local Dashboards: tables capped at whole rows with the real scope (#848), scroll in their tile (#833), `<br>` in cells (#846); The Catalog no longer blanks without saved connection settings (#832); Marquez restarts after a reboot (#857).
 - Overview honesty fixes (#783, #807, #791, #755).
 - Extended properties, duplicate relationships, map-valued properties (#699, #700, #701, #682).
 - Catalog lists page to the end; Data Assets tree; list caches (#659, #658, #661, #666).

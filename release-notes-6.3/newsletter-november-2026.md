@@ -38,15 +38,15 @@ Learn more about [Local Dashboards](https://github.com/odpi/egeria-workspaces/bl
 
 ### Numbers that say what they measured
 
-A count that was never taken is not zero, and a list that stopped at its limit is not a total. We went through the Egeria Overview, the dashboards and the report results and removed every place where "not measured" could show as 0, or a cap as a total. Totals now count the whole repository, slow sections are measured in the background, each count says which population it covers, and anything not measured says so. Resource Explorer follows the same rule: a database it has not surveyed is "not established", not empty.
+A count that was never taken is not zero, and a list that stopped at its limit is not a total. We went through the Egeria Overview, the dashboards and the report results and removed every place where "not measured" could show as 0, or a cap as a total. Totals now count the whole repository, slow sections are measured in the background, each count says which population it covers, and anything not measured says so. Resource Explorer follows the same rule: a database it has not surveyed is "not established", not empty. Report results now carry their own notes, such as "Showing the first 100; more may exist", and the Portal shows them under every result; long tables are cut only at whole rows, and they say how many rows they left out.
 
 This matters most when an AI reads the numbers. An agent that sees "0 quality issues" when nothing was checked will report good news that isn't true.
 
 Learn more about the [Egeria Overview](https://github.com/odpi/egeria-workspaces/blob/main/portal-docs/tools/egeria-overview.md).
 
-### Relationships grouped by purpose
+### Relationships and classifications grouped by purpose
 
-Egeria gives every relationship type a purpose. The Portal uses it to group relationships into six families: Composition, Governance & Description, Organization, Associations, Design & Deployment, and Operations. You see the same grouping in the Type Explorer, the detail panels, the Data Mesh view and The Catalog, so a busy element's relationships are much easier to read. The Type Explorer also now shows inherited relationships and classifications.
+Egeria gives every relationship type a purpose. The Portal uses it to group relationships into six families: Composition, Governance & Description, Organization, Associations, Design & Deployment, and Operations. You see the same grouping in the Type Explorer, the detail panels, the Data Mesh view and The Catalog, so a busy element's relationships are much easier to read. The Type Explorer also now shows inherited relationships and classifications. Classifications are grouped the same way, by Egeria's six classification purposes: Governance, Governance Implementation, Category, Descriptive, Analytical and Management.
 
 Across the Portal, every column, pane and split can be resized, and each page remembers your widths.
 
@@ -106,11 +106,12 @@ Learn more in the [Trellis repository](https://github.com/dwolfson/trellis) and 
 
 ## pyegeria
 
-pyegeria, the Python client for Egeria, has had 36 releases since 6.2.0 (6.2.1 to 6.2.36). The highlights:
+pyegeria, the Python client for Egeria, has had 39 releases since 6.2.0 (6.2.1 to 6.2.39). The highlights:
 
 - Clients and Dr.Egeria commands for Egeria 6.3's report specs, measurements and dashboards.
 - Report specs that can be held in Egeria and run from plain pyegeria, checked when they load, with a reason given for any that cannot run.
 - Counts that return "not measured" (`None`) rather than 0.
+- A report spec can produce a standard document, starting with a DCAT-AP 3 catalog of a collection's Assets, checked against the DCAT-AP shapes.
 - New Dr.Egeria commands for reference data, business capabilities, statements of applicability, survey reports and security findings.
 - My Egeria (formerly My Profile) is now part of the production package.
 - pyegeria runs on Python 3.14.

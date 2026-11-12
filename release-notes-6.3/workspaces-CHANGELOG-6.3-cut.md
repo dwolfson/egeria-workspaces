@@ -10,7 +10,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
 
    ## [6.3] - 2026-11-16
 
-   Aligns with Egeria 6.3 and pyegeria 6.2.36. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the narrative summary.
+   Aligns with Egeria 6.3 and pyegeria 6.2.37 and later. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the narrative summary.
    ```
 
 2. Keep every existing `[Unreleased]` entry, under the same Added / Changed / Fixed / Removed headings.
@@ -73,6 +73,12 @@ The current `[Unreleased]` section was written as items landed and stops around 
 - **Heap dump** when the platform runs out of memory ([#773](https://github.com/odpi/egeria-workspaces/pull/773));
   `pg_stat_statements` on the shared Postgres ([#804](https://github.com/odpi/egeria-workspaces/pull/804)).
 
+- **DCAT support**: DCAT configuration for the quickstart and freshstart metadata stores and integration daemons,
+  with loading-bay `dcat/` folders ([#849](https://github.com/odpi/egeria-workspaces/pull/849)); an OpenLineage log store notebook, and Pasteur in the nanny daemons
+  ([#847](https://github.com/odpi/egeria-workspaces/pull/847)).
+- **One renderer for pyegeria's structured TABLE** (`egeria-table.js`); Local Dashboards and Report Specs draw TABLE
+  results from the structured shape ([#855](https://github.com/odpi/egeria-workspaces/pull/855), [#856](https://github.com/odpi/egeria-workspaces/pull/856)).
+
 ### Changed (append)
 
 - **Platform**: quickstart and freshstart on Egeria 6.3-SNAPSHOT; the quickstart pin tracks the Pasteur build
@@ -127,6 +133,8 @@ The current `[Unreleased]` section was written as items landed and stops around 
   empty limits ([#641](https://github.com/odpi/egeria-workspaces/pull/641)); compose build ([#626](https://github.com/odpi/egeria-workspaces/pull/626));
   heal primes valid metadata ([#801](https://github.com/odpi/egeria-workspaces/pull/801)).
 - **MCP SSE headers** ([#738](https://github.com/odpi/egeria-workspaces/pull/738)).
+- **Marquez restarts after a reboot**, and the infra check covers `airflow-marquez` ([#857](https://github.com/odpi/egeria-workspaces/pull/857)); the scheduled infra
+  check writes one bounded log line per run ([#854](https://github.com/odpi/egeria-workspaces/pull/854)).
 
 ### Security (new heading)
 
@@ -142,5 +150,5 @@ The current `[Unreleased]` section was written as items landed and stops around 
 ### Not itemised
 
 Docs-only PRs (design notes and Portal Docs reorganisation: #649, #683, #728, #778, #782, #786, #787, #792, #794,
-#797, #799, #813), CI chores (#744, #747, #768, #779) and the "keep RELEASE_NOTES per release" note. Add any of them
-if the owner wants them listed.
+#797, #799, #813), CI chores (#744, #747, #768, #779) and the "keep RELEASE_NOTES per release" note. Dependabot bumps after #830 (#834–#837, #839, #841–#843) go under the existing
+Dependencies entry. Add any of them if the owner wants them listed.

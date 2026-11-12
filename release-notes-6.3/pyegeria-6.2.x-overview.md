@@ -1,10 +1,12 @@
 <!-- DRAFT: new file docs/release-notes/6.2.x-egeria-6.3.md in odpi/egeria-python.
      An aggregate overview; the per-version files (6.2.26.md onwards) are not changed.
-     Range v6.2.0 (c9dc7a43, 2026-10-08) to v6.2.36 (e2f048d8, 2026-11-11). Numbers are PRs in odpi/egeria-python. -->
+     Range v6.2.0 (c9dc7a43, 2026-10-08) to v6.2.39 (18178917, 2026-11-12). 6.2.38 was tagged but not published to PyPI;
+     6.2.39 carries its fixes. Numbers are PRs in odpi/egeria-python. -->
 
-# pyegeria 6.2.0 → 6.2.36 (Egeria 6.3)
+# pyegeria 6.2.0 → 6.2.39 (Egeria 6.3)
 
-pyegeria shipped 36 releases between 6.2.0 (October 8, 2026) and 6.2.36 (November 11, 2026), roughly four a week.
+pyegeria shipped 39 releases between 6.2.0 (October 8, 2026) and 6.2.39 (November 12, 2026), roughly four a week
+(6.2.38 was tagged but not published to PyPI; 6.2.39 includes its fixes).
 Together they are the Python side of **Egeria 6.3**. This page groups those releases by theme, so you can see what
 changed without reading each one. The per-release notes from 6.2.26 onwards are in this folder; earlier releases are
 described in their release PRs.
@@ -29,6 +31,12 @@ pip install -U pyegeria
 - **Report specs held in Egeria**, run from plain pyegeria (6.2.28, #563, #564, #569); specs are organised in consumer
   folders with a recursive sync and consumer index (6.2.33, #582); restricted specs (6.2.35, #587).
 - **Search and get filters** are universal, checked and typed (6.2.28, #567).
+- **Standard documents and complex values** (6.2.37, #589): a DOCUMENT output type with validators that never fetch
+  over the network, and a built-in **DCAT Catalog** spec that exports a collection's Assets as a DCAT-AP 3 catalog,
+  validated against the shipped SHACL shapes; an opt-in structured TABLE (`table_shape="structured"`) and native DICT
+  (`dict_shape="native"`), with per-column render intents. Existing calls return the same shapes. The DCAT Catalog
+  runs with a search string as well as a scope (6.2.38, #590). See
+  [Output formats and report specs](../output-formats-and-report-specs.md) (#592).
 
 ## Dashboards and measurements (Egeria 6.3)
 
@@ -58,6 +66,7 @@ pip install -U pyegeria
 - **Link and detach commands that reported success but sent nothing** are fixed (6.2.28, #566).
 - **Zone Membership in Basic templates**; blank zones are no longer cleared (6.2.30, #577).
 - **Parent ID keeps memberships**, templates ship as package data, and a dashboard resolver (6.2.32, #581).
+- **A bullet in a list attribute is one item**, commas and all (6.2.39, #591). Write list values as bullets.
 
 ## Egeria 6.3 compatibility
 
@@ -78,6 +87,7 @@ pip install -U pyegeria
 - Renamed to `my_egeria.py` (6.2.12, #491); login as a different user and no-Egeria startup handling (#501, #507).
 - Edit Profile saves to Egeria (#524).
 - Promoted to a production package (#580), with a recorded video blog and voiceover pipeline (#584).
+- Selecting a business domain passes the GUID (6.2.38, #590).
 
 ## Correctness
 
@@ -109,6 +119,8 @@ pip install -U pyegeria
 | 6.2.27 | Totals count the whole repository by default (#556). | Expect larger, correct totals. |
 | 6.2.34 | An element hidden by zone security is reported as `AUTHORIZATION_ERROR_403`, not `_401`; the exception class is unchanged and a 403 is never retried (#585, ISSUE-182). | If you match `AUTHORIZATION_ERROR_401` in the text, match `AUTHORIZATION_ERROR` instead. |
 | 6.2.36 | With `body=` and no paging in the body, the method's `page_size` default now applies on 19 methods (#588). | Put `pageSize` in the body, or pass `page_size`, if you relied on Egeria's default page. See [6.2.36](6.2.36.md). |
+| 6.2.37 | Rendered **text** changes (REPORT, LIST, MD, FORM, HTML, the CLI table): LIST cells are drawn by what the value is, and capped results say "more may exist" (#589). Result shapes are unchanged. | Re-check anything that parses pyegeria's rendered text; read DICT or JSON instead. See [6.2.37](6.2.37.md). |
+| 6.2.39 | Dr.Egeria: a single bullet on its own line, such as "- a, b", is one item (it used to be two) (#591). | Write one item per bullet. See [6.2.39](6.2.39.md). |
 
 ## Dependencies and housekeeping
 
@@ -124,8 +136,8 @@ pip install -U pyegeria
 | 6.2.1 – 6.2.10 | Oct 10 – Oct 23 | #443, #447, #455, #459, #461, #467, #473, #476, #479, #484 |
 | 6.2.11 – 6.2.20 | Oct 24 – Nov 3 | #487, #494, #499, #504, #511, #515, #522, #523, #525, #527 |
 | 6.2.21 – 6.2.30 | Nov 4 – Nov 10 | #529, #533, #536, #545, #551, #554, #557, #568, #575, #577 |
-| 6.2.31 – 6.2.36 | Nov 10 – Nov 11 | #578, #581, #583, #585, #587, #588 |
+| 6.2.31 – 6.2.39 | Nov 10 – Nov 12 | #578, #581, #583, #585, #587, #588, #589, #590, #591 |
 
 Detailed notes: [6.2.26](6.2.26.md) · [6.2.27](6.2.27.md) · [6.2.28](6.2.28.md) · [6.2.29](6.2.29.md) ·
 [6.2.30](6.2.30.md) · [6.2.31](6.2.31.md) · [6.2.32](6.2.32.md) · [6.2.33](6.2.33.md) · [6.2.34](6.2.34.md) ·
-[6.2.35](6.2.35.md) · [6.2.36](6.2.36.md)
+[6.2.35](6.2.35.md) · [6.2.36](6.2.36.md) · [6.2.37](6.2.37.md) · [6.2.38](6.2.38.md) · [6.2.39](6.2.39.md)

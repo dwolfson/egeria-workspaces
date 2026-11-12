@@ -1,5 +1,5 @@
 <!-- DRAFT: new file CHANGELOG.md at the root of dwolfson/trellis.
-     Baseline b74b07f9 (2026-10-09, the October 2026 newsletter) to c9892ec2 (#1078, 2026-11-11).
+     Baseline b74b07f9 (2026-10-09, the October 2026 newsletter) to 73738df8 (#1086, 2026-11-12).
      Owner decision 2026-11-11: the release is "6.3 Tech Preview", tagged and released (GitHub release) to coincide
      with the Egeria 6.3 release, tentatively Monday 2026-11-16. Proposed tag name: v6.3-tech-preview (TODO: confirm).
      Package versions (resource-explorer 0.1.0, egeria-advisor 0.1.2, ...) are left as they are. -->
@@ -49,7 +49,9 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 
 #### Egeria Advisor
 - **Dashboards in Egeria**: lists and shows Egeria-held sheets as the signed-in user (#1042), then reads and authors
-  them at parity with the Portal (#1067, #1068); Used by shows display names (#1070).
+  them at parity with the Portal (#1067, #1068); Used by shows display names (#1070);
+  large tables scroll inside their tile and a capped table says what it left out (#1084); an unreadable or empty
+  folder says why (#1086).
 - **Report specs in Egeria**: syncs report specs held in Egeria, retiring the Phase-1 loader (#1033); publishes and
   withdraws specs, restricted per user, with Used by (#1060).
 - **Perspectives from Egeria**, with an absence that says why (#1059).
@@ -72,6 +74,7 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 - A zone with no access control is private, matching Egeria (#1043).
 - Egeria Advisor feedback: a changed vote supersedes the earlier one for that answer, and the recorded intent is the
   one the question was routed to rather than the selector (#1078).
+- Egeria Advisor drops its unread `EMBEDDING_DEVICE` setting (#1080).
 
 ### Fixed
 - **Identity and access**: ambient identity, caller-identity rounds, private investigation attach, no forged person
@@ -93,22 +96,25 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 - **Egeria Advisor**: feedback no longer blocks the event loop (#1044); Dr.Egeria runs as the signed-in user (#1045);
   calls with neither token nor password are refused (#1046); strict mermaid rendering (#1047); throwaway test schema
   (#1051); the runtime image includes `trellis-feedback` (#1074); an Egeria 5xx or a dropped connection at Portal
-  sign-in is "unreachable", not "rejected" (#1077).
+  sign-in is "unreachable", not "rejected" (#1077); a saved-query count tile shows no member table under the
+  number (#1081).
 
 ### Security
 - See *Fixed › Identity and access* and *Changed* (credential fallback retired, zone rule).
 - The certifi floor excludes the distrusted emSign ECC G3 root (#989).
 
 ### Dependencies
-- pyegeria floor raised from 6.1.15 to 6.2.1, then step by step to 6.2.36 (#593, #651, #728, #806, #819, #834, #853,
-  #951, #959, #974, #987, #1005, #1028, #1036, #1061, #1071, #1076).
+- pyegeria floor raised from 6.1.15 to 6.2.1, then step by step to 6.2.39 (#593, #651, #728, #806, #819, #834, #853,
+  #951, #959, #974, #987, #1005, #1028, #1036, #1061, #1071, #1076, #1082, #1083).
 - About 20 Dependabot bumps from the odpi side (notebook, jupyterlab, mlflow, aiohttp, authlib, pypdf and others),
   via the sync (#112).
 
 ### CI and tests
 - Resource Explorer tests on main and PRs only; job timeout raised to 60, then 90 minutes; stale image runs cancelled;
-  PR images built only when their inputs change; ea-tests cover querycache (#884, #601, #891, #670, #1075, #1063).
-- Tests write no tracked files; ratchets for silent success; a pyegeria contract test (#595, #1048, #1056).
+  PR images built only when their inputs change; ea-tests cover querycache; builder and runtime image stages copy the same workspace packages
+  (#884, #601, #891, #670, #1075, #1063, #1079).
+- Tests write no tracked files; ratchets for silent success; a pyegeria contract test; the spec-sync fake answers an
+  empty page the way Egeria does (#595, #1048, #1056, #1085).
 - Dr.Egeria templates synced (#91, #103, #104, #639, #858, #874, #1004); odpi sync and DCO remediation (#108, #981, #112).
 
 ### Docs

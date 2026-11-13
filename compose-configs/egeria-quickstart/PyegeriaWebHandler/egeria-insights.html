@@ -1024,7 +1024,7 @@ function SearchResults({ results, selection }) {
             ? (results.total >= 10000
                 ? 'matching elements found — stopped at the 10,000 cap, there may be more'
                 : 'matching elements found — stopped early (Egeria repeated a page), there may be more')
-            : 'matching elements (exact)')
+            : 'matching elements (counted until Egeria reported no more)')
         : ('matching elements' + (results.capped ? ' (showing top ' + results.total + ' — refine to see more, or run an exact count)' : '')),
       items.length > 0 && el('input', { type: 'search', placeholder: 'Filter results…', value: filter,
         onChange: function(e){ setFilter(e.target.value); },

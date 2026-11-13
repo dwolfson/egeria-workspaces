@@ -80,6 +80,14 @@ def test_the_ui_says_may_be_more_when_truncated():
     assert "truncated at 10,000" not in html and html.count("there may be more") == 2
 
 
+def test_a_complete_run_is_not_called_exact():
+    """Both loops use metadata-expert finds, where a filtered page can come back null (B5 capture) and
+    pyegeria collapses [] with null, so a stop on an empty page is not proof of the end."""
+    html = (HERE / "egeria-insights.html").read_text()
+    assert "matching elements (exact" not in html
+    assert "'matching elements (counted until Egeria reported no more)'" in html
+
+
 def test_freshstart_lookups_ask_for_25_not_1():
     for name, const in (("bootstrap_monitor_handler.py", "_CANARY_PAGE_SIZE"),
                         ("catalog_search_handler.py", "_OLDEST_PAGE_SIZE")):

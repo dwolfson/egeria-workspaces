@@ -1,7 +1,8 @@
 <!-- DRAFT for egeria-docs: site/docs/release-notes/november-2026.md
      Status: draft 2026-11-11, from release-notes-6.3/RELEASE-NOTES-NEXT.md.
      Open points are marked TODO. Also add the page to site/mkdocs.yml (nav), as fb489c6b did for October.
-     Screenshots: none taken yet; each TODO-IMAGE says what to capture.
+     Screenshots: draft shots (800x500, laz, as erinoverview, 2026-11-13) are in release-notes-6.3/images/;
+     each TODO-IMAGE says what to retake at full resolution.
      Owner decision 2026-11-11: this is OUR PIECE of the Egeria project's 6.3 release notes/newsletter, not the whole
      newsletter. The project supplies the opening, the core Egeria 6.3 platform sections, the link to the full 6.3
      release notes and upgrade notes. The opening paragraph, "Future plans" and "Connecting with the project" below are
@@ -22,7 +23,9 @@ Welcome to the Egeria community's November 2026 newsletter. Since our [last news
 In October we said that AI agents and applications are only as trustworthy as the context they work from. This release applies that idea to our own tools. A number on a dashboard now says what it counted, or says that it was not measured. The reports and dashboards people rely on are kept in Egeria, so they are governed like any other metadata. And Resource Explorer and Egeria Advisor, the early previews we showed in October, are now a Tech Preview.
 
 <!-- TODO-IMAGE: Portal Local Dashboards, folder tree on the left, one of the "useful" sheets open
-     (for example the repository trends sheet), signed in as a Coco persona. File: november-2026-local-dashboards.png -->
+     (for example the repository trends sheet), signed in as a Coco persona. File: november-2026-local-dashboards.png
+     DRAFT shot taken 2026-11-13 as erinoverview on laz at 800x500 (pane limit); retake at full resolution before publishing. Alternative: images/november-2026-local-dashboards-list.jpg (the sheet list with folders and Used by). -->
+![The Catalog Health dashboard sheet, held in Egeria, showing AI-readiness counts, asset ownership, stale assets and asset composition](november-2026-local-dashboards.jpg)
 
 ## What's new
 
@@ -52,7 +55,9 @@ Across the Portal, every column, pane and split can be resized, and each page re
 
 Learn more about [relationship purposes](https://github.com/odpi/egeria-workspaces/blob/main/portal-docs/tools/egeria-explorer.md#relationship-purposes).
 
-<!-- TODO-IMAGE: a detail panel with relationships folded into purpose families. File: november-2026-relationship-purposes.png -->
+<!-- TODO-IMAGE: a detail panel with relationships folded into purpose families. File: november-2026-relationship-purposes.png
+     DRAFT shot taken 2026-11-13 as erinoverview on laz at 800x500 (pane limit); retake at full resolution before publishing. -->
+![The Customer API in The Catalog, with its 15 relationships folded into Composition, Governance & Description, and Design & Deployment](november-2026-relationship-purposes.jpg)
 
 ### Tutorials and analytic functions
 
@@ -75,7 +80,9 @@ Egeria Workspaces, our ready-to-run environment, now tracks the Egeria 6.3 build
 - **Airflow and Marquez start with the demo**, and Airflow's lineage flows into Egeria through OpenLineage.
 - **Coco Pharmaceuticals content**: a Chief Data Officer dashboard, security support, sustainability reference data, and Airflow pipelines that bring the digital products to life.
 
-<!-- TODO-IMAGE: Resource Browser page for one Coco resource. File: november-2026-resource-browser.png -->
+<!-- TODO-IMAGE: Resource Browser page for one Coco resource. File: november-2026-resource-browser.png
+     DRAFT shot taken 2026-11-13 as erinoverview on laz at 800x500 (pane limit); retake at full resolution before publishing. -->
+![The Resource Locator page for the Customer API: what it contains, its lineage, and its usage activity](november-2026-resource-browser.jpg)
 
 You can [try the live demo](https://egeria.pdr-associates.com){target=blank} without installing anything (signing up takes a minute), or run [Egeria Workspaces](https://egeria-project.org/egeria-workspaces/) locally with Docker or Podman.
 
@@ -93,11 +100,15 @@ In October we shared these two [Trellis](https://egeria-project.org/concepts/tre
 - **It learns from you.** When you rate an answer you can say why. An administrator reviews the feedback and can trace a problem back to a gap in the documents. The document index can be rebuilt, swapped in and rolled back.
 - **A six-part tutorial** takes you from signing in to analysis.
 
-<!-- TODO-IMAGE: Resource Explorer Next UI, a database resource with cards and tiles. File: november-2026-resource-explorer.png -->
+<!-- TODO-IMAGE: Resource Explorer Next UI, a database resource with cards and tiles. File: november-2026-resource-explorer.png
+     DRAFT shot taken 2026-11-13 as erinoverview on laz at 800x500 (pane limit); retake at full resolution before publishing. This shot shows the coco_pharma database with a stale Egeria link ("element not found") left over from the Egeria reset; re-survey and re-publish before the retake, or pick another database. -->
+![Resource Explorer's At a glance view of the coco_pharma database: schemas, tables, rows and size since the last survey](november-2026-resource-explorer.png)
 
 **Egeria Advisor** now reads and authors dashboards held in Egeria, just as the Portal does, and publishes report specs. It runs Dr.Egeria as the signed-in user and refuses requests that carry no credentials. It shares the same feedback loop as Resource Explorer.
 
-<!-- TODO-IMAGE: Egeria Advisor showing a dashboard sheet it read from Egeria. File: november-2026-egeria-advisor.png -->
+<!-- TODO-IMAGE: Egeria Advisor showing a dashboard sheet it read from Egeria. File: november-2026-egeria-advisor.png
+     DRAFT shot taken 2026-11-13 as erinoverview on laz at 800x500 (pane limit); retake at full resolution before publishing. -->
+![Egeria Advisor showing the Catalog Health sheet, held in Egeria and read as the signed-in user, with "not measured" where nothing was measured](november-2026-egeria-advisor.jpg)
 
 Both applications are still a Tech Preview: they keep changing quickly, and your feedback shapes them. Try them, use the feedback buttons, and tell us what you would like next.
 

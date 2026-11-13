@@ -14,7 +14,7 @@ work has been about three things: putting what Resource Explorer finds **into Eg
 and surveyed by Egeria's own engine host); making every answer say **what it established and what it did not**; and
 **closing the loop** with the people who use it, through shared feedback, triage and a document index that can be
 rebuilt and rolled back. Egeria Advisor now reads and authors the same Egeria-held dashboards and report specs as the
-Portal. It ships with **Egeria 6.3** and requires **pyegeria 6.2.39**.
+Portal. It ships with **Egeria 6.3** and requires **pyegeria 6.2.41**.
 
 **6.3 Tech Preview** &middot; **1,151** commits &middot; **~523** PRs &middot; **12** packages &middot; **5** weeks
 
@@ -95,7 +95,7 @@ Portal. It ships with **Egeria 6.3** and requires **pyegeria 6.2.39**.
 
 ## Upgrade notes
 
-- **pyegeria 6.2.39 or later is required** by Resource Explorer and Egeria Advisor (#1083).
+- **pyegeria 6.2.41 or later is required** by Resource Explorer and Egeria Advisor (see PR). <!-- Owner 2026-11-13: the notes state pyegeria 6.2.41 as the floor; 6.2.41 ships before Monday. At the cut, check the floor PRs landed and cite them. -->
 - **Database credentials must be in the secrets store.** The plaintext fallback is gone (#823).
 - **Only JWT bearer tokens are accepted at login** (#827).
 - **Zones**: a zone with no access control is private, as in Egeria (#1043). Content in such zones is visible only to

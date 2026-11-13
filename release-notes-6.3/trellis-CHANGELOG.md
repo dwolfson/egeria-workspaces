@@ -104,8 +104,8 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 - The certifi floor excludes the distrusted emSign ECC G3 root (#989).
 
 ### Dependencies
-- pyegeria floor raised from 6.1.15 to 6.2.1, then step by step to 6.2.39 (#593, #651, #728, #806, #819, #834, #853,
-  #951, #959, #974, #987, #1005, #1028, #1036, #1061, #1071, #1076, #1082, #1083).
+- pyegeria floor raised from 6.1.15 to 6.2.1, then step by step to 6.2.41 (#593, #651, #728, #806, #819, #834, #853,
+  #951, #959, #974, #987, #1005, #1028, #1036, #1061, #1071, #1076, #1082, #1083; TODO: add the 6.2.41 floor PR at the cut).
 - About 20 Dependabot bumps from the odpi side (notebook, jupyterlab, mlflow, aiohttp, authlib, pypdf and others),
   via the sync (#112).
 

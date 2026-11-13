@@ -102,7 +102,7 @@ In October we shared these two [Trellis](https://egeria-project.org/concepts/tre
 Both applications are still a Tech Preview: they keep changing quickly, and your feedback shapes them. Try them, use the feedback buttons, and tell us what you would like next.
 
 Learn more in the [Trellis repository](https://github.com/dwolfson/trellis) and the [Resource Explorer tutorial](https://github.com/dwolfson/trellis/tree/main/packages/resource-explorer/docs/tutorial).
-<!-- TODO: confirm the Trellis repository link is the one to publish (dwolfson/trellis is public); link the 6.3 Tech Preview release once tagged. -->
+<!-- TODO: confirm the Trellis repository link is the one to publish (dwolfson/trellis is public); link the 6.3 Tech Preview release once tagged: https://github.com/dwolfson/trellis/releases/tag/v6.3-tech-preview. -->
 
 ## pyegeria
 

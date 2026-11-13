@@ -1,7 +1,7 @@
 <!-- DRAFT: new file CHANGELOG.md at the root of dwolfson/trellis.
      Baseline b74b07f9 (2026-10-09, the October 2026 newsletter) to 73738df8 (#1086, 2026-11-12).
      Owner decision 2026-11-11: the release is "6.3 Tech Preview", tagged and released (GitHub release) to coincide
-     with the Egeria 6.3 release, tentatively Monday 2026-11-16. Proposed tag name: v6.3-tech-preview (TODO: confirm).
+     with the Egeria 6.3 release, tentatively Monday 2026-11-16. Tag name: v6.3-tech-preview (owner, 2026-11-13).
      Package versions (resource-explorer 0.1.0, egeria-advisor 0.1.2, ...) are left as they are. -->
 
 # Changelog

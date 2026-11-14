@@ -106,6 +106,9 @@ async def _exchange(user: str, token: str) -> str:
     if not session:
         raise _Unknown("Studio's sign-in answer carried no session")
     with _sessions_lock:
+        now = time.time()
+        for k in [k for k, (_s, exp) in _sessions.items() if exp <= now]:   # drop expired sessions as we go
+            del _sessions[k]
         _sessions[_key(user, token)] = (session, _expiry(session))
     return session
 

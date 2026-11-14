@@ -198,7 +198,8 @@ services:
       APPLICATION_PROPERTIES_PATH: "/platform/application.properties"
       # Egeria Advisor URL — checked server-side; set in .env if running on a non-default port/host
       EGERIA_ADVISOR_URL: "${EGERIA_ADVISOR_URL:-http://localhost:7880/}"
-      # Trellis Studio's freshstart twin (7840): "Edit in Studio" on report-spec and sheet views.
+      # Trellis Studio's freshstart twin (7840). Read only once freshstart's own PyegeriaWebHandler gets
+      # studio_handler.py and the "Edit in Studio" pages; for now the link is quickstart only.
       EGERIA_STUDIO_URL: "${EGERIA_STUDIO_URL:-http://localhost:7840/}"
       EGERIA_STUDIO_API_URL: "${EGERIA_STUDIO_API_URL:-http://host.docker.internal:7840}"
     extra_hosts:

@@ -192,3 +192,12 @@ def test_pages_show_the_link_only_on_yes():
     explorer = (here / "type-explorer.html").read_text()
     assert "if (answer !== 'yes') return null;" in explorer
     assert "if (spec.source !== 'egeria' || !label) return;" in explorer
+
+
+def test_expired_sessions_are_pruned_on_insert(monkeypatch):
+    studio = _FakeStudio(answers=[(200, {"answer": "yes"})])
+    monkeypatch.setattr(studio_handler.httpx, "AsyncClient", studio.client)
+    studio_handler._sessions[("old-user", "abc")] = ("stale", time.time() - 10)
+    _as(monkeypatch, _egeria_token())
+    _run(studio_handler.can_edit(kind="spec", ref="X"))
+    assert ("old-user", "abc") not in studio_handler._sessions and len(studio_handler._sessions) == 1

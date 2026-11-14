@@ -357,6 +357,8 @@ from advisor_handler import router as advisor_router
 app.include_router(advisor_router)
 from resource_explorer_handler import router as resource_explorer_router
 app.include_router(resource_explorer_router)
+from studio_handler import router as studio_router
+app.include_router(studio_router)
 
 # ── Demo mode ──────────────────────────────────────────────────────────────────
 

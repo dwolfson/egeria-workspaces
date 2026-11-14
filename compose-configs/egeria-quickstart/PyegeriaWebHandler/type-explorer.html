@@ -2818,6 +2818,49 @@ function rsRunFormats(spec) {
   return own;
 }
 
+// "Edit in Studio" (owner decision C, 2026-11-14): shown only when Trellis Studio says the signed-in user can edit
+// this spec (GET /api/studio/can-edit, asked as the user through egeriaFetch's X-Egeria-Token). On "unknown" it
+// shows nothing and says why in the console (the server logs it too); on "no" it shows nothing. Only a spec held in
+// Egeria can be edited there. Studio checks again when it opens the spec: the link is a hint, never the check.
+function RsEditInStudio({ spec }) {
+  const creds = React.useContext(CredContext);
+  const [answer, setAnswer] = useState(null);
+  const label = spec.label || spec.name;
+  useEffect(function() {
+    setAnswer(null);
+    if (spec.source !== 'egeria' || !label) return;
+    if (!creds || !creds.token) { console.info('Edit in Studio not shown: not signed in'); return; }
+    var cancelled = false;
+    egeriaFetch('/api/studio/can-edit?kind=spec&ref=' + encodeURIComponent(label), creds)
+      .then(function(r) { return r.json().catch(function() { return {}; }).then(function(b) {
+        return r.ok ? b : { answer: 'unknown', why: b.detail || ('HTTP ' + r.status) }; }); })
+      .catch(function(e) { return { answer: 'unknown', why: e.message }; })
+      .then(function(v) {
+        if (cancelled) return;
+        if (v.answer === 'unknown') console.info('Edit in Studio not shown for ' + label + ': Studio could not tell (' + (v.why || 'no answer') + ')');
+        setAnswer(v.answer);
+      });
+    return function() { cancelled = true; };
+  }, [label, spec.source, creds && creds.token]);
+  if (answer !== 'yes') return null;
+  function open() {
+    var w = window.open('', '_blank');   // opened in the click so it isn't blocked
+    if (w) w.opener = null;
+    egeriaFetch('/api/studio/handoff', creds, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+                                                 body: JSON.stringify({ kind: 'spec', label: label }) })
+      .then(function(r) { return r.json().then(function(b) { return { ok: r.ok, body: b }; }); })
+      .then(function(res) {
+        if (res.ok && res.body.ok && w) { w.location.href = res.body.studio_sso_url; return; }
+        if (w) w.close();
+        alert('Could not open Studio: ' + ((res.body && (res.body.detail || res.body.reason)) || 'no answer'));
+      })
+      .catch(function(e) { if (w) w.close(); alert('Could not open Studio: ' + e.message); });
+  }
+  return React.createElement('button', { onClick: open, title: 'Open this spec in Trellis Studio to make a new version',
+    style: { fontSize: 11, padding: '3px 9px', borderRadius: 4, border: '1px solid var(--border)',
+             background: 'transparent', color: 'var(--text)', cursor: 'pointer', whiteSpace: 'nowrap' } }, 'Edit in Studio');
+}
+
 function ReportSpecDetail({ spec, onSelectSpec, portalSupply, consumers }) {
   const creds = React.useContext(CredContext);
   const _favPersonaId = React.useContext(PersonaContext);
@@ -3043,7 +3086,8 @@ function ReportSpecDetail({ spec, onSelectSpec, portalSupply, consumers }) {
       spec.resolution && spec.resolution.bindersDeprecated && React.createElement(RsBindersTag, null),
       React.createElement(RsSourceBadge, { spec: spec }),
       React.createElement(RsUsedBy, { spec: spec }),
-      React.createElement(CopyJsonButton, { data: spec })
+      React.createElement(CopyJsonButton, { data: spec }),
+      React.createElement(RsEditInStudio, { spec: spec })
     ),
     React.createElement(RsSourceDetail, { spec: spec, onSelectSpec: onSelectSpec }),
     spec.restricted && React.createElement('div', { className: 'rs-restricted-detail', style: { marginTop: 8, fontSize: 11, color: 'var(--dim)', overflowWrap: 'anywhere' } },

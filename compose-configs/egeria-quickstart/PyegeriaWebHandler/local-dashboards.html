@@ -400,6 +400,54 @@ function viewerToken() {
   }).catch(function() { return null; });
 }
 
+// "Edit in Studio" (owner decision C): shown only when Trellis Studio says the signed-in user can edit this
+// sheet. The Portal asks Studio as the user (GET /api/studio/can-edit with the user's X-Egeria-Token). "unknown"
+// shows nothing and says why in the console (the server logs it too); "no" shows nothing. Studio checks again
+// when it opens the sheet: the link is a hint, never the check.
+function studioEditLink(kind, label, host) {
+  if (!host) return;
+  viewerToken().then(function(token) {
+    if (!token) { console.info('Edit in Studio not shown: no signed-in persona in this browser'); return null; }
+    return fetch('/api/studio/can-edit?kind=' + encodeURIComponent(kind) + '&ref=' + encodeURIComponent(label),
+                 { headers: { 'X-Egeria-Token': token } })
+      .then(function(r) {
+        return r.json().catch(function() { return {}; }).then(function(b) {
+          return r.ok ? b : { answer: 'unknown', why: b.detail || ('HTTP ' + r.status) };
+        });
+      })
+      .then(function(v) {
+        if (!v || v.answer !== 'yes') {
+          if (!v || v.answer !== 'no') console.info('Edit in Studio not shown: Studio could not tell (' + ((v && v.why) || 'no answer') + ')');
+          return;
+        }
+        var b = document.createElement('button');
+        b.className = 'btn';
+        b.textContent = 'Edit in Studio';
+        b.title = 'Open this ' + kind + ' in Trellis Studio to make a new version';
+        b.addEventListener('click', function() { openInStudio(kind, label); });
+        host.appendChild(b);
+      });
+  }).catch(function(e) { console.info('Edit in Studio not shown: ' + e.message); });
+}
+
+function openInStudio(kind, label) {
+  var w = window.open('', '_blank');   // opened in the click, so it isn't blocked; pointed at Studio below
+  if (w) w.opener = null;
+  viewerToken()
+    .then(function(token) {
+      return fetch('/api/studio/handoff', { method: 'POST',
+        headers: Object.assign({ 'Content-Type': 'application/json' }, token ? { 'X-Egeria-Token': token } : {}),
+        body: JSON.stringify({ kind: kind, label: label }) });
+    })
+    .then(function(r) { return r.json().then(function(b) { return { ok: r.ok, body: b }; }); })
+    .then(function(res) {
+      if (res.ok && res.body.ok && w) { w.location.href = res.body.studio_sso_url; return; }
+      if (w) w.close();
+      alert('Could not open Studio: ' + ((res.body && (res.body.detail || res.body.reason)) || 'no answer'));
+    })
+    .catch(function(e) { if (w) w.close(); alert('Could not open Studio: ' + e.message); });
+}
+
 function fetchExecuteCached(body, force) {
   return viewerPersona().then(function(persona) {
     return _fetchExecuteCached(persona ? Object.assign({}, body, { persona: persona }) : body, force);
@@ -765,10 +813,12 @@ function renderDetail(name, force) {
         + (sheet.family ? '<span class="badge badge-fam">' + esc(sheet.family) + '</span>' : '')
         + '<select class="btn" onchange="setPerspective(this.value)" title="Filter placements by viewer-role perspective">' + perspOptions + '</select>'
         + '<button class="icon-btn" title="Refresh everything: re-resolve this sheet and re-run every report now (bypasses the caches)" aria-label="Refresh this Dashboard Sheet and re-run every report" onclick="renderDetail(' + attrJson(sheet.name) + ',true)">↻</button>'
+        + (sheet.source === 'egeria' ? '<span id="studio-edit"></span>' : '')
         + (sheet.source === 'egeria' ? egeriaDeleteDisabled('Delete Dashboard', 'btn btn-danger') : '<button class="btn btn-danger" onclick="deleteSheet(' + attrJson(sheet.name) + ',' + attrJson(sheet.heading || sheet.name) + ')">Delete Dashboard</button>')
         + '</div></div>'
         + '<div class="placements" id="placements"></div>';
 
+      if (sheet.source === 'egeria') studioEditLink('sheet', sheet.name, document.getElementById('studio-edit'));
       var grid = document.getElementById('placements');
       if (!sheet.placements || !sheet.placements.length) {
         grid.outerHTML = perspective

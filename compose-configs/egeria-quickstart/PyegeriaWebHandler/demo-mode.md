@@ -137,6 +137,8 @@ Egeria Advisor is a separate AI-assistant service (its own repo/process, not par
 |----------|---------|-------------|
 | `EGERIA_ADVISOR_URL` | `http://localhost:8880/` | Base URL of the Advisor service. Used both for the server-side reachability check and as the base of the SSO handoff link opened in the attendee's browser — **must be reachable from attendees' browsers**, not just from this host. For a public deployment (`SITE_URL` on a public domain), set this to Advisor's public HTTPS URL (e.g. `https://your-domain.com:8881/`), not `localhost` — `localhost` only works when the browser and the Advisor process are on the same machine. |
 | `EGERIA_ADVISOR_SSO_SECRET` | _(blank)_ | HS256 secret shared with Advisor's own `ADVISOR_PORTAL_SECRET` (**not** this app's `JWT_SECRET`). Signs the short-lived token that lets an attendee land in Advisor already logged in as their persona. Leave blank to disable SSO — the tile then shows **Not configured** and `/api/advisor/handoff` returns 503. |
+| `EGERIA_STUDIO_URL` | `http://localhost:8840/` | Trellis Studio, sent to browsers for **Edit in Studio** (same public-URL caveat as `EGERIA_ADVISOR_URL`). |
+| `EGERIA_STUDIO_API_URL` | `http://host.docker.internal:8840` | Studio as this container reaches it: `/api/auth/portal` and `/api/can-edit`. |
 
 **Why Advisor needs to bind `0.0.0.0`, not `127.0.0.1`:** if Advisor is started via its own CLI default (`egeria-advisor-web`, no flags), it binds `127.0.0.1` only — reachable from the host but not from the `quickstart-pyegeria-web` container's reachability check, nor from any other machine. Start it with `scripts/run_web.sh` (from the Advisor repo) instead, which honors `ADVISOR_BIND_HOST=0.0.0.0` from its own `.env`, or pass `--host 0.0.0.0` explicitly. HTTPS (`ADVISOR_HTTPS_PORT`, default 8881) only starts if `ADVISOR_SSL_CERTFILE`/`ADVISOR_SSL_KEYFILE` are set and exist.
 
@@ -223,6 +225,8 @@ Egeria Advisor is a separate AI-assistant service (its own repo/process, not par
 |--------|------|------|-------------|
 | `GET` | `/api/advisor/status` | Public | Reachability + whether SSO is configured |
 | `POST` | `/api/advisor/handoff` | Verified user | Mint an SSO handoff URL for the caller's persona. Body: `{persona, display_name}`. Returns `{ok, advisor_sso_url}` |
+| `GET` | `/api/studio/can-edit` | Signed-in user (X-Egeria-Token) | `?kind=spec\|sheet&ref=` → `{answer: yes\|no\|unknown, why}`, asked of Trellis Studio as the user. Any failure is `unknown` with its reason, logged; the pages show **Edit in Studio** only on `yes`. |
+| `POST` | `/api/studio/handoff` | Signed-in user (X-Egeria-Token) | Body `{kind, label}` → `{ok, studio_sso_url}`: Studio at `/?open=<kind>:<label>#pt=<token>`; Studio checks the rights again before it opens anything. |
 
 ### Admin
 

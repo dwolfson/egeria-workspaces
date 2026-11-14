@@ -109,6 +109,13 @@ def advisor_check_urls() -> list:
 # insecure/mismatched key.
 EGERIA_ADVISOR_SSO_SECRET: str = os.environ.get("EGERIA_ADVISOR_SSO_SECRET", "")
 
+# Trellis Studio (port 8840 on laz, 7840 for freshstart): the authoring app. "Edit in Studio" on report-spec and
+# sheet views shows only where Studio says the signed-in user can edit (owner decision C). EGERIA_STUDIO_URL is
+# sent to browsers (same public-URL caveat as EGERIA_ADVISOR_URL); EGERIA_STUDIO_API_URL is what this container
+# calls (Studio's /api/auth/portal and /api/can-edit). Same SSO secret as above: Studio's TRELLIS_PORTAL_SECRET.
+EGERIA_STUDIO_URL: str = os.environ.get("EGERIA_STUDIO_URL", "http://localhost:8840/")
+EGERIA_STUDIO_API_URL: str = os.environ.get("EGERIA_STUDIO_API_URL", "http://host.docker.internal:8840")
+
 # Resource Explorer — same "trellis" family of apps as Egeria Advisor, same
 # shared secret above (its compose config feeds this same value in as
 # TRELLIS_PORTAL_SECRET), no separate secret needed. Same public-URL caveat

@@ -330,6 +330,11 @@ services:
       # .env exactly. Leave unset to disable the SSO handoff (tile shows
       # "Not configured").
       EGERIA_ADVISOR_SSO_SECRET: "${EGERIA_ADVISOR_SSO_SECRET:-}"
+      # Trellis Studio ("Edit in Studio" on report-spec and sheet views, shown only where Studio says the
+      # signed-in user can edit): EGERIA_STUDIO_URL goes to browsers, EGERIA_STUDIO_API_URL is what this
+      # container calls. Same SSO secret as above (Studio's TRELLIS_PORTAL_SECRET).
+      EGERIA_STUDIO_URL: "${EGERIA_STUDIO_URL:-http://localhost:8840/}"
+      EGERIA_STUDIO_API_URL: "${EGERIA_STUDIO_API_URL:-http://host.docker.internal:8840}"
       # Resource Explorer — same trellis family/SSO secret as Advisor above.
       EGERIA_RESOURCE_EXPLORER_URL: "${EGERIA_RESOURCE_EXPLORER_URL:-http://localhost:8810/}"
     extra_hosts:

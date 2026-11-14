@@ -270,6 +270,7 @@ Per-release detail is in the themes above; the appendix is the same list by sect
 - 2-hour bearer tokens (#651).
 - `presentationStyle` replaces `emphasis`; MeasurementSpecification references become relationships (docs: #796, #795).
 - Egeria 6.3-SNAPSHOT platform pins through the Pasteur build (#647, #748, #740, #798, #800, #805, #808, #810, #827); freshstart pyegeria capped below 6.2.27 (#807).
+  <!-- TODO (Coordinator, 2026-11-14): laz platform upgrade ~20:45Z brings odpi/egeria#9453 (paging contract) and odpi/egeria#9450 (Wedgwood subscription performance). Cite the workspaces pin PR when it lands; describe both for users from the upstream PRs, not from this note. -->
 - Analytic functions and metric paths by registered name (#741, #742, #743, #811).
 - Postgres templates take a secrets store (#679).
 

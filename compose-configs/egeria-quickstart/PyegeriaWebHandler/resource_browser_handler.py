@@ -1128,12 +1128,16 @@ async def search_terms(q: str = Query(..., min_length=2)):
 #
 # Egeria's My Profile service keeps a "My Private Journal" note log on each
 # user's profile and puts every entry in a governance zone named after that user.
-# That zone alone hides nothing: a userId zone only GRANTS, and a zone with no
-# security list is ignored, so everyone can still read the entry (verified on
-# quickstart 2026-10-13, JournalEntry 8bec72e4). journal-my-activity also ignores
-# initialClassifications. So each new entry is re-zoned straight afterwards to
-# [_PRIVATE_ZONE, <userId>]: the secured zone denies everyone else, the userId
-# zone lets the author back in.
+# journal-my-activity ignores initialClassifications, so each new entry is re-zoned
+# straight afterwards to [_PRIVATE_ZONE, <userId>]. Since Egeria e9fd817f4c (laz
+# builds have it) a zone with no governance control makes an element private to the
+# users that zone names, so the userId zone alone already hides the entry from
+# everyone else. On an older platform that zone only grants and is otherwise
+# ignored, so everyone could read the entry (seen on quickstart 2026-10-13,
+# JournalEntry 8bec72e4). The secured _PRIVATE_ZONE (its security list names a
+# group nobody holds) denies everyone else either way: belt and braces on a newer
+# platform, the protection itself on an older one, and the "protected" marker the
+# reader is shown.
 #
 # The entry is then linked to the resource with an Actions relationship
 # (resource = actionCause at end 1, JournalEntry = an Action at end 2), as the
@@ -1144,11 +1148,18 @@ async def search_terms(q: str = Query(..., min_length=2)):
 # createNoteLogEntry), so the link is a second call. The resource is also kept in
 # additionalProperties. Public notes stay on the resource's own note logs.
 #
-# _PRIVATE_ZONE borrows Resource Explorer's secured zone (defined in the
-# quickstart and freshstart user directories) until Egeria's journal fix lands;
-# BACKLOG.md RL-1 is to review that choice then.
+# _PRIVATE_ZONE is the Resource Locator's own secured zone (PO-13, owner's decision
+# "Dedicated zone", 2026-11-15; DESIGN-PO13-RESOURCE-LOCATOR-PRIVATE-ZONE), defined in
+# the user directories beside Resource Explorer's. Notes written before it were zoned
+# with RE's secured zone (resource-explorer-private); this code never writes that zone
+# again, but reads still count it as protected until those notes are migrated.
+# DEPLOY ORDER: the zone must be defined on a platform before this code writes it
+# there. On a platform without e9fd817f4c an undefined zone is ignored, so the note
+# would be readable by everyone; keep private notes off on such a platform.
 
-_PRIVATE_ZONE = "resource-explorer-private"
+_PRIVATE_ZONE = "resource-locator-private"
+#: Zones that mark a private note as protected when read: the Locator's own, and RE's that older notes carry.
+_PROTECTED_ZONES = frozenset({"resource-locator-private", "resource-explorer-private"})
 _ACTIONS_PAGE = 200
 _ACTIONS_MAX_PAGES = 10
 
@@ -1176,10 +1187,11 @@ def _private_note_record(e: dict) -> dict:
     rec = _note_record(e)
     ap = ((e.get("properties") or {}).get("additionalProperties") or {})
     zones = _zones_of(e.get("elementHeader"))
-    # "protected" is what the reader should believe: only entries in the secured
-    # zone are hidden from others. Older entries carry the userId zone alone.
+    # "protected" is what the reader should believe: entries in a secured zone (the
+    # Locator's own, or RE's on notes written before PO-13) are hidden from others.
+    # Older entries carry the userId zone alone.
     rec.update(resourceGUID=ap.get("resourceGUID"), private=True, zones=zones,
-               protected=_PRIVATE_ZONE in zones)
+               protected=bool(_PROTECTED_ZONES.intersection(zones)))
     return rec
 
 

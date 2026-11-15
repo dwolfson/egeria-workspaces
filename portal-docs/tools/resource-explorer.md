@@ -43,7 +43,7 @@ tile signs the Portal's user straight in.
 ## In the Portal
 
 - **Curation Coverage tile.** The report spec **Resource Explorer - Curation Coverage** puts RE's published-against-not-yet-published count for a database on a [Dashboard Sheet](local-dashboards.md). The Portal calls RE server-to-server, as the viewer's persona: it exchanges the Portal's SSO token at RE's `POST /api/auth/portal`, then calls `GET /api/analytics/curation-coverage-tile/{type}/{slug}`.
-- **Resource Locator.** Work lists published from RE appear in the [Resource Locator](resource-locator.md), and lists made there appear in RE, because both use the same Egeria collections. The Locator's private notes use RE's secured zone, `resource-explorer-private`.
+- **Resource Locator.** Work lists published from RE appear in the [Resource Locator](resource-locator.md), and lists made there appear in RE, because both use the same Egeria collections. The Locator's private notes have their own secured zone, `resource-locator-private`; only notes written before it existed are in RE's `resource-explorer-private`.
 
 There are two addresses:
 

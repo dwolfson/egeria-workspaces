@@ -65,7 +65,7 @@ You can also add **informal tags**, use the Egeria Feedback widget to **like**, 
 The Notes card has an **everyone / only me** choice.
 
 - **Everyone** adds a note to the resource's own note log. Anyone who can see the resource can read it.
-- **Only me** keeps the note in your own **My Profile journal**. It is linked to the resource with an `Actions` relationship, so it shows up both here and, with what it is about, in your journal listing. It is placed in a secured governance zone (`resource-explorer-private`) plus your own userId zone, so only you can read it. Other users get "not authorised", and the note is filtered out of their searches.
+- **Only me** keeps the note in your own **My Profile journal**. It is linked to the resource with an `Actions` relationship, so it shows up both here and, with what it is about, in your journal listing. It is placed in the Resource Locator's own secured governance zone (`resource-locator-private`) plus your own userId zone, so only you can read it. (Notes written before that zone existed are in Resource Explorer's `resource-explorer-private` instead; they are just as private.) Other users get "not authorised", and the note is filtered out of their searches.
 
 Private notes cannot be deleted yet: Egeria has no way to delete a journal entry. The page says so. Older private notes that carry only your userId zone are shown as **in your journal, but other people can read it**, because that zone alone keeps no one out.
 

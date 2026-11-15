@@ -165,6 +165,8 @@ read-only find of DataScope elements, counting those whose
 ---
 ## RL-1 Resource Locator private notes: review the borrowed secured zone (2026-10-13) — open
 
+**2026-11-15 (PO-13, owner: "Dedicated zone"):** the Portal code now writes the Locator's own secured zone, `resource-locator-private`, and reads either zone as protected (branch claude/portal-rl-private-zone). Still to do, under Dan's word and a peer round: define the zone in the user directories and restart egeria-main (this must happen before the code is deployed on a machine), then migrate existing notes. Design: ~/.re-gate/DESIGN-PO13-RESOURCE-LOCATOR-PRIVATE-ZONE-2026-11-15.md.
+
 Private notes in the Resource Locator are My Profile journal entries. Egeria's
 `journal-my-activity` zones each entry with the userId only, and ignores
 `initialClassifications`. A userId zone only GRANTS, so on its own it hides

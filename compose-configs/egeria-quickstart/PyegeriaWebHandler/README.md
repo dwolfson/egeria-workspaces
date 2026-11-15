@@ -964,7 +964,7 @@ For example, in the Coco Pharmaceuticals sample the two **License** relationship
 A shop-for-resources app at `/resource-locator` (also `/resource-browser`; API under `/api/resource-browser/...`). User guide: [portal-docs/tools/resource-locator.md](../../../portal-docs/tools/resource-locator.md). Code: `resource_browser_handler.py` + `resource-browser.html`, mirrored to freshstart. Tests: `tests/test_resource_browser.py`.
 
 **Private notes** are My Profile journal entries (`journal-my-activity`), then two more calls:
-1. re-zoned to `[resource-explorer-private, <userId>]` with `add_zone_membership`, because `journal-my-activity` stamps only the userId zone and ignores `initialClassifications`;
+1. re-zoned to `[resource-locator-private, <userId>]` with `add_zone_membership`, because `journal-my-activity` stamps only the userId zone and ignores `initialClassifications`. `resource-locator-private` is the Locator's own secured zone (PO-13); it must be defined on the platform before this code runs there. Notes written before it carry Resource Explorer's `resource-explorer-private`, and are still shown as protected;
 2. linked to the resource with an **`Actions`** relationship (resource = `actionCause`, end 1), created through Metadata Expert's `related-elements`.
 
 They are read back through Asset Maker's `elements/{guid}/sponsored/actions`, passing `activity_status_list=None` (pyegeria before 6.2.3 defaulted that to `IN_PROGRESS`, which drops journal entries). Delete returns 501: Egeria cannot delete a journal entry (egeria-python ISSUE-146). Review all this when Egeria's journal and zone fixes land: BACKLOG RL-1.

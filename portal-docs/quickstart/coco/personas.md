@@ -77,7 +77,8 @@ Coco's metadata is divided into **governance zones**, and each zone lists who ma
 A few zones that matter in the demos:
 - **digital-products**: every Coco member can read digital products, but only digital product managers (and the integration connectors) can create or change them.
 - **landing-area** and **quarantine**: newly arrived data, open only to a few roles such as metadata architects and the data-management processes. For example, `erinoverview` and `peterprofile` see the files there and the licences attached to them; `garygeeke` and `calliequartile` see none.
-- **resource-explorer-private**: private notes and investigations. Only their author can read them.
+- **resource-explorer-private**: Resource Explorer's private investigations (and Resource Locator notes written before the Locator had its own zone). Only their author can read them.
+- **resource-locator-private**: the Resource Locator's private notes. Only their author can read them.
 
 ---
 

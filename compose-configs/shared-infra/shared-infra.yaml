@@ -85,6 +85,12 @@ services:
       # already generous for this single-broker demo instance's ~100+ consumer
       # groups. Set to take effect on the next fresh-database redeploy.
       KAFKA_CFG_OFFSETS_TOPIC_NUM_PARTITIONS: "10"
+      # Largest message the broker accepts (4 MB). Kafka's ~1 MB default dropped
+      # ~1.3 MB Egeria metadata-change events. Must be >= the producers'
+      # max.request.size, which the server configs in
+      # egeria-quickstart/servers/ also set to 4 MB. Only effective
+      # because of the entrypoint override above.
+      KAFKA_CFG_MESSAGE_MAX_BYTES: "4194304"
       # Heap. kafka-server-start.sh only falls back to -Xmx1G -Xms1G when this
       # is unset, and that 1 GB default is what ran out on 2026-08-16. Sized to
       # leave room for Egeria's EGERIA_MEM_LIMIT (6g) on the same host.

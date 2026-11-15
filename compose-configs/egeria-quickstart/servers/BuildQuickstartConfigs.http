@@ -118,7 +118,8 @@ Content-Type: application/json
 {
 "producer":
 {
-"bootstrap.servers":"~{kafkaEndpoint}~"
+"bootstrap.servers":"~{kafkaEndpoint}~",
+"max.request.size":"4194304"
 },
 "consumer":
 {
@@ -326,7 +327,8 @@ Content-Type: application/json
 {
   "producer":
   {
-    "bootstrap.servers":"~{kafkaEndpoint}~"
+    "bootstrap.servers":"~{kafkaEndpoint}~",
+    "max.request.size":"4194304"
   },
   "consumer":
   {
@@ -430,7 +432,8 @@ Content-Type: application/json
 {
   "producer":
   {
-    "bootstrap.servers":"~{kafkaEndpoint}~"
+    "bootstrap.servers":"~{kafkaEndpoint}~",
+    "max.request.size":"4194304"
   },
   "consumer":
   {
@@ -814,7 +817,8 @@ Content-Type: application/json
 {
   "producer":
   {
-    "bootstrap.servers":"~{kafkaEndpoint}~"
+    "bootstrap.servers":"~{kafkaEndpoint}~",
+    "max.request.size":"4194304"
   },
   "consumer":
   {
@@ -1035,7 +1039,8 @@ Content-Type: application/json
 {
   "producer":
   {
-    "bootstrap.servers":"~{kafkaEndpoint}~"
+    "bootstrap.servers":"~{kafkaEndpoint}~",
+    "max.request.size":"4194304"
   },
   "consumer":
   {

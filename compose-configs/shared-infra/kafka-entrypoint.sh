@@ -60,6 +60,13 @@ RETENTION_CHECK_MS=${KAFKA_CFG_LOG_RETENTION_CHECK_INTERVAL_MS:-300000}
 CLEANER_ENABLE=${KAFKA_CFG_LOG_CLEANER_ENABLE:-true}
 AUTO_CREATE_TOPICS=${KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE:-true}
 
+# Largest record batch the broker accepts. Kafka's default (~1 MB) rejected
+# ~1.3 MB Egeria metadata-change events on the OMAS outTopic (2026-11-15,
+# RecordTooLargeException). Must be >= the producers' max.request.size, which
+# is set to the same 4 MB in the server configs. Topics without their own
+# max.message.bytes inherit this value.
+MESSAGE_MAX_BYTES=${KAFKA_CFG_MESSAGE_MAX_BYTES:-4194304}
+
 # __consumer_offsets partition count. Only takes effect the first time this
 # topic is auto-created — changing it later does nothing to an
 # already-formatted log dir (Kafka can't shrink an existing topic's
@@ -102,6 +109,7 @@ num.io.threads=8
 socket.send.buffer.bytes=102400
 socket.receive.buffer.bytes=102400
 socket.request.max.bytes=104857600
+message.max.bytes=${MESSAGE_MAX_BYTES}
 
 # Log settings
 num.partitions=1
@@ -128,6 +136,7 @@ echo "[$(date '+%Y-%m-%d %H:%M:%S')]   log.retention.hours=${RETENTION_HOURS}" \
      "log.retention.bytes=${RETENTION_BYTES} log.segment.bytes=${SEGMENT_BYTES}"
 echo "[$(date '+%Y-%m-%d %H:%M:%S')]   offsets.topic.num.partitions=${OFFSETS_TOPIC_PARTITIONS}" \
      "(only takes effect if __consumer_offsets doesn't already exist)"
+echo "[$(date '+%Y-%m-%d %H:%M:%S')]   message.max.bytes=${MESSAGE_MAX_BYTES}"
 echo "[$(date '+%Y-%m-%d %H:%M:%S')]   KAFKA_HEAP_OPTS=${KAFKA_HEAP_OPTS:-<unset, kafka-server-start.sh will use -Xmx1G -Xms1G>}"
 
 # Format only on a genuinely empty log dir. meta.properties is what makes this

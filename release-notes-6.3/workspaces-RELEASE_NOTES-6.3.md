@@ -137,8 +137,10 @@ In numbers: 377 commits and 217 merged pull requests over five weeks.
 - **Data Initialization shows each batch's status**, and only one run of a batch can be in progress at a time. Three
   Coco notebooks can now be run again safely, and new portal docs cover techniques and best practices for them
   ([#883](https://github.com/odpi/egeria-workspaces/pull/883)).
-- **Statements of applicability**: a Coco sample for ISO/IEC 27001 ([#881](https://github.com/odpi/egeria-workspaces/pull/881)).
-<!-- At the cut: the 6.3 bundle (RK-22 no hard-coded Portal folder GUID, Rocky's five-status branches, floor 6.3.0) and #885/#886 once merged; #882 if merged. -->
+- **Statements of applicability**: Egeria Explorer has a new Statements of Applicability view, with an implementation
+  summary and a table of controls you can sort and filter ([#882](https://github.com/odpi/egeria-workspaces/pull/882)), and Coco has a sample for ISO/IEC 27001
+  ([#881](https://github.com/odpi/egeria-workspaces/pull/881)).
+<!-- At the cut: the 6.3 bundle (RK-22 no hard-coded Portal folder GUID, Rocky's five-status branches, floor 6.3.0) (#885/#886 and #882 are merged and included). -->
 
 ## Platform, infrastructure and dependencies
 

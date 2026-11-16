@@ -80,6 +80,8 @@ The current `[Unreleased]` section was written as items landed and stops around 
   results from the structured shape ([#855](https://github.com/odpi/egeria-workspaces/pull/855), [#856](https://github.com/odpi/egeria-workspaces/pull/856)).
 - **Data Initialization batch status**: each batch shows its status, one run per batch at a time; best-practice docs
   for the Data Initialization notebooks ([#883](https://github.com/odpi/egeria-workspaces/pull/883)).
+- **Statements of Applicability view** in Egeria Explorer: an implementation summary and a sortable, filterable table
+  of controls ([#882](https://github.com/odpi/egeria-workspaces/pull/882)).
 - **Coco sample statement of applicability** for ISO/IEC 27001 ([#881](https://github.com/odpi/egeria-workspaces/pull/881)).
 
 ### Changed (append)

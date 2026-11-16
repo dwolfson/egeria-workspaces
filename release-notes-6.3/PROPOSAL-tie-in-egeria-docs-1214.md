@@ -137,3 +137,15 @@ and Dr.Egeria"**.
 5. Tag on the release date.
 6. Rework the video script and write the blog draft.
 7. Retake the screenshots.
+
+## Owner decisions, 2026-11-16
+
+1. Plan: **go as written** (outputs 1–3; diffs shown before any PR).
+2. pyegeria floor: **6.2.42 everywhere**. I open the two code-floor PRs (workspaces quickstart Dockerfiles; trellis
+   Resource Explorer pyproject), shown to the owner first.
+3. Release date: **17 November 2026** for changelog headings and the `v6.3` / `v6.3-tech-preview` tags.
+4. #882: **wait** for it to merge before the egeria-docs PR.
+5. Quickstart re-pin to `odpi/egeria-platform:6.3`: **yes, open it** (shown first).
+6. Mandy: **the owner asks her** about the four boxes and blog 11; I wait for his word.
+7. Blog 7 screenshots: **retake full size as erinoverview** and add them in our egeria-docs PR.
+8. Video: **Egeria YouTube channel**; blog 11 and the newsletter link to it.

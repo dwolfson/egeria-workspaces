@@ -15,6 +15,8 @@ from fastapi import APIRouter, HTTPException, Query, Request
 from fastapi.responses import JSONResponse
 from loguru import logger
 
+from egeria_error_mapping import raise_egeria_http_error
+
 from pyegeria.omvs.classification_explorer import ClassificationExplorer
 from valid_values_handler import _extract_name_from_element as _vv_property_name
 from pyegeria_docs_handler import search_pyegeria_docs
@@ -338,11 +340,12 @@ def catalog_search(
             try:
                 raw = _do_search(None)
             except Exception as exc2:
-                logger.exception("catalog_search failed for q=%r (unrestricted retry)", q)
-                raise HTTPException(status_code=500, detail=str(exc2))
+                logger.exception("catalog_search failed for q={!r} (unrestricted retry)", q)
+                raise_egeria_http_error(exc2)
         else:
-            logger.exception("catalog_search failed for q=%r", q)
-            raise HTTPException(status_code=500, detail=str(exc))
+            # Shared mapping (PO-25): an expired/unknown user is 401, a timeout 504, ... not all 500.
+            logger.exception("catalog_search failed for q={!r}", q)
+            raise_egeria_http_error(exc)
 
     items = []
     for el in (raw if isinstance(raw, list) else []):
@@ -373,7 +376,7 @@ def catalog_search(
             _serialize_pyegeria_hit(h) for h in search_pyegeria_docs(q, limit=_PYEGERIA_HIT_LIMIT)
         ]
     except Exception:
-        logger.exception("catalog_search: pyegeria docs search failed for q=%r", q)
+        logger.exception("catalog_search: pyegeria docs search failed for q={!r}", q)
 
     # REST API endpoint hits (REST APIs page) -- same reasoning as python-api
     # above: no guid, kept out of the dedup pass, reads an already-cached
@@ -383,7 +386,7 @@ def catalog_search(
             _serialize_rest_api_hit(h) for h in search_rest_apis(q, limit=_REST_API_HIT_LIMIT)
         ]
     except Exception:
-        logger.exception("catalog_search: REST API search failed for q=%r", q)
+        logger.exception("catalog_search: REST API search failed for q={!r}", q)
 
     groups = [
         {

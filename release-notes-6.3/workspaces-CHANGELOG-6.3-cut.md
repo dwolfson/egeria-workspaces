@@ -90,6 +90,8 @@ The current `[Unreleased]` section was written as items landed and stops around 
 - **`init_trellis.sh`** creates the Trellis role and database from `PGVECTOR_PASSWORD`, and `gen-env.sh` generates
   that password for a brand-new install. The shared-infra README covers creating the role on an existing volume and
   setting or changing its password (TR-27, [#887](https://github.com/odpi/egeria-workspaces/pull/887)).
+- **The 16 MetadataExpert Dr.Egeria templates** (type and enum definitions, instances, classify, link and publish,
+  Update Relationship, Count Metadata Elements), the same as pyegeria 6.3.0's ([#888](https://github.com/odpi/egeria-workspaces/pull/888)).
 
 ### Changed (append)
 
@@ -153,6 +155,8 @@ The current `[Unreleased]` section was written as items landed and stops around 
   Dr.Egeria inbox models its subscription as a Digital Subscription ([#883](https://github.com/odpi/egeria-workspaces/pull/883)).
 - **Marquez restarts after a reboot**, and the infra check covers `airflow-marquez` ([#857](https://github.com/odpi/egeria-workspaces/pull/857)); the scheduled infra
   check writes one bounded log line per run ([#854](https://github.com/odpi/egeria-workspaces/pull/854)).
+- **`gen-env.sh` quotes the Kafka directory paths**, so shared infrastructure starts from a checkout whose path contains
+  a space ([#888](https://github.com/odpi/egeria-workspaces/pull/888)).
 
 ### Security (new heading)
 
@@ -166,14 +170,6 @@ The current `[Unreleased]` section was written as items landed and stops around 
 - **Obsidian plugin dependencies** ([#704](https://github.com/odpi/egeria-workspaces/pull/704)): already under Changed; move here.
 - **No default `egeria_advisor` password**: `init_egeria.sql` no longer creates the role with a well-known password
   (TR-27, [#887](https://github.com/odpi/egeria-workspaces/pull/887)).
-
-<!-- [IF #888 MERGES] add (checked against #888's description and files, 2026-11-16):
-Added:
-- **The 16 MetadataExpert Dr.Egeria templates** (type and enum definitions, instances, classify, link and publish,
-  Update Relationship, Count Metadata Elements), the same as pyegeria 6.3.0's ([#888](https://github.com/odpi/egeria-workspaces/pull/888)).
-Fixed:
-- **`gen-env.sh` quotes the Kafka directory paths**, so shared infrastructure starts from a checkout whose path contains
-  a space ([#888](https://github.com/odpi/egeria-workspaces/pull/888)). -->
 
 ### Not itemised
 

@@ -24,7 +24,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
    ```
 
    `v6.2` is tagged at `903e8eeb` (#619), as the owner agreed on 2026-11-11. Tag `v6.3` at the release commit, on the
-   release date (tentatively Monday 2026-11-17, alongside Egeria 6.3).
+   release date (Tuesday 2026-11-17 (owner, 2026-11-16), alongside Egeria 6.3).
 
 5. Remove the "Since 6.2 (unreleased, on `main`)" section from RELEASE_NOTES.md, since the new 6.3 section covers it.
 

@@ -81,6 +81,7 @@ Egeria Workspaces, our ready-to-run environment, now tracks the Egeria 6.3 build
 - **Coco Pharmaceuticals content**: a Chief Data Officer dashboard, security support, sustainability reference data, and Airflow pipelines that bring the digital products to life.
 
 <!-- TODO-IMAGE: Resource Browser page for one Coco resource. File: november-2026-resource-browser.png
+     Owner 2026-11-16: Resource Locator updates are in progress; retake this shot (and any Locator shots in the blog 11 tour) only after they land on laz.
      DRAFT shot taken 2026-11-13 as erinoverview on laz at 800x500 (pane limit); retake at full resolution before publishing. -->
 ![The Resource Locator page for the Customer API: what it contains, its lineage, and its usage activity](november-2026-resource-browser.jpg)
 

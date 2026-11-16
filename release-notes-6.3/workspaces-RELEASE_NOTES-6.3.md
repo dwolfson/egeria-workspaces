@@ -193,6 +193,12 @@ Thank you to everyone who contributed: Dan Wolfson (313 commits), Mandy Chessell
 - **`egeria-upgrade-reset plan --latest` is now `--stable`** and picks the newest released Egeria rather than the
   next release's development build. `--latest` still works (#886).
 
+<!-- [IF #887 MERGES] then: switch every "6.2.42 or later; we recommend 6.3.0" to "pyegeria 6.3.0 or later (#887)", and add:
+- **The Trellis database password no longer has a default.** Set `PGVECTOR_PASSWORD` in `compose-configs/shared-infra/.env`;
+  `gen-env.sh` generates one for a new install. On an older install whose `egeria_advisor` role still uses the well-known
+  password, change it first (see the shared-infra README, "Setting or changing the egeria_advisor password") (#887).
+- **The first start after upgrading restarts the shared Postgres once** (see PR #887). -->
+
 ## Where the detail lives
 
 The full list of changes, with links to each pull request, is in the `[6.3]` section of

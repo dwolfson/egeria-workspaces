@@ -18,7 +18,7 @@ Egeria Advisor now reads and authors the same dashboards and report specs held i
 new Studio application gives report specs, reports and dashboard sheets a dedicated authoring space.
 
 Both remain a **Tech Preview**: they are changing quickly, and your feedback shapes where they go next. This release
-goes with **Egeria 6.3** and needs **pyegeria 6.2.42 or later**; we recommend **pyegeria 6.3.0**, the release that matches Egeria 6.3.<!-- When the 6.3 bundle raises the code floors to 6.3.0, say "pyegeria 6.3.0 or later" and cite the bundle PR. --> For the changes to the Egeria platform itself, see
+goes with **Egeria 6.3** and needs **pyegeria 6.3.0 or later**, the release that matches Egeria 6.3. For the changes to the Egeria platform itself, see
 the [Egeria 6.3 release notes](https://egeria-project.org/release-notes/latest/).
 
 In numbers: 1,151 commits and about 523 merged pull requests across 12 packages over five weeks.
@@ -101,7 +101,7 @@ In numbers: 1,151 commits and about 523 merged pull requests across 12 packages 
 
 ## Dependencies, CI and documentation
 
-- **pyegeria**: the minimum version rose step by step from 6.1.15 to 6.2.42 (#593 to #1099).
+- **pyegeria**: the minimum version rose step by step from 6.1.15 to 6.3.0 (#593 to #1101).
 - **CI**: Resource Explorer tests run on main and on pull requests; images are rebuilt only when their inputs change
   (#1075); tests no longer write tracked files and fail if a check passes without doing anything (#595, #1048); and a
   contract test checks the pyegeria calls we rely on (#1056).
@@ -114,8 +114,7 @@ Thank you to everyone who contributed: Dan Wolfson (1,135 commits) and dependabo
 
 ## Upgrade notes
 
-- **pyegeria 6.2.42 or later is required** by Resource Explorer, Egeria Advisor and Studio (#1095, #1099); 6.3.0 is
-  recommended.
+- **pyegeria 6.3.0 or later is required** by Resource Explorer, Egeria Advisor, Studio and `trellis-auth` (#1101).
 - **Database credentials must be in the secrets store.** The plaintext fallback is gone (#823).
 - **Only JWT bearer tokens are accepted at login** (#827).
 - **Zones**: a zone with no access control is private, as it is in Egeria (#1043). Content in such a zone is visible

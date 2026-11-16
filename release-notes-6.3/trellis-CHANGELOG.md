@@ -15,7 +15,7 @@ Egeria release they ship with. Pull requests are `#N` in this repository.
 ## [Unreleased]
 
 ## [6.3 Tech Preview] - 2026-11-17
-<!-- At the cut: fold in #1087–#1100. #1099 (RE pyegeria floor 6.2.42, 825e496e) and #1100 (RE fix batch TR-1/2/15/22/24) merged 2026-11-16; main 92dd7d30. Describe #1100 from its PR. -->
+<!-- At the cut: fold in #1087–#1100. #1099 (RE pyegeria floor 6.2.42, 825e496e) and #1100 (RE fix batch TR-1/2/15/22/24) merged 2026-11-16; #1101 (floor 6.3.0 for RE/EA/Studio/trellis-auth) merged 16:50Z, main 34dbddb5. Describe #1100 from its PR. -->
 
 First recorded release, a Tech Preview released with Egeria 6.3. It covers everything merged since the October 2026 Egeria newsletter, which introduced
 Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the narrative.
@@ -112,8 +112,8 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 - The certifi floor excludes the distrusted emSign ECC G3 root (#989).
 
 ### Dependencies
-- pyegeria floor raised from 6.1.15 to 6.2.1, then step by step to 6.2.42 (#593, #651, #728, #806, #819, #834, #853,
-  #951, #959, #974, #987, #1005, #1028, #1036, #1061, #1071, #1076, #1082, #1083, #1090, #1095, #1099).
+- pyegeria floor raised from 6.1.15 to 6.2.1, then step by step to 6.3.0 (#593, #651, #728, #806, #819, #834, #853,
+  #951, #959, #974, #987, #1005, #1028, #1036, #1061, #1071, #1076, #1082, #1083, #1090, #1095, #1099, #1101).
 - About 20 Dependabot bumps from the odpi side (notebook, jupyterlab, mlflow, aiohttp, authlib, pypdf and others),
   via the sync (#112).
 

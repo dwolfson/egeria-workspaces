@@ -197,7 +197,9 @@ Thank you to everyone who contributed: Dan Wolfson (313 commits), Mandy Chessell
 - **The Trellis database password no longer has a default.** Set `PGVECTOR_PASSWORD` in `compose-configs/shared-infra/.env`;
   `gen-env.sh` generates one for a new install. On an older install whose `egeria_advisor` role still uses the well-known
   password, change it first (see the shared-infra README, "Setting or changing the egeria_advisor password") (#887).
-- **The first start after upgrading restarts the shared Postgres once** (see PR #887). -->
+- **The first time shared infrastructure starts after this upgrade, Docker recreates the `egeria-shared-postgres`
+  container once**, because its configuration gained the `PGVECTOR_PASSWORD` setting. Your data is kept, but plan for
+  a short database outage and stop anything that uses it first (#887). -->
 
 ## Where the detail lives
 

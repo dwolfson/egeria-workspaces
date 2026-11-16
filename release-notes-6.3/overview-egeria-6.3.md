@@ -46,7 +46,7 @@ dashboards, and Resource Explorer has a six-part tutorial.
 
 - **Egeria Workspaces:** 217 merged changes.
 - **Resource Explorer and Egeria Advisor:** more than 500 merged PRs.
-- **pyegeria:** 39 releases, 6.2.1 to 6.2.39. <!-- TODO at the cut: extend to 6.2.41. -->
+- **pyegeria:** 39 releases, 6.2.1 to 6.2.39. <!-- TODO at the cut: extend to 6.2.42 (owner 2026-11-16: 6.2.42 everywhere). -->
 
 ## Try it
 

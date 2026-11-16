@@ -15,7 +15,7 @@ Since the 6.2 release on October 9, `egeria-workspaces` has been about two thing
 dashboards people rely on in Egeria, where they are governed like any other metadata, and making every number
 the Portal shows say what it actually measured. Around that, the demo stack was locked down by default, the
 Portal gained a Resource Browser, relationships are grouped by purpose, and every width can be dragged. It
-tracks the **Egeria 6.3** builds and **pyegeria 6.2.41 and later**. **This is the 6.3 release.**
+tracks the **Egeria 6.3** builds and **pyegeria 6.2.42 and later**. **This is the 6.3 release.**
 
 **6.3** &middot; **377** commits &middot; **217** merged PRs &middot; **81** feature commits &middot; **126** fix commits &middot; **5** weeks
 
@@ -180,8 +180,8 @@ tracks the **Egeria 6.3** builds and **pyegeria 6.2.41 and later**. **This is th
   the Portal's rendered tables should be re-checked; see the *Report Specs* tutorial, Part C ([#853](https://github.com/odpi/egeria-workspaces/pull/853)).
 - **Postgres templates take a secrets store** ([#679](https://github.com/odpi/egeria-workspaces/pull/679)).
 - **Egeria Advisor runs as `egeriaadvisornpa`** in quickstart ([#828](https://github.com/odpi/egeria-workspaces/pull/828)).
-- **Freshstart** needs pyegeria `>=6.2.21,<6.2.27`; the quickstart needs **pyegeria 6.2.41 or later** (see PR).
-  <!-- Owner 2026-11-13: the notes state pyegeria 6.2.41 as the floor; 6.2.41 ships before Monday. At the cut, check the floor PRs landed and cite them. -->
+- **Freshstart** needs pyegeria `>=6.2.21,<6.2.27`; the quickstart needs **pyegeria 6.2.42 or later** (see PR).
+  <!-- Owner 2026-11-16: state pyegeria 6.2.42 as the floor everywhere. Before the PR, the code floor must match: the quickstart Dockerfiles are still >=6.2.41; a floor PR raises them to 6.2.42. Cite that PR here. -->
 
 ## Where the detail lives
 

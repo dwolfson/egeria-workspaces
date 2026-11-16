@@ -3,7 +3,7 @@
      Range v6.2.0 (c9dc7a43, 2026-10-08) to v6.2.39 (18178917, 2026-11-12). 6.2.38 was tagged but not published to PyPI;
      6.2.39 carries its fixes. Numbers are PRs in odpi/egeria-python. -->
 
-<!-- TODO at the cut: extend to 6.2.40/6.2.41 (owner 2026-11-13: 6.2.41 is the floor the release notes state). -->
+<!-- TODO at the cut: extend to 6.2.40/6.2.41/6.2.42 (#593, #595, #598; owner 2026-11-16: 6.2.42 is the floor the release notes state everywhere). -->
 
 # pyegeria 6.2.0 → 6.2.39 (Egeria 6.3)
 

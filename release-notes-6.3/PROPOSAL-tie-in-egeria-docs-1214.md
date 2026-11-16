@@ -82,7 +82,7 @@ Platform items shrink to one linked line each. They use her terms: "Open Lineage
 
 | Repo | Files | Repo-specific detail kept |
 |---|---|---|
-| odpi/egeria-workspaces | `RELEASE_NOTES.md` new 6.3 section; `CHANGELOG.md` `[Unreleased]` cut to `[6.3]`; tag `v6.3` | Portal changes by app, PR list, upgrade notes. The quickstart needs **pyegeria 6.2.41 or later**. Adds the quickstart re-pin to `odpi/egeria-platform:6.3`, #881, and #882 if merged. |
+| odpi/egeria-workspaces | `RELEASE_NOTES.md` new 6.3 section; `CHANGELOG.md` `[Unreleased]` cut to `[6.3]`; tag `v6.3` | Portal changes by app, PR list, upgrade notes. The quickstart needs **pyegeria 6.2.42 or later** (needs a floor PR: the Dockerfiles are still `>=6.2.41`). Adds the quickstart re-pin to `odpi/egeria-platform:6.3`, #881, and #882 if merged. |
 | dwolfson/trellis | `CHANGELOG.md` `[6.3 Tech Preview]`; `RELEASE_NOTES.md`; tag `v6.3-tech-preview` | Resource Explorer, Egeria Advisor and **Studio** (new: #1095, port 8840). Needs **pyegeria 6.2.42 or later** for Egeria Advisor and Studio, 6.2.41 for Resource Explorer. Adds `EMBEDDING_DEVICE` gone and the Postgres password change. |
 | odpi/egeria-python | new `docs/release-notes/6.2.x-egeria-6.3.md` | The aggregate of 6.2.1 to **6.2.42** (adds 6.2.40 #593, 6.2.41 #595, 6.2.42 #598). Behaviour changes and the upgrade table. |
 
@@ -119,8 +119,8 @@ and Dr.Egeria"**.
 ## Decisions needed from the owner
 
 1. **The plan as a whole:** go, or change parts.
-2. **pyegeria floor per repo: workspaces 6.2.41, trellis 6.2.42.** The Coordinator's message assumes this.
-   Please confirm it here.
+2. ~~pyegeria floor~~ **Decided 2026-11-16: 6.2.42 everywhere.** The workspaces quickstart and trellis Resource
+   Explorer code floors must be raised to match before the notes go out.
 3. **Release date for changelog headings and tags:** 17 November (her overview table), or 16 November (the
    day the image was pushed).
 4. **Quickstart re-pin PR** to `odpi/egeria-platform:6.3`: should I open it?

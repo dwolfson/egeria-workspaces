@@ -10,7 +10,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
 
    ## [6.3] - 2026-11-16
 
-   Aligns with Egeria 6.3 and pyegeria 6.2.41 and later. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the narrative summary.
+   Aligns with Egeria 6.3 and pyegeria 6.2.42 and later. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the narrative summary.
    ```
 
 2. Keep every existing `[Unreleased]` entry, under the same Added / Changed / Fixed / Removed headings.

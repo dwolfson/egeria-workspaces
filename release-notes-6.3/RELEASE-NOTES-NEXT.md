@@ -225,6 +225,7 @@ Per-release detail is in the themes above; the appendix is the same list by sect
 - Issue tracker brought up to date and re-sorted in several passes; analytic function resolution documented (ISSUE-169 to ISSUE-172).
 
 ## C. egeria-workspaces (`odpi/egeria-workspaces#N`)
+<!-- Candidate at the cut (2026-11-16): sample statements of applicability for Coco (#881, merged 38c999a6); Egeria Explorer Statements of Applicability view (#882, NOT merged yet; include only if it merges before the cut). -->
 
 ### Highlights
 - Dashboards and report specs held in Egeria, by folder, with Used by (odpi/egeria-workspaces#818, #821, #826, #829, #830).

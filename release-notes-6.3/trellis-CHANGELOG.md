@@ -15,7 +15,7 @@ Egeria release they ship with. Pull requests are `#N` in this repository.
 ## [Unreleased]
 
 ## [6.3 Tech Preview] - 2026-11-17
-<!-- At the cut: fold in #1087–#1100. #1099 (RE pyegeria floor 6.2.42, 825e496e) and #1100 (RE fix batch TR-1/2/15/22/24) merged 2026-11-16; #1101 (floor 6.3.0 for RE/EA/Studio/trellis-auth) merged 16:50Z, main 34dbddb5. #1100 described from its PR and commits. -->
+<!-- At the cut: fold in #1087–#1102. #1099 (RE pyegeria floor 6.2.42, 825e496e) and #1100 (RE fix batch TR-1/2/15/22/24) merged 2026-11-16; #1101 (floor 6.3.0 for RE/EA/Studio/trellis-auth) merged 16:50Z, main 34dbddb5; #1102 (TR-27 docs) merged 17:21Z, 389a14ff. #1100 described from its PR and commits. -->
 
 First recorded release, a Tech Preview released with Egeria 6.3. It covers everything merged since the October 2026 Egeria newsletter, which introduced
 Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the narrative.
@@ -138,7 +138,7 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 - Dr.Egeria templates synced (#91, #103, #104, #639, #858, #874, #1004); odpi sync and DCO remediation (#108, #981, #112).
 
 ### Docs
-- [IF #1102 MERGES] **No default database password** (TR-27, #1102): the QUICKSTART, READMEs, Resource Explorer admin
+- **No default database password** (TR-27, #1102): the QUICKSTART, READMEs, Resource Explorer admin
   guide and deployment docs say where `PGVECTOR_PASSWORD` comes from (`compose-configs/shared-infra/.env` with Egeria
   Workspaces, or one you generate for a standalone install), and Egeria Advisor's `.env.example` lists it.
 - User and admin guide rounds; design notes reorganised into exchange, implemented and rulings (#683, #688, #695).

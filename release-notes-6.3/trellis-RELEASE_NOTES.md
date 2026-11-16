@@ -123,10 +123,10 @@ Thank you to everyone who contributed: Dan Wolfson (1,135 commits) and dependabo
 - **Database credentials must be in the secrets store.** The plaintext fallback is gone (#823).
 - **A second run of the same survey on the same resource is refused** with 409 while one is queued or running (#1100).
   Cancel the first run, or wait for it to finish.
-<!-- [IF #1102 MERGES] add: **There is no default database password.** Set `PGVECTOR_PASSWORD`: with Egeria Workspaces
+- **There is no default database password.** Set `PGVECTOR_PASSWORD`: with Egeria Workspaces
   it is in `compose-configs/shared-infra/.env`; for a standalone install, generate your own. An install whose
   `egeria_advisor` role still uses the old well-known password should change it (see the Egeria Workspaces shared-infra
-  README, "Setting or changing the egeria_advisor password") (#1102). -->
+  README, "Setting or changing the egeria_advisor password") (#1102).
 - **Only JWT bearer tokens are accepted at login** (#827).
 - **Zones**: a zone with no access control is private, as it is in Egeria (#1043). Content in such a zone is visible
   only to its owner.

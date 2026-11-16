@@ -1,3 +1,7 @@
+<!-- Verified 2026-11-16 (Coordinator review items 4-6): bearer tokens 2 h = bearerTokenTimeout=2 in runtime-volumes/quickstart-platform-data/quickstart.application.properties (#651);
+     Dr.Egeria commands present in pyegeria 6.2.42 compact specs (Business Capability, Measurement, Dashboard, Statement of Applicability,
+     Zone Membership update); Coco content on upstream main: chief-data-officer-dashboard.md, 3. sustainability/, 4. keeping-safe/,
+     data-security-strategy.md, exchange-quickstart/coco-dags/. -->
 <!-- DRAFT, 2026-11-16: our additions to Mandy's egeria-docs 6.3 release notes (odpi/egeria-docs, after #1214 / d55aa0cf).
      Part A goes into site/snippets/release-notes/6-3.md, just before "### Upgrade notes", in the same layout as the
      6.1 and 6.2 boxes. Part B goes under that file's "### Upgrade notes". Part C is additions to
@@ -16,16 +20,16 @@
     - **[IF #882 MERGES]** Egeria Explorer has a new **Statements of Applicability** view. For each [statement of applicability](/services/omvs/security-officer/overview/#statements-of-applicability), it shows an implementation summary and a table of its controls, which you can sort and filter.
     - **The Resource Browser** gives each resource a page showing what it contains and what it means, with work lists and team sharing. The Catalog has a tab for each kind of infrastructure, and its lists page to the end.
     - **The [Lineage Explorer](/user-interfaces/lineage-explorer/overview)** lets you choose how many hops to show, and every diagram has an Expand button that opens a viewer you can pan and zoom.
-    - **Every column and pane in the portal can be resized**, and your choices are remembered.
+    - **Columns and panes across the portal can be resized**, and your choices are remembered.
     - **Airflow and Marquez start with the demo**, and Airflow's Open Lineage events flow into Egeria.
     - **New tutorials** cover saved queries, analytic functions, report specifications and local dashboards, with worked examples.
-    - **A new `egeria-upgrade-reset` tool** plans and performs an upgrade or reset of the quickstart's Egeria step by step, with a verified backup. The quickstart now runs the released Egeria 6.3 image.
+    - **A new `egeria-upgrade-reset` tool** plans and performs an upgrade or reset of the quickstart's Egeria step by step, with a verified backup. [IF #885 MERGES] The quickstart now runs the released Egeria 6.3 image.
     - We continue to harden the portal environment. Its ports are bound to the local machine by default (`--lan` opens them), and bearer tokens last two hours.
 
 ??? functional "Enhancements to Dr.Egeria and pyegeria"
     - [Dr.Egeria](/user-interfaces/dr-egeria/overview) has new commands and templates for statements of applicability, business capabilities, report specifications, measurements and dashboards, and for setting an element's governance zones.
     - Reports can be produced as documents and as DCAT catalogs, and as structured tables that the portal displays the same way everywhere.
-    - [pyegeria](/concepts/pyegeria) follows Egeria's paging rules. On Egeria 6.3, results can be confirmed complete; on older platforms, a count says "at least N" rather than giving a total that might be wrong.
+    - [pyegeria](/concepts/pyegeria) follows Egeria's paging rules: when a result can't be confirmed complete, a count says "at least N" rather than giving a total that might be wrong. With pyegeria 6.3.0 on Egeria 6.3, results can be confirmed complete. <!-- tied to the 6.3.0 swap below: drop the last sentence if 6.3.0 isn't on PyPI by the cut. -->
     - pyegeria has a new authoring API for report specifications, reports and dashboard sheets, with private drafts and published versions.
     - A value that wasn't measured is reported as not measured, never as 0.
     - pyegeria 6.3.0 is the release that matches Egeria 6.3. <!-- swap in only once 6.3.0 is on PyPI; until then: "pyegeria 6.2.42 is the current release." -->
@@ -47,7 +51,7 @@
 # Part B: bullets for "### Upgrade notes" in `6-3.md`
 
 - **Egeria Workspaces** needs pyegeria 6.2.42 or later. <!-- swap: "6.2.42 or later; 6.3.0 recommended" once 6.3.0 is on PyPI, or "6.3.0 or later" if the floor PR lands first. -->
-- **Upgrading the quickstart:** use `egeria-upgrade-reset` (`plan` first, then `apply`). Its `--latest` option is now `--stable`, and picks the newest released Egeria; `--latest` still works.
+- **Upgrading the quickstart:** use `egeria-upgrade-reset` (`plan` first, then `apply`). [IF #886 MERGES] `--stable` picks the newest released Egeria; `--latest` is now another name for `--stable`, so it does the same.
 - **Report specifications held in Egeria** are read from the portal's consumer folder. See the Egeria Workspaces release notes for the one-time step on an existing Egeria.
 
 # Part C: additions to `site/docs/release-notes/november-2026.md`
@@ -64,7 +68,7 @@
 
 ## Technical preview: Resource Explorer, Egeria Advisor and Studio
 
-The AI applications on Trellis are released alongside Egeria 6.3 as a technical preview. Resource Explorer now publishes what it finds into Egeria and runs its surveys on Egeria's own engine host. Egeria Advisor works with the same dashboards and report specifications held in Egeria as the portal does, and the new Studio application is for authoring them. Try them on the [live demo](https://egeria.pdr-associates.com){target=blank}, and tell us what works for you.
+The AI applications on Trellis are released alongside Egeria 6.3 as a technical preview. Resource Explorer now publishes what it finds into Egeria and runs its surveys on Egeria's own engine host. Egeria Advisor works with the same dashboards and report specifications held in Egeria as the portal does, and the new Studio application is for authoring them. You can try Resource Explorer and Egeria Advisor on the [live demo](https://egeria.pdr-associates.com){target=blank}. Please tell us what works for you. <!-- RE and EA are on the public demo (owner, 2026-11-11); Studio isn't confirmed there, so it isn't offered. -->
 
 **C4. One sentence added to her "pyegeria and Dr.Egeria" section**:
 

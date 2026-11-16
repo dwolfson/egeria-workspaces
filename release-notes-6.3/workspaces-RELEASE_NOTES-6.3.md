@@ -16,7 +16,7 @@ Since the 6.2 release on October 9, our work on `egeria-workspaces` has focused 
   their own local ones.
 * Improving the accuracy and transparency of the measurements, metrics and KPIs we display.
 
-This release goes with **Egeria 6.3** and needs **pyegeria 6.2.42 or later**; we recommend **pyegeria 6.3.0**, the release that matches Egeria 6.3.<!-- When the 6.3 bundle raises the code floors to 6.3.0, say "pyegeria 6.3.0 or later" and cite the bundle PR. --> For the changes to the Egeria
+This release goes with **Egeria 6.3** and needs **pyegeria 6.3.0 or later**, the release that matches Egeria 6.3. For the changes to the Egeria
 platform itself, see the [Egeria 6.3 release notes](https://egeria-project.org/release-notes/latest/) and the
 [November 2026 newsletter](https://egeria-project.org/release-notes/november-2026/).
 
@@ -190,18 +190,16 @@ Thank you to everyone who contributed: Dan Wolfson (313 commits), Mandy Chessell
   the Portal's rendered tables should be re-checked; see the *Report Specs* tutorial, Part C ([#853](https://github.com/odpi/egeria-workspaces/pull/853)).
 - **Postgres templates take a secrets store** ([#679](https://github.com/odpi/egeria-workspaces/pull/679)).
 - **Egeria Advisor runs as `egeriaadvisornpa`** in quickstart ([#828](https://github.com/odpi/egeria-workspaces/pull/828)).
-- **The quickstart needs pyegeria 6.2.42 or later** (6.3.0 recommended), and runs the released Egeria 6.3 image (#885). Freshstart
+- **The quickstart needs pyegeria 6.3.0 or later** ([#887](https://github.com/odpi/egeria-workspaces/pull/887)), and runs the released Egeria 6.3 image (#885). Freshstart
   still needs pyegeria `>=6.2.21,<6.2.27`.
 - **`egeria-upgrade-reset plan --latest` is now `--stable`** and picks the newest released Egeria rather than the
   next release's development build. `--latest` still works (#886).
-
-<!-- [IF #887 MERGES] then: switch every "6.2.42 or later; we recommend 6.3.0" to "pyegeria 6.3.0 or later (#887)", and add:
 - **The Trellis database password no longer has a default.** Set `PGVECTOR_PASSWORD` in `compose-configs/shared-infra/.env`;
   `gen-env.sh` generates one for a new install. On an older install whose `egeria_advisor` role still uses the well-known
-  password, change it first (see the shared-infra README, "Setting or changing the egeria_advisor password") (#887).
+  password, change it first (see the shared-infra README, "Setting or changing the egeria_advisor password") ([#887](https://github.com/odpi/egeria-workspaces/pull/887)).
 - **The first time shared infrastructure starts after this upgrade, Docker recreates the `egeria-shared-postgres`
   container once**, because its configuration gained the `PGVECTOR_PASSWORD` setting. Your data is kept, but plan for
-  a short database outage and stop anything that uses it first (#887). -->
+  a short database outage and stop anything that uses it first ([#887](https://github.com/odpi/egeria-workspaces/pull/887)).
 
 ## Where the detail lives
 

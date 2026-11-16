@@ -1,3 +1,6 @@
+<!-- SENT to Mandy on Slack 2026-11-16 (owner's word, via the Coordinator) as EGERIA-DOCS-6.3-SUMMARY-FOR-MANDY-2026-11-16.md
+     plus the two SoA screenshots. This text is the baseline she has: any later change goes to her as a delta, so tell the
+     Coordinator. -->
 <!-- DRAFT, updated 2026-11-16: our additions to Mandy's egeria-docs 6.3 release notes (odpi/egeria-docs, after #1214 / d55aa0cf).
      Part A goes into site/snippets/release-notes/6-3.md, just before "### Upgrade notes", in the same layout as the
      6.1 and 6.2 boxes. Part B goes under that file's "### Upgrade notes". Part C is additions to

@@ -16,9 +16,14 @@ re-derive the anchor from the live `/api/...` response (see each anchor's
 the assertions in the tests that consume it.
 """
 
-# verified against: GET /api/collections/0affb580-fa81-4d00-9438-b26faf11845d
+# NOT archive-seeded, unlike the header assumes: this WorkItemList and its Projects are loaded by Dr.Egeria
+# from exchange-quickstart/loading-bay/dr-egeria-inbox/Local Dashboards/LOCAL_DASHBOARDS_ROADMAP.dr-egeria.md,
+# so Egeria assigns new GUIDs whenever the platform is reset and the document re-run. qualifiedNames,
+# names, category and membership are stable; GUIDs are not. Re-derived 2026-11-16 after the reset (old
+# WorkItemList guid 0affb580-fa81-4d00-9438-b26faf11845d no longer exists).
+# verified against: GET /api/collections/14fb3765-9b73-4a6c-933b-db18c220678d (2026-11-16)
 WORK_ITEM_LIST = {
-    "guid": "0affb580-fa81-4d00-9438-b26faf11845d",
+    "guid": "14fb3765-9b73-4a6c-933b-db18c220678d",
     "typeName": "WorkItemList",
     "displayName": "Local Dashboards - Next Steps",
     "qualifiedName": "Coco Pharmaceuticals::WorkItemList::Local-Dashboards---Next-Steps::1.0",
@@ -27,11 +32,11 @@ WORK_ITEM_LIST = {
     # (guid, displayName, typeName) for every collectionMember — order not
     # asserted (Egeria doesn't guarantee member ordering), membership set is.
     "members": {
-        ("d8a61d15-fb63-44d2-b6ed-91557036e066", "Add drill-click parity for Vega bar/line charts", "Project"),
-        ("f83d77e8-7413-436c-a4f9-4a5142ea09e7", "Unblock find_method for Dashboard Sheet commands", "Project"),
-        ("c816f0e6-6789-404f-9946-b40a1ab3bf61", "Build Egeria Advisor dashboard editor (NEXT-13)", "Project"),
-        ("797b1d3c-67ff-4832-ad24-06432b24d564", "Render nested Dashboard Sheets inline", "Project"),
-        ("9f13b7b1-bd27-4c22-81b3-47b8e3e372c3", "Wire funnelChart into AI & Context Intelligence tile", "Project"),
+        ("d3ee9e60-2351-432b-b002-c66a5b571670", "Add drill-click parity for Vega bar/line charts", "Project"),
+        ("b649fed6-df76-4bdd-a8dd-a216b25ede8d", "Unblock find_method for Dashboard Sheet commands", "Project"),
+        ("486aa04e-63fb-48a0-85c8-36e207559f8d", "Build Egeria Advisor dashboard editor (NEXT-13)", "Project"),
+        ("1b10cb3c-da69-4096-ab5e-2a689f67e728", "Render nested Dashboard Sheets inline", "Project"),
+        ("c1be70b4-2909-41db-b9b9-3ffd107bcefb", "Wire funnelChart into AI & Context Intelligence tile", "Project"),
     },
 }
 
@@ -39,9 +44,9 @@ WORK_ITEM_LIST = {
 # 2026-07-31 Collections-vs-Digital-Products routing bug end to end: open
 # this project, click "View" on its WORK_ITEM_LIST membership, and confirm
 # the destination is the Collections tab (not Digital Products).
-# verified against: GET /api/projects (filtered)
+# verified against: GET /api/collections/14fb3765-9b73-4a6c-933b-db18c220678d collectionMembers (2026-11-16)
 NEXT_13_PROJECT = {
-    "guid": "c816f0e6-6789-404f-9946-b40a1ab3bf61",
+    "guid": "486aa04e-63fb-48a0-85c8-36e207559f8d",
     "displayName": "Build Egeria Advisor dashboard editor (NEXT-13)",
     "qualifiedName": "Build Egeria Advisor dashboard editor (NEXT-13)::1.0",
 }

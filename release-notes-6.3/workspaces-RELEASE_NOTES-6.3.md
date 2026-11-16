@@ -101,7 +101,7 @@ In numbers: 377 commits and 217 merged pull requests over five weeks.
 - A **Chief Data Officer dashboard** for Jules Keeper ([#780](https://github.com/odpi/egeria-workspaces/pull/780)).
 - **Jupyter no longer trusts the emSign ECC G3 root** ([#776](https://github.com/odpi/egeria-workspaces/pull/776)).
 
-## November 8 to 12: dashboards and report specs held in Egeria
+## November 8 to 16: dashboards and report specs held in Egeria
 
 - **Report specs show what they declare**, whether they can run, and if not, why not
   ([#809](https://github.com/odpi/egeria-workspaces/pull/809)); the Portal supplies a spec's inputs by role
@@ -134,6 +134,11 @@ In numbers: 377 commits and 217 merged pull requests over five weeks.
   shared-infrastructure health check and a read-only "last reset" panel in Portal Admin ([#851](https://github.com/odpi/egeria-workspaces/pull/851), [#854](https://github.com/odpi/egeria-workspaces/pull/854),
   [#857](https://github.com/odpi/egeria-workspaces/pull/857)); after a reset, the sample content that used to be loaded by hand is now restored automatically ([#850](https://github.com/odpi/egeria-workspaces/pull/850)).
 - **Egeria Advisor** (6.3 Tech Preview) gets its own service account, `egeriaadvisornpa` ([#828](https://github.com/odpi/egeria-workspaces/pull/828)).
+- **Data Initialization shows each batch's status**, and only one run of a batch can be in progress at a time. Three
+  Coco notebooks can now be run again safely, and new portal docs cover techniques and best practices for them
+  ([#883](https://github.com/odpi/egeria-workspaces/pull/883)).
+- **Statements of applicability**: a Coco sample for ISO/IEC 27001 ([#881](https://github.com/odpi/egeria-workspaces/pull/881)).
+<!-- At the cut: the 6.3 bundle (RK-22 no hard-coded Portal folder GUID, Rocky's five-status branches, floor 6.3.0) and #885/#886 once merged; #882 if merged. -->
 
 ## Platform, infrastructure and dependencies
 

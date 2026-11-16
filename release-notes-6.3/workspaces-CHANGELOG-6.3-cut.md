@@ -78,6 +78,9 @@ The current `[Unreleased]` section was written as items landed and stops around 
   ([#847](https://github.com/odpi/egeria-workspaces/pull/847)).
 - **One renderer for pyegeria's structured TABLE** (`egeria-table.js`); Local Dashboards and Report Specs draw TABLE
   results from the structured shape ([#855](https://github.com/odpi/egeria-workspaces/pull/855), [#856](https://github.com/odpi/egeria-workspaces/pull/856)).
+- **Data Initialization batch status**: each batch shows its status, one run per batch at a time; best-practice docs
+  for the Data Initialization notebooks ([#883](https://github.com/odpi/egeria-workspaces/pull/883)).
+- **Coco sample statement of applicability** for ISO/IEC 27001 ([#881](https://github.com/odpi/egeria-workspaces/pull/881)).
 
 ### Changed (append)
 
@@ -133,6 +136,8 @@ The current `[Unreleased]` section was written as items landed and stops around 
   empty limits ([#641](https://github.com/odpi/egeria-workspaces/pull/641)); compose build ([#626](https://github.com/odpi/egeria-workspaces/pull/626));
   the self-heal step now loads valid metadata values first ([#801](https://github.com/odpi/egeria-workspaces/pull/801)).
 - **MCP SSE headers** ([#738](https://github.com/odpi/egeria-workspaces/pull/738)).
+- **Three Coco Data Initialization notebooks** fit their cell limits and are safe to run again; the Local Dashboards
+  Dr.Egeria inbox models its subscription as a Digital Subscription ([#883](https://github.com/odpi/egeria-workspaces/pull/883)).
 - **Marquez restarts after a reboot**, and the infra check covers `airflow-marquez` ([#857](https://github.com/odpi/egeria-workspaces/pull/857)); the scheduled infra
   check writes one bounded log line per run ([#854](https://github.com/odpi/egeria-workspaces/pull/854)).
 

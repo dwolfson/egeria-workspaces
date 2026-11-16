@@ -43,7 +43,7 @@ pip install -U pyegeria
 - **Egeria 6.3's type system**: the properties catalog is regenerated from Egeria, and the `queries` attribute is no
   longer sent or accepted on schema types.
 
-### Planned for V.Next
+### Planned for the next release
 
 These changes are planned for an upcoming release.
 

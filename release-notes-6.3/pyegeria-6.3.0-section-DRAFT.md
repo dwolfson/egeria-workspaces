@@ -16,14 +16,17 @@ from an earlier 6.2 release, the rest of this page describes the 6.2 series that
 pip install -U pyegeria
 ```
 
-### Paging you can trust on Egeria 6.3
+### Paging on Egeria 6.3
 
 - **pyegeria now knows which Egeria fixes a platform carries**, one version check per upstream fix, and trusts a read
   only on a platform that has every fix it needs (`pyegeria.core.paging`, `platform_fixes`). Egeria 6.3 carries
   both paging fixes: odpi/egeria#9453, for the find reads, and odpi/egeria#9454, for `get_relationships` and
   `get_related_elements`. Released Egeria from 6.3.0 on is trusted for both, since the V6.3 tag carries both fixes.
-  On Egeria 6.3, results from those reads can be confirmed complete. On older platforms they are reported as
-  "at least N".
+  On Egeria 6.3, pyegeria can tell when it has read to the end of those results. On older platforms, counts are
+  reported as "at least N".
+- **Known issue on Egeria 6.3:** a search for data assets with no filter can return fewer assets than the repository
+  holds, so treat its count as a lower bound. <!-- EG-15 (Rocky, 2026-11-16: 440 of 1797 DataAssets missing from an
+  unfiltered find_data_assets on released 6.3). Add the upstream issue link once one exists. -->
 - **A find's count says "at least N" unless the end was confirmed.** `result_count(result)`
   (`pyegeria.view.format_set_executor`) gives the count, its wording, and the reason when it isn't final.
 - **MCP report runs page up to their maximum rows** and include a count, so a filtered first page no longer reads as
@@ -42,11 +45,10 @@ pip install -U pyegeria
 - **Egeria 6.3's type system**: the properties catalog is regenerated from Egeria, and the `queries` attribute is no
   longer sent or accepted on schema types.
 
-### Planned for the next release
-
-These changes are planned for an upcoming release.
+### Planned for pyegeria 6.4 or the next release
 
 
-- **`load_egeria_report_specs` will be removed in the next release.** It has been deprecated since 6.2.42 (see PR) and
+- **`load_egeria_report_specs` will be removed in pyegeria 6.4 or the next release.** It has been deprecated since 6.2.42 (see PR) and
   logs a warning once. Report specs held in Egeria load through the spec cache (`pyegeria.view.egeria_spec_cache.sync_report_specs`).
-- **No default password or built-in identity**, except in a demo profile that is named explicitly.
+- **pyegeria 6.4 or the next release drops the default password** and any built-in identity, except in a demo profile
+  that is named explicitly.

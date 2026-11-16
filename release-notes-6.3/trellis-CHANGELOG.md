@@ -15,7 +15,7 @@ Egeria release they ship with. Pull requests are `#N` in this repository.
 ## [Unreleased]
 
 ## [6.3 Tech Preview] - 2026-11-17
-<!-- At the cut: fold in #1087–#1100. #1099 (RE pyegeria floor 6.2.42, 825e496e) and #1100 (RE fix batch TR-1/2/15/22/24) merged 2026-11-16; #1101 (floor 6.3.0 for RE/EA/Studio/trellis-auth) merged 16:50Z, main 34dbddb5. Describe #1100 from its PR. -->
+<!-- At the cut: fold in #1087–#1100. #1099 (RE pyegeria floor 6.2.42, 825e496e) and #1100 (RE fix batch TR-1/2/15/22/24) merged 2026-11-16; #1101 (floor 6.3.0 for RE/EA/Studio/trellis-auth) merged 16:50Z, main 34dbddb5. #1100 described from its PR and commits. -->
 
 First recorded release, a Tech Preview released with Egeria 6.3. It covers everything merged since the October 2026 Egeria newsletter, which introduced
 Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the narrative.
@@ -84,6 +84,13 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 - Egeria Advisor drops its unread `EMBEDDING_DEVICE` setting (#1080).
 
 ### Fixed
+- **Survey runs** (#1100):
+  - only one run of a survey definition can be queued or running on a resource at a time. Another request is refused
+    with 409, naming the run already in progress and how to cancel it, and nothing is queued (TR-1);
+  - cancelling a queued run also closes its activity entry, which used to stay "running" (TR-2);
+  - if a run can't be queued, its activity entry is closed as an error (TR-1).
+- **Egeria sign-in errors are recognised by error class and HTTP code**, not by message text, so a refused sign-in
+  (sign in again) is no longer confused with Egeria refusing a signed-in user (TR-22, #1100).
 - **Identity and access**: ambient identity, caller-identity rounds, private investigation attach, no forged person
   actions from the CLI, constant-time token compare, non-JWT tokens refused at login, a dead token answered the same
   way everywhere (#579, #587, #640, #665, #685, #827, #997).
@@ -108,6 +115,11 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
   number (#1081).
 
 ### Security
+- **The `trellis-auth` token check never signs in with a configured password.** It checks the token as the token's
+  own user, so a token Egeria has refused can no longer pass by signing in again as the service account (TR-24,
+  #1100).
+- **The docs probe and CVE scan check TLS certificates with certifi** (through httpx), so they no longer trust the
+  emSign ECC Root CA - G3 that some system certificate stores still hold (TR-15, #1100).
 - See *Fixed › Identity and access* and *Changed* (credential fallback retired, zone rule).
 - The certifi floor excludes the distrusted emSign ECC G3 root (#989).
 
@@ -126,6 +138,9 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 - Dr.Egeria templates synced (#91, #103, #104, #639, #858, #874, #1004); odpi sync and DCO remediation (#108, #981, #112).
 
 ### Docs
+- [IF #1102 MERGES] **No default database password** (TR-27, #1102): the QUICKSTART, READMEs, Resource Explorer admin
+  guide and deployment docs say where `PGVECTOR_PASSWORD` comes from (`compose-configs/shared-infra/.env` with Egeria
+  Workspaces, or one you generate for a standalone install), and Egeria Advisor's `.env.example` lists it.
 - User and admin guide rounds; design notes reorganised into exchange, implemented and rulings (#683, #688, #695).
 - Design notes: files, open data, quality, extensibility, local dashboards, OSI metric exchange, feedback extraction,
   closed loop, re-index, hardware acceleration (#785, #786, #889, #939, #978, #984, #1011, #1016, #1035, #1072).

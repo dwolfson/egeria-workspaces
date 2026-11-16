@@ -152,6 +152,24 @@ The current `[Unreleased]` section was written as items landed and stops around 
 - **Jupyter no longer trusts the emSign ECC G3 root** ([#776](https://github.com/odpi/egeria-workspaces/pull/776)).
 - **Obsidian plugin dependencies** ([#704](https://github.com/odpi/egeria-workspaces/pull/704)): already under Changed; move here.
 
+<!-- [IF #887 MERGES] add these entries (checked against #887's description and diff, 2026-11-16):
+Added:
+- **Dr.Egeria templates for Egeria 6.3**: Limit Result by Status lists the five element statuses, lifecycle filters
+  are added, deployment status uses `REJECTED`, and activity status gains `FOR_INFO`. The templates match pyegeria
+  6.3.0's (#887).
+- **A Dr.Egeria best-practices doc** with the same status values (#887).
+- **`init_trellis.sh`** creates the Trellis role and database from `PGVECTOR_PASSWORD`, and `gen-env.sh` generates
+  that password for a brand-new install. The shared-infra README covers creating the role on an existing volume and
+  setting or changing its password (TR-27, #887).
+Changed:
+- **pyegeria 6.3.0 is the quickstart's minimum**, in the four Dockerfiles and `requirements.txt` (#887).
+- **The Portal's report-spec consumer folder is found by its qualified name**, not a hard-coded GUID (RK-22, #887).
+- **The shared Postgres service gains a `PGVECTOR_PASSWORD` setting**, so the first start after upgrading recreates
+  the `egeria-shared-postgres` container once. Data and existing passwords are kept (#887).
+Security:
+- **No default `egeria_advisor` password**: `init_egeria.sql` no longer creates the role with a well-known password
+  (TR-27, #887). -->
+
 ### Not itemised
 
 Docs-only PRs (design notes and Portal Docs reorganisation: #649, #683, #728, #778, #782, #786, #787, #792, #794,

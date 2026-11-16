@@ -96,6 +96,11 @@ In numbers: 1,151 commits and about 523 merged pull requests across 12 packages 
 - **Studio** is a new application for authoring report specs, reports and dashboard sheets, with forms, preview and
   lifecycle, built on pyegeria's authoring API. It has no language model of its own: AI-assisted authoring comes
   from Egeria Advisor, shown as a panel (#1095).
+- **Resource Explorer fixes** (#1100): a survey definition can have only one run queued or running on a resource at a
+  time, and a second request is told which run is in progress and how to cancel it; cancelling a queued run closes its
+  activity entry; sign-in errors from Egeria are recognised by their error class and code rather than their wording;
+  the token check never signs in with a configured password; and the docs probe and CVE scan check certificates with
+  certifi.
 - **Work in progress**: `trellis-ui` (#1062), and `trellis-accel`, which chooses a compute device at run time
   (#1073; design #1072).
 
@@ -116,6 +121,12 @@ Thank you to everyone who contributed: Dan Wolfson (1,135 commits) and dependabo
 
 - **pyegeria 6.3.0 or later is required** by Resource Explorer, Egeria Advisor, Studio and `trellis-auth` (#1101).
 - **Database credentials must be in the secrets store.** The plaintext fallback is gone (#823).
+- **A second run of the same survey on the same resource is refused** with 409 while one is queued or running (#1100).
+  Cancel the first run, or wait for it to finish.
+<!-- [IF #1102 MERGES] add: **There is no default database password.** Set `PGVECTOR_PASSWORD`: with Egeria Workspaces
+  it is in `compose-configs/shared-infra/.env`; for a standalone install, generate your own. An install whose
+  `egeria_advisor` role still uses the old well-known password should change it (see the Egeria Workspaces shared-infra
+  README, "Setting or changing the egeria_advisor password") (#1102). -->
 - **Only JWT bearer tokens are accepted at login** (#827).
 - **Zones**: a zone with no access control is private, as it is in Egeria (#1043). Content in such a zone is visible
   only to its owner.

@@ -7,10 +7,9 @@
 
 # pyegeria 6.2.0 → 6.2.39 (Egeria 6.3)
 
-pyegeria shipped 39 releases between 6.2.0 (October 8, 2026) and 6.2.39 (November 12, 2026), roughly four a week
-(6.2.38 was tagged but not published to PyPI; 6.2.39 includes its fixes).
-Together they are the Python side of **Egeria 6.3**. This page groups those releases by theme, so you can see what
-changed without reading each one. The per-release notes from 6.2.26 onwards are in this folder; earlier releases are
+We released pyegeria 39 times between 6.2.0 (October 8, 2026) and 6.2.39 (November 12, 2026), about four releases a
+week. (6.2.38 was tagged but not published to PyPI; 6.2.39 includes its fixes.) Together they make up the Python side
+of **Egeria 6.3**. This page groups the releases by theme, so you can see what changed without reading each one. The per-release notes from 6.2.26 onwards are in this folder; earlier releases are
 described in their release PRs.
 
 **If you are upgrading from 6.2.0, read [Behaviour changes](#behaviour-changes) first.**
@@ -49,10 +48,11 @@ pip install -U pyegeria
   (6.2.34, #585); Saved Query delete, Smart Collections by catalog target, and report parameters on dashboard Reports
   (6.2.35, #587).
 
-## Overview metrics that say what they measured
+## Overview metrics: measured or not measured
 
-- **Unmeasured is `None`, not 0** (6.2.22, #531; opt-in strict counts since #448). A capped or timed-out count is not
-  measured, never the cap (#555); scans read every page or report nothing (#565).
+- **A value that wasn't measured is `None`, not 0** (6.2.22, #531; opt-in strict counts since #448). A count that hit
+  its cap or timed out is reported as not measured, rather than as the cap (#555); scans either read every page or
+  report nothing (#565).
 - **`asset_composition`**, with a subtype tree and two count scopes (6.2.23, #534); the absence word `nothing_found`
   (#535).
 - **`population=`** is the count keyword; `scope=` is deprecated (6.2.24, #538).

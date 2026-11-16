@@ -10,7 +10,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
 
    ## [6.3] - 2026-11-17
 
-   Aligns with Egeria 6.3 and pyegeria 6.2.42 and later. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the narrative summary.
+   This release goes with Egeria 6.3 and needs pyegeria 6.2.42 or later. [RELEASE_NOTES.md](RELEASE_NOTES.md) summarizes the main changes.
    ```
 
 2. Keep every existing `[Unreleased]` entry, under the same Added / Changed / Fixed / Removed headings.
@@ -24,7 +24,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
    ```
 
    `v6.2` is tagged at `903e8eeb` (#619), as the owner agreed on 2026-11-11. Tag `v6.3` at the release commit, on the
-   release date (Tuesday 2026-11-17 (owner, 2026-11-16), alongside Egeria 6.3).
+   release date, Tuesday 2026-11-17, alongside Egeria 6.3 (owner, 2026-11-16).
 
 5. Remove the "Since 6.2 (unreleased, on `main`)" section from RELEASE_NOTES.md, since the new 6.3 section covers it.
 
@@ -131,7 +131,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
   shared infra ([#624](https://github.com/odpi/egeria-workspaces/pull/624)); loading bay Bitol folder
   ([#681](https://github.com/odpi/egeria-workspaces/pull/681)); secrets refresh ([#638](https://github.com/odpi/egeria-workspaces/pull/638));
   empty limits ([#641](https://github.com/odpi/egeria-workspaces/pull/641)); compose build ([#626](https://github.com/odpi/egeria-workspaces/pull/626));
-  heal primes valid metadata ([#801](https://github.com/odpi/egeria-workspaces/pull/801)).
+  the self-heal step now loads valid metadata values first ([#801](https://github.com/odpi/egeria-workspaces/pull/801)).
 - **MCP SSE headers** ([#738](https://github.com/odpi/egeria-workspaces/pull/738)).
 - **Marquez restarts after a reboot**, and the infra check covers `airflow-marquez` ([#857](https://github.com/odpi/egeria-workspaces/pull/857)); the scheduled infra
   check writes one bounded log line per run ([#854](https://github.com/odpi/egeria-workspaces/pull/854)).

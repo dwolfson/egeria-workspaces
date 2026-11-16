@@ -1,113 +1,130 @@
 <!-- DRAFT: new file RELEASE_NOTES.md at the root of dwolfson/trellis, mirroring egeria-workspaces' RELEASE_NOTES.md.
-     Range b74b07f9 (2026-10-09) to 73738df8 (#1086, 2026-11-12). Refresh the stats at the cut.
-     Owner decisions 2026-11-11: label "6.3 Tech Preview", tagged/released with Egeria 6.3 (tentatively Monday
-     2026-11-16); RE and EA are on the public demo. -->
+     Range b74b07f9 (2026-10-09) to 73738df8 (#1086, 2026-11-12), plus #1095/#1099 by hand. Refresh the stats at the cut.
+     Owner decisions: label "6.3 Tech Preview", tag v6.3-tech-preview, released with Egeria 6.3 on Tuesday
+     2026-11-17; RE and EA are on the public demo. -->
 
 # Trellis 6.3 Tech Preview: Resource Explorer and Egeria Advisor
 
-Five weeks, more than 500 merged PRs, and two early previews that now publish to Egeria, run their surveys through it,
-and learn from the people who use them. They are still a **Tech Preview**: changing quickly, and shaped by your
-feedback.
+Resource Explorer and Egeria Advisor were introduced as early previews in the October 2026 Egeria newsletter.
+Since then, our work on Trellis has focused on:
 
-In the October 2026 Egeria newsletter, Resource Explorer and Egeria Advisor were "early previews". Since then the
-work has been about three things: putting what Resource Explorer finds **into Egeria** (published, zoned, read back,
-and surveyed by Egeria's own engine host); making every answer say **what it established and what it did not**; and
-**closing the loop** with the people who use it, through shared feedback, triage and a document index that can be
-rebuilt and rolled back. Egeria Advisor now reads and authors the same Egeria-held dashboards and report specs as the
-Portal. It ships with **Egeria 6.3** and requires **pyegeria 6.2.42**.
+* Putting what Resource Explorer finds into Egeria: results are published with the right zones and checked once
+  they arrive, and surveys run on Egeria's own engine host.
+* Being clear about what an answer is based on, including what could not be determined.
+* Learning from the people who use the tools, through shared feedback, triage, and a document index that can be
+  rebuilt and rolled back.
 
-**6.3 Tech Preview** &middot; **1,151** commits &middot; **~523** PRs &middot; **12** packages &middot; **5** weeks
+Egeria Advisor now reads and authors the same dashboards and report specs held in Egeria as the Portal does, and a
+new Studio application gives report specs, reports and dashboard sheets a dedicated authoring space.
+
+Both remain a **Tech Preview**: they are changing quickly, and your feedback shapes where they go next. This release
+goes with **Egeria 6.3** and needs **pyegeria 6.2.42 or later**. For the changes to the Egeria platform itself, see
+the [Egeria 6.3 release notes](https://egeria-project.org/release-notes/latest/).
+
+In numbers: 1,151 commits and about 523 merged pull requests across 12 packages over five weeks.
 
 ## Try it
 
-- **Live demo, no install**: **[egeria.pdr-associates.com](https://egeria.pdr-associates.com)**. Register free,
-  pick a Coco Pharmaceuticals persona, and open Resource Explorer or Egeria Advisor from their tiles on the Portal home page.
-- **Run it with Egeria Workspaces**: [Deploying Trellis with the QuickStart](docs/deploying-trellis-with-quickstart.md)
-  and [QUICKSTART.md](QUICKSTART.md). Both applications open from tiles on the Egeria Workspaces Portal home page.
-- **Learn Resource Explorer**: the six-part [tutorial](packages/resource-explorer/docs/tutorial/).
-- **Understand the design**: [Trellis architecture](docs/trellis-architecture.md) and [the journey so far](docs/trellis-journey.md).
+- **Live demo**: you can try both at [egeria.pdr-associates.com](https://egeria.pdr-associates.com) without
+  installing anything. Register for free, pick a Coco Pharmaceuticals persona, and open Resource Explorer or Egeria
+  Advisor from their tiles on the Portal home page.
+- **Run it with Egeria Workspaces**: see [Deploying Trellis with the QuickStart](docs/deploying-trellis-with-quickstart.md)
+  and [QUICKSTART.md](QUICKSTART.md). Both applications open from tiles on the Portal home page.
+- **Learn Resource Explorer**: work through the six-part [tutorial](packages/resource-explorer/docs/tutorial/).
+- **Understand the design**: read about the [Trellis architecture](docs/trellis-architecture.md) and [the journey so far](docs/trellis-journey.md).
 
 ---
 
-## Mid Oct: publish to Egeria, surveys by Egeria, and whose identity
+## Mid October: publishing to Egeria, surveys run by Egeria, and identity
 
-- **Publish to Egeria with zoning and read-back** (#644 and follow-ups). Resource Explorer zones what it produced,
-  never what it references; private material publishes only as its owner and fails closed; links such as
-  ExternalReference and LineageMapping are made once, never again on re-publish (#678, #682); membership read-back pages (#631).
-- **Engine-host surveys**: steps run by Egeria's engine host with two staleness measures (#658, #663, #699), and an
-  OpenLineage run event for every step (#646).
-- **Database surveys** gain per-table heap and index sizes (#582), flags, materialized views and activity (#627).
-- **Identity**: ambient identity and caller-identity rounds (#579, #587), private investigation attach (#640), no
-  forged person actions from the CLI (#665), constant-time token compare (#685).
-- **Honest results**: an unsurveyed database is "not established"; "not determined" never reads 0 (#616, #625).
+- **Publishing to Egeria, with zones, and checking the result** (#644 and follow-ups). Resource Explorer places what it
+  created in zones, but not the elements it only refers to. Private material is published only as its owner, and is
+  not published at all if that isn't possible. Links such as ExternalReference and LineageMapping are made once and
+  not repeated when you publish again (#678, #682). Checking collection membership now reads every page (#631).
+- **Surveys on Egeria's engine host**: survey steps run on Egeria's engine host, with two measures of how stale a
+  result is (#658, #663, #699), and each step sends an Open Lineage run event (#646).
+- **Database surveys** now report heap and index sizes for each table (#582), as well as flags, materialized views and activity (#627).
+- **Identity**: requests run as the person making them (#579, #587); private investigations can be attached (#640);
+  the command line can no longer record actions on someone else's behalf (#665); tokens are compared in constant
+  time (#685).
+- **Clearer results**: a database that hasn't been surveyed shows as "not established", and a value that couldn't be
+  determined is never shown as 0 (#616, #625).
 
-## Late Oct: a new interface, quality checks, files, and a better chat
+## Late October: a new interface, quality checks, files, and chat improvements
 
-- **Next UI**: cards and tiles, At a glance, Survey & analyses (#776, #778, #782); the Look control (Dark, Light,
-  Paper) (#765); a generic graph renderer, deployment topology first (#831); every data table resizes (#942).
-- **Value profile and quality checks**, with sampling settings at every scope; verdicts are kept locally and sent to
-  Egeria by Publish; a quality survey runs across a work list on a schedule (#759, #767, #772, #880, #893, #894).
-- **One card per Survey Definition** with a run line, history and Cancel (#729, #735).
-- **Chat**: the first index of a repository is asked about first (#777); Ollama native endpoint (#779); Phoenix
-  tracing (#745); markdown in the chat rail and journal preview (#855, #861).
-- **Credentials only through the secrets store**; the plaintext fallback is retired (#823). Non-JWT tokens are refused
-  at login (#827).
-- **Files**: Egeria's CSV survey, Parquet profile, Delta Lake layout signal, and narrative passages that chat can search
-  (#868, #912, #977). **Declared extensibility**: a step declares itself and the questions it adds (#885, #886, #916, #919).
+- **A new interface** with cards and tiles, an At a glance view, and a Survey & analyses page (#776, #778, #782); a
+  choice of Dark, Light or Paper looks (#765); a graph view, starting with deployment topology (#831); and data
+  tables you can resize (#942).
+- **Value profiles and quality checks**, with sampling settings at every level. Results are kept locally and sent to
+  Egeria when you publish, and a quality survey can run across a work list on a schedule (#759, #767, #772, #880,
+  #893, #894).
+- **One card for each survey definition**, showing its latest run and history, with a Cancel button (#729, #735).
+- **Chat**: questions about a repository use that repository's own index first (#777); Ollama's native endpoint is
+  supported (#779); Phoenix tracing is available (#745); and markdown displays in the chat panel and journal preview
+  (#855, #861).
+- **Credentials come only from the secrets store**; the plaintext fallback has been removed (#823). Login accepts
+  only JWT bearer tokens (#827).
+- **Files**: Egeria's CSV survey, Parquet profiles, a Delta Lake layout check, and searchable text passages for chat
+  (#868, #912, #977).
+- **Extensibility**: a survey step now declares what it is and which questions it adds (#885, #886, #916, #919).
 
-## Early Nov: tutorial, open data, and the Analytic Library on PyPI
+## Early November: the tutorial, open data, and the Analytic Library on PyPI
 
-- **Tutorial parts 1 to 6**, from what Resource Explorer is for to analysis further down the funnel
+- **A six-part tutorial**, from what Resource Explorer is for through to deeper analysis
   (#969, #970, #972, #975, #983, #990).
-- **Open data**: publish one dataset with read-back (#946); a DOI-only repository states what is established (#982).
-- **Set steps**: `schema_comparison` (#952) and a set-steps section on work-list pages (#944).
-- **The Analytic Library is a published wheel**, `egeria-trellis-analytics` 0.2.0 (#996).
-- **A zone with no access control is private**, matching Egeria (#1043); a dead token is answered the same way
-  everywhere (#997); the certifi floor excludes the emSign ECC G3 root (#989).
+- **Open data**: a single dataset can be published and checked (#946), and a repository known only by its DOI shows what is known about it (#982).
+- **Steps across a set of resources**: `schema_comparison` (#952), and a section for them on work-list pages (#944).
+- **The Analytic Library is now on PyPI** as `egeria-trellis-analytics` 0.2.0 (#996).
+- **A zone with no access control is private**, as it is in Egeria (#1043); an expired token gets the same response
+  everywhere (#997); and the certifi minimum version no longer trusts the emSign ECC G3 root (#989).
 
-## Nov 8–12: closing the loop, and Egeria Advisor on Egeria-held dashboards
+## November 8 to 16: feedback, Egeria Advisor on dashboards held in Egeria, and Studio
 
-- **`trellis-feedback`**, a shared feedback library (0.1 to 0.3): ratings carry a cause and evidence, an admin triages
-  them, and a diagnosis can be routed to a gap in the documents (#1012, #1013, #1017, #1018, #1019, #1031, #1032, #1034).
-- **Re-index**: the document index can be rebuilt, swapped in and rolled back; a held rebuild says "held", and admins
-  can cancel it (#1037 to #1041, #1053, #1054).
-- **Evidence has an as-of date** on every compiled section (#1021, #1024).
-- **Egeria Advisor**: Dashboards read and authored in Egeria, at parity with the Portal; large tables scroll in
-  their tile, and capped tables and unreadable folders say why (#1042, #1067, #1068, #1070, #1084, #1086);
-  report specs synced from, published to and withdrawn from Egeria (#1033, #1060); perspectives from Egeria (#1059);
-  one fail-closed admin gate (#1050, #1052); Dr.Egeria runs as the signed-in user and calls with no credentials are
-  refused (#1045, #1046); feedback through the shared library (#1069, #1078); Egeria being down at sign-in is
-  "unreachable", not "rejected" (#1077).
-- **`trellis-ui`** (#1062) and **`trellis-accel`**, choosing a compute device at run time, work in progress
+- **`trellis-feedback`**, a shared feedback library (0.1 to 0.3): when you rate an answer you can say why and attach
+  evidence; an administrator reviews the feedback and can trace a problem back to a gap in the documents (#1012,
+  #1013, #1017, #1018, #1019, #1031, #1032, #1034).
+- **Re-indexing**: the document index can be rebuilt, switched over and rolled back; a rebuild that is on hold says
+  so, and administrators can cancel it (#1037 to #1041, #1053, #1054).
+- **Every compiled section shows the date of its evidence** (#1021, #1024).
+- **Egeria Advisor** reads and authors dashboards held in Egeria, just as the Portal does. Large tables scroll within
+  their tile, and a shortened table or a folder that can't be read says why (#1042, #1067, #1068, #1070, #1084,
+  #1086). Report specs are synced from, published to and withdrawn from Egeria (#1033, #1060), and perspectives come
+  from Egeria (#1059). There is a single admin check that denies access when in doubt (#1050, #1052). Dr.Egeria runs
+  as the signed-in user, and calls with no credentials are refused (#1045, #1046). Feedback uses the shared library
+  (#1069, #1078). If Egeria is down when you sign in, you're told it is unreachable rather than that you were
+  rejected (#1077).
+- **Studio** is a new application for authoring report specs, reports and dashboard sheets, with forms, preview and
+  lifecycle, built on pyegeria's authoring API. It has no language model of its own: AI-assisted authoring comes
+  from Egeria Advisor, shown as a panel (#1095).
+- **Work in progress**: `trellis-ui` (#1062), and `trellis-accel`, which chooses a compute device at run time
   (#1073; design #1072).
 
-## Underneath all of it
+## Dependencies, CI and documentation
 
-- **pyegeria** floor from 6.1.15 to 6.2.39, step by step (#593 … #1083).
-- **CI**: Resource Explorer tests run on main and PRs; image builds only when their inputs change (#1075); tests write
-  no tracked files and ratchet against silent success (#595, #1048); a pyegeria contract test (#1056).
-- **Docs**: user and admin guides, and design notes for files, open data, quality, extensibility, local dashboards,
-  OSI metric exchange, feedback, re-index and hardware acceleration.
+- **pyegeria**: the minimum version rose step by step from 6.1.15 to 6.2.42 (#593 to #1099).
+- **CI**: Resource Explorer tests run on main and on pull requests; images are rebuilt only when their inputs change
+  (#1075); tests no longer write tracked files and fail if a check passes without doing anything (#595, #1048); and a
+  contract test checks the pyegeria calls we rely on (#1056).
+- **Documentation**: user and administrator guides, and design notes for files, open data, quality, extensibility,
+  local dashboards, OSI metric exchange, feedback, re-indexing and hardware acceleration.
 
-**Commits by author:** 1,135 — Dan Wolfson &middot; 16 — dependabot[bot]
+Thank you to everyone who contributed: Dan Wolfson (1,135 commits) and dependabot (16).
 
 ---
 
 ## Upgrade notes
 
-- **pyegeria 6.2.42 or later is required** by Resource Explorer, Egeria Advisor and Studio (#1095, #1099). <!-- Owner 2026-11-16: state pyegeria 6.2.42 as the floor everywhere. Before the PR, the code floor must match: Resource Explorer's pyproject is still >=6.2.41 (EA and Studio are >=6.2.42, #1095). Cite that PR here. -->
+- **pyegeria 6.2.42 or later is required** by Resource Explorer, Egeria Advisor and Studio (#1095, #1099).
 - **Database credentials must be in the secrets store.** The plaintext fallback is gone (#823).
 - **Only JWT bearer tokens are accepted at login** (#827).
-- **Zones**: a zone with no access control is private, as in Egeria (#1043). Content in such zones is visible only to
-  its owner.
-- **Private resources** no longer offer an Egeria-dispatched survey (#991).
+- **Zones**: a zone with no access control is private, as it is in Egeria (#1043). Content in such a zone is visible
+  only to its owner.
+- **Private resources** no longer offer a survey run by Egeria (#991).
 - **The Analytic Library comes from PyPI** (`egeria-trellis-analytics` 0.2.0) instead of the in-repo package (#996).
-- **`EMBEDDING_DEVICE` is gone** from Egeria Advisor's settings; it was never read (#1080).
+- **`EMBEDDING_DEVICE` has been removed** from Egeria Advisor's settings; it was never used (#1080).
 - **Egeria Advisor runs as its own service account**, `egeriaadvisornpa`, in the Egeria Workspaces quickstart
   (odpi/egeria-workspaces#828).
 
 ## Where the detail lives
 
-The full list by section is in [CHANGELOG.md](CHANGELOG.md). Design notes are under `docs/`.
-
-*trellis 6.3 Tech Preview &middot; b74b07f9 (2026-10-09) → v6.3-tech-preview &middot; compiled from git history*
+The full list of changes, by section, is in [CHANGELOG.md](CHANGELOG.md). Design notes are under `docs/`.

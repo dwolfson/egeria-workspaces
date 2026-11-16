@@ -95,7 +95,7 @@ Portal. It ships with **Egeria 6.3** and requires **pyegeria 6.2.42**.
 
 ## Upgrade notes
 
-- **pyegeria 6.2.42 or later is required** by Resource Explorer, Egeria Advisor and Studio (see PR). <!-- Owner 2026-11-16: state pyegeria 6.2.42 as the floor everywhere. Before the PR, the code floor must match: Resource Explorer's pyproject is still >=6.2.41 (EA and Studio are >=6.2.42, #1095). Cite that PR here. -->
+- **pyegeria 6.2.42 or later is required** by Resource Explorer, Egeria Advisor and Studio (#1095, #1099). <!-- Owner 2026-11-16: state pyegeria 6.2.42 as the floor everywhere. Before the PR, the code floor must match: Resource Explorer's pyproject is still >=6.2.41 (EA and Studio are >=6.2.42, #1095). Cite that PR here. -->
 - **Database credentials must be in the secrets store.** The plaintext fallback is gone (#823).
 - **Only JWT bearer tokens are accepted at login** (#827).
 - **Zones**: a zone with no access control is private, as in Egeria (#1043). Content in such zones is visible only to

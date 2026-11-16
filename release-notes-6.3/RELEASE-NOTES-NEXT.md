@@ -290,3 +290,5 @@ Per-release detail is in the themes above; the appendix is the same list by sect
 - Portal Docs reorganisation; Resource Locator guide; notebooks in data initialization (#728, #649, #664).
 - Report-spec design notes and Portal behaviour (#778, #782, #786, #787, #792, #794, #799, #813, #683, #797).
 - `RELEASE_NOTES.md` is written per release; update it at release time.
+
+<!-- 2026-11-16 PRs opened (owner "Yes, push and open"): odpi/egeria-workspaces#885 (pyegeria 6.2.42 floor + quickstart pinned to odpi/egeria-platform:6.3), #886 (egeria-upgrade-reset resolves :stable; --stable flag, --latest kept), dwolfson/trellis#1099 (RE floor 6.2.42). Cite them as merged only once they merge; add an upgrade note for #886's flag rename. -->

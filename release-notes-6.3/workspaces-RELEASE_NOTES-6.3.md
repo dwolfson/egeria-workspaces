@@ -180,7 +180,7 @@ tracks the **Egeria 6.3** builds and **pyegeria 6.2.42 and later**. **This is th
   the Portal's rendered tables should be re-checked; see the *Report Specs* tutorial, Part C ([#853](https://github.com/odpi/egeria-workspaces/pull/853)).
 - **Postgres templates take a secrets store** ([#679](https://github.com/odpi/egeria-workspaces/pull/679)).
 - **Egeria Advisor runs as `egeriaadvisornpa`** in quickstart ([#828](https://github.com/odpi/egeria-workspaces/pull/828)).
-- **Freshstart** needs pyegeria `>=6.2.21,<6.2.27`; the quickstart needs **pyegeria 6.2.42 or later** (see PR).
+- **Freshstart** needs pyegeria `>=6.2.21,<6.2.27`; the quickstart needs **pyegeria 6.2.42 or later** (#885).
   <!-- Owner 2026-11-16: state pyegeria 6.2.42 as the floor everywhere. Before the PR, the code floor must match: the quickstart Dockerfiles are still >=6.2.41; a floor PR raises them to 6.2.42. Cite that PR here. -->
 
 ## Where the detail lives

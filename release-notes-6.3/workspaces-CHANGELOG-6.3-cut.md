@@ -167,6 +167,14 @@ The current `[Unreleased]` section was written as items landed and stops around 
 - **No default `egeria_advisor` password**: `init_egeria.sql` no longer creates the role with a well-known password
   (TR-27, [#887](https://github.com/odpi/egeria-workspaces/pull/887)).
 
+<!-- [IF #888 MERGES] add (checked against #888's description and files, 2026-11-16):
+Added:
+- **The 16 MetadataExpert Dr.Egeria templates** (type and enum definitions, instances, classify, link and publish,
+  Update Relationship, Count Metadata Elements), the same as pyegeria 6.3.0's ([#888](https://github.com/odpi/egeria-workspaces/pull/888)).
+Fixed:
+- **`gen-env.sh` quotes the Kafka directory paths**, so shared infrastructure starts from a checkout whose path contains
+  a space ([#888](https://github.com/odpi/egeria-workspaces/pull/888)). -->
+
 ### Not itemised
 
 Docs-only PRs (design notes and Portal Docs reorganisation: #649, #683, #728, #778, #782, #786, #787, #792, #794,

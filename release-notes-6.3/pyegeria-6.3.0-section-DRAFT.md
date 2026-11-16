@@ -35,9 +35,8 @@ pip install -U pyegeria
 - **Project Scope** maps to the project's `scope` property.
 - **Default value overrides** are sent when the target type declares them.
 - **Authoring validation is stricter**: the find method must suit the target type, and column keys are checked.
-- **Status values match Egeria** (PY-21). The fallback list of deployment statuses offered `REJECTED_FOR_DEPLOYMENT`;
-  Egeria's value is `REJECTED`. The built-in report specs for Actor Manager, Feedback and Projects now offer the
-  `FOR_INFO` activity status.
+- **Deployment status matches Egeria** (PY-21). The fallback list of deployment statuses offered
+  `REJECTED_FOR_DEPLOYMENT`; Egeria's value is `REJECTED`.
 - **Drafts are listed correctly on a live Egeria.** Listing and pruning drafts used to find none on a real server.
   They now read each kind by type, filtered by the author's zone.
 - **Egeria 6.3's type system**: the properties catalog is regenerated from Egeria, and the `queries` attribute is no
@@ -48,6 +47,6 @@ pip install -U pyegeria
 These changes are planned for an upcoming release.
 
 
-- **`load_egeria_report_specs` will be removed.** It has been deprecated since 6.2.42 (see PR) and logs a warning
-  once. Report specs held in Egeria load through the spec cache (`pyegeria.view.egeria_spec_cache.sync_report_specs`).
+- **`load_egeria_report_specs` will be removed in the next release.** It has been deprecated since 6.2.42 (see PR) and
+  logs a warning once. Report specs held in Egeria load through the spec cache (`pyegeria.view.egeria_spec_cache.sync_report_specs`).
 - **No default password or built-in identity**, except in a demo profile that is named explicitly.

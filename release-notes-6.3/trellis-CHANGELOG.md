@@ -58,6 +58,12 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 - **A single admin check** from `trellis-auth` that denies access when in doubt (#1050); the Admin link is shown only to administrators (#1052).
 - **Feedback** through the shared `trellis-feedback` library (#1069).
 
+#### Studio
+- **Studio**, a new application for authoring report specs, reports and dashboard sheets, with forms, preview and
+  lifecycle, built on pyegeria's authoring API. It has no language model of its own; AI-assisted authoring comes from
+  Egeria Advisor, shown as a panel. Started with `packages/studio/scripts/start-studio.sh`, with its own CI workflow
+  (#1095).
+
 #### Shared packages
 - **`trellis-feedback`** 0.1 to 0.3: a shared feedback store with append-only triage (#1012 onwards).
 - **`trellis-ui`**, a shared UI package; Egeria Advisor gets the three looks (#1062).

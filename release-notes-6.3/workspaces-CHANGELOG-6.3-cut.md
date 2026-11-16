@@ -10,7 +10,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
 
    ## [6.3] - 2026-11-17
 
-   This release goes with Egeria 6.3 and needs pyegeria 6.2.42 or later. [RELEASE_NOTES.md](RELEASE_NOTES.md) summarizes the main changes.
+   This release goes with Egeria 6.3 and needs pyegeria 6.2.42 or later.<!-- pyegeria 6.3.0 (Coordinator plan, 2026-11-16): once 6.3.0 is on PyPI, say "6.2.42 or later; 6.3.0 recommended". If the follow-up PR raising the floor to 6.3.0 lands before the cut, say "6.3.0 or later" and cite it. --> [RELEASE_NOTES.md](RELEASE_NOTES.md) summarizes the main changes.
    ```
 
 2. Keep every existing `[Unreleased]` entry, under the same Added / Changed / Fixed / Removed headings.

@@ -16,7 +16,7 @@ Since the 6.2 release on October 9, our work on `egeria-workspaces` has focused 
   their own local ones.
 * Improving the accuracy and transparency of the measurements, metrics and KPIs we display.
 
-This release goes with **Egeria 6.3** and needs **pyegeria 6.2.42 or later**. For the changes to the Egeria
+This release goes with **Egeria 6.3** and needs **pyegeria 6.2.42 or later**.<!-- pyegeria 6.3.0 (Coordinator plan, 2026-11-16): once 6.3.0 is on PyPI, say "6.2.42 or later; 6.3.0 recommended". If the follow-up PR raising the floor to 6.3.0 lands before the cut, say "6.3.0 or later" and cite it. --> For the changes to the Egeria
 platform itself, see the [Egeria 6.3 release notes](https://egeria-project.org/release-notes/latest/) and the
 [November 2026 newsletter](https://egeria-project.org/release-notes/november-2026/).
 

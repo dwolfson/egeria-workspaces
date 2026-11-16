@@ -18,7 +18,7 @@ Egeria Advisor now reads and authors the same dashboards and report specs held i
 new Studio application gives report specs, reports and dashboard sheets a dedicated authoring space.
 
 Both remain a **Tech Preview**: they are changing quickly, and your feedback shapes where they go next. This release
-goes with **Egeria 6.3** and needs **pyegeria 6.2.42 or later**. For the changes to the Egeria platform itself, see
+goes with **Egeria 6.3** and needs **pyegeria 6.2.42 or later**.<!-- pyegeria 6.3.0 (Coordinator plan, 2026-11-16): once 6.3.0 is on PyPI, say "6.2.42 or later; 6.3.0 recommended". If the follow-up PR raising the floor to 6.3.0 lands before the cut, say "6.3.0 or later" and cite it. --> For the changes to the Egeria platform itself, see
 the [Egeria 6.3 release notes](https://egeria-project.org/release-notes/latest/).
 
 In numbers: 1,151 commits and about 523 merged pull requests across 12 packages over five weeks.

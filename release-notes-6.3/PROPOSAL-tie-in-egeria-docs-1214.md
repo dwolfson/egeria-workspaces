@@ -1,80 +1,130 @@
-# Proposal: tie our 6.3 notes into Mandy's egeria-docs release notes
+# Plan: our three 6.3 release-note outputs, fitted to Mandy's egeria-docs #1214
 
-Status: proposal for the owner, 2026-11-16. Nothing changed in any repo yet; no PR open.
-Source read: odpi/egeria-docs main `d55aa0cf` (#1214 "Release notes for 6.3 (part 1)", merged 13:08Z) and #1213.
+Status: plan for the owner, 2026-11-16. Nothing changed in any repo; no PR open. Every PR waits for the owner's go.
+Source read: odpi/egeria-docs main `d55aa0cf` (#1214 "Release notes for 6.3 (part 1)", merged 13:08Z; also #1213).
 
-## What Mandy's #1214 already covers
+## What Mandy's material covers, and the gap
 
-- `site/docs/release-notes/november-2026.md` is **the** November newsletter. It already has an
-  Egeria Workspaces section (Resource Locator, grouped by purpose, lineage hop controls, dashboards and
-  report specs held in Egeria, Airflow and Marquez, resizable columns, `egeria-upgrade-reset`) and a
-  short pyegeria and Dr.Egeria section.
-- `snippets/release-notes/6-3.md`: a two-paragraph summary (operations, performance, standards: DCAT,
-  NIST, ISO/IEC 27001 statements of applicability, STRIDE, Open Lineage in PostgreSQL), then details
-  and upgrade notes. It says nothing about pyegeria versions, Workspaces or Trellis.
-- `overview.md`: 6.3 branch date 16 November, **release date 17 November**; 6.4 late December; 7.0 mid February 2027.
-- Blogs 6 to 10. Blog 7 (security professionals) has a placeholder:
-  `<!-- SCREENSHOT NEEDED: a statement of applicability with its linked controls ... in Egeria Explorer -->`.
+- `site/snippets/release-notes/6-3.md` (shown by `latest.md`): summary, about 45 "Details of this release"
+  boxes about the platform, then Upgrade notes. **Unlike 6.1 and 6.2, it has no boxes for our work yet.**
+  In 6.2 the same file had "AI applications on Trellis", "Enhancements to the Egeria Workspaces",
+  "Enhancements to Dr.Egeria and pyegeria" and "Refreshed Coco Pharmaceuticals content", placed just
+  before Upgrade notes. That is the slot for ours.
+- `site/docs/release-notes/november-2026.md`: the newsletter. It already has short Egeria Workspaces and
+  pyegeria sections. It has nothing on Trellis.
+- `overview.md`: 6.3 branched 16 November, **released 17 November**.
+- Blogs 6 to 10: the 6.3 release, security professionals, data mesh, business flows from lineage, DCAT.
+  Blog 7 has an empty placeholder: "SCREENSHOT NEEDED: a statement of applicability ... in Egeria Explorer".
+- No pyegeria version appears anywhere in her pages.
 
-So our own newsletter draft (`newsletter-november-2026.md`) now duplicates hers. Her text is the
-published voice; ours should feed into it, not compete.
+## Output 1: into egeria-docs (one PR to odpi/egeria-docs)
 
-## Proposed changes
+**A. `site/snippets/release-notes/6-3.md`**: four new `??? functional` boxes before `### Upgrade notes`, in the 6.2
+layout and her voice (short, plain, linking to `/user-interfaces/...` pages):
 
-### 1. Newsletter: stop our standalone draft, add a small PR to hers
+1. **"Enhancements to the Egeria Workspaces"**:
+   - Dashboards and report specs held in Egeria, in folders;
+   - the Overview shows only what it measured;
+   - relationships and classifications grouped by purpose (links to her purpose concepts);
+   - Resource Browser and Resource Locator;
+   - The Catalog tabs;
+   - lineage hop limit and the Expand viewer;
+   - resizable panes;
+   - Airflow and Marquez;
+   - `egeria-upgrade-reset`.
+   Statements of applicability go in two places: the Coco sample (#881, merged) here, and the
+   Explorer view (#882) only if it merges first.
+2. **"Enhancements to Dr.Egeria and pyegeria"**:
+   - new command families: statements of applicability, business capability, report specs, measurements,
+     dashboards, zone membership;
+   - DOCUMENT and DCAT report output;
+   - paging that completes and says when a result was capped;
+   - the authoring API;
+   - "pyegeria 6.2.42 is the current release".
+3. **"AI applications on Trellis (6.3 Tech Preview)"**:
+   - Resource Explorer publishes to and surveys through Egeria;
+   - Egeria Advisor;
+   - the new Studio authoring surface;
+   - the same Tech Preview caveat as 6.2;
+   - tag `v6.3-tech-preview`.
+4. **"Refreshed Coco Pharmaceuticals content"**:
+   - Chief Data Officer dashboard;
+   - the statement of applicability sample (#881);
+   - sustainability reference data;
+   - Airflow pipelines.
 
-Retire `newsletter-november-2026.md` as a separate page. Instead, one small egeria-docs PR to
-`november-2026.md` that adds only what is missing, in her style, without rewriting her text:
+Plus two Upgrade-notes bullets:
+- The minimum pyegeria versions per repo (see "Decisions").
+- Run `egeria-upgrade-reset` for the quickstart.
 
-- **Egeria Workspaces section**, two or three bullets she doesn't have:
-  - The Overview shows only what it measured (no sample numbers; "not measured" is said plainly).
-  - The Catalog: a tab per kind of infrastructure, lists that page to the end.
-  - Statements of applicability: the Coco sample (#881, merged), and the Egeria Explorer
-    Statements of Applicability view (#882) **only if #882 merges first**. Each links to her
-    "Statements of applicability" bullet in the security section.
-- **A new short section "Tech Preview: Resource Explorer and Egeria Advisor"** (Trellis
-  `v6.3-tech-preview`). Her newsletter doesn't mention Trellis at all; you decided it is
-  released alongside 6.3 and is on the public demo. About five bullets, cut down from our draft.
-- **pyegeria section**: one sentence with the version: "Install or upgrade with
-  `pip install -U pyegeria`; 6.2.42 is the current release", and a link to the pyegeria release notes.
-- **Images**: only if you want them; our draft shots are 800x500. Offer a full-size Statement of
-  Applicability shot from Egeria Explorer for blog 7's placeholder (needs #882 merged and a retake).
+**B. `site/docs/release-notes/november-2026.md`**: small additions only; her text stays as written.
+- Add a short **"Tech Preview: Resource Explorer and Egeria Advisor"** section after Egeria Workspaces.
+- Add one statement of applicability bullet to her Workspaces list, linked to her security section.
+- Add a version line to her pyegeria section.
 
-### 2. Workspaces RELEASE_NOTES and CHANGELOG cut
+**C. Optional:** a full-size Egeria Explorer statement of applicability screenshot for blog 7's placeholder.
+This needs #882 merged and a retake as erinoverview.
 
-- Add at the top: "For the Egeria 6.3 platform, see the [6.3 release notes](https://egeria-project.org/release-notes/latest/)
-  and the [November 2026 newsletter](https://egeria-project.org/release-notes/november-2026/)."
-- Where we describe a platform change (zones fail closed, 8-hop lineage limit, purposes, DCAT,
-  Open Lineage in PostgreSQL), keep one line and link to her section instead of explaining it again.
-- Use her terms in prose: "Open Lineage" (product names like the `OpenLineage` connector stay as is),
-  "statement of applicability", "governance zones fail closed", "Resource Locator".
-- Release date: use **17 November 2026** (her overview table) for `## [6.3]` and the tags, unless you
-  want 16 November (the day the 6.3 image was pushed).
-- Add #881 under Added; #882 only if merged.
+New in this PR: only our components. Linked, not repeated: everything platform-side (zones, purposes, DCAT,
+Open Lineage, the nannies, security pack) points at her boxes and blogs.
 
-### 3. Trellis CHANGELOG and RELEASE_NOTES
+## Output 2: in our repos (one PR each)
 
-- Same top link to her 6.3 notes and blog 6.
-- Add **Studio** (port 8840, trellis #1095), which isn't in our draft.
-- Fix the pyegeria floor (see 5).
+Each of these opens with "For the Egeria 6.3 platform, see the
+[6.3 release notes](https://egeria-project.org/release-notes/latest/) and
+[blog 6](https://github.com/odpi/egeria-docs/tree/main/blogs/blog-6-egeria-6-3-release)".
+Platform items shrink to one linked line each. They use her terms: "Open Lineage" in prose,
+"statement of applicability", "governance zones fail closed".
 
-### 4. pyegeria aggregate page and one-page overview
+| Repo | Files | Repo-specific detail kept |
+|---|---|---|
+| odpi/egeria-workspaces | `RELEASE_NOTES.md` new 6.3 section; `CHANGELOG.md` `[Unreleased]` cut to `[6.3]`; tag `v6.3` | Portal changes by app, PR list, upgrade notes. The quickstart needs **pyegeria 6.2.41 or later**. Adds the quickstart re-pin to `odpi/egeria-platform:6.3`, #881, and #882 if merged. |
+| dwolfson/trellis | `CHANGELOG.md` `[6.3 Tech Preview]`; `RELEASE_NOTES.md`; tag `v6.3-tech-preview` | Resource Explorer, Egeria Advisor and **Studio** (new: #1095, port 8840). Needs **pyegeria 6.2.42 or later** for Egeria Advisor and Studio, 6.2.41 for Resource Explorer. Adds `EMBEDDING_DEVICE` gone and the Postgres password change. |
+| odpi/egeria-python | new `docs/release-notes/6.2.x-egeria-6.3.md` | The aggregate of 6.2.1 to **6.2.42** (adds 6.2.40 #593, 6.2.41 #595, 6.2.42 #598). Behaviour changes and the upgrade table. |
 
-- Extend to 6.2.40, 6.2.41, 6.2.42 (#593, #595, #598).
-- Link to her 6.3 notes for the platform side.
+Our standalone newsletter draft (`newsletter-november-2026.md`) is retired: its content moves into Output 1B and
+Output 3. The one-page overview stays as a local working page and is not published.
 
-### 5. pyegeria floor
+## Output 3: a video and a companion blog (complement, not duplicate)
 
-Mandy's pages state no pyegeria version, so nothing conflicts. The code on main today:
-workspaces quickstart `>=6.2.41`; trellis Resource Explorer `>=6.2.41`, Egeria Advisor and Studio `>=6.2.42`.
-Still your call (asked earlier): state each repo's real floor, or 6.2.42 everywhere (needs a
-workspaces floor PR).
+Her blogs explain the platform. Ours shows the tools: **"A tour of the Egeria 6.3 Portal: Explorer, dashboards
+and Dr.Egeria"**.
 
-### 6. Video script
+- **Video**: rework `video-script-egeria-6.3.md` into a tour, about 7 minutes, as Erin Overview, recorded on laz
+  or the live demo.
+  1. Portal home.
+  2. **A statement of applicability in Egeria Explorer**: Mandy's Coco ISMS sample, the #882 view. This ties
+     into her blog 7.
+  3. The same statement of applicability written as a Dr.Egeria document, from #881's workbook.
+  4. Relationships and classifications grouped by purpose, linked to her concepts.
+  5. Dashboards and report specs held in Egeria.
+  6. The Overview's honest numbers.
+  7. Resource Explorer and Egeria Advisor, 60 seconds, as a Tech Preview.
+  8. Close, pointing at her blogs 6 to 10 for the platform story.
+  The current scenes on platform features (zones, Open Lineage) are cut, because her blogs cover them.
+- **Blog**: `blogs/blog-11-touring-the-egeria-portal/README.md` in egeria-docs, the written form of the tour,
+  with the screenshots. It goes in the same PR as Output 1, or a separate one, as Mandy prefers.
+- **Retakes needed**: full-size shots. The statement of applicability view needs #882 merged. The Resource
+  Explorer shot comes after the Resource Explorer recovery. Crop the Prefect banner.
 
-Unchanged, but point its closing card at blog 6 and her 6.3 notes.
+## Decisions needed from the owner
 
-## Not doing
+1. **The plan as a whole:** go, or change parts.
+2. **pyegeria floor per repo: workspaces 6.2.41, trellis 6.2.42.** The Coordinator's message assumes this.
+   Please confirm it here.
+3. **Release date for changelog headings and tags:** 17 November (her overview table), or 16 November (the
+   day the image was pushed).
+4. **Quickstart re-pin PR** to `odpi/egeria-platform:6.3`: should I open it?
+5. **#882:** wait for it to merge before the egeria-docs PR, or go without it and add it later.
+6. **egeria-docs layout:** check with Mandy before the PR that our four boxes and the blog 11 slot suit her.
+   This is a question for you to pass on; I won't contact her.
 
-- Not editing her summary, details, upgrade notes or blogs, apart from offering the blog 7 screenshot.
-- No PR to egeria-docs, workspaces, trellis or pyegeria until you say go.
+## Order once approved
+
+1. Do the cut in the worktree: run the merge check, refresh the stats, cover 6.2.40 to 6.2.42 and Studio.
+2. Draft Output 1 and Output 2.
+3. Show you the diffs.
+4. Open the PRs.
+5. Tag on the release date.
+6. Rework the video script and write the blog draft.
+7. Retake the screenshots.

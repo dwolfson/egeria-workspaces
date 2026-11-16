@@ -29,10 +29,10 @@
 ??? functional "Enhancements to Dr.Egeria and pyegeria"
     - [Dr.Egeria](/user-interfaces/dr-egeria/overview) has new commands and templates for statements of applicability, business capabilities, report specifications, measurements and dashboards, and for setting an element's governance zones.
     - Reports can be produced as documents and as DCAT catalogs, and as structured tables that the portal displays the same way everywhere.
-    - [pyegeria](/concepts/pyegeria) follows Egeria's paging rules: when a result can't be confirmed complete, a count says "at least N" rather than giving a total that might be wrong. With pyegeria 6.3.0 on Egeria 6.3, pyegeria can tell when it has read to the end of a result. <!-- tied to the 6.3.0 swap below: drop this sentence if 6.3.0 isn't on PyPI by the cut. Don't promise complete counts: an unfiltered find_data_assets on released 6.3 misses assets (EG-15). -->
+    - [pyegeria](/concepts/pyegeria) follows Egeria's paging rules: when a result can't be confirmed complete, a count says "at least N" rather than giving a total that might be wrong. With pyegeria 6.3.0 on Egeria 6.3, pyegeria can tell when it has read to the end of a result. <!-- Don't promise complete counts: an unfiltered find_data_assets on released 6.3 misses assets (EG-15). -->
     - pyegeria has a new authoring API for report specifications, reports and dashboard sheets, with private drafts and published versions.
     - A value that wasn't measured is reported as not measured, never as 0.
-    - pyegeria 6.3.0 is the release that matches Egeria 6.3. <!-- swap in only once 6.3.0 is on PyPI; until then: "pyegeria 6.2.42 is the current release." -->
+    - [pyegeria 6.3.0](https://github.com/odpi/egeria-python/releases/tag/v6.3.0){target=blank} is the release that matches Egeria 6.3.
 
 ??? functional "Technical preview: AI applications on Trellis"
     [Trellis](/concepts/trellis) is released alongside Egeria 6.3 as the *6.3 Tech Preview*.
@@ -50,7 +50,7 @@
 
 # Part B: bullets for "### Upgrade notes" in `6-3.md`
 
-- **Egeria Workspaces** needs pyegeria 6.2.42 or later. <!-- swap: "6.2.42 or later; 6.3.0 recommended" once 6.3.0 is on PyPI, or "6.3.0 or later" if the floor PR lands first. -->
+- **Egeria Workspaces** needs pyegeria 6.2.42 or later, and pyegeria 6.3.0 is recommended. <!-- When the 6.3 bundle raises the code floors to 6.3.0, say "pyegeria 6.3.0 or later" and cite the bundle PR. -->
 - **Upgrading the quickstart:** use `egeria-upgrade-reset` (`plan` first, then `apply`). `--stable` picks the newest released Egeria; `--latest` is now another name for `--stable`, so it does the same.
 - **Report specifications held in Egeria** are read from the portal's consumer folder. See the Egeria Workspaces release notes for the one-time step on an existing Egeria.
 

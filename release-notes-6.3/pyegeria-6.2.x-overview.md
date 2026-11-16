@@ -1,25 +1,73 @@
-<!-- DRAFT: new file docs/release-notes/6.2.x-egeria-6.3.md in odpi/egeria-python.
-     An aggregate overview; the per-version files (6.2.26.md onwards) are not changed.
-     Range v6.2.0 (c9dc7a43, 2026-10-08) to v6.2.39 (18178917, 2026-11-12). 6.2.38 was tagged but not published to PyPI;
-     6.2.39 carries its fixes. Numbers are PRs in odpi/egeria-python. -->
+<!-- DRAFT: new file docs/release-notes/6.3.0-egeria-6.3.md in odpi/egeria-python (was planned as 6.2.x-egeria-6.3.md).
+     pyegeria 6.3.0 = odpi/egeria-python#600, squash and tag v6.3.0 = 3af20c48, on PyPI 2026-11-16 15:50Z.
+     The 6.2 part covers v6.2.0 (c9dc7a43, 2026-10-08) to v6.2.39 (18178917, 2026-11-12). Numbers are PRs in
+     odpi/egeria-python. -->
+<!-- TODO at the cut: extend the 6.2 part to 6.2.40/6.2.41/6.2.42 (#593, #595, #598). Several items in 6.2.42 (NO_PASSWORD,
+     can_edit, used_by, the per-identity spec cache, the load_egeria_report_specs deprecation) belong there, not in 6.3.0. -->
 
-<!-- pyegeria 6.3.0 is planned with the cut (Coordinator, 2026-11-16): its section is drafted in pyegeria-6.3.0-section-DRAFT.md. -->
-<!-- TODO at the cut: extend to 6.2.40/6.2.41/6.2.42 (#593, #595, #598; owner 2026-11-16: 6.2.42 is the floor the release notes state everywhere). -->
+# pyegeria 6.3.0, with the 6.2 series that led to it
 
-# pyegeria 6.2.0 → 6.2.39 (Egeria 6.3)
-
-We released pyegeria 39 times between 6.2.0 (October 8, 2026) and 6.2.39 (November 12, 2026), about four releases a
-week. (6.2.38 was tagged but not published to PyPI; 6.2.39 includes its fixes.) Together they make up the Python side
-of **Egeria 6.3**. This page groups the releases by theme, so you can see what changed without reading each one. The per-release notes from 6.2.26 onwards are in this folder; earlier releases are
-described in their release PRs.
-
-**If you are upgrading from 6.2.0, read [Behaviour changes](#behaviour-changes) first.**
+pyegeria 6.3.0 is the Python client for **Egeria 6.3**. This page describes what's new in 6.3.0, then the 6.2 series of
+releases that led up to it.
 
 ```bash
 pip install -U pyegeria
 ```
 
-## Report specs and analytic functions
+## pyegeria 6.3.0
+
+Released 2026-11-16 ([odpi/egeria-python#600](https://github.com/odpi/egeria-python/pull/600), [release](https://github.com/odpi/egeria-python/releases/tag/v6.3.0)).
+
+pyegeria 6.3.0 is the release that matches Egeria 6.3. It follows 6.2.42 and adds the changes below. If you're coming
+from an earlier 6.2 release, [the 6.2 series](#the-62-series) below describes what led up to it.
+
+### Paging on Egeria 6.3
+
+- **pyegeria now knows which Egeria fixes a platform carries**, one version check per upstream fix, and trusts a read
+  only on a platform that has every fix it needs (`pyegeria.core.paging`, `platform_fixes`). Egeria 6.3 carries
+  both paging fixes: odpi/egeria#9453, for the find reads, and odpi/egeria#9454, for `get_relationships` and
+  `get_related_elements`. Released Egeria from 6.3.0 on is trusted for both, since the V6.3 tag carries both fixes.
+  On Egeria 6.3, pyegeria can tell when it has read to the end of those results. On older platforms, counts are
+  reported as "at least N".
+- **Known issue on Egeria 6.3:** a search for data assets with no filter can return fewer assets than the repository
+  holds, so treat its count as a lower bound. <!-- EG-15 (Rocky, 2026-11-16: 440 of 1797 DataAssets missing from an
+  unfiltered find_data_assets on released 6.3). Add the upstream issue link once one exists. -->
+- **A find's count says "at least N" unless the end was confirmed.** `result_count(result)`
+  (`pyegeria.view.format_set_executor`) gives the count, its wording, and the reason when it isn't final.
+- **MCP report runs page up to their maximum rows** and include a count, so a filtered first page no longer reads as
+  "nothing".
+
+### Dr.Egeria and authoring
+
+- **Limit Result by Status** is a list of element statuses, with lifecycle filters added.
+- **Project Scope** maps to the project's `scope` property.
+- **Default value overrides** are sent when the target type declares them.
+- **Authoring validation is stricter**: the find method must suit the target type, and column keys are checked.
+- **Deployment status matches Egeria** (PY-21). The fallback list of deployment statuses offered
+  `REJECTED_FOR_DEPLOYMENT`; Egeria's value is `REJECTED`.
+- **Drafts are listed correctly on a live Egeria.** Listing and pruning drafts used to find none on a real server.
+  They now read each kind by type, filtered by the author's zone.
+- **Egeria 6.3's type system**: the properties catalog is regenerated from Egeria, and the `queries` attribute is no
+  longer sent or accepted on schema types.
+
+### Planned for pyegeria 6.4 or the next release
+
+
+- **`load_egeria_report_specs` will be removed in pyegeria 6.4 or the next release.** It has been deprecated since 6.2.42 (see PR) and
+  logs a warning once. Report specs held in Egeria load through the spec cache (`pyegeria.view.egeria_spec_cache.sync_report_specs`).
+- **pyegeria 6.4 or the next release drops the default password** and any built-in identity, except in a demo profile
+  that is named explicitly.
+
+## The 6.2 series
+
+We released pyegeria 39 times between 6.2.0 (October 8, 2026) and 6.2.39 (November 12, 2026), about four releases a
+week. (6.2.38 was tagged but not published to PyPI; 6.2.39 includes its fixes.) Together with 6.3.0 they make up the
+Python side of **Egeria 6.3**. This page groups the releases by theme, so you can see what changed without reading each one. The per-release notes from 6.2.26 onwards are in this folder; earlier releases are
+described in their release PRs.
+
+**If you are upgrading from 6.2.0, read [Behaviour changes](#behaviour-changes) first.**
+
+### Report specs and analytic functions
 
 - **Found by registered name.** Analytic functions resolve by registry name or an allowed module prefix (#516), can
   carry a declaration (#517), say why a result is absent instead of returning it as data (#518), and are discovered
@@ -40,7 +88,7 @@ pip install -U pyegeria
   runs with a search string as well as a scope (6.2.38, #590). See
   [Output formats and report specs](../output-formats-and-report-specs.md) (#592).
 
-## Dashboards and measurements (Egeria 6.3)
+### Dashboards and measurements (Egeria 6.3)
 
 - **Client and Dr.Egeria commands** for Egeria 6.3 report specs, measurements and dashboards (6.2.24, #540, #541).
 - **Dashboard sheets** are written as Egeria 6.3 Dashboard elements (#570), read from Egeria (#571), held with an
@@ -49,7 +97,7 @@ pip install -U pyegeria
   (6.2.34, #585); Saved Query delete, Smart Collections by catalog target, and report parameters on dashboard Reports
   (6.2.35, #587).
 
-## Overview metrics: measured or not measured
+### Overview metrics: measured or not measured
 
 - **A value that wasn't measured is `None`, not 0** (6.2.22, #531; opt-in strict counts since #448). A count that hit
   its cap or timed out is reported as not measured, rather than as the cap (#555); scans either read every page or
@@ -59,7 +107,7 @@ pip install -U pyegeria
 - **`population=`** is the count keyword; `scope=` is deprecated (6.2.24, #538).
 - **Totals count the whole repository** by default (6.2.27, #556); `stale_assets` counted by update-time bisection (#572).
 
-## Dr.Egeria
+### Dr.Egeria
 
 - **Reference Data** authoring, and the Valid Metadata family split (6.2.3, #449).
 - **Credentials resolved at run time** with one precedence chain (#477); Postgres commands take a secrets store (#478).
@@ -71,7 +119,7 @@ pip install -U pyegeria
 - **Parent ID keeps memberships**, templates ship as package data, and a dashboard resolver (6.2.32, #581).
 - **A bullet in a list attribute is one item**, commas and all (6.2.39, #591). Write list values as bullets.
 
-## Egeria 6.3 compatibility
+### Egeria 6.3 compatibility
 
 - Governance Engine client for the engine-action operations Egeria moved (6.2.5, #460).
 - Boxed properties, and a failed bearer-token request now raises (6.2.13, #498).
@@ -84,7 +132,7 @@ pip install -U pyegeria
 - `NotificationType` drops `notificationInterval`; subscription types use `minimumNotificationInterval` (#558).
 - Security annotation models and findings/posture reports (#495).
 
-## My Egeria (formerly My Profile)
+### My Egeria (formerly My Profile)
 
 - One key-binding convention and a discoverable My Team view (#463, #469); My Network option (#458).
 - Renamed to `my_egeria.py` (6.2.12, #491); login as a different user and no-Egeria startup handling (#501, #507).
@@ -92,7 +140,7 @@ pip install -U pyegeria
 - Promoted to a production package (#580), with a recorded video blog and voiceover pipeline (#584).
 - Selecting a business domain passes the GUID (6.2.38, #590).
 
-## Correctness
+### Correctness
 
 - Five update methods that sent no body (6.2.7, #471).
 - Request fields silently dropped SDK-wide (6.2.10, #483).
@@ -105,11 +153,11 @@ pip install -U pyegeria
 - `get_collection_members` pages; folder walks page every folder; no paging loop can run forever (6.2.36, #588,
   ISSUE-185).
 
-## Security
+### Security
 
 - certifi floor excluding the distrusted emSign G3 root, and tornado 6.6 (6.2.21, #529).
 
-## Behaviour changes
+### Behaviour changes
 
 | Since | Change | What to do |
 |---|---|---|
@@ -125,14 +173,14 @@ pip install -U pyegeria
 | 6.2.37 | Rendered **text** changes (REPORT, LIST, MD, FORM, HTML, the CLI table): LIST cells are drawn by what the value is, and capped results say "more may exist" (#589). Result shapes are unchanged. | Re-check anything that parses pyegeria's rendered text; read DICT or JSON instead. See [6.2.37](6.2.37.md). |
 | 6.2.39 | Dr.Egeria: a single bullet on its own line, such as "- a, b", is one item (it used to be two) (#591). | Write one item per bullet. See [6.2.39](6.2.39.md). |
 
-## Dependencies and housekeeping
+### Dependencies and housekeeping
 
 - multidict 6.9.1 (#437); codeql-action and action-gh-release bumps (#441, #442, #559, #560); consolidated Dependabot
   updates (#502).
 - The issue trackers (`PYEGERIA_ISSUES.md`, `EGERIA_OPEN_ISSUES.md`) were re-derived and kept current through the
   Egeria re-test passes.
 
-## Release-by-release
+### Release-by-release
 
 | Version | Date | Release PR |
 |---|---|---|

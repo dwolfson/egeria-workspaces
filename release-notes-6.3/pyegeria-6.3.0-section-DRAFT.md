@@ -1,3 +1,4 @@
+<!-- SUPERSEDED 2026-11-16: merged into pyegeria-6.2.x-overview.md (now "pyegeria 6.3.0, with the 6.2 series that led to it"). Edit there. -->
 <!-- pyegeria 6.3.0 tagged 2026-11-16: odpi/egeria-python#600, squash 3af20c48 = tag v6.3.0. Re-check items against 3af20c48 and cite #600; move into the page once the wheel is on PyPI (Coordinator signals). -->
 <!-- DRAFT, 2026-11-16: the pyegeria 6.3.0 section, held until 6.3.0 is on PyPI (Coordinator owns the release; owner gives the go).
      Built from the code diff v6.2.42..origin/release/next fb5e655a, plus PY-21 (ca935426) and the #9454 release floor

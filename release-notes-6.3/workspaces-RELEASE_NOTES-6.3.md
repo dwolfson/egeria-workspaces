@@ -16,7 +16,7 @@ Since the 6.2 release on October 9, our work on `egeria-workspaces` has focused 
   their own local ones.
 * Improving the accuracy and transparency of the measurements, metrics and KPIs we display.
 
-This release goes with **Egeria 6.3** and needs **pyegeria 6.2.42 or later**.<!-- pyegeria 6.3.0 (Coordinator plan, 2026-11-16): once 6.3.0 is on PyPI, say "6.2.42 or later; 6.3.0 recommended". If the follow-up PR raising the floor to 6.3.0 lands before the cut, say "6.3.0 or later" and cite it. --> For the changes to the Egeria
+This release goes with **Egeria 6.3** and needs **pyegeria 6.2.42 or later**; we recommend **pyegeria 6.3.0**, the release that matches Egeria 6.3.<!-- When the 6.3 bundle raises the code floors to 6.3.0, say "pyegeria 6.3.0 or later" and cite the bundle PR. --> For the changes to the Egeria
 platform itself, see the [Egeria 6.3 release notes](https://egeria-project.org/release-notes/latest/) and the
 [November 2026 newsletter](https://egeria-project.org/release-notes/november-2026/).
 
@@ -188,7 +188,7 @@ Thank you to everyone who contributed: Dan Wolfson (313 commits), Mandy Chessell
   the Portal's rendered tables should be re-checked; see the *Report Specs* tutorial, Part C ([#853](https://github.com/odpi/egeria-workspaces/pull/853)).
 - **Postgres templates take a secrets store** ([#679](https://github.com/odpi/egeria-workspaces/pull/679)).
 - **Egeria Advisor runs as `egeriaadvisornpa`** in quickstart ([#828](https://github.com/odpi/egeria-workspaces/pull/828)).
-- **The quickstart needs pyegeria 6.2.42 or later**, and runs the released Egeria 6.3 image (#885). Freshstart
+- **The quickstart needs pyegeria 6.2.42 or later** (6.3.0 recommended), and runs the released Egeria 6.3 image (#885). Freshstart
   still needs pyegeria `>=6.2.21,<6.2.27`.
 - **`egeria-upgrade-reset plan --latest` is now `--stable`** and picks the newest released Egeria rather than the
   next release's development build. `--latest` still works (#886).

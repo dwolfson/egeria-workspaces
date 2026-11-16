@@ -83,7 +83,7 @@ Platform items shrink to one linked line each. They use her terms: "Open Lineage
 | Repo | Files | Repo-specific detail kept |
 |---|---|---|
 | odpi/egeria-workspaces | `RELEASE_NOTES.md` new 6.3 section; `CHANGELOG.md` `[Unreleased]` cut to `[6.3]`; tag `v6.3` | Portal changes by app, PR list, upgrade notes. The quickstart needs **pyegeria 6.2.42 or later** (needs a floor PR: the Dockerfiles are still `>=6.2.41`). Adds the quickstart re-pin to `odpi/egeria-platform:6.3`, #881, and #882 if merged. |
-| dwolfson/trellis | `CHANGELOG.md` `[6.3 Tech Preview]`; `RELEASE_NOTES.md`; tag `v6.3-tech-preview` | Resource Explorer, Egeria Advisor and **Studio** (new: #1095, port 8840). Needs **pyegeria 6.2.42 or later** for Egeria Advisor and Studio, 6.2.41 for Resource Explorer. Adds `EMBEDDING_DEVICE` gone and the Postgres password change. |
+| dwolfson/trellis | `CHANGELOG.md` `[6.3 Tech Preview]`; `RELEASE_NOTES.md`; tag `v6.3-tech-preview` | Resource Explorer, Egeria Advisor and **Studio** (new: #1095, port 8840). Needs **pyegeria 6.2.42 or later** (Resource Explorer's pyproject is still `>=6.2.41`; raise it to match). Adds `EMBEDDING_DEVICE` gone and the Postgres password change. |
 | odpi/egeria-python | new `docs/release-notes/6.2.x-egeria-6.3.md` | The aggregate of 6.2.1 to **6.2.42** (adds 6.2.40 #593, 6.2.41 #595, 6.2.42 #598). Behaviour changes and the upgrade table. |
 
 Our standalone newsletter draft (`newsletter-november-2026.md`) is retired: its content moves into Output 1B and

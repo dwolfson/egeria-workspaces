@@ -140,7 +140,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
 
 - **Credentials are sent only to allow-listed Egeria platforms** ([#819](https://github.com/odpi/egeria-workspaces/pull/819)).
 - **A signed-in user's request is never run as the service user** ([#715](https://github.com/odpi/egeria-workspaces/pull/715)).
-- **Public demo hardening and Obsidian lock-down** ([#640](https://github.com/odpi/egeria-workspaces/pull/640),
+- **Continued hardening of the Portal environment** ([#640](https://github.com/odpi/egeria-workspaces/pull/640),
   [#642](https://github.com/odpi/egeria-workspaces/pull/642), [#643](https://github.com/odpi/egeria-workspaces/pull/643)).
 - **Ports bind to `127.0.0.1` by default** ([#644](https://github.com/odpi/egeria-workspaces/pull/644)); `--lan` opens them
   ([#687](https://github.com/odpi/egeria-workspaces/pull/687)). Move the existing `--lan` entry here or cross-reference it.

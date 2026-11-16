@@ -9,36 +9,40 @@
 
 # Egeria Workspaces 6.3
 
-Five weeks, 217 merged changes, and dashboards and report specs that now live in Egeria.
+Since the 6.2 release on October 9, our work on `egeria-workspaces` has focused on:
 
-Since the 6.2 release on October 9, `egeria-workspaces` has been about two things: keeping the reports and
-dashboards people rely on in Egeria, where they are governed like any other metadata, and making every number
-the Portal shows say what it actually measured. Around that, the demo stack was locked down by default, the
-Portal gained a Resource Browser, relationships are grouped by purpose, and every width can be dragged. It
-tracks the **Egeria 6.3** builds and **pyegeria 6.2.42 and later**. **This is the 6.3 release.**
+* Keeping up with the new features in Egeria, and making them easy to reach and to observe.
+* Extending reports and dashboards into Egeria, while still letting users and teams create and manage
+  their own local ones.
+* Improving the accuracy and transparency of the measurements, metrics and KPIs we display.
 
-**6.3** &middot; **377** commits &middot; **217** merged PRs &middot; **81** feature commits &middot; **126** fix commits &middot; **5** weeks
+This release goes with **Egeria 6.3** and needs **pyegeria 6.2.42 or later**. For the changes to the Egeria
+platform itself, see the [Egeria 6.3 release notes](https://egeria-project.org/release-notes/latest/) and the
+[November 2026 newsletter](https://egeria-project.org/release-notes/november-2026/).
+
+In numbers: 377 commits and 217 merged pull requests over five weeks.
 
 ## Try it
 
-- **Live demo, no install**: **[egeria.pdr-associates.com](https://egeria.pdr-associates.com)**. Register
-  free, pick a Coco Pharmaceuticals persona, explore in your browser. Open **Local Dashboards** to see sheets
-  held in Egeria, by folder.
-- **Run it yourself**: [Getting started](https://github.com/odpi/egeria-workspaces#getting-started)
-  (Quickstart or Freshstart, local via Docker/Podman). Add `--lan` to reach the stack from other machines.
-- **Learn by doing**: the new [Portal tutorials](portal-docs/tutorials/overview.md) on saved queries, analytic
+- **Live demo**: you can try everything at [egeria.pdr-associates.com](https://egeria.pdr-associates.com)
+  without installing anything. Register for free, pick a Coco Pharmaceuticals persona, and explore. Open
+  **Local Dashboards** to see the dashboard sheets held in Egeria, organized by folder.
+- **Run it yourself**: follow [Getting started](https://github.com/odpi/egeria-workspaces#getting-started) to
+  run Quickstart or Freshstart locally with Docker or Podman. Add `--lan` if you want to reach it from other
+  machines.
+- **Learn by doing**: new [Portal tutorials](portal-docs/tutorials/overview.md) cover saved queries, analytic
   functions, report specs and local dashboards, with [worked examples](portal-docs/tutorials/worked-examples.md).
 
 ---
 
-## Mid Oct: Resource Browser, and a demo that is locked down by default
+## Mid October: the Resource Browser and a more secure demo
 
 - **Resource Browser** ([#620](https://github.com/odpi/egeria-workspaces/pull/620),
   [#621](https://github.com/odpi/egeria-workspaces/pull/621), [#622](https://github.com/odpi/egeria-workspaces/pull/622),
   [#625](https://github.com/odpi/egeria-workspaces/pull/625)): a page per resource with what it contains, its
   meaning and notes on its parts; search, home and browse; work lists and team sharing. Resource Explorer's
   **Curation Coverage** appears as a Dashboard Sheet tile ([#628](https://github.com/odpi/egeria-workspaces/pull/628)).
-- **Public demo hardening** after the Obsidian compromise ([#640](https://github.com/odpi/egeria-workspaces/pull/640),
+- **We continue to harden the Portal environment** ([#640](https://github.com/odpi/egeria-workspaces/pull/640),
   [#642](https://github.com/odpi/egeria-workspaces/pull/642), [#643](https://github.com/odpi/egeria-workspaces/pull/643)).
 - **Ports bind to `127.0.0.1` by default** ([#644](https://github.com/odpi/egeria-workspaces/pull/644)); bearer
   tokens last two hours ([#651](https://github.com/odpi/egeria-workspaces/pull/651)).
@@ -53,7 +57,7 @@ tracks the **Egeria 6.3** builds and **pyegeria 6.2.42 and later**. **This is th
   ([#654](https://github.com/odpi/egeria-workspaces/pull/654), [#655](https://github.com/odpi/egeria-workspaces/pull/655)).
 - **Data initialization can run notebooks** ([#662](https://github.com/odpi/egeria-workspaces/pull/662)).
 
-## Late Oct: lineage from Airflow, Coco content, and closing credential gaps
+## Late October: lineage from Airflow, more Coco content, and credential fixes
 
 - **Airflow and Marquez start with the demo**, and Airflow's OpenLineage events reach Egeria as well as Marquez
   ([#706](https://github.com/odpi/egeria-workspaces/pull/706)); `--lan` opens the ports for one run
@@ -79,7 +83,7 @@ tracks the **Egeria 6.3** builds and **pyegeria 6.2.42 and later**. **This is th
 - **Analytic functions are found by registered name** ([#741](https://github.com/odpi/egeria-workspaces/pull/741),
   [#742](https://github.com/odpi/egeria-workspaces/pull/742), [#743](https://github.com/odpi/egeria-workspaces/pull/743)).
 
-## Early Nov: relationship purposes, resizable widths, honest Overview
+## Early November: relationship purposes, resizable panes, and a more accurate Overview
 
 - **Relationships grouped by Egeria's relationship purpose** into six families in the Type Explorer, detail
   panels, Data Mesh and The Catalog; the Type Explorer shows inherited relationships and classifications
@@ -89,17 +93,17 @@ tracks the **Egeria 6.3** builds and **pyegeria 6.2.42 and later**. **This is th
 - **Every column, pane and split can be resized**, remembered per page ([#754](https://github.com/odpi/egeria-workspaces/pull/754)).
 - **Lineage Explorer** hop limit and cut markers ([#749](https://github.com/odpi/egeria-workspaces/pull/749));
   Mermaid diagrams get an Expand viewer ([#781](https://github.com/odpi/egeria-workspaces/pull/781)).
-- **The Overview shows only what it measured**: whole-repository counts, background measurement of slow sections,
-  `asset_composition`, and "not measured" cards ([#783](https://github.com/odpi/egeria-workspaces/pull/783),
+- **The Overview only shows numbers it has actually measured.** Counts cover the whole repository, slow sections
+  are measured in the background, and a card says "not measured" rather than showing a guess ([#783](https://github.com/odpi/egeria-workspaces/pull/783),
   [#785](https://github.com/odpi/egeria-workspaces/pull/785), [#788](https://github.com/odpi/egeria-workspaces/pull/788),
   [#790](https://github.com/odpi/egeria-workspaces/pull/790), [#793](https://github.com/odpi/egeria-workspaces/pull/793),
   [#807](https://github.com/odpi/egeria-workspaces/pull/807)).
 - A **Chief Data Officer dashboard** for Jules Keeper ([#780](https://github.com/odpi/egeria-workspaces/pull/780)).
 - **Jupyter no longer trusts the emSign ECC G3 root** ([#776](https://github.com/odpi/egeria-workspaces/pull/776)).
 
-## Nov 8–12: dashboards and report specs held in Egeria
+## November 8 to 12: dashboards and report specs held in Egeria
 
-- **Report specs show what they declare**, whether they can run, and why not
+- **Report specs show what they declare**, whether they can run, and if not, why not
   ([#809](https://github.com/odpi/egeria-workspaces/pull/809)); the Portal supplies a spec's inputs by role
   ([#806](https://github.com/odpi/egeria-workspaces/pull/806)).
 - **Credentials are sent only to allow-listed platforms** ([#819](https://github.com/odpi/egeria-workspaces/pull/819)).
@@ -119,7 +123,7 @@ tracks the **Egeria 6.3** builds and **pyegeria 6.2.42 and later**. **This is th
   ([#825](https://github.com/odpi/egeria-workspaces/pull/825)).
 - **Classifications grouped by Egeria's classification purpose** (six purposes) in the Type Explorer, detail panels,
   Data Mesh and The Catalog; the `/api/types` routes no longer take a `user_id` parameter ([#831](https://github.com/odpi/egeria-workspaces/pull/831)).
-- **Results say what they left out**: pyegeria's result notes ("more may exist") show under every result
+- **Results tell you when something was left out**: pyegeria's notes, such as "more may exist", now appear under every result
   ([#852](https://github.com/odpi/egeria-workspaces/pull/852)); long tables are capped at whole rows and say the placement's real scope ([#848](https://github.com/odpi/egeria-workspaces/pull/848)); large tables
   scroll inside their tile with a sticky header ([#833](https://github.com/odpi/egeria-workspaces/pull/833)); `<br>` in a table cell is a line break ([#846](https://github.com/odpi/egeria-workspaces/pull/846)).
 - **One renderer for pyegeria's structured TABLE** (`egeria-table.js`), used by Local Dashboards and Report Specs
@@ -128,18 +132,17 @@ tracks the **Egeria 6.3** builds and **pyegeria 6.2.42 and later**. **This is th
   ([#849](https://github.com/odpi/egeria-workspaces/pull/849), [#847](https://github.com/odpi/egeria-workspaces/pull/847)).
 - **`egeria-upgrade-reset`**, a host CLI that plans and runs an Egeria upgrade or reset step by step, with a
   shared-infrastructure health check and a read-only "last reset" panel in Portal Admin ([#851](https://github.com/odpi/egeria-workspaces/pull/851), [#854](https://github.com/odpi/egeria-workspaces/pull/854),
-  [#857](https://github.com/odpi/egeria-workspaces/pull/857)); after a reset, the hand-run seeds now heal on their own ([#850](https://github.com/odpi/egeria-workspaces/pull/850)).
+  [#857](https://github.com/odpi/egeria-workspaces/pull/857)); after a reset, the sample content that used to be loaded by hand is now restored automatically ([#850](https://github.com/odpi/egeria-workspaces/pull/850)).
 - **Egeria Advisor** (6.3 Tech Preview) gets its own service account, `egeriaadvisornpa` ([#828](https://github.com/odpi/egeria-workspaces/pull/828)).
 
-## Underneath all of it
+## Platform, infrastructure and dependencies
 
-- **Platform**: quickstart and freshstart moved to Egeria 6.3-SNAPSHOT; the quickstart pin tracks the Pasteur build
+- **Platform**: the quickstart is pinned to the released Egeria 6.3 image, `odpi/egeria-platform:6.3` (#885).
+  During the release cycle, quickstart and freshstart followed the Egeria 6.3-SNAPSHOT builds
   ([#647](https://github.com/odpi/egeria-workspaces/pull/647), [#748](https://github.com/odpi/egeria-workspaces/pull/748),
   [#798](https://github.com/odpi/egeria-workspaces/pull/798), [#800](https://github.com/odpi/egeria-workspaces/pull/800),
   [#805](https://github.com/odpi/egeria-workspaces/pull/805), [#808](https://github.com/odpi/egeria-workspaces/pull/808),
   [#810](https://github.com/odpi/egeria-workspaces/pull/810), [#827](https://github.com/odpi/egeria-workspaces/pull/827)).
-  <!-- Owner 2026-11-13: re-pin the quickstart to the released Egeria 6.3 image at the cut, as 6.2 did; then add
-  the re-pin PR here and an upgrade note ("Platform images are pinned to odpi/egeria-platform:6.3"). -->
 - **pyegeria**: the image floors rose step by step from 6.2.7 to 6.2.24, and the images run newer releases
   (see PRs [#667](https://github.com/odpi/egeria-workspaces/pull/667) to [#802](https://github.com/odpi/egeria-workspaces/pull/802)).
   Freshstart is capped below 6.2.27 ([#807](https://github.com/odpi/egeria-workspaces/pull/807)).
@@ -152,7 +155,7 @@ tracks the **Egeria 6.3** builds and **pyegeria 6.2.42 and later**. **This is th
   mcp, schemathesis, pytest, Python base images, Prefect, certbot, docker) and the OpenSSF Scorecard workflow, which
   now runs.
 
-**Commits by author:** 313 — Dan Wolfson &middot; 41 — dependabot[bot] &middot; 23 — Mandy Chessell
+Thank you to everyone who contributed: Dan Wolfson (313 commits), Mandy Chessell (23) and dependabot (41).
 
 ---
 
@@ -180,12 +183,13 @@ tracks the **Egeria 6.3** builds and **pyegeria 6.2.42 and later**. **This is th
   the Portal's rendered tables should be re-checked; see the *Report Specs* tutorial, Part C ([#853](https://github.com/odpi/egeria-workspaces/pull/853)).
 - **Postgres templates take a secrets store** ([#679](https://github.com/odpi/egeria-workspaces/pull/679)).
 - **Egeria Advisor runs as `egeriaadvisornpa`** in quickstart ([#828](https://github.com/odpi/egeria-workspaces/pull/828)).
-- **Freshstart** needs pyegeria `>=6.2.21,<6.2.27`; the quickstart needs **pyegeria 6.2.42 or later** (#885).
-  <!-- Owner 2026-11-16: state pyegeria 6.2.42 as the floor everywhere. Before the PR, the code floor must match: the quickstart Dockerfiles are still >=6.2.41; a floor PR raises them to 6.2.42. Cite that PR here. -->
+- **The quickstart needs pyegeria 6.2.42 or later**, and runs the released Egeria 6.3 image (#885). Freshstart
+  still needs pyegeria `>=6.2.21,<6.2.27`.
+- **`egeria-upgrade-reset plan --latest` is now `--stable`** and picks the newest released Egeria rather than the
+  next release's development build. `--latest` still works (#886).
 
 ## Where the detail lives
 
-The full list with PR links is in the `[6.3]` section of [CHANGELOG.md](CHANGELOG.md). Anything still open is in
-`BACKLOG.md`; everything closed is in `BACKLOG-ARCHIVE.md`.
-
-*egeria-workspaces 6.3 &middot; 6.2 (903e8eeb) → 6.3 &middot; compiled from git history*
+The full list of changes, with links to each pull request, is in the `[6.3]` section of
+[CHANGELOG.md](CHANGELOG.md). Work that is still open is in `BACKLOG.md`, and finished work is in
+`BACKLOG-ARCHIVE.md`.

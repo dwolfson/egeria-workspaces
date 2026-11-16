@@ -50,7 +50,7 @@ Learn more: `portal-docs/tutorials/overview.md`.
 
 ## Demo stack and security
 
-The demo now isolates its workbenches behind an egress allow-list, binds published ports to 127.0.0.1 by default (`--lan` opens them), starts Airflow and Marquez with lineage flowing to Egeria, and has self-healing containers. After the Obsidian compromise the public demo was hardened. The Portal only sends credentials to allow-listed platforms, a signed-in user's request is never run as the service account, and Jupyter and the images no longer trust the distrusted emSign ECC G3 root.
+The demo now isolates its workbenches behind an egress allow-list, binds published ports to 127.0.0.1 by default (`--lan` opens them), starts Airflow and Marquez with lineage flowing to Egeria, and has self-healing containers. We continue to harden the Portal environment. The Portal only sends credentials to allow-listed platforms, a signed-in user's request is never run as the service account, and Jupyter and the images no longer trust the distrusted emSign ECC G3 root.
 
 ---
 
@@ -263,7 +263,7 @@ Per-release detail is in the themes above; the appendix is the same list by sect
 - Blank Data Mesh/Locator pages; text contrast (#654, #655).
 - Type Explorer fixes (#777, #750, #745, #746); solution components (#716, #717).
 - ISC graphs on Egeria 6.3 and 404 for missing ISC (#710, #648).
-- Jupyter distrusts emSign G3 (#776); Obsidian lock-down and demo hardening (#640, #642, #643); MCP SSE headers (#738).
+- Jupyter distrusts emSign G3 (#776); continued hardening of the Portal environment (#640, #642, #643); MCP SSE headers (#738).
 - Demo reset (#646, #729); shared infra (#624, #686, #820); loading bay Bitol folder (#681); secrets refresh (#638); empty limits (#641); compose build (#626).
 
 ### Changed / behaviour changes

@@ -43,7 +43,10 @@ pip install -U pyegeria
 - **Egeria 6.3's type system**: the properties catalog is regenerated from Egeria, and the `queries` attribute is no
   longer sent or accepted on schema types.
 
-### Coming in pyegeria 7 (expected early January 2027)
+### Planned for V.Next
+
+These changes are planned for an upcoming release.
+
 
 - **`load_egeria_report_specs` will be removed.** It has been deprecated since 6.2.42 (see PR) and logs a warning
   once. Report specs held in Egeria load through the spec cache (`pyegeria.view.egeria_spec_cache.sync_report_specs`).

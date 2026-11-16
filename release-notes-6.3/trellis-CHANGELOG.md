@@ -15,6 +15,7 @@ Egeria release they ship with. Pull requests are `#N` in this repository.
 ## [Unreleased]
 
 ## [6.3 Tech Preview] - 2026-11-17
+<!-- At the cut: fold in #1087–#1100. #1099 (RE pyegeria floor 6.2.42, 825e496e) and #1100 (RE fix batch TR-1/2/15/22/24) merged 2026-11-16; main 92dd7d30. Describe #1100 from its PR. -->
 
 First recorded release, a Tech Preview released with Egeria 6.3. It covers everything merged since the October 2026 Egeria newsletter, which introduced
 Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the narrative.

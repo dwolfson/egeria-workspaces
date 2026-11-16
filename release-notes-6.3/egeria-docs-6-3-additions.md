@@ -7,7 +7,7 @@
      6.1 and 6.2 boxes. Part B goes under that file's "### Upgrade notes". Part C is additions to
      site/docs/release-notes/november-2026.md. Mandy's own text is not changed.
      Held until #882 merges and the owner has checked the layout with Mandy (owner, 2026-11-16).
-     Items marked [IF #882 MERGES] come out if it hasn't merged by the cut. -->
+     #885 and #886 merged 2026-11-16, so their conditionals are removed. Items marked [IF #882 MERGES] come out if it hasn't merged by the cut. -->
 
 # Part A: boxes for `site/snippets/release-notes/6-3.md`
 
@@ -23,7 +23,7 @@
     - **Columns and panes across the portal can be resized**, and your choices are remembered.
     - **Airflow and Marquez start with the demo**, and Airflow's Open Lineage events flow into Egeria.
     - **New tutorials** cover saved queries, analytic functions, report specifications and local dashboards, with worked examples.
-    - **A new `egeria-upgrade-reset` tool** plans and performs an upgrade or reset of the quickstart's Egeria step by step, with a verified backup. [IF #885 MERGES] The quickstart now runs the released Egeria 6.3 image.
+    - **A new `egeria-upgrade-reset` tool** plans and performs an upgrade or reset of the quickstart's Egeria step by step, with a verified backup. The quickstart now runs the released Egeria 6.3 image.
     - We continue to harden the portal environment. Its ports are bound to the local machine by default (`--lan` opens them), and bearer tokens last two hours.
 
 ??? functional "Enhancements to Dr.Egeria and pyegeria"
@@ -51,7 +51,7 @@
 # Part B: bullets for "### Upgrade notes" in `6-3.md`
 
 - **Egeria Workspaces** needs pyegeria 6.2.42 or later. <!-- swap: "6.2.42 or later; 6.3.0 recommended" once 6.3.0 is on PyPI, or "6.3.0 or later" if the floor PR lands first. -->
-- **Upgrading the quickstart:** use `egeria-upgrade-reset` (`plan` first, then `apply`). [IF #886 MERGES] `--stable` picks the newest released Egeria; `--latest` is now another name for `--stable`, so it does the same.
+- **Upgrading the quickstart:** use `egeria-upgrade-reset` (`plan` first, then `apply`). `--stable` picks the newest released Egeria; `--latest` is now another name for `--stable`, so it does the same.
 - **Report specifications held in Egeria** are read from the portal's consumer folder. See the Egeria Workspaces release notes for the one-time step on an existing Egeria.
 
 # Part C: additions to `site/docs/release-notes/november-2026.md`

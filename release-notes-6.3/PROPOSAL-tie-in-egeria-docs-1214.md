@@ -64,8 +64,7 @@ Plus two Upgrade-notes bullets:
 
 **C. Blog 7 screenshot (taken now, draft):** `images/november-2026-statement-of-applicability.jpg` (header and
 implementation summary tiles) and `...-controls.jpg` (the filterable controls table). Both are 800x600, taken
-read-only on laz Egeria Explorer (#882 at a69e7084) with Mandy's Coco ISMS sample. They were taken as **Gary Geeke**,
-the persona already signed in, and his badge shows in the header: crop it out, or retake as erinoverview at full size.
+read-only on laz Egeria Explorer (#882 at a69e7084) with Mandy's Coco ISMS sample. Retaken 2026-11-16 as **Erin Overview** (badge shows Erin; 800x600 is the browser pane's limit).
 Offer them to Mandy in the egeria-docs PR or in a note. #882 isn't merged, so the caption says "Egeria Explorer
 (Egeria Workspaces)" and claims nothing about a release.
 

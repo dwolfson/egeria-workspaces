@@ -62,8 +62,12 @@ Plus two Upgrade-notes bullets:
 - Add one statement of applicability bullet to her Workspaces list, linked to her security section.
 - Add a version line to her pyegeria section.
 
-**C. Optional:** a full-size Egeria Explorer statement of applicability screenshot for blog 7's placeholder.
-This needs #882 merged and a retake as erinoverview.
+**C. Blog 7 screenshot (taken now, draft):** `images/november-2026-statement-of-applicability.jpg` (header and
+implementation summary tiles) and `...-controls.jpg` (the filterable controls table). Both are 800x600, taken
+read-only on laz Egeria Explorer (#882 at a69e7084) with Mandy's Coco ISMS sample. They were taken as **Gary Geeke**,
+the persona already signed in, and his badge shows in the header: crop it out, or retake as erinoverview at full size.
+Offer them to Mandy in the egeria-docs PR or in a note. #882 isn't merged, so the caption says "Egeria Explorer
+(Egeria Workspaces)" and claims nothing about a release.
 
 New in this PR: only our components. Linked, not repeated: everything platform-side (zones, purposes, DCAT,
 Open Lineage, the nannies, security pack) points at her boxes and blogs.
@@ -86,6 +90,11 @@ Our standalone newsletter draft (`newsletter-november-2026.md`) is retired: its 
 Output 3. The one-page overview stays as a local working page and is not published.
 
 ## Output 3: a video and a companion blog (complement, not duplicate)
+
+**In one line:** a 7-minute narrated screen-recording video, "A tour of the Egeria 6.3 Portal: Explorer,
+dashboards and Dr.Egeria", with a matching written blog (blog 11 in `odpi/egeria-docs/blogs/`). It shows the tools
+her blogs 6–10 describe, and doesn't repeat her platform story. Where the video lives is your call: the Egeria
+YouTube channel (linked from her newsletter), or a link from blog 11.
 
 Her blogs explain the platform. Ours shows the tools: **"A tour of the Egeria 6.3 Portal: Explorer, dashboards
 and Dr.Egeria"**.

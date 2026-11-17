@@ -110,3 +110,5 @@ chat, draft owners / per-user drafts; drafts from before the update aren't carri
 PO-45 staged 2026-11-17 from the Coordinator's text (no PR yet): new upgrade step 4 (renumber 4→5 … 8→9 when
 un-staging, along with #894's step 7) and a CHANGELOG Security entry. The same bundle brings PO-40/41/44, PY-30 and
 PO-42/43 (working set wording: change "work list" in the Locator lines). Write those from the PR body when it opens.
+#894 un-staged 2026-11-17 (upstream b0cd37e6, 21:56Z); upgrade steps now 1–8. Recount at b0cd37e6: workspaces
+504 / 254, Dan 427, Mandy 27, dependabot 50 (trellis unchanged at b7837e6c, 1,273 / ~541).

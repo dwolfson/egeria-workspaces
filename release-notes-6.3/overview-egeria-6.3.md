@@ -41,7 +41,7 @@ dashboards, and Resource Explorer has a six-part tutorial.
 
 ## By the numbers (October 9 to November 17, 2026)
 
-- **Egeria Workspaces:** 253 merged changes.
+- **Egeria Workspaces:** 254 merged changes.
 - **Resource Explorer and Egeria Advisor:** more than 500 merged PRs.
 - **pyegeria:** 43 releases, 6.2.1 to 6.2.42 and then 6.3.0, the release that matches Egeria 6.3.
 

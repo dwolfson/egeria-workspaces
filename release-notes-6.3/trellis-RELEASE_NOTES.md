@@ -155,13 +155,11 @@ Thank you to everyone who contributed: Dan Wolfson (1,257 commits) and dependabo
 - **Egeria Advisor's report-spec drafts now belong to the user who started them.** Drafts started before this
   update aren't carried over; start them again (#1106).
 -->
-<!-- STAGED until odpi/egeria-workspaces #894 merges. Then uncomment:
 - **Stored database passwords survive a container recreate.** Set `RE_DB_CREDENTIAL_KEY` or
   `TRELLIS_DB_CREDENTIAL_KEY` to a stable value; without either, Resource Explorer derives the key from the host name
   and warns, and passwords stored before a recreate can't be read. Egeria Workspaces now requires
   `TRELLIS_DB_CREDENTIAL_KEY` in its Trellis `.env` and the Prefect worker's `.env.re-worker`; re-enter each stored
   database password once (Egeria Workspaces #894).
--->
 - **Only JWT bearer tokens are accepted at login** (#827).
 - **Zones**: a zone with no access control is private, as it is in Egeria (#1043). Content in such a zone is visible
   only to its owner.

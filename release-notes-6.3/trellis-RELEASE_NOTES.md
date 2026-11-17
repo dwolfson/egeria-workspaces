@@ -114,7 +114,7 @@ In numbers: 1,273 commits and about 541 merged pull requests across 12 packages 
   results.
 <!-- STAGED until the PR that turns EA_SPEC_AUTHORING_V2 and EA_SPEC_ELICITOR_FIXES on by default merges (Dan,
   2026-11-17: "Turn them on by default"). Then replace the bullet's first sentence with:
-  "**Report-spec authoring in Egeria Advisor is built on pyegeria's authoring API** (#1104, #1105, #PR)." and
+  "**Report-spec authoring in Egeria Advisor is built on pyegeria's authoring API** (#1104, #1105, #1106)." and
   "With them on, chat builds … don't show its ranking and counts yet. Tested against a live Egeria in a test
   harness," with "In chat,", and drop "off by default, behind … and" from "It is …"; then add: "To turn it off, set `EA_SPEC_AUTHORING_V2=0`; `EA_SPEC_ELICITOR_FIXES=0`
   turns off only the question handling (sort and status from your words)." Per the Coordinator 2026-11-17, from branch
@@ -151,6 +151,10 @@ Thank you to everyone who contributed: Dan Wolfson (1,257 commits) and dependabo
   Explorer's registry gains a `flow_run_results` table, created when Resource Explorer first starts; there is nothing
   to do (#1093).
 - **After an Egeria reset**, follow the recovery procedure in the operations guide (§2.0) (#1088).
+<!-- STAGED until #1106 merges and U2, U3 (through 8880's chat) and U5 hold. Then uncomment:
+- **Egeria Advisor's report-spec drafts now belong to the user who started them.** Drafts started before this
+  update aren't carried over; start them again (#1106).
+-->
 <!-- STAGED until odpi/egeria-workspaces #894 merges. Then uncomment:
 - **Stored database passwords survive a container recreate.** Set `RE_DB_CREDENTIAL_KEY` or
   `TRELLIS_DB_CREDENTIAL_KEY` to a stable value; without either, Resource Explorer derives the key from the host name

@@ -105,3 +105,5 @@ in the Coordinator's session too; off switches per the Coordinator recorded in t
 U5 (Architect 2026-11-17): chat gets no signed-in client and Execute bypasses v2.answer, so no user reaches the v2
 path even with the flags on. The live text now says "work in progress … chat doesn't use it yet"; the default-on
 un-stage also waits for the per-request client + Execute fix (same trellis PR) and U3 through 8880's chat.
+EA default-on PR = dwolfson/trellis#1106 (8e6124af): default-on flags, signed-in user's client in chat, Execute ==
+chat, draft owners / per-user drafts; drafts from before the update aren't carried over (staged upgrade note).

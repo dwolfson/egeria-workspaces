@@ -117,8 +117,7 @@ Learn more in the [Trellis repository](https://github.com/dwolfson/trellis) and 
 
 ## pyegeria
 
-pyegeria, the Python client for Egeria, has had 39 releases since 6.2.0 (6.2.1 to 6.2.39). The highlights:
-<!-- TODO at the cut: extend to 6.2.42 (owner 2026-11-16: 6.2.42 is the stated floor everywhere). -->
+pyegeria, the Python client for Egeria, has had 43 releases since 6.2.0: 6.2.1 to 6.2.42, then 6.3.0, the release that matches Egeria 6.3. The highlights:
 
 - Clients and Dr.Egeria commands for Egeria 6.3's report specs, measurements and dashboards.
 - Report specs that can be held in Egeria and run from plain pyegeria, checked when they load, with a reason given for any that cannot run.

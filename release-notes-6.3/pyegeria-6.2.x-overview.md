@@ -1,9 +1,8 @@
 <!-- DRAFT: new file docs/release-notes/6.3.0-egeria-6.3.md in odpi/egeria-python (was planned as 6.2.x-egeria-6.3.md).
      pyegeria 6.3.0 = odpi/egeria-python#600, squash and tag v6.3.0 = 3af20c48, on PyPI 2026-11-16 15:50Z.
-     The 6.2 part covers v6.2.0 (c9dc7a43, 2026-10-08) to v6.2.39 (18178917, 2026-11-12). Numbers are PRs in
-     odpi/egeria-python. -->
-<!-- TODO at the cut: extend the 6.2 part to 6.2.40/6.2.41/6.2.42 (#593, #595, #598). Several items in 6.2.42 (NO_PASSWORD,
-     can_edit, used_by, the per-identity spec cache, the load_egeria_report_specs deprecation) belong there, not in 6.3.0. -->
+     The 6.2 part covers v6.2.0 (c9dc7a43, 2026-10-08) to v6.2.42 (9b3eb8e9, 2026-11-15). Numbers are PRs in
+     odpi/egeria-python. 6.2.40–6.2.42 written 2026-11-17 from #593, #595, #598 and docs/release-notes/6.2.40.md;
+     there are no 6.2.41/6.2.42 note files (their notes were in next.md at v6.2.42). -->
 
 # pyegeria 6.3.0, with the 6.2 series that led to it
 
@@ -53,19 +52,58 @@ from an earlier 6.2 release, [the 6.2 series](#the-62-series) below describes wh
 ### Planned for pyegeria 6.4 or the next release
 
 
-- **`load_egeria_report_specs` will be removed in pyegeria 6.4 or the next release.** It has been deprecated since 6.2.42 (see PR) and
+- **`load_egeria_report_specs` will be removed in pyegeria 6.4 or the next release.** It has been deprecated since 6.2.42 (#598) and
   logs a warning once. Report specs held in Egeria load through the spec cache (`pyegeria.view.egeria_spec_cache.sync_report_specs`).
 - **pyegeria 6.4 or the next release drops the default password** and any built-in identity, except in a demo profile
   that is named explicitly.
 
 ## The 6.2 series
 
-We released pyegeria 39 times between 6.2.0 (October 8, 2026) and 6.2.39 (November 12, 2026), about four releases a
+We released pyegeria 42 times between 6.2.0 (October 8, 2026) and 6.2.42 (November 15, 2026), about four releases a
 week. (6.2.38 was tagged but not published to PyPI; 6.2.39 includes its fixes.) Together with 6.3.0 they make up the
 Python side of **Egeria 6.3**. This page groups the releases by theme, so you can see what changed without reading each one. The per-release notes from 6.2.26 onwards are in this folder; earlier releases are
 described in their release PRs.
 
 **If you are upgrading from 6.2.0, read [Behaviour changes](#behaviour-changes) first.**
+
+### The last three: 6.2.40 to 6.2.42
+
+These three releases, from November 12 to 15, came just before 6.3.0.
+
+**6.2.40: Dr.Egeria writes what you asked for** (#593)
+- Every property of every Dr.Egeria Create command was written to a test Egeria and read back, and this release
+  fixes what didn't come back. Search Keywords are now attached, glossary-term flags become the matching
+  classifications, and schema attribute positions and cardinality go on the link to the parent.
+- **An attribute Dr.Egeria can't send is reported, not dropped.** The command's warnings say
+  `not applied: <attribute>: <reason>`.
+- Commands Dr.Egeria can't carry out say why and send nothing, and every failure prints its exception and Egeria's
+  message id on one line. Several Create commands that used to fail now run.
+- `pyegeria.view.report_spec_publish` builds and checks the Dr.Egeria documents that publish and withdraw report
+  specs, so the Portal and Egeria Advisor do it the same way.
+- See [6.2.40](6.2.40.md) for the details and the known issues, including that Egeria replaces
+  `additionalProperties` as a whole map.
+
+**6.2.41: the authoring API** (#595)
+- **`pyegeria.authoring`** for report specs, Reports and dashboard sheets: drafts, validation, preview as a given user,
+  diff and publish, with MCP tools. Drafts are private to their author and are pruned after 30 days.
+- **Published versions don't change.** Each publish records its version, time and publisher, and an update is refused
+  unless its exact target can be found.
+- **`additionalProperties` is merged key by key on update**, so re-importing a spec no longer drops keys.
+- **The MetadataExpert commands** in Dr.Egeria (16 of them) work on type and enum definitions and raw elements.
+  They aren't allowed from chat, and the destructive ones need the GUID or name typed back before anything is written.
+
+**6.2.42: complete paging, and no password you didn't give** (#598)
+- **Paging:** every loop that pages goes through `pyegeria.core.paging`, and a short or empty page isn't taken as the
+  end. A lookup answers found, absent or unknown; an error is never "absent".
+- **No password you didn't give:** pass `user_pwd=NO_PASSWORD` to hold no password, typically with a bearer token.
+  A client pyegeria builds for another client gets that client's token and never the configured default password.
+  `user_pwd=None` still takes the configured password, as before.
+- **Report specs are cached per user**, which fixes a race where one user's request could get another user's specs.
+  A server that acts for many users can say so (`PYEGERIA_MULTI_USER=1`), and then gets no fallback identity.
+- **Authoring:** `can_edit` (yes, no or unknown) and `used_by` (what uses this spec, Report or sheet), both read as
+  the user; a refusal carries an `answer` of absent, unknown or refused.
+- `egeria-table.js`, the table renderer the Portal and Egeria Advisor share, ships with the package.
+- `load_egeria_report_specs` is deprecated; see *Planned for pyegeria 6.4 or the next release* above.
 
 ### Report specs and analytic functions
 
@@ -156,6 +194,9 @@ described in their release PRs.
 ### Security
 
 - certifi floor excluding the distrusted emSign G3 root, and tornado 6.6 (6.2.21, #529).
+- The MCP server signs in as the configured identity rather than a built-in one, and the unique-name lookup no longer
+  signs in with the default password (6.2.42, #598).
+- One user's report specs can no longer be served to another user's concurrent request (6.2.42, #598).
 
 ### Behaviour changes
 
@@ -172,6 +213,9 @@ described in their release PRs.
 | 6.2.36 | With `body=` and no paging in the body, the method's `page_size` default now applies on 19 methods (#588). | Put `pageSize` in the body, or pass `page_size`, if you relied on Egeria's default page. See [6.2.36](6.2.36.md). |
 | 6.2.37 | Rendered **text** changes (REPORT, LIST, MD, FORM, HTML, the CLI table): LIST cells are drawn by what the value is, and capped results say "more may exist" (#589). Result shapes are unchanged. | Re-check anything that parses pyegeria's rendered text; read DICT or JSON instead. See [6.2.37](6.2.37.md). |
 | 6.2.39 | Dr.Egeria: a single bullet on its own line, such as "- a, b", is one item (it used to be two) (#591). | Write one item per bullet. See [6.2.39](6.2.39.md). |
+| 6.2.40 | Dr.Egeria reports attributes it can't send (`not applied: …`) and no longer sends keys the Egeria type doesn't declare (#593). | Read the warnings; fix or remove the attributes they name. See [6.2.40](6.2.40.md). |
+| 6.2.41 | An update merges `additionalProperties` key by key (#595). | Nothing, unless you relied on an update removing keys. |
+| 6.2.42 | The report-spec cache takes its default identity from the process's own client, not the shell's `EGERIA_USER` (#598). | Pass the client, or set the identity explicitly, if you relied on `EGERIA_USER`. |
 
 ### Dependencies and housekeeping
 
@@ -188,7 +232,9 @@ described in their release PRs.
 | 6.2.11 – 6.2.20 | Oct 24 – Nov 3 | #487, #494, #499, #504, #511, #515, #522, #523, #525, #527 |
 | 6.2.21 – 6.2.30 | Nov 4 – Nov 10 | #529, #533, #536, #545, #551, #554, #557, #568, #575, #577 |
 | 6.2.31 – 6.2.39 | Nov 10 – Nov 12 | #578, #581, #583, #585, #587, #588, #589, #590, #591 |
+| 6.2.40 – 6.2.42 | Nov 12 – Nov 15 | #593, #595, #598 |
+| 6.3.0 | Nov 16 | #600 |
 
 Detailed notes: [6.2.26](6.2.26.md) · [6.2.27](6.2.27.md) · [6.2.28](6.2.28.md) · [6.2.29](6.2.29.md) ·
 [6.2.30](6.2.30.md) · [6.2.31](6.2.31.md) · [6.2.32](6.2.32.md) · [6.2.33](6.2.33.md) · [6.2.34](6.2.34.md) ·
-[6.2.35](6.2.35.md) · [6.2.36](6.2.36.md) · [6.2.37](6.2.37.md) · [6.2.38](6.2.38.md) · [6.2.39](6.2.39.md)
+[6.2.35](6.2.35.md) · [6.2.36](6.2.36.md) · [6.2.37](6.2.37.md) · [6.2.38](6.2.38.md) · [6.2.39](6.2.39.md) · [6.2.40](6.2.40.md)

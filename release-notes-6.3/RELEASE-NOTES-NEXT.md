@@ -93,7 +93,7 @@ Learn more: `docs/feedback-closed-loop-design.md`, `docs/hardware-acceleration-p
 
 # pyegeria (6.2.0 to 6.2.39)
 
-39 releases in five weeks (about 4 a week). Grouped by theme, with the first version where a notable item landed.
+42 releases of 6.2 in five and a half weeks (about 4 a week), then 6.3.0 on November 16. Grouped by theme, with the first version where a notable item landed.
 
 - **Report specs and analytic functions.** Found by registered name and the `pyegeria.report_specs` entry points (6.2.16 to 6.2.18); every routine has a declaration (6.2.24); every spec resolved at load, unrunnable ones listed with reasons (6.2.25); specs held in Egeria and run from plain pyegeria (6.2.28); consumer folders (6.2.33); restricted specs (6.2.35); DOCUMENT output with validators and the DCAT Catalog spec, structured TABLE and native DICT, per-column render intents (6.2.37); DCAT Catalog by search string (6.2.38).
 - **Dashboards and measurements (Egeria 6.3).** Client and Dr.Egeria commands for report specs, measurements and dashboards (6.2.24); Dashboard Sheets read from and held in Egeria with an owner (6.2.28, 6.2.31); sheets in Egeria folders (by 6.2.34); Collection Members by qualifiedName and `saved_query` reports (6.2.34); report parameters on dashboard Reports (6.2.35).

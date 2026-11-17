@@ -105,9 +105,9 @@ In numbers: 1,273 commits and about 541 merged pull requests across 12 packages 
 - **Egeria Advisor asks before it changes anything**: actions from chat and plans need your confirmation, and commands
   that aren't safe to repeat ask before a re-run (#1091). Its dashboard tables look and behave like the Portal's (#1089).
 - **Work in progress: report-spec authoring in Egeria Advisor on pyegeria's authoring API** (#1104, #1105). It is
-  off by default, behind `EA_SPEC_AUTHORING_V2` and `EA_SPEC_ELICITOR_FIXES`, and Egeria Advisor's chat doesn't use it
-  yet, even with them on. It has been tested against a live Egeria, where a question such as "which risks have the
-  highest importance?" is sorted on that property, and a property with an ordered scale is ranked by that
+  off by default, behind `EA_SPEC_AUTHORING_V2` and `EA_SPEC_ELICITOR_FIXES`. With them on, chat builds the spec with
+  it, but the answers in chat and from Execute Spec don't show its ranking and counts yet. Tested against a live
+  Egeria in a test harness, a question such as "which risks have the highest importance?" is sorted on that property, and a property with an ordered scale is ranked by that
   scale rather than alphabetically. A question about content status searches every status you asked for in one
   search; for properties that take one value it says which values it didn't search, and it refuses an invalid status.
   It doesn't claim a ranked or complete list, and counts say "at least N", unless Egeria confirmed the end of the
@@ -115,7 +115,8 @@ In numbers: 1,273 commits and about 541 merged pull requests across 12 packages 
 <!-- STAGED until the PR that turns EA_SPEC_AUTHORING_V2 and EA_SPEC_ELICITOR_FIXES on by default merges (Dan,
   2026-11-17: "Turn them on by default"). Then replace the bullet's first sentence with:
   "**Report-spec authoring in Egeria Advisor is built on pyegeria's authoring API** (#1104, #1105, #PR)." and
-  "It has been tested against a live Egeria, where" with "In chat,"; then add: "To turn it off, set `EA_SPEC_AUTHORING_V2=0`; `EA_SPEC_ELICITOR_FIXES=0`
+  "With them on, chat builds … don't show its ranking and counts yet. Tested against a live Egeria in a test
+  harness," with "In chat,", and drop "off by default, behind … and" from "It is …"; then add: "To turn it off, set `EA_SPEC_AUTHORING_V2=0`; `EA_SPEC_ELICITOR_FIXES=0`
   turns off only the question handling (sort and status from your words)." Per the Coordinator 2026-11-17, from branch
   claude/ea-rebase-on-by-default; check both switches in the merged code (U2), the U3 live check through 8880's
   chat, and U5 (per-request user client; Execute runs what chat shows) before un-staging. -->

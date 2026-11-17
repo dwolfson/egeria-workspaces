@@ -67,8 +67,8 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
   `EA_SPEC_ELICITOR_FIXES`):" and add a Changed entry: "Report-spec authoring on by default; `EA_SPEC_AUTHORING_V2=0`
   turns it all off, `EA_SPEC_ELICITOR_FIXES=0` only the elicitor fixes; `EA_SPEC_STATUS_MERGE` stays off". -->
 - **Report-spec authoring on pyegeria's authoring API** (work in progress, #1104, #1105), off unless
-  `EA_SPEC_AUTHORING_V2` and `EA_SPEC_ELICITOR_FIXES` are set; chat and Execute don't use it yet, even with them on.
-  Tested against a live Egeria, it gives:
+  `EA_SPEC_AUTHORING_V2` and `EA_SPEC_ELICITOR_FIXES` are set; with them on, chat builds the spec with it, but chat and
+  Execute Spec don't show its answers yet. Tested against a live Egeria in a test harness, it gives:
   - **Ordinal ranking** (TR-6): a property with an ordered scale, such as importance, is ranked by its scale. A capped
     preview is re-read (up to `RANK_READ_ROWS`, 500) before ranking, and "ranked all N" appears only on a confirmed end.
   - **A sort from the question's words** (C03, #1105): "highest / lowest <attribute>" or "most / least <adjective>"

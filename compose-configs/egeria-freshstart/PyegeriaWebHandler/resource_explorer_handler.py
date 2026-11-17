@@ -57,17 +57,20 @@ async def _resource_explorer_reachable() -> bool:
 
 @router.get("/status")
 async def resource_explorer_status():
-    """Public — reachability + whether SSO is configured. No lock state to report."""
-    reachable = await _resource_explorer_reachable()
+    """Public — reachability + whether SSO and the URL are configured. No lock state to report."""
+    reachable = await _resource_explorer_reachable() if EGERIA_RESOURCE_EXPLORER_URL else False
     return {
         "reachable":      reachable,
         "sso_configured": bool(EGERIA_ADVISOR_SSO_SECRET),
+        "url_configured": bool(EGERIA_RESOURCE_EXPLORER_URL),
     }
 
 
 @router.post("/handoff")
 async def handoff(request: Request):
     """Mint an SSO handoff URL for the signed-in user. No lock to acquire."""
+    if not EGERIA_RESOURCE_EXPLORER_URL:
+        raise HTTPException(status_code=503, detail="Resource Explorer is not configured (EGERIA_RESOURCE_EXPLORER_URL unset)")
     if not EGERIA_ADVISOR_SSO_SECRET:
         raise HTTPException(status_code=503, detail="Resource Explorer SSO is not configured (EGERIA_ADVISOR_SSO_SECRET unset)")
     try:

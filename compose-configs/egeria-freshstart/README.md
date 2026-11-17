@@ -162,6 +162,38 @@ The portal admin role is controlled by the `EGERIA_ADMIN_USERS` environment vari
 
 For the full reference — config variables, REST API, user lifecycle, admin panel guide, and troubleshooting — see [`PyegeriaWebHandler/demo-mode.md`](PyegeriaWebHandler/demo-mode.md).
 
+## Egeria Advisor and Resource Explorer
+
+The portal has two tiles that open Egeria Advisor and Resource Explorer (the trellis apps)
+already signed in, as the user signed in to the portal: the handoff carries that user's
+own freshstart Egeria token. Both are **off by default**. A tile shows "Not configured"
+and its handoff returns 503 until you set these in `compose-configs/egeria-freshstart/.env`:
+
+```ini
+EGERIA_ADVISOR_URL=http://localhost:7880/            # Advisor tile
+EGERIA_RESOURCE_EXPLORER_URL=http://localhost:7810/  # Resource Explorer tile
+EGERIA_ADVISOR_SSO_SECRET=<the trellis instance's ADVISOR_PORTAL_SECRET>
+```
+
+`gen-env.sh` keeps these three across re-runs.
+
+**The trellis instance must target freshstart's own Egeria** (`https://…:8443`,
+`fs-view-server`). Never point these URLs at another platform's trellis, such as
+quickstart's on 8880/8810, which targets quickstart's Egeria on 9443. That instance
+can't use a freshstart token, and sharing one SSO secret across platforms isn't supported.
+
+Resource Explorer also signs in to Egeria with its own non-personal account,
+`resourceexplorernpa`, which is in the secrets templates here. **An existing freshstart
+runtime secrets directory needs that account added by hand**:
+
+- In `runtime-volumes/freshstart-platform-data/secrets/egeria-user-directory.omsecrets`,
+  add the account and its membership of the `omagServer`, `governanceEngine` and
+  `serverOperator` groups.
+- In `egeria-servers.omsecrets`, add its `Resource Explorer` token entry.
+
+The startup scripts only seed secrets files that don't exist yet (with TR-28,
+`install-secrets.py --keep-existing`), so they won't reseed files you already have.
+
 ## Dr. Egeria Processing
 
 The freshstart environment supports Dr. Egeria processing on port `7800` (MCP/REST).

@@ -869,7 +869,8 @@ if (_jupToken) { _startJupKeepalive(); }
 function _renderTrellisTile(elId, s, launchFn, label) {
   var el = document.getElementById(elId);
   if (!el) return;
-  if (!s.sso_configured) {
+  // Inert until both its URL and the shared SSO secret are set (see README).
+  if (!s.sso_configured || !s.url_configured) {
     el.innerHTML = '<span class="soon-badge" style="background:var(--hover);color:var(--muted)">Not configured</span>';
     return;
   }

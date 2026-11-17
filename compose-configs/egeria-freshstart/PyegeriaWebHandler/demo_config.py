@@ -59,18 +59,20 @@ EGERIA_ADMIN_USERS: set[str] = {
 SITE_URL: str = os.environ.get("SITE_URL", "https://localhost:7843").rstrip("/")
 
 # Optional integrations — set in .env, not in yaml
-EGERIA_ADVISOR_URL:  str = os.environ.get("EGERIA_ADVISOR_URL",  "http://localhost:7880/")
+EGERIA_ADVISOR_URL:  str = os.environ.get("EGERIA_ADVISOR_URL",  "")
 
 # Portal -> trellis (Egeria Advisor, Resource Explorer) SSO handoff, as in
 # quickstart's demo_config. EGERIA_ADVISOR_SSO_SECRET is the HS256 secret shared
 # with Advisor's ADVISOR_PORTAL_SECRET and Resource Explorer's
 # TRELLIS_PORTAL_SECRET; left empty, both tiles show "Not configured" and the
-# handoff routes return 503. Freshstart's defaults are the 7xxx counterparts of
-# quickstart's (Advisor 7880, Resource Explorer 7810): the trellis instance must
-# target freshstart's own Egeria (8443, fs-view-server), because the handoff
-# carries the signed-in user's freshstart Egeria token.
+# handoff routes return 503. Unlike quickstart, both URLs default to empty, and
+# a tile and its handoff stay inert ("Not configured") until its URL is set: the
+# trellis instance must target freshstart's own Egeria (8443, fs-view-server),
+# because the handoff carries the signed-in user's freshstart Egeria token, so
+# there is no safe default (a localhost default could reach quickstart's trellis).
+# The usual freshstart ports are Advisor 7880 and Resource Explorer 7810.
 EGERIA_ADVISOR_SSO_SECRET: str = os.environ.get("EGERIA_ADVISOR_SSO_SECRET", "")
-EGERIA_RESOURCE_EXPLORER_URL: str = os.environ.get("EGERIA_RESOURCE_EXPLORER_URL", "http://localhost:7810/")
+EGERIA_RESOURCE_EXPLORER_URL: str = os.environ.get("EGERIA_RESOURCE_EXPLORER_URL", "")
 OBSIDIAN_VAULT_URL:  str = os.environ.get("OBSIDIAN_VAULT_URL",  "")
 OBSIDIAN_GITHUB_URL: str = os.environ.get("OBSIDIAN_GITHUB_URL", "https://github.com/odpi/egeria-workspaces/tree/main/coco-workbooks")
 

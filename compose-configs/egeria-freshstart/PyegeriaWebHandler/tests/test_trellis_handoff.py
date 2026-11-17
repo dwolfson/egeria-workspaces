@@ -38,9 +38,9 @@ def _fake_egeria_token(exp_offset: int) -> str:
 def app(monkeypatch):
     monkeypatch.setenv("EGERIA_ADVISOR_SSO_SECRET", SSO_SECRET)
     monkeypatch.setenv("JWT_SECRET", PORTAL_SECRET)
-    # test freshstart's own defaults, whatever the host container sets
-    monkeypatch.delenv("EGERIA_ADVISOR_URL", raising=False)
-    monkeypatch.delenv("EGERIA_RESOURCE_EXPLORER_URL", raising=False)
+    # a localhost URL, so browser_facing_url rewrites the host (whatever the host container sets)
+    monkeypatch.setenv("EGERIA_ADVISOR_URL", "http://localhost:7880/")
+    monkeypatch.setenv("EGERIA_RESOURCE_EXPLORER_URL", "http://localhost:7810/")
     for m in ("demo_config", "trellis_sso", "demo_auth_handler", "advisor_handler", "resource_explorer_handler"):
         sys.modules.pop(m, None)
     import advisor_handler
@@ -111,7 +111,7 @@ def test_handoff_is_503_without_the_shared_secret(app, monkeypatch, path):
 def test_status_is_public(app, monkeypatch, path):
     r = TestClient(app).get(path)
     assert r.status_code == 200
-    assert r.json() == {"reachable": True, "sso_configured": True}
+    assert r.json() == {"reachable": True, "sso_configured": True, "url_configured": True}
     for mod in app.state.mods[:2]:
         monkeypatch.setattr(mod, "EGERIA_ADVISOR_SSO_SECRET", "")
     assert TestClient(app).get(path).json()["sso_configured"] is False
@@ -180,3 +180,36 @@ def test_gen_env_keeps_the_trellis_settings(tmp_path):
     subprocess.run(["bash", str(fs / "gen-env.sh")], check=True, capture_output=True, env=env, cwd=fs)
     lines = (fs / ".env").read_text().splitlines()
     assert lines.count("EGERIA_ADVISOR_SSO_SECRET=dummy-value") == 1
+
+
+_URL_VARS = {"/api/advisor": ("EGERIA_ADVISOR_URL", 0), "/api/resource-explorer": ("EGERIA_RESOURCE_EXPLORER_URL", 1)}
+
+
+@pytest.mark.parametrize("prefix", list(_URL_VARS))
+def test_tile_and_handoff_are_inert_until_the_url_is_set(app, monkeypatch, prefix):
+    """No default trellis URL: an unset one must not fall back to a localhost (possibly quickstart's) trellis."""
+    var, i = _URL_VARS[prefix]
+    monkeypatch.setattr(app.state.mods[i], var, "")
+    status = TestClient(app).get(f"{prefix}/status").json()
+    assert status["url_configured"] is False and status["reachable"] is False
+    c = TestClient(app, cookies=_session_cookie(app, _fake_egeria_token(600)))
+    r = c.post(f"{prefix}/handoff", json={})
+    assert r.status_code == 503 and var in r.json()["detail"]
+
+
+@pytest.mark.parametrize("var", ["EGERIA_ADVISOR_URL", "EGERIA_RESOURCE_EXPLORER_URL"])
+def test_trellis_urls_default_to_unset(monkeypatch, var):
+    monkeypatch.delenv(var, raising=False)
+    sys.modules.pop("demo_config", None)
+    import demo_config
+    try:
+        assert getattr(demo_config, var) == ""
+    finally:
+        sys.modules.pop("demo_config", None)
+    compose = (_MODULE_DIR.parent / "egeria-freshstart.yaml").read_text()
+    assert f'{var}: "${{{var}:-}}"' in compose
+
+
+def test_portal_tile_is_not_configured_without_the_url():
+    html = (_MODULE_DIR / "demo-portal.html").read_text()
+    assert "if (!s.sso_configured || !s.url_configured) {" in html

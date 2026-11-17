@@ -89,17 +89,20 @@ async def _advisor_reachable() -> bool:
 
 @router.get("/status")
 async def advisor_status():
-    """Public — reachability + whether SSO is configured. No lock state to report."""
-    reachable = await _advisor_reachable()
+    """Public — reachability + whether SSO and the URL are configured. No lock state to report."""
+    reachable = await _advisor_reachable() if EGERIA_ADVISOR_URL else False
     return {
         "reachable":      reachable,
         "sso_configured": bool(EGERIA_ADVISOR_SSO_SECRET),
+        "url_configured": bool(EGERIA_ADVISOR_URL),
     }
 
 
 @router.post("/handoff")
 async def handoff(request: Request):
     """Mint an SSO handoff URL for the signed-in user. No lock to acquire."""
+    if not EGERIA_ADVISOR_URL:
+        raise HTTPException(status_code=503, detail="Egeria Advisor is not configured (EGERIA_ADVISOR_URL unset)")
     if not EGERIA_ADVISOR_SSO_SECRET:
         raise HTTPException(status_code=503, detail="Egeria Advisor SSO is not configured (EGERIA_ADVISOR_SSO_SECRET unset)")
     try:

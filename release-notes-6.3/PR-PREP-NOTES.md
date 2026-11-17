@@ -86,3 +86,8 @@ Architect PASS on d2f0fc97. Pending (N2): if b8a61ec9 and 210ddcfa (crumb scroll
 before the release, add "and its scroll" to the #893 Locator line and recount once more.
 TR-6 staged 2026-11-17 (Architect, from the Coordinator's 17:45Z re-run: C03 fails, the microflow never sets
 sequencing). Two STAGED blocks in trellis RELEASE_NOTES/CHANGELOG; un-stage when the C03 fix merges and C03 passes.
+TR-6 un-staged after #1105 (b7837e6c) and C03's live pass at 19:41Z. Re-scoped at the same time: TR-6, TR-7 phase 2,
+the C03 sort and the count wording all live in spec_authoring_v2.py, off unless EA_SPEC_AUTHORING_V2 is set (the
+sort/status conditions also need EA_SPEC_ELICITOR_FIXES; `_on()` reads 1/true/yes/on, default unset). So the
+notes describe them as the opt-in prototype, not default behaviour.
+Trellis recount at b7837e6c: 1,273 commits, ~541 PRs, Dan 1,257, dependabot 16. Workspaces unchanged (65095b8b).

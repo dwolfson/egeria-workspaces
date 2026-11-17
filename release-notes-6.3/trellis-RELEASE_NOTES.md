@@ -16,7 +16,7 @@ Both remain a **Tech Preview**: they are changing quickly, and your feedback sha
 goes with **Egeria 6.3** and needs **pyegeria 6.3.0 or later**, the release that matches Egeria 6.3. For the changes to the Egeria platform itself, see
 the [Egeria 6.3 release notes](https://egeria-project.org/release-notes/latest/).
 
-In numbers: 1,270 commits and about 540 merged pull requests across 12 packages between October 9 and November 17.
+In numbers: 1,273 commits and about 541 merged pull requests across 12 packages between October 9 and November 17.
 
 ## Try it
 
@@ -104,13 +104,13 @@ In numbers: 1,270 commits and about 540 merged pull requests across 12 packages 
   and keeps the links that still work. The operations guide has the steps in order (#1087, #1088, #1097).
 - **Egeria Advisor asks before it changes anything**: actions from chat and plans need your confirmation, and commands
   that aren't safe to repeat ask before a re-run (#1091). Its dashboard tables look and behave like the Portal's (#1089).
-- **Egeria Advisor counts more carefully** (#1104). It no longer claims a ranked or complete list unless Egeria
-  confirmed the end of the results. A question about content status searches every status you asked for in one search; for properties
-  that take one value it says which values it didn't search, and it refuses an invalid status. Counts say "at least N"
-  unless the end was confirmed.
-<!-- STAGED until the C03 fix merges and C03 passes (TR-6: a question doesn't reach the ranking yet). Then add after
-  "unless Egeria confirmed the end of the results.": A property with an ordered scale, such as importance, is ranked
-  by that scale rather than alphabetically. And restore the bullet title "ranks and counts more carefully". -->
+- **A prototype of report-spec authoring in Egeria Advisor, built on pyegeria's authoring API**, off unless you set
+  `EA_SPEC_AUTHORING_V2` and `EA_SPEC_ELICITOR_FIXES` (#1104, #1105). With both on, a question such as "which risks
+  have the highest importance?" is sorted on that property, and a property with an ordered scale is ranked by that
+  scale rather than alphabetically. A question about content status searches every status you asked for in one
+  search; for properties that take one value it says which values it didn't search, and it refuses an invalid status.
+  It doesn't claim a ranked or complete list, and counts say "at least N", unless Egeria confirmed the end of the
+  results.
 - **Work in progress**: `trellis-ui` (#1062), and `trellis-accel`, which chooses a compute device at run time
   (#1073; design #1072).
 
@@ -123,7 +123,7 @@ In numbers: 1,270 commits and about 540 merged pull requests across 12 packages 
 - **Documentation**: user and administrator guides, and design notes for files, open data, quality, extensibility,
   local dashboards, OSI metric exchange, feedback, re-indexing and hardware acceleration.
 
-Thank you to everyone who contributed: Dan Wolfson (1,254 commits) and dependabot (16).
+Thank you to everyone who contributed: Dan Wolfson (1,257 commits) and dependabot (16).
 
 ---
 

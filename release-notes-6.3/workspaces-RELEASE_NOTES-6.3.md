@@ -94,11 +94,12 @@ In numbers: 377 commits and 217 merged pull requests over five weeks.
 
 ## November 8 to 16: dashboards and report specs held in Egeria
 
-<!-- STAGED until #889 merges. Then uncomment:
 - **The Resource Locator searches more and explains itself.** Search finds columns, attributes and data fields, and
   can search several kinds at once. Hover over a term on the page to see what it means. You can set, change and clear
   a resource's Data Scope, and create and edit Data Lenses that govern work lists ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
--->
+- **The Overview marks figures it could not confirm.** When paging can't confirm that a count read to the end, the
+  figure says "at least N" or "N found", with the reason, instead of a bare number that might be wrong
+  ([#890](https://github.com/odpi/egeria-workspaces/pull/890)).
 - **Report specs show what they declare**, whether they can run, and if not, why not
   ([#809](https://github.com/odpi/egeria-workspaces/pull/809)); the Portal supplies a spec's inputs by role
   ([#806](https://github.com/odpi/egeria-workspaces/pull/806)).
@@ -153,10 +154,10 @@ In numbers: 377 commits and 217 merged pull requests over five weeks.
   [#810](https://github.com/odpi/egeria-workspaces/pull/810), [#827](https://github.com/odpi/egeria-workspaces/pull/827)).
 - **pyegeria**: the image floors rose step by step from 6.2.7 to 6.2.24, and the images run newer releases
   (see PRs [#667](https://github.com/odpi/egeria-workspaces/pull/667) to [#802](https://github.com/odpi/egeria-workspaces/pull/802)).
-  Freshstart is capped below 6.2.27 ([#807](https://github.com/odpi/egeria-workspaces/pull/807)).
-<!-- STAGED: when #892 merges, replace the line above with:
-  Freshstart now needs pyegeria 6.3.0 or later too, and its Overview matches the quickstart's ([#892](https://github.com/odpi/egeria-workspaces/pull/892)).
--->
+  Freshstart, briefly capped below 6.2.27 ([#807](https://github.com/odpi/egeria-workspaces/pull/807)), now needs
+  pyegeria 6.3.0 or later too. Its Portal catches up with the quickstart's: shared helper modules and 13 handlers
+  ([#891](https://github.com/odpi/egeria-workspaces/pull/891)), then the Overview, with "not measured" and the
+  unconfirmed marks ([#892](https://github.com/odpi/egeria-workspaces/pull/892)).
 - **Shared infrastructure**: autoheal started, Postgres tuning and `pg_stat_statements` ([#686](https://github.com/odpi/egeria-workspaces/pull/686),
   [#804](https://github.com/odpi/egeria-workspaces/pull/804)); Kafka log size cap
   ([#820](https://github.com/odpi/egeria-workspaces/pull/820)); Marquez restarts after a reboot ([#857](https://github.com/odpi/egeria-workspaces/pull/857)); heap dump on out-of-memory
@@ -191,16 +192,14 @@ Thank you to everyone who contributed: Dan Wolfson (313 commits), Mandy Chessell
    connection. Until they are, the new DAG `coco_subscriptions_egeria`, which starts unpaused, fails on every run
    because that connection is missing. If you don't want it yet, pause it in Airflow
    ([#870](https://github.com/odpi/egeria-workspaces/pull/870)).
-<!-- STAGED until #889 merges. Then append to step 5:
    The same start gives the `provisioner` database user its own password, kept in `PROVISIONER_PASSWORD` in
    `compose-configs/shared-infra/.env` (generated if missing, on existing installs too), and updates the runtime
    secrets and Airflow's connection to match, which is why Airflow must be restarted in the same run
    ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
--->
 6. **Rebuild the images.** The quickstart needs pyegeria 6.3.0 or later
    ([#887](https://github.com/odpi/egeria-workspaces/pull/887)) and runs the released Egeria 6.3 image
-   ([#885](https://github.com/odpi/egeria-workspaces/pull/885)). Freshstart still needs pyegeria `>=6.2.21,<6.2.27`.
-<!-- STAGED: when #892 merges, replace the freshstart sentence above with "Freshstart now needs pyegeria 6.3.0 or later too ([#892](https://github.com/odpi/egeria-workspaces/pull/892))." -->
+   ([#885](https://github.com/odpi/egeria-workspaces/pull/885)). Freshstart now needs pyegeria 6.3.0 or later too
+   ([#892](https://github.com/odpi/egeria-workspaces/pull/892)).
 7. **To upgrade or reset the quickstart's Egeria itself**, use `compose-configs/egeria-quickstart/bin/egeria-upgrade-reset`
    (`plan` first, then `apply`); see *Upgrading or resetting the quickstart Egeria*
    ([#851](https://github.com/odpi/egeria-workspaces/pull/851)). `plan --stable` picks the newest released Egeria;

@@ -63,3 +63,7 @@ CHANGELOG Security + Added entries. R1 and R3 fixed in f2258115.
 Browse lists gain a Lens filter (inside / outside / cannot be compared) and a "Data scope recorded / none recorded"
 facet. Goes to odpi in a PR after #889 merges, so probably not in the 6.3 release. If that PR merges before the
 release PRs, add it to the Resource Locator line and the CHANGELOG Added entry. Not in any draft yet.
+
+**Done 2026-11-17:** #889–#892 merged upstream (13:06–13:07Z, 97ecd7ef). The #889 and #892 blocks are un-staged,
+and #890/#891 entries added. Before the PRs, recount the contributor commit numbers in the "Thank you" line
+(they predate these merges).

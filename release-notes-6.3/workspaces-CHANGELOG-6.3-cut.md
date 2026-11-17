@@ -58,6 +58,11 @@ The current `[Unreleased]` section was written as items landed and stops around 
   ([#788](https://github.com/odpi/egeria-workspaces/pull/788), [#793](https://github.com/odpi/egeria-workspaces/pull/793),
   [#790](https://github.com/odpi/egeria-workspaces/pull/790)).
 - **Lineage Explorer** hop limit and cut markers ([#749](https://github.com/odpi/egeria-workspaces/pull/749)).
+- **Resource Locator**: search on columns, attributes and data fields; several kinds at once; hover help on terms;
+  set, change and clear Data Scope; create and edit Data Lenses that govern work lists ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
+- **The Overview marks unconfirmed figures**: "at least N" or "N found", with the reason, when paging can't confirm
+  a count read to the end, in the counts, viewer totals and the Ownership and Semantic Grounding tiles
+  ([#890](https://github.com/odpi/egeria-workspaces/pull/890)).
 - **Mermaid Expand viewer** ([#781](https://github.com/odpi/egeria-workspaces/pull/781)).
 - **Filter and sort** on long relationship and property lists, and on schema, column and attribute-index tables
   ([#656](https://github.com/odpi/egeria-workspaces/pull/656), [#657](https://github.com/odpi/egeria-workspaces/pull/657));
@@ -114,8 +119,11 @@ The current `[Unreleased]` section was written as items landed and stops around 
   [#811](https://github.com/odpi/egeria-workspaces/pull/811)).
 - **Dashboard placements**: `presentationStyle` replaces `emphasis`; MeasurementSpecification references become
   relationships (docs: [#796](https://github.com/odpi/egeria-workspaces/pull/796), [#795](https://github.com/odpi/egeria-workspaces/pull/795)).
-- **Freshstart pyegeria capped below 6.2.27** ([#807](https://github.com/odpi/egeria-workspaces/pull/807)); image
-  floors raised step by step to 6.2.24 ([#667](https://github.com/odpi/egeria-workspaces/pull/667),
+- **Freshstart catches up with the quickstart**: shared helper modules and 13 handlers
+  ([#891](https://github.com/odpi/egeria-workspaces/pull/891)), then the Overview, with pyegeria 6.3.0 or later
+  replacing the earlier cap below 6.2.27 ([#892](https://github.com/odpi/egeria-workspaces/pull/892),
+  [#807](https://github.com/odpi/egeria-workspaces/pull/807)).
+- **pyegeria image floors** raised step by step to 6.2.24 ([#667](https://github.com/odpi/egeria-workspaces/pull/667),
   [#680](https://github.com/odpi/egeria-workspaces/pull/680), [#688](https://github.com/odpi/egeria-workspaces/pull/688),
   [#695](https://github.com/odpi/egeria-workspaces/pull/695), [#707](https://github.com/odpi/egeria-workspaces/pull/707),
   [#712](https://github.com/odpi/egeria-workspaces/pull/712), [#731](https://github.com/odpi/egeria-workspaces/pull/731),
@@ -167,13 +175,9 @@ The current `[Unreleased]` section was written as items landed and stops around 
 
 ### Security (new heading)
 
-<!-- STAGED until #889 merges. Then uncomment (and add the Locator line under Added):
 - **No well-known password for the `provisioner` database user.** It comes from `PROVISIONER_PASSWORD` in
   `shared-infra/.env`, generated when missing; the first start rotates it with the runtime secrets and Airflow, and
   it is kept out of `pg_stat_statements`' query-text file (TR-28, [#889](https://github.com/odpi/egeria-workspaces/pull/889)).
-Added: - **Resource Locator**: search on columns, attributes and data fields; several kinds at once; hover help on terms;
-  set, change and clear Data Scope; create and edit Data Lenses that govern work lists ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
--->
 - **Credentials are sent only to allow-listed Egeria platforms** ([#819](https://github.com/odpi/egeria-workspaces/pull/819)).
 - **A signed-in user's request is never run as the service user** ([#715](https://github.com/odpi/egeria-workspaces/pull/715)).
 - **Continued hardening of the Portal environment** ([#640](https://github.com/odpi/egeria-workspaces/pull/640),

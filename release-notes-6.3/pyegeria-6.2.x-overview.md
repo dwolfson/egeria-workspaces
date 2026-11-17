@@ -23,7 +23,8 @@ from an earlier 6.2 release, [the 6.2 series](#the-62-series) below describes wh
   On Egeria 6.3, pyegeria can tell when it has read to the end of those results. On older platforms, counts are
   reported as "at least N".
 - **Known issue on Egeria 6.3:** a search for data assets with no filter, or a read of all elements of a type
-  (`get_elements`), can return fewer elements than the repository holds, so treat such counts as a lower bound.
+  (`get_elements`), can return fewer elements than the repository holds. pyegeria 6.3.0 may still report such a count as final,
+  so apply the lower bound yourself.
 - **A find's count says "at least N" unless the end was confirmed.** `result_count(result)`
   (`pyegeria.view.format_set_executor`) gives the count, its wording, and the reason when it isn't final.
 - **MCP report runs page up to their maximum rows** and include a count, so a filtered first page no longer reads as

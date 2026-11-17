@@ -36,7 +36,7 @@
 ??? functional "Enhancements to Dr.Egeria and pyegeria"
     - [Dr.Egeria](/user-interfaces/dr-egeria/overview) has new commands and templates for statements of applicability, business capabilities, report specifications, measurements and dashboards, and for setting an element's governance zones.
     - Reports can be produced as documents and as DCAT catalogs, and as structured tables that the portal displays the same way everywhere.
-    - [pyegeria](/concepts/pyegeria) follows Egeria's paging rules: when a result can't be confirmed complete, a count says "at least N" rather than giving a total that might be wrong. With pyegeria 6.3.0 on Egeria 6.3, pyegeria can tell when it has read to the end of most results; an unfiltered search for data assets, or an unfiltered read of all elements of a type, can still come back short.
+    - [pyegeria](/concepts/pyegeria) follows Egeria's paging rules: when a result can't be confirmed complete, a count says "at least N" rather than giving a total that might be wrong. With pyegeria 6.3.0 on Egeria 6.3, pyegeria can tell when it has read to the end of most results; an unfiltered search for data assets, or an unfiltered read of all elements of a type, can still come back short, and pyegeria may report that count as final, so treat it as a lower bound.
     - pyegeria has a new authoring API for report specifications, reports and dashboard sheets, with private drafts and published versions.
     - A value that wasn't measured is reported as not measured, never as 0.
     - [pyegeria 6.3.0](https://github.com/odpi/egeria-python/releases/tag/v6.3.0){target=blank} is the release that matches Egeria 6.3.

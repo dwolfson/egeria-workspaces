@@ -23,8 +23,7 @@ else. A spec says what it needs before it runs, and if it can't run, it says why
 
 **2. A number should say what it measured.** "0" and "we didn't check" are different answers, and so are "60" and
 "at least 60". The Portal, pyegeria and Resource Explorer now keep them apart: an unmeasured count is shown as not
-measured, a capped list says it was capped, and totals cover the whole repository. (One caveat on Egeria 6.3: an unfiltered
-count of data assets can come out low, so read it as "at least".) This matters most when an AI
+measured, a capped list says it was capped, and totals cover the whole repository. This matters most when an AI
 reads the numbers and repeats them.
 
 **3. A Tech Preview you can use.** Resource Explorer and Egeria Advisor are released together as the **6.3 Tech

@@ -3,7 +3,8 @@
      Coordinator.
      2026-11-17: the two SoA screenshots were replaced (same file names, no text change) with the retakes in 11beb892,
      taken as Erin Overview on released Egeria 6.3 and pyegeria 6.3.0; sent to Mandy's Slack DM by the Coordinator with Dan's word.
-     2026-11-17 (Architect read-back O1): Part A's Overview and pyegeria bullets gained the EG-15 caveat; this needs to go to Mandy as an update. -->
+     2026-11-17: the EG-15 caveat added after the read-back (O1) was withdrawn the same morning (EG-15 is pyegeria's default
+     ACTIVE content-status filter plus visibility, not an Egeria defect), so Part A is back to exactly what Mandy has. -->
 <!-- DRAFT, updated 2026-11-16: our additions to Mandy's egeria-docs 6.3 release notes (odpi/egeria-docs, after #1214 / d55aa0cf).
      Part A goes into site/snippets/release-notes/6-3.md, just before "### Upgrade notes", in the same layout as the
      6.1 and 6.2 boxes. Part B goes under that file's "### Upgrade notes". Part C is additions to
@@ -22,7 +23,7 @@
     [Egeria Workspaces](/egeria-workspaces) has kept up with the new features in Egeria 6.3. Its portal now holds more of its content in Egeria, and is clearer about what its numbers mean.
 
     - **Dashboards and report specifications are held in Egeria**, organized in folders by the tools that use them. They can be shared, secured by governance zone and reused. Users and teams can still create and manage their own local dashboards. Egeria Explorer shows a *Used by* row for each report specification.
-    - **The Overview only shows numbers it has measured.** Counts cover the whole repository, and a card says "not measured" rather than showing a guess. Results also say when more may exist. On Egeria 6.3, an unfiltered count of data assets can be lower than the repository holds, so treat it as a lower bound.
+    - **The Overview only shows numbers it has measured.** Counts cover the whole repository, and a card says "not measured" rather than showing a guess. Results also say when more may exist.
     - **Relationships and classifications are grouped by [purpose](/concepts/relationship-purpose)** in [Egeria Explorer](/user-interfaces/egeria-explorer/overview), the [Data Mesh](/user-interfaces/data-mesh/overview) view and [The Catalog](/user-interfaces/the-catalog/overview).
     - Egeria Explorer has a new **Statements of Applicability** view. For each [statement of applicability](/services/omvs/security-officer/overview/#statements-of-applicability), it shows an implementation summary and a table of its controls, which you can sort and filter.
     - **The Resource Browser** gives each resource a page showing what it contains and what it means, with work lists and team sharing. The Catalog has a tab for each kind of infrastructure, and its lists page to the end.
@@ -36,7 +37,7 @@
 ??? functional "Enhancements to Dr.Egeria and pyegeria"
     - [Dr.Egeria](/user-interfaces/dr-egeria/overview) has new commands and templates for statements of applicability, business capabilities, report specifications, measurements and dashboards, and for setting an element's governance zones.
     - Reports can be produced as documents and as DCAT catalogs, and as structured tables that the portal displays the same way everywhere.
-    - [pyegeria](/concepts/pyegeria) follows Egeria's paging rules: when a result can't be confirmed complete, a count says "at least N" rather than giving a total that might be wrong. With pyegeria 6.3.0 on Egeria 6.3, pyegeria can tell when it has read to the end of most results; an unfiltered search for data assets can still come back short.
+    - [pyegeria](/concepts/pyegeria) follows Egeria's paging rules: when a result can't be confirmed complete, a count says "at least N" rather than giving a total that might be wrong. With pyegeria 6.3.0 on Egeria 6.3, pyegeria can tell when it has read to the end of a result.
     - pyegeria has a new authoring API for report specifications, reports and dashboard sheets, with private drafts and published versions.
     - A value that wasn't measured is reported as not measured, never as 0.
     - [pyegeria 6.3.0](https://github.com/odpi/egeria-python/releases/tag/v6.3.0){target=blank} is the release that matches Egeria 6.3.

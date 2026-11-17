@@ -230,9 +230,7 @@ Thank you to everyone who contributed: Dan Wolfson (313 commits), Mandy Chessell
 - **Postgres templates take a secrets store** ([#679](https://github.com/odpi/egeria-workspaces/pull/679)).
 - **Egeria Advisor runs as `egeriaadvisornpa`** in quickstart ([#828](https://github.com/odpi/egeria-workspaces/pull/828)).
 - **Counts show what the signed-in user can see.** Elements anchored to Promise or Memento elements appear only with
-  the Promise / Memento toggle on, and content in a governance zone appears only to users with access to that zone. A search for data assets returns only
-  assets whose content status matches its filter, which is ACTIVE by default, so assets with no content status (often
-  those catalogued by integration connectors) are left out.
+  the Promise / Memento toggle on, and content in a governance zone appears only to users with access to that zone.
 
 ## Where the detail lives
 

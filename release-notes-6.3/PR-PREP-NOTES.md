@@ -82,3 +82,5 @@ on the first-parent line (218 at 3b8ac7e2, not the 217 recorded then); Thank-you
 Trellis: the same from b74b07f9, counted in a scratch bare clone (the shared checkout's origin/main was stale).
 Workspaces 499 / 253, Dan 422, Mandy 27, dependabot 50. Trellis 1,270 / ~540, Dan 1,254, dependabot 16.
 Anything merged after this needs another recount.
+Architect PASS on d2f0fc97. Pending (N2): if b8a61ec9 and 210ddcfa (crumb scroll, Show-more count) ship in a bundle
+before the release, add "and its scroll" to the #893 Locator line and recount once more.

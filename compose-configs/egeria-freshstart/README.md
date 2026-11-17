@@ -34,6 +34,12 @@ These scripts:
 They also build `freshstart-egeria-main` from `Dockerfile-egeria-platform`, which copies
 no deployment-specific secrets into the image. Runtime secrets are mounted from the runtime volume.
 
+The platform image is pinned to the released Egeria 6.3 (`odpi/egeria-platform:6.3@sha256:483726b6…`), the same as
+quickstart. A freshstart whose metadata store was written by an earlier pre-release build may not open cleanly on it.
+If the platform fails to start or its servers report store errors after the upgrade, back up and reset the store:
+drop the freshstart metadata-store schema in the shared PostgreSQL (database `egeria_freshstart`) and restart, so it
+starts empty and reloads its content. (`egeria-upgrade-reset` covers quickstart only.)
+
 The startup scripts now automatically refresh images during startup:
 
 - local compose images are rebuilt with `docker compose build --pull`, which checks for newer base images before building, and

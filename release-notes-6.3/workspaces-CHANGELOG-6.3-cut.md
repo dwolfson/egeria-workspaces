@@ -63,12 +63,10 @@ The current `[Unreleased]` section was written as items landed and stops around 
 - **The Overview marks unconfirmed figures**: "at least N" or "N found", with the reason, when paging can't confirm
   a count read to the end, in the counts, viewer totals and the Ownership and Semantic Grounding tiles
   ([#890](https://github.com/odpi/egeria-workspaces/pull/890)).
-<!-- STAGED until #893 merges. Then uncomment:
 - **Resource Locator follow-ups**: Browse by folder, search keyword and category; glossary terms as a search kind;
   Browse lists filtered by a Data Lens; select several results and add them to a work list; a breadcrumb back to the
   list with its search and filters; "Resource Locator Home"; a Data Scope year, month or day means the whole of it;
   emptying a scope or pressing Clear clears it, after asking ([#893](https://github.com/odpi/egeria-workspaces/pull/893)).
--->
 - **Mermaid Expand viewer** ([#781](https://github.com/odpi/egeria-workspaces/pull/781)).
 - **Filter and sort** on long relationship and property lists, and on schema, column and attribute-index tables
   ([#656](https://github.com/odpi/egeria-workspaces/pull/656), [#657](https://github.com/odpi/egeria-workspaces/pull/657));
@@ -178,10 +176,8 @@ The current `[Unreleased]` section was written as items landed and stops around 
   check writes one bounded log line per run ([#854](https://github.com/odpi/egeria-workspaces/pull/854)).
 - **`gen-env.sh` quotes the Kafka directory paths**, so shared infrastructure starts from a checkout whose path contains
   a space ([#888](https://github.com/odpi/egeria-workspaces/pull/888)).
-<!-- STAGED until #893 merges. Then uncomment:
 - **`fresh-start-local` waits for a healthy platform** and handles Podman like `quick-start-local`; the shared-infra
   README says re-running a start script keeps the `provisioner` password ([#893](https://github.com/odpi/egeria-workspaces/pull/893)).
--->
 
 ### Security (new heading)
 

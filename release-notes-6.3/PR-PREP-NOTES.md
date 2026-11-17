@@ -75,3 +75,10 @@ line (377 commits / 217 PRs), the overview's "By the numbers (October 9 to Novem
 (Locator line after #889's; freshstart line under Other changes) and two in the CHANGELOG (Added; Fixed). #893 also
 carries the L6 features above (Lens filter on Browse, "no data scope recorded" count), so they're covered by it.
 Un-stage all four when it merges, then do the recount.
+
+**Recount done 2026-11-17** after #893 (upstream 65095b8b, 17:09Z) and trellis #1104 (21f906da). Method, which gives
+377 at the old head 3b8ac7e2: commits = `git rev-list --count --no-merges 903e8eeb..HEAD`; PRs = distinct PR numbers
+on the first-parent line (218 at 3b8ac7e2, not the 217 recorded then); Thank-you = `git log --no-merges --format=%an`.
+Trellis: the same from b74b07f9, counted in a scratch bare clone (the shared checkout's origin/main was stale).
+Workspaces 499 / 253, Dan 422, Mandy 27, dependabot 50. Trellis 1,270 / ~540, Dan 1,254, dependabot 16.
+Anything merged after this needs another recount.

@@ -11,7 +11,7 @@ This release goes with **Egeria 6.3** and needs **pyegeria 6.3.0 or later**, the
 platform itself, see the [Egeria 6.3 release notes](https://egeria-project.org/release-notes/latest/) and the
 [November 2026 newsletter](https://egeria-project.org/release-notes/november-2026/).
 
-In numbers: 377 commits and 217 merged pull requests over five weeks.
+In numbers: 499 commits and 253 merged pull requests between October 9 and November 17.
 
 ## Try it
 
@@ -97,12 +97,10 @@ In numbers: 377 commits and 217 merged pull requests over five weeks.
 - **The Resource Locator searches more and explains itself.** Search finds columns, attributes and data fields, and
   can search several kinds at once. Hover over a term on the page to see what it means. You can set, change and clear
   a resource's Data Scope, and create and edit Data Lenses that govern work lists ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
-<!-- STAGED until #893 merges. Then uncomment:
 - **Browse the Resource Locator by folder, search keyword or category**, and search glossary terms too. Filter Browse
   lists by a Data Lens, tick several results and add them to a work list at once, and follow a breadcrumb back to
   your list with its search and filters kept. A Data Scope of a year, month or day covers the whole of it
   ([#893](https://github.com/odpi/egeria-workspaces/pull/893)).
--->
 - **The Overview marks figures it could not confirm.** When paging can't confirm that a count read to the end, the
   figure says "at least N" or "N found", with the reason, instead of a bare number that might be wrong
   ([#890](https://github.com/odpi/egeria-workspaces/pull/890)).
@@ -173,7 +171,7 @@ In numbers: 377 commits and 217 merged pull requests over five weeks.
   mcp, schemathesis, pytest, Python base images, Prefect, certbot, docker) and the OpenSSF Scorecard workflow, which
   now runs.
 
-Thank you to everyone who contributed: Dan Wolfson (313 commits), Mandy Chessell (23) and dependabot (41).
+Thank you to everyone who contributed: Dan Wolfson (422 commits), Mandy Chessell (27) and dependabot (50).
 
 ---
 
@@ -238,11 +236,9 @@ Thank you to everyone who contributed: Dan Wolfson (313 commits), Mandy Chessell
   the Promise / Memento toggle on, and content in a governance zone appears only to users with access to that zone.
 - **If you call pyegeria's `find_data_assets` yourself** (in notebooks or scripts), it returns only ACTIVE assets by
   default; pass `content_status_list=[]` to include assets with no content status. The Portal's lists already do.
-<!-- STAGED until #893 merges. Then uncomment:
 - **`fresh-start-local` waits for the platform to report healthy**, and handles Podman the way `quick-start-local`
   does. Re-running a start script keeps the `provisioner` password; the shared-infra README says when a new one is
   made ([#893](https://github.com/odpi/egeria-workspaces/pull/893)).
--->
 
 ## Where the detail lives
 

@@ -16,7 +16,7 @@ Both remain a **Tech Preview**: they are changing quickly, and your feedback sha
 goes with **Egeria 6.3** and needs **pyegeria 6.3.0 or later**, the release that matches Egeria 6.3. For the changes to the Egeria platform itself, see
 the [Egeria 6.3 release notes](https://egeria-project.org/release-notes/latest/).
 
-In numbers: 1,151 commits and about 523 merged pull requests across 12 packages over five weeks.
+In numbers: 1,270 commits and about 540 merged pull requests across 12 packages between October 9 and November 17.
 
 ## Try it
 
@@ -73,7 +73,7 @@ In numbers: 1,151 commits and about 523 merged pull requests across 12 packages 
 - **A zone with no access control is private**, as it is in Egeria (#1043); an expired token gets the same response
   everywhere (#997); and the certifi minimum version no longer trusts the emSign ECC G3 root (#989).
 
-## November 8 to 16: feedback, Egeria Advisor on dashboards held in Egeria, and Studio
+## November 8 to 17: feedback, Egeria Advisor on dashboards held in Egeria, and Studio
 
 - **`trellis-feedback`**, a shared feedback library (0.1 to 0.3): when you rate an answer you can say why and attach
   evidence; an administrator reviews the feedback and can trace a problem back to a gap in the documents (#1012,
@@ -104,6 +104,11 @@ In numbers: 1,151 commits and about 523 merged pull requests across 12 packages 
   and keeps the links that still work. The operations guide has the steps in order (#1087, #1088, #1097).
 - **Egeria Advisor asks before it changes anything**: actions from chat and plans need your confirmation, and commands
   that aren't safe to repeat ask before a re-run (#1091). Its dashboard tables look and behave like the Portal's (#1089).
+- **Egeria Advisor ranks and counts more carefully** (#1104). A property with an ordered scale, such as importance,
+  is ranked by that scale rather than alphabetically, and "ranked all N" appears only when Egeria confirmed the end of
+  the results. A question about content status searches every status you asked for in one search; for properties
+  that take one value it says which values it didn't search, and it refuses an invalid status. Counts say "at least N"
+  unless the end was confirmed.
 - **Work in progress**: `trellis-ui` (#1062), and `trellis-accel`, which chooses a compute device at run time
   (#1073; design #1072).
 
@@ -116,7 +121,7 @@ In numbers: 1,151 commits and about 523 merged pull requests across 12 packages 
 - **Documentation**: user and administrator guides, and design notes for files, open data, quality, extensibility,
   local dashboards, OSI metric exchange, feedback, re-indexing and hardware acceleration.
 
-Thank you to everyone who contributed: Dan Wolfson (1,135 commits) and dependabot (16).
+Thank you to everyone who contributed: Dan Wolfson (1,254 commits) and dependabot (16).
 
 ---
 

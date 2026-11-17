@@ -62,9 +62,12 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
   needs your confirmation, and so does running a plan. Commands that aren't safe to repeat ask you to acknowledge a
   re-run (#1091).
 - **Dashboard table tiles** are drawn by the Portal's own table renderer, with resizable columns (#1089).
+<!-- STAGED until the C03 fix merges and C03 passes (TR-6 isn't reached from a question yet). Then uncomment, adding the fix's PR:
 - **Ordinal ranking** (TR-6, #1104): a property with an ordered scale, such as importance, is ranked by its scale. A
   capped preview is re-read (up to `RANK_READ_ROWS`, 500) before ranking, and "ranked all N" appears only on a
   confirmed end.
+-->
+- **No ranked or complete list unless Egeria confirmed the end** (#1104).
 - **Content-status questions in one search** (TR-7 phase 2, #1104): every status asked for, in one type-scoped search;
   one-value properties name the values not searched; an invalid status is refused first; counts say "at least N"
   unless the end was confirmed.

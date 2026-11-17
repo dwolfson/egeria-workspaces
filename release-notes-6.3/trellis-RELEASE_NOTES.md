@@ -104,11 +104,13 @@ In numbers: 1,270 commits and about 540 merged pull requests across 12 packages 
   and keeps the links that still work. The operations guide has the steps in order (#1087, #1088, #1097).
 - **Egeria Advisor asks before it changes anything**: actions from chat and plans need your confirmation, and commands
   that aren't safe to repeat ask before a re-run (#1091). Its dashboard tables look and behave like the Portal's (#1089).
-- **Egeria Advisor ranks and counts more carefully** (#1104). A property with an ordered scale, such as importance,
-  is ranked by that scale rather than alphabetically, and "ranked all N" appears only when Egeria confirmed the end of
-  the results. A question about content status searches every status you asked for in one search; for properties
+- **Egeria Advisor counts more carefully** (#1104). It no longer claims a ranked or complete list unless Egeria
+  confirmed the end of the results. A question about content status searches every status you asked for in one search; for properties
   that take one value it says which values it didn't search, and it refuses an invalid status. Counts say "at least N"
   unless the end was confirmed.
+<!-- STAGED until the C03 fix merges and C03 passes (TR-6: a question doesn't reach the ranking yet). Then add after
+  "unless Egeria confirmed the end of the results.": A property with an ordered scale, such as importance, is ranked
+  by that scale rather than alphabetically. And restore the bullet title "ranks and counts more carefully". -->
 - **Work in progress**: `trellis-ui` (#1062), and `trellis-accel`, which chooses a compute device at run time
   (#1073; design #1072).
 

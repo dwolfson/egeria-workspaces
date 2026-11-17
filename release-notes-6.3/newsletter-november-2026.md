@@ -82,7 +82,9 @@ Egeria Workspaces, our ready-to-run environment, now tracks the Egeria 6.3 build
 
 <!-- TODO-IMAGE: Resource Browser page for one Coco resource. File: november-2026-resource-browser.png
      Owner 2026-11-16: Resource Locator updates are in progress; retake this shot (and any Locator shots in the blog 11 tour) only after they land on laz.
-     Coordinator 2026-11-16: the Locator chain (search on columns, multi-type filter, hover help, Data Scope / Data Lens) deploys to laz as L4 8776a4fb, not before 00:00Z. Show these in the retake; PR numbers to come, add them to the notes when known.
+     Coordinator 2026-11-17 00:00:26Z: the Locator chain is LIVE on laz (L4 091bba00): search on columns and attributes, a multi-type filter,
+     hover help on terms, Data Scope / Data Lens editing, refreshed docs. Branches claude/rl-* (to claude/rl-docs 428a0155) go to odpi in the
+     next bundled PR; cite that PR number in the notes once the Coordinator sends it. Show these features in the retake.
      DRAFT shot taken 2026-11-13 as erinoverview on laz at 800x500 (pane limit); retake at full resolution before publishing. -->
 ![The Resource Locator page for the Customer API: what it contains, its lineage, and its usage activity](november-2026-resource-browser.jpg)
 

@@ -214,7 +214,8 @@ Thank you to everyone who contributed: Dan Wolfson (422 commits), Mandy Chessell
 <!-- STAGED until #894 merges. Then insert as step 7 and renumber the next step to 8:
 7. **If you run Resource Explorer and Egeria Advisor (Trellis), set `TRELLIS_DB_CREDENTIAL_KEY`.** It is now
    required in `compose-configs/optional-associated-runtimes/trellis/.env`, and the Prefect Resource Explorer worker
-   needs the same value in `.env.re-worker`; without it Resource Explorer won't start. Generate it once (for example
+   needs the same value in `.env.re-worker`; without it, compose won't start the Resource Explorer containers (a
+   Resource Explorer you run on the host falls back to a host-name key and warns). Generate it once (for example
    `openssl rand -hex 32`) and keep it stable. Before this, the key that encrypts stored database passwords came from
    the container's host name, so each recreate made them unreadable: re-enter each stored database password once.
    If an older `.env` sets `RE_DB_CREDENTIAL_KEY`, that one takes precedence, so leave it unset or give it the same

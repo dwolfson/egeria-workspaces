@@ -160,6 +160,13 @@ The current `[Unreleased]` section was written as items landed and stops around 
 
 ### Security (new heading)
 
+<!-- STAGED until #889 merges. Then uncomment (and add the Locator line under Added):
+- **No well-known password for the `provisioner` database user.** It comes from `PROVISIONER_PASSWORD` in
+  `shared-infra/.env`, generated when missing; the first start rotates it with the runtime secrets and Airflow, and
+  it is kept out of the statement log (TR-28, [#889](https://github.com/odpi/egeria-workspaces/pull/889)).
+Added: - **Resource Locator**: search on columns, attributes and data fields; several kinds at once; hover help on terms;
+  set, change and clear Data Scope; create and edit Data Lenses that govern work lists ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
+-->
 - **Credentials are sent only to allow-listed Egeria platforms** ([#819](https://github.com/odpi/egeria-workspaces/pull/819)).
 - **A signed-in user's request is never run as the service user** ([#715](https://github.com/odpi/egeria-workspaces/pull/715)).
 - **Continued hardening of the Portal environment** ([#640](https://github.com/odpi/egeria-workspaces/pull/640),

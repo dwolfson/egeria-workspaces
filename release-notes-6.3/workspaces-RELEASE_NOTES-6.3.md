@@ -103,6 +103,11 @@ In numbers: 377 commits and 217 merged pull requests over five weeks.
 
 ## November 8 to 16: dashboards and report specs held in Egeria
 
+<!-- STAGED until #889 merges (open 2026-11-17, Coordinator's bundle; live on laz since 00:00Z). Then uncomment:
+- **The Resource Locator searches more and explains itself.** Search finds columns, attributes and data fields, and
+  can search several kinds at once. Hover over a term on the page to see what it means. You can set, change and clear
+  a resource's Data Scope, and create and edit Data Lenses that govern work lists ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
+-->
 - **Report specs show what they declare**, whether they can run, and if not, why not
   ([#809](https://github.com/odpi/egeria-workspaces/pull/809)); the Portal supplies a spec's inputs by role
   ([#806](https://github.com/odpi/egeria-workspaces/pull/806)).
@@ -200,6 +205,12 @@ Thank you to everyone who contributed: Dan Wolfson (313 commits), Mandy Chessell
 - **The first time shared infrastructure starts after this upgrade, Docker recreates the `egeria-shared-postgres`
   container once**, because its configuration gained the `PGVECTOR_PASSWORD` setting. Your data is kept, but plan for
   a short database outage and stop anything that uses it first ([#887](https://github.com/odpi/egeria-workspaces/pull/887)).
+<!-- STAGED until #889 merges. Then uncomment:
+- **The `provisioner` database user no longer has a well-known password.** `gen-env.sh` keeps `PROVISIONER_PASSWORD` in
+  `compose-configs/shared-infra/.env` and generates one if it is missing, on existing installs too. The first start after
+  this upgrade changes the password, the runtime secrets and (with `--with-airflow-marquez`) Airflow's connection together,
+  so restart Airflow in the same run ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
+-->
 
 ## Where the detail lives
 

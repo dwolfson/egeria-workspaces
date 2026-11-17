@@ -231,6 +231,8 @@ Thank you to everyone who contributed: Dan Wolfson (313 commits), Mandy Chessell
 - **Egeria Advisor runs as `egeriaadvisornpa`** in quickstart ([#828](https://github.com/odpi/egeria-workspaces/pull/828)).
 - **Counts show what the signed-in user can see.** Elements anchored to Promise or Memento elements appear only with
   the Promise / Memento toggle on, and content in a governance zone appears only to users with access to that zone.
+- **If you call pyegeria's `find_data_assets` yourself** (in notebooks or scripts), it returns only ACTIVE assets by
+  default; pass `content_status_list=[]` to include assets with no content status. The Portal's lists already do.
 
 ## Where the detail lives
 

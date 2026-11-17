@@ -293,6 +293,10 @@ from obsidian_lock_handler import router as obsidian_lock_router
 app.include_router(obsidian_lock_router)
 from jupyter_lock_handler import router as jupyter_lock_router
 app.include_router(jupyter_lock_router)
+from advisor_handler import router as advisor_router
+app.include_router(advisor_router)
+from resource_explorer_handler import router as resource_explorer_router
+app.include_router(resource_explorer_router)
 
 # ── Demo mode ──────────────────────────────────────────────────────────────────
 

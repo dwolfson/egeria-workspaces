@@ -198,6 +198,12 @@ services:
       APPLICATION_PROPERTIES_PATH: "/platform/application.properties"
       # Egeria Advisor URL — checked server-side; set in .env if running on a non-default port/host
       EGERIA_ADVISOR_URL: "${EGERIA_ADVISOR_URL:-http://localhost:7880/}"
+      # Shared HS256 secret with Egeria Advisor's ADVISOR_PORTAL_SECRET (and
+      # Resource Explorer's TRELLIS_PORTAL_SECRET) for the Portal -> trellis SSO
+      # handoff. Leave unset to disable it (the tiles show "Not configured").
+      EGERIA_ADVISOR_SSO_SECRET: "${EGERIA_ADVISOR_SSO_SECRET:-}"
+      # Resource Explorer — same trellis family/SSO secret as Advisor above.
+      EGERIA_RESOURCE_EXPLORER_URL: "${EGERIA_RESOURCE_EXPLORER_URL:-http://localhost:7810/}"
     extra_hosts:
       - "${HOST_FQDN}:${HOST_GATEWAY_IP:-host-gateway}"
       - "host.docker.internal:${HOST_GATEWAY_IP:-host-gateway}"

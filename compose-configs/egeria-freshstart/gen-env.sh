@@ -110,6 +110,20 @@ if [[ -z "$EGERIA_MEM_LIMIT_VAL" ]]; then
   EGERIA_MEM_LIMIT_VAL="6g"
 fi
 
+# Keys this script does not generate but must not drop: .env is rewritten from
+# scratch below, so carry these forward from the existing .env when set
+# (the trellis handoff settings; see .env.example).
+CARRY_KEYS=(EGERIA_ADVISOR_URL EGERIA_RESOURCE_EXPLORER_URL EGERIA_ADVISOR_SSO_SECRET)
+CARRIED=""
+if [[ -f .env ]]; then
+  for key in "${CARRY_KEYS[@]}"; do
+    line="$(grep -E "^${key}=" .env | tail -n1 || true)"
+    if [[ -n "${line#*=}" ]]; then
+      CARRIED+="${line}"$'\n'
+    fi
+  done
+fi
+
 TMP_ENV=".env.tmp"
 cat > "$TMP_ENV" <<EOF
 HOST_FQDN=${HOST_FQDN}
@@ -119,6 +133,7 @@ HOST_GATEWAY_IP=${HOST_GATEWAY_IP}
 EGERIA_MEM_LIMIT=${EGERIA_MEM_LIMIT_VAL}
 CONFIG_JSON="${CONFIG_JSON_ESCAPED}"
 EOF
+printf '%s' "$CARRIED" >> "$TMP_ENV"
 mv -f "$TMP_ENV" .env
 
 echo "[gen-env.sh] Wrote .env with HOST_FQDN=${HOST_FQDN}, KAFKA_CLUSTER_ID=${KAFKA_CLUSTER_ID_VAL}, EGERIA_MEM_LIMIT=${EGERIA_MEM_LIMIT_VAL}" >&2

@@ -343,6 +343,10 @@ Promise.all([
     setInterval(refreshObsidianTile, 30000);
     refreshJupyterTile();
     setInterval(refreshJupyterTile, 30000);
+    refreshAdvisorTile();
+    setInterval(refreshAdvisorTile, 30000);
+    refreshResourceExplorerTile();
+    setInterval(refreshResourceExplorerTile, 30000);
     fetch('/api/demo/personas').then(function(r){ return r.json(); }).then(function(data) {
       _personas = data;
       var stored = _loadStored();
@@ -446,7 +450,6 @@ function renderFavorites(favs) {
 function renderAppGrid(demoMode, advisorRunning, advisorUrl) {
   var jupyterUrl = 'http://' + window.location.hostname + ':8888/?token=egeria';
   _jupUrl = jupyterUrl;
-  advisorUrl = advisorUrl || ('http://' + window.location.hostname + ':8880/');
   var apps = [
     // Row 1 — primary tools
     { icon: '📊', name: 'Egeria Overview',
@@ -485,9 +488,13 @@ function renderAppGrid(demoMode, advisorRunning, advisorUrl) {
     { icon: '🖥️', name: 'My Egeria',
       desc: 'Explore your Egeria profile, roles, teams, actions, and data catalog.',
       url: '/my-egeria/', newTab: true, enabled: true },
-    { icon: '🤖', name: 'Egeria Advisor',
-      desc: advisorRunning ? 'AI-powered guidance for your Egeria environment.' : 'AI-powered guidance for your Egeria environment. (Not currently running)',
-      url: advisorUrl, newTab: true, enabled: !demoMode, unavailable: !demoMode && !advisorRunning },
+    // Trellis handoffs (as quickstart): status + SSO handoff as the signed-in user, see advisor_handler.py
+    { icon: '🔭', name: 'Alpha: Resource Explorer',
+      desc: 'Scout, Assess, Discover, Enrich Resources.',
+      enabled: !demoMode, resourceExplorer: true },
+    { icon: '🤖', name: 'Alpha: Egeria Advisor',
+      desc: 'AI-powered guidance for your Egeria environment.',
+      enabled: !demoMode, advisor: true },
     // Remaining — docs, admin & API references
     { icon: '📚', name: 'Egeria Workspaces Documentation',
       desc: 'User guides, tool reference, Dr. Egeria templates, Coco Pharmaceuticals scenarios, and admin docs.',
@@ -519,6 +526,10 @@ function renderAppGrid(demoMode, advisorRunning, advisorUrl) {
     } else if (a.jupyter) {
       action = '<div id="jup-tile-action"><span style="color:var(--muted);font-size:0.8rem">Loading…</span></div>'
              + '<div id="jup-tile-bookmark"></div>';
+    } else if (a.advisor) {
+      action = '<div id="advisor-tile-action"><span style="color:var(--muted);font-size:0.8rem">Loading…</span></div>';
+    } else if (a.resourceExplorer) {
+      action = '<div id="re-tile-action"><span style="color:var(--muted);font-size:0.8rem">Loading…</span></div>';
     } else {
       action = '<button class="btn btn-accent app-action" onclick="launch(' + JSON.stringify(a.url).replace(/"/g, '&quot;') + ',' + a.newTab + ',' + JSON.stringify(a.name).replace(/"/g, '&quot;') + ')">' + (a.newTab ? 'Open ↗' : 'Open') + '</button>';
     }
@@ -851,6 +862,71 @@ function _clearJupToken() {
 }
 
 if (_jupToken) { _startJupKeepalive(); }
+
+// ── Trellis SSO handoffs (Egeria Advisor, Resource Explorer) ─────────────────
+// Quickstart's tiles, except the handoff is always the signed-in user (the
+// server takes the identity from the session), so there is no persona step.
+function _renderTrellisTile(elId, s, launchFn, label) {
+  var el = document.getElementById(elId);
+  if (!el) return;
+  if (!s.sso_configured) {
+    el.innerHTML = '<span class="soon-badge" style="background:var(--hover);color:var(--muted)">Not configured</span>';
+    return;
+  }
+  if (!s.reachable) {
+    el.innerHTML = '<span class="soon-badge" style="background:var(--hover);color:var(--muted)">Not running</span>';
+    return;
+  }
+  el.innerHTML = '<button class="btn btn-accent" onclick="' + launchFn + '()">' + label + '</button>';
+}
+
+function _refreshTrellisTile(statusUrl, elId, launchFn, label) {
+  fetch(statusUrl).then(function(r) { return r.json(); }).then(function(s) {
+    _renderTrellisTile(elId, s, launchFn, label);
+  }).catch(function() {
+    var el = document.getElementById(elId);
+    if (el) el.innerHTML = '<span class="obs-hint">Status unavailable</span>';
+  });
+}
+
+function _launchTrellis(handoffUrl, urlKey, appName) {
+  // Open the tab synchronously, inside the click handler, so the popup blocker
+  // doesn't reject it once it is redirected after the handoff fetch resolves.
+  var tab = window.open('', '_blank');
+  fetch(handoffUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' })
+    .then(function(r) {
+      return r.json().then(function(data) { return { status: r.status, data: data }; });
+    }).then(function(res) {
+      var data = res.data || {};
+      if (res.status === 401) {
+        if (tab) tab.close();
+        window.location.href = '/login';
+        return;
+      }
+      if (!data.ok) {
+        if (tab) tab.close();
+        alert('Could not open ' + appName + ': ' + (data.reason || data.detail || 'unavailable'));
+        return;
+      }
+      if (tab) { tab.opener = null; tab.location = data[urlKey]; }
+    }).catch(function(e) {
+      if (tab) tab.close();
+      alert('Error: ' + e.message);
+    });
+}
+
+function refreshAdvisorTile() {
+  _refreshTrellisTile('/api/advisor/status', 'advisor-tile-action', 'launchAdvisor', 'Ask Advisor →');
+}
+function launchAdvisor() {
+  _launchTrellis('/api/advisor/handoff', 'advisor_sso_url', 'Egeria Advisor');
+}
+function refreshResourceExplorerTile() {
+  _refreshTrellisTile('/api/resource-explorer/status', 're-tile-action', 'launchResourceExplorer', 'Open ↗');
+}
+function launchResourceExplorer() {
+  _launchTrellis('/api/resource-explorer/handoff', 'resource_explorer_sso_url', 'Resource Explorer');
+}
 
 // ── Jupyter notebook bookmarks ────────────────────────────────────────────────
 function _renderJupBookmark(personaId) {

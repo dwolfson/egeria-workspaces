@@ -85,7 +85,7 @@ In numbers: 377 commits and 217 merged pull requests over five weeks.
 - **Lineage Explorer** hop limit and cut markers ([#749](https://github.com/odpi/egeria-workspaces/pull/749));
   Mermaid diagrams get an Expand viewer ([#781](https://github.com/odpi/egeria-workspaces/pull/781)).
 - **The Overview only shows numbers it has actually measured.** Counts cover the whole repository, slow sections
-  are measured in the background, and a card says "not measured" rather than showing a guess (see the note on data-asset counts under Upgrade notes) ([#783](https://github.com/odpi/egeria-workspaces/pull/783),
+  are measured in the background, and a card says "not measured" rather than showing a guess (see the note on low counts under Upgrade notes) ([#783](https://github.com/odpi/egeria-workspaces/pull/783),
   [#785](https://github.com/odpi/egeria-workspaces/pull/785), [#788](https://github.com/odpi/egeria-workspaces/pull/788),
   [#790](https://github.com/odpi/egeria-workspaces/pull/790), [#793](https://github.com/odpi/egeria-workspaces/pull/793),
   [#807](https://github.com/odpi/egeria-workspaces/pull/807)).
@@ -229,8 +229,8 @@ Thank you to everyone who contributed: Dan Wolfson (313 commits), Mandy Chessell
   the Portal's rendered tables should be re-checked; see the *Report Specs* tutorial, Part C ([#853](https://github.com/odpi/egeria-workspaces/pull/853)).
 - **Postgres templates take a secrets store** ([#679](https://github.com/odpi/egeria-workspaces/pull/679)).
 - **Egeria Advisor runs as `egeriaadvisornpa`** in quickstart ([#828](https://github.com/odpi/egeria-workspaces/pull/828)).
-- **Counts of data assets can be low on Egeria 6.3.** An unfiltered search for data assets can return fewer than the
-  repository holds, so treat such totals as a lower bound.
+- **Some counts can be low on Egeria 6.3.** An unfiltered search for data assets, or an unfiltered read of all
+  elements of a type, can return fewer than the repository holds, so treat such totals as a lower bound.
 
 ## Where the detail lives
 

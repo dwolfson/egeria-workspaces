@@ -22,8 +22,8 @@ from an earlier 6.2 release, [the 6.2 series](#the-62-series) below describes wh
   `get_related_elements`. Released Egeria from 6.3.0 on is trusted for both, since the V6.3 tag carries both fixes.
   On Egeria 6.3, pyegeria can tell when it has read to the end of those results. On older platforms, counts are
   reported as "at least N".
-- **Known issue on Egeria 6.3:** a search for data assets with no filter can return fewer assets than the repository
-  holds, so treat its count as a lower bound.
+- **Known issue on Egeria 6.3:** a search for data assets with no filter, or a read of all elements of a type
+  (`get_elements`), can return fewer elements than the repository holds, so treat such counts as a lower bound.
 - **A find's count says "at least N" unless the end was confirmed.** `result_count(result)`
   (`pyegeria.view.format_set_executor`) gives the count, its wording, and the reason when it isn't final.
 - **MCP report runs page up to their maximum rows** and include a count, so a filtered first page no longer reads as

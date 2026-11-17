@@ -37,8 +37,8 @@ The current `[Unreleased]` section was written as items landed and stops around 
   Airflow DAG `coco_subscriptions_egeria` loads them into Egeria. A new `egeria_ods` database in the shared PostgreSQL,
   with a `provisioner` role, is set up to receive Egeria's own digital products, one table per product; tables arrive
   once Egeria's daily refresh subscriptions run on a schedule. `ensure-shared-infra.sh` runs `init_egeria_ods.sql` on
-  every start, creating only what is missing. The Open Lineage Cataloguer's account gains the publish zones Egeria 6.3
-  requires.
+  every start, creating only what is missing. The Open Lineage Cataloguer's account now defines `publishZones` (empty),
+  because from Egeria 6.3 publishing fails for an account that doesn't define it.
 - **Dashboards held in Egeria.** Dashboard sheets and their tiles can be held in Egeria as Egeria 6.3 Dashboard
   elements with an owner, behind a token-only dashboards API ([#818](https://github.com/odpi/egeria-workspaces/pull/818)).
   Local Dashboards shows a folder tree of Egeria-held sheets with a Used by row

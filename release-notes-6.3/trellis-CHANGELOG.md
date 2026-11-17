@@ -15,7 +15,7 @@ Egeria release they ship with. Pull requests are `#N` in this repository.
 ## [Unreleased]
 
 ## [6.3 Tech Preview] - 2026-11-17
-<!-- At the cut: fold in #1087–#1102. #1099 (RE pyegeria floor 6.2.42, 825e496e) and #1100 (RE fix batch TR-1/2/15/22/24) merged 2026-11-16; #1101 (floor 6.3.0 for RE/EA/Studio/trellis-auth) merged 16:50Z, main 34dbddb5; #1102 (TR-27 docs) merged 17:21Z, 389a14ff. #1100 described from its PR and commits. -->
+<!-- Folded in 2026-11-17: #1087–#1103 (all merged; #1090 and #1095 were already in). Was: fold in #1087–#1102. #1099 (RE pyegeria floor 6.2.42, 825e496e) and #1100 (RE fix batch TR-1/2/15/22/24) merged 2026-11-16; #1101 (floor 6.3.0 for RE/EA/Studio/trellis-auth) merged 16:50Z, main 34dbddb5; #1102 (TR-27 docs) merged 17:21Z, 389a14ff. #1100 described from its PR and commits. -->
 
 First recorded release, a Tech Preview released with Egeria 6.3. It covers everything merged since the October 2026 Egeria newsletter, which introduced
 Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the narrative.
@@ -47,6 +47,13 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 - **Feedback with a closed loop** using `trellis-feedback`: ratings carry a cause and evidence, admin triage, a
   diagnosis can be routed to a gap (#1012, #1013, #1017, #1018, #1019, #1031, #1032, #1034).
 - **Re-index**: rebuild, swap and roll back the document index (#1037, #1038, #1039, #1040, #1041).
+- **Survey steps on Prefect workers**: the Resource Explorer image has a `prefect-worker` role, and each step goes to a
+  worker running the same commit. The status banner reports workers from Prefect's own status, and says separately
+  when the Prefect server can't be reached or the pool is missing (#1091). The configured pool (`PREFECT_WORK_POOL`)
+  decides where a step goes, and Resource Explorer names any of its workers that are running on a different pool (#1092).
+- **Recovery after an Egeria reset**: a new Alignment step, *re-attach by name*, reconnects Resource Explorer's records
+  to Egeria using the qualified names it stored, with a dry run first. Alignment Apply now writes an activity entry for
+  each step it applies (#1087). The recovery is one ordered procedure in the operations guide (#1088).
 
 #### Egeria Advisor
 - **Dashboards in Egeria**: lists and shows Egeria-held sheets as the signed-in user (#1042), then reads and authors
@@ -58,6 +65,10 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 - **Perspectives from Egeria**, with an explanation when there are none (#1059).
 - **A single admin check** from `trellis-auth` that denies access when in doubt (#1050); the Admin link is shown only to administrators (#1052).
 - **Feedback** through the shared `trellis-feedback` library (#1069).
+- **Confirmation before Egeria Advisor changes anything**: a Dr.Egeria action from chat is validated first and then
+  needs your confirmation, and so does running a plan. Commands that aren't safe to repeat ask you to acknowledge a
+  re-run (#1091).
+- **Dashboard table tiles** are drawn by the Portal's own table renderer, with resizable columns (#1089).
 
 #### Studio
 - **Studio**, a new application for authoring report specs, reports and dashboard sheets, with forms, preview and
@@ -82,6 +93,8 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 - Egeria Advisor feedback: a changed vote supersedes the earlier one for that answer, and the recorded intent is the
   one the question was routed to rather than the selector (#1078).
 - Egeria Advisor drops its unread `EMBEDDING_DEVICE` setting (#1080).
+- Clearing stale contexts and investigations keeps the stored qualified names and clears only the Egeria GUID, so they
+  can be re-attached (#1087). The cleanup after an Egeria reset keeps the pointers that still resolve (#1097).
 
 ### Fixed
 - **Survey runs** (#1100):
@@ -89,6 +102,10 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
     with 409, naming the run already in progress and how to cancel it, and nothing is queued (TR-1);
   - cancelling a queued run also closes its activity entry, which used to stay "running" (TR-2);
   - if a run can't be queued, its activity entry is closed as an error (TR-1).
+- **Survey steps on Prefect** (#1093, #1094): once a Prefect flow run may exist, the step is never run a second time
+  locally, and its result is read from Resource Explorer's registry. A step output that can't be stored exactly fails
+  the run, so nothing is published from a damaged result.
+- **Egeria Advisor's Dashboards tab keeps you signed in**, and report parameter names are converted to snake case before a report runs (#1091).
 - **Egeria sign-in errors are recognised by error class and HTTP code**, not by message text, so a refused sign-in
   (sign in again) is no longer confused with Egeria refusing a signed-in user (TR-22, #1100).
 - **Identity and access**: ambient identity, caller-identity rounds, private investigation attach, no forged person
@@ -120,21 +137,25 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
   #1100).
 - **The docs probe and CVE scan check TLS certificates with certifi** (through httpx), so they no longer trust the
   emSign ECC Root CA - G3 that some system certificate stores still hold (TR-15, #1100).
+- **No built-in database password** (TR-12, TR-25, #1096): Resource Explorer and Egeria Advisor no longer fall back
+  to the well-known password. Without `PGVECTOR_PASSWORD` they refuse to start and name the missing setting, never
+  its value. The Resource Explorer image has no database URLs or password built in.
 - See *Fixed › Identity and access* and *Changed* (credential fallback retired, zone rule).
 - The certifi floor excludes the distrusted emSign ECC G3 root (#989).
 
 ### Dependencies
 - pyegeria floor raised from 6.1.15 to 6.2.1, then step by step to 6.3.0 (#593, #651, #728, #806, #819, #834, #853,
-  #951, #959, #974, #987, #1005, #1028, #1036, #1061, #1071, #1076, #1082, #1083, #1090, #1095, #1099, #1101).
+  #951, #959, #974, #987, #1005, #1028, #1036, #1061, #1071, #1076, #1082, #1083, #1090, #1091, #1095, #1099, #1101).
 - About 20 Dependabot bumps from the odpi side (notebook, jupyterlab, mlflow, aiohttp, authlib, pypdf and others),
-  via the sync (#112).
+  via the sync (#112), and patch updates from the 2026-11-16 Dependabot review (#1098).
 
 ### CI and tests
 - Resource Explorer tests on main and PRs only; job timeout raised to 60, then 90 minutes; stale image runs cancelled;
   PR images built only when their inputs change; ea-tests cover querycache; builder and runtime image stages copy the same workspace packages
   (#884, #601, #891, #670, #1075, #1063, #1079).
 - Tests no longer write tracked files, and fail if a check passes without doing anything; a pyegeria contract test; the spec-sync test double answers an
-  empty page the way Egeria does (#595, #1048, #1056, #1085).
+  empty page the way Egeria does (#595, #1048, #1056, #1085). Database tests fail rather than skip when a database is
+  required (#1096); Egeria Advisor tests show its shared report-spec sync can't pick up a user's private draft (#1103).
 - Dr.Egeria templates synced (#91, #103, #104, #639, #858, #874, #1004); odpi sync and DCO remediation (#108, #981, #112).
 
 ### Docs

@@ -101,6 +101,13 @@ In numbers: 1,151 commits and about 523 merged pull requests across 12 packages 
   activity entry; sign-in errors from Egeria are recognised by their error class and code rather than their wording;
   the token check never signs in with a configured password; and the docs probe and CVE scan check certificates with
   certifi.
+- **Survey steps can run on Prefect workers.** The Resource Explorer image can run as a Prefect worker; the configured
+  pool decides where each step goes, and the status banner says when no worker can take it (#1091, #1092). A step
+  is never run twice, and a result that can't be stored exactly fails the run rather than publishing (#1093, #1094).
+- **Recovering after an Egeria reset**: Resource Explorer can reconnect its records to Egeria by the names it stored,
+  and keeps the links that still work. The operations guide has the steps in order (#1087, #1088, #1097).
+- **Egeria Advisor asks before it changes anything**: actions from chat and plans need your confirmation, and commands
+  that aren't safe to repeat ask before a re-run (#1091). Its dashboard tables look and behave like the Portal's (#1089).
 - **Work in progress**: `trellis-ui` (#1062), and `trellis-accel`, which chooses a compute device at run time
   (#1073; design #1072).
 
@@ -126,7 +133,11 @@ Thank you to everyone who contributed: Dan Wolfson (1,135 commits) and dependabo
 - **There is no default database password.** Set `PGVECTOR_PASSWORD`: with Egeria Workspaces
   it is in `compose-configs/shared-infra/.env`; for a standalone install, generate your own. An install whose
   `egeria_advisor` role still uses the old well-known password should change it (see the Egeria Workspaces shared-infra
-  README, "Setting or changing the egeria_advisor password") (#1102).
+  README, "Setting or changing the egeria_advisor password") (#1102). Without it, Resource Explorer and Egeria Advisor
+  refuse to start and say which setting is missing (#1096).
+- **Prefect**: steps go to the pool named in `PREFECT_WORK_POOL`, so run your workers on that pool (#1092). Resource
+  Explorer's registry gains a `flow_run_results` table; see #1093 for how it is created on an existing install.
+- **After an Egeria reset**, follow the recovery procedure in the operations guide (§2.0) (#1088).
 - **Only JWT bearer tokens are accepted at login** (#827).
 - **Zones**: a zone with no access control is private, as it is in Egeria (#1043). Content in such a zone is visible
   only to its owner.

@@ -31,8 +31,14 @@ Commit both copies. `compose-configs/freshstart-sync-manifest.json` puts every f
 - `by_design`: differs on purpose, with the reason given.
 - `not_yet`: not synced yet, with its parity row.
 
-A new Portal file must be classified there, or `--check` fails. When a `pending` or `not_yet` file comes into sync,
-`--check` asks you to move it to `identical`, so those lists only shrink.
+A new Portal file must be classified there, or `--check` fails. When a `not_yet` file comes into sync, `--check`
+fails until you move it to `identical`, so that list only shrinks. When a `pending` file comes into sync it prints a
+note instead (it fails only with `--strict`), so the PR it was waiting for doesn't turn other PRs red.
+
+Transforms are plain substitutions over the whole file. `env-path` replaces every `egeria-quickstart`, including in
+comments, docs and URLs, so read the freshstart file by eye the first time an entry uses it. `--write` refuses a
+freshstart file that has a `FRESHSTART-ONLY` block when its entry lacks the `fences` transform, rather than drop the
+block.
 
 The Pyegeria Web Handler now uses the **Dr. Egeria v2** core, which features a dynamic registry-based dispatcher (`V2Dispatcher`).
 

@@ -15,6 +15,7 @@ to bring freshstart's copy up to date, and commit both. CI runs --check.
     --write [PATH ...] copy quickstart -> freshstart for the `identical` and `transformed` entries
                        (all of them, or just the PATHs given), applying each entry's transforms
     --summary          print the count in each manifest category
+    --strict           with --check, also fail on pending entries that are now in sync
 
 The manifest, compose-configs/freshstart-sync-manifest.json, puts every file of either tree in exactly
 one category (an explicit path beats a glob):
@@ -22,10 +23,15 @@ one category (an explicit path beats a glob):
     identical    byte-identical in both trees
     transformed  identical after the entry's named transforms (see "transforms" in the manifest)
     pending      becomes identical/transformed when the named PR merges; reported, never fails. Once it is
-                 in sync, --check fails until the entry is moved to identical/transformed.
+                 in sync, --check notes that the entry should move to identical/transformed (a failure only
+                 with --strict, so the named PR landing does not turn unrelated PRs red; CI does not pass it).
     by_design    differs on purpose, or exists in one tree only on purpose (reason given)
     not_yet      should be synced but is not yet (parity row given). Once a file listed by name is in
                  sync, --check fails until it is moved to identical, so the list only shrinks.
+
+Transforms are plain byte substitutions over the whole file. In particular env-path replaces EVERY
+"egeria-quickstart" in it, comments, docs and URLs included, so when an entry first uses env-path, read
+the resulting freshstart file by eye.
 
 Transform "fences" keeps freshstart-only blocks: lines from one containing FRESHSTART-ONLY BEGIN to one
 containing FRESHSTART-ONLY END stay as they are, re-inserted after the line that precedes them (which
@@ -120,7 +126,13 @@ def render(manifest: dict, entry: dict, src: bytes, dst: bytes | None) -> bytes:
             raise SyncError(f"unknown transform {name!r}")
         for old, new in manifest["transforms"][name]:
             out = out.replace(old.encode(), new.encode())
-    if "fences" not in names or dst is None:
+    if "fences" not in names:
+        if dst is not None and FENCE_BEGIN in dst:
+            # without the fences transform the block would be silently dropped on --write
+            raise SyncError("freshstart's copy has a FRESHSTART-ONLY block but the entry has no 'fences' "
+                            "transform; add 'fences' to its transforms (or remove the block) first")
+        return out
+    if dst is None:
         return out
     lines = out.splitlines(keepends=True)
     _, blocks = _split_fences(dst)
@@ -137,7 +149,7 @@ def render(manifest: dict, entry: dict, src: bytes, dst: bytes | None) -> bytes:
     return b"".join(lines)
 
 
-def check(repo: Path = REPO, manifest_path: Path = MANIFEST) -> tuple[list[str], list[str]]:
+def check(repo: Path = REPO, manifest_path: Path = MANIFEST, strict: bool = False) -> tuple[list[str], list[str]]:
     """(failures, notes). No failures means freshstart is in sync with what the manifest says."""
     manifest = json.loads(manifest_path.read_text())
     src_files, dst_files = _files(repo, SOURCE), _files(repo, TARGET)
@@ -191,7 +203,7 @@ def check(repo: Path = REPO, manifest_path: Path = MANIFEST) -> tuple[list[str],
         except SyncError:
             ok = False
         if ok:
-            fail.append(f"pending ({entry.get('after', '?')}) is now in sync: move {path} to "
+            (fail if strict else note).append(f"pending ({entry.get('after', '?')}) is now in sync: move {path} to "
                         f"{'transformed' if entry.get('transforms') else 'identical'}")
         else:
             note.append(f"pending until {entry.get('after', '?')}: {path}")
@@ -239,6 +251,8 @@ def main(argv: list[str] | None = None) -> int:
     g.add_argument("--check", action="store_true")
     g.add_argument("--write", nargs="*", metavar="PATH")
     g.add_argument("--summary", action="store_true")
+    ap.add_argument("--strict", action="store_true",
+                    help="with --check, also fail on pending entries that are now in sync")
     ap.add_argument("-v", "--verbose", action="store_true", help="with --check, also list pending/notes")
     args = ap.parse_args(argv)
     try:
@@ -251,7 +265,7 @@ def main(argv: list[str] | None = None) -> int:
             changed = write(args.write)
             print("\n".join(f"wrote {TARGET}/{p}" for p in changed) or "freshstart already in sync")
             return 0
-        fail, note = check()
+        fail, note = check(strict=args.strict)
     except SyncError as exc:
         print(f"sync-freshstart: {exc}", file=sys.stderr)
         return 2

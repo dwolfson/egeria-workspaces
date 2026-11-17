@@ -72,13 +72,17 @@ def test_unclassified_and_stale_entries_fail(tmp_path):
     assert "stale not_yet entry" in fail and "x/**" in fail
 
 
-def test_pending_is_a_note_until_in_sync_then_fails(tmp_path):
+def test_pending_in_sync_is_a_note_and_fails_only_with_strict(tmp_path):
     m = {"pending": {"p.py": {"after": "#999"}}}
     root = _tree(tmp_path, {"p.py": (b"new\n", b"old\n")}, m)
     fail, note = _check(root)
-    assert fail == [] and any("#999" in n for n in note)
+    assert fail == [] and any("pending until #999" in n for n in note)
     (root / sync.TARGET / "p.py").write_bytes(b"new\n")
-    fail, _ = _check(root)
+    # the named PR landed: a note, so unrelated PRs stay green ...
+    fail, note = _check(root)
+    assert fail == [] and any("move p.py to identical" in n for n in note)
+    # ... and a failure only when asked for
+    fail, _ = sync.check(root, root / "manifest.json", strict=True)
     assert len(fail) == 1 and "move p.py to identical" in fail[0]
 
 
@@ -123,3 +127,16 @@ def test_manifest_categories_do_not_overlap():
         for p in sync._entries(m, cat):
             assert p not in seen, f"{p} is in both {seen[p]} and {cat}"
             seen[p] = cat
+
+
+
+@pytest.mark.parametrize("cat,entry", [("identical", None), ("transformed", {"transforms": ["view-server"]})])
+def test_write_refuses_to_drop_a_fenced_block_without_the_fences_transform(tmp_path, cat, entry):
+    fs = b"one\n# FRESHSTART-ONLY BEGIN\nkeep me\n# FRESHSTART-ONLY END\ntwo\n"
+    m = {cat: ["f.py"] if entry is None else {"f.py": entry}}
+    root = _tree(tmp_path, {"f.py": (b"one\ntwo\nthree\n", fs)}, m)
+    with pytest.raises(sync.SyncError, match="fences"):
+        sync.write([], root, root / "manifest.json")
+    assert (root / sync.TARGET / "f.py").read_bytes() == fs          # block not dropped
+    fail = _check(root)[0]
+    assert fail and "FRESHSTART-ONLY block" in fail[0] and "fences" in fail[0]

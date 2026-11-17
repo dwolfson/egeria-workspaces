@@ -67,3 +67,6 @@ release PRs, add it to the Resource Locator line and the CHANGELOG Added entry. 
 **Done 2026-11-17:** #889–#892 merged upstream (13:06–13:07Z, 97ecd7ef). The #889 and #892 blocks are un-staged,
 and #890/#891 entries added. Before the PRs, recount the contributor commit numbers in the "Thank you" line
 (they predate these merges).
+Recount once, after the last merge before the release PRs, over one window for all of: the RELEASE_NOTES "In numbers"
+line (377 commits / 217 PRs), the overview's "By the numbers (October 9 to November 12)" heading and figures, and the
+"Thank you" counts (Architect R2, 5bd4437f read-back).

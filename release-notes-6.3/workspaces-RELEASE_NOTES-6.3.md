@@ -92,7 +92,7 @@ In numbers: 377 commits and 217 merged pull requests over five weeks.
 - A **Chief Data Officer dashboard** for Jules Keeper ([#780](https://github.com/odpi/egeria-workspaces/pull/780)).
 - **Jupyter no longer trusts the emSign ECC G3 root** ([#776](https://github.com/odpi/egeria-workspaces/pull/776)).
 
-## November 8 to 16: dashboards and report specs held in Egeria
+## November 8 to 17: dashboards and report specs held in Egeria
 
 - **The Resource Locator searches more and explains itself.** Search finds columns, attributes and data fields, and
   can search several kinds at once. Hover over a term on the page to see what it means. You can set, change and clear
@@ -155,7 +155,7 @@ In numbers: 377 commits and 217 merged pull requests over five weeks.
 - **pyegeria**: the image floors rose step by step from 6.2.7 to 6.2.24, and the images run newer releases
   (see PRs [#667](https://github.com/odpi/egeria-workspaces/pull/667) to [#802](https://github.com/odpi/egeria-workspaces/pull/802)).
   Freshstart, briefly capped below 6.2.27 ([#807](https://github.com/odpi/egeria-workspaces/pull/807)), now needs
-  pyegeria 6.3.0 or later too. Its Portal catches up with the quickstart's: shared helper modules and 13 handlers
+  pyegeria 6.3.0 or later too. Its Portal catches up with the quickstart's: shared helper modules and 11 handlers
   ([#891](https://github.com/odpi/egeria-workspaces/pull/891)), then the Overview, with "not measured" and the
   unconfirmed marks ([#892](https://github.com/odpi/egeria-workspaces/pull/892)).
 - **Shared infrastructure**: autoheal started, Postgres tuning and `pg_stat_statements` ([#686](https://github.com/odpi/egeria-workspaces/pull/686),

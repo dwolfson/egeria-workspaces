@@ -119,7 +119,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
   [#811](https://github.com/odpi/egeria-workspaces/pull/811)).
 - **Dashboard placements**: `presentationStyle` replaces `emphasis`; MeasurementSpecification references become
   relationships (docs: [#796](https://github.com/odpi/egeria-workspaces/pull/796), [#795](https://github.com/odpi/egeria-workspaces/pull/795)).
-- **Freshstart catches up with the quickstart**: shared helper modules and 13 handlers
+- **Freshstart catches up with the quickstart**: shared helper modules and 11 handlers
   ([#891](https://github.com/odpi/egeria-workspaces/pull/891)), then the Overview, with pyegeria 6.3.0 or later
   replacing the earlier cap below 6.2.27 ([#892](https://github.com/odpi/egeria-workspaces/pull/892),
   [#807](https://github.com/odpi/egeria-workspaces/pull/807)).

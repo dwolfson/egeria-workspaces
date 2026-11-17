@@ -94,3 +94,7 @@ Trellis recount at b7837e6c: 1,273 commits, ~541 PRs, Dan 1,257, dependabot 16. 
 Dan 2026-11-17, in this session: "Turn them on by default" (EA_SPEC_AUTHORING_V2 + EA_SPEC_ELICITOR_FIXES; not
 EA_SPEC_STATUS_MERGE). Relayed verbatim to the Coordinator. The default-on wording is staged in both trellis files; if
 the PR doesn't merge before the release, the opt-in text stays.
+Architect PASS on 3eec815c. Un-stage the default-on wording only when all hold: U1 the trellis PR merged; U2 an explicit
+EA_SPEC_AUTHORING_V2=0/false (and FIXES) turns it off, and the notes say how; U3 checked through the real 8880 with no
+flag in any env file (resolved state shown at startup/health; C03, B05, B15 asked through the service); U4
+EA_SPEC_STATUS_MERGE stays off, so keep "says which values it didn't search".

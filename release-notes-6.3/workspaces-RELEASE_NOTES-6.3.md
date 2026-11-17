@@ -101,6 +101,12 @@ In numbers: 504 commits and 254 merged pull requests between October 9 and Novem
   lists by a Data Lens, tick several results and add them to a work list at once, and follow a breadcrumb back to
   your list with its search, filters, scroll and the rows you opened with Show more kept. A Data Scope of a year,
   month or day covers the whole of it ([#893](https://github.com/odpi/egeria-workspaces/pull/893), [#894](https://github.com/odpi/egeria-workspaces/pull/894)).
+<!-- STAGED until #895 merges. Then (1) change "work list(s)" to "working set(s)" in this section's Locator lines and
+  in the Resource Browser line near the top (l.~34), and (2) uncomment:
+- **Delete a working set you own.** The Resource Locator shows what will change (members, shares, lenses) and asks
+  first. Members are never deleted, and anything that would block the delete is named before anything is written
+  ([#895](https://github.com/odpi/egeria-workspaces/pull/895)).
+-->
 - **The Overview marks figures it could not confirm.** When paging can't confirm that a count read to the end, the
   figure says "at least N" or "N found", with the reason, instead of a bare number that might be wrong
   ([#890](https://github.com/odpi/egeria-workspaces/pull/890)).
@@ -187,16 +193,19 @@ Thank you to everyone who contributed: Dan Wolfson (427 commits), Mandy Chessell
    install whose `egeria_advisor` role still has the old well-known password, change it first (see the shared-infra
    README, "Setting or changing the egeria_advisor password"), then put the new value in `.env`
    ([#887](https://github.com/odpi/egeria-workspaces/pull/887)).
-<!-- STAGED until the PO-45 bundle PR merges (Architect read-back pending; PR number to come; check the names in the
-  merged code first). Then insert here as step 4 and renumber the steps after it:
-4. **Set the Portal's service passwords; there are no built-in defaults now** (#PR).
+<!-- STAGED until #895 merges (names checked at its head 3e9c50ef: egeria-quickstart.yaml l.314/441,
+  egeria-freshstart.yaml l.183). Then insert here as step 4 and renumber the steps after it (5 to 9):
+4. **Set the Portal's service passwords; there are no built-in defaults now** ([#895](https://github.com/odpi/egeria-workspaces/pull/895)).
    - *Quickstart:* the Portal and my-profile take their Egeria password from `QUICKSTART_PERSONA_PASSWORD` in
      `compose-configs/egeria-quickstart/.env`. `./quick-start-local` writes the Coco demo password there if it is
      missing (an exported value wins). If you start with plain `docker compose`, run `./quick-start-local` once or add
-     the variable first.
+     the variable first. After upgrading, recreate `pyegeria-web` and `my-profile`; a restart doesn't change their
+     environment.
    - *Freshstart (breaking):* `freshstart-pyegeria-web` no longer has a built-in `EGERIA_ADMIN_CALLER_PASSWORD`. Set it
      in `compose-configs/egeria-freshstart/.env`, or export it, before the next start. `fresh-start-local` keeps it
      across runs and never makes one up.
+   - *Credentials in URLs are refused:* `?user_id=…&user_pwd=…` in a URL is refused on every route. A request that
+     names a user needs that user's token or password; the Portal says so in words (HTTP 400).
 -->
 4. **Start the shared infrastructure.** The first time, Docker recreates the `egeria-shared-postgres` container once,
    because its configuration gained the `PGVECTOR_PASSWORD` setting; your data is kept
@@ -258,6 +267,14 @@ Thank you to everyone who contributed: Dan Wolfson (427 commits), Mandy Chessell
   the Promise / Memento toggle on, and content in a governance zone appears only to users with access to that zone.
 - **If you call pyegeria's `find_data_assets` yourself** (in notebooks or scripts), it returns only ACTIVE assets by
   default; pass `content_status_list=[]` to include assets with no content status. The Portal's lists already do.
+<!-- STAGED until #895 merges. Then uncomment:
+- **A Dr.Egeria block that runs nothing is no longer reported as a success.** Through the Portal's MCP tool
+  `dr_egeria_run_block`, a block whose headings are a level off says so, with hints that name the line and the fix
+  once pyegeria provides them ([#895](https://github.com/odpi/egeria-workspaces/pull/895)).
+- **Optional firewall for the shared Postgres port.** `compose-configs/shared-infra/systemd/egeria-pg-firewall.service`
+  drops connections to 5442 unless they come from a Docker network; the README there has the check and its limits
+  (IPv4 only) ([#895](https://github.com/odpi/egeria-workspaces/pull/895)).
+-->
 - **`fresh-start-local` waits for the platform to report healthy**, and handles Podman the way `quick-start-local`
   does. Re-running a start script keeps the `provisioner` password; the shared-infra README says when a new one is
   made ([#893](https://github.com/odpi/egeria-workspaces/pull/893)).

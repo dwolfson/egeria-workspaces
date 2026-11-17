@@ -112,3 +112,7 @@ un-staging, along with #894's step 7) and a CHANGELOG Security entry. The same b
 PO-42/43 (working set wording: change "work list" in the Locator lines). Write those from the PR body when it opens.
 #894 un-staged 2026-11-17 (upstream b0cd37e6, 21:56Z); upgrade steps now 1–8. Recount at b0cd37e6: workspaces
 504 / 254, Dan 427, Mandy 27, dependabot 50 (trellis unchanged at b7837e6c, 1,273 / ~541).
+#895 staged 2026-11-17 (bundle/2026-11-17-security 3e9c50ef). Names checked at its head. RELEASE_NOTES: step 4 (+
+recreate, + URLs refused), Locator working-set block (+ rename work list → working set), Other changes (PY-30,
+firewall). CHANGELOG: Security (PO-45/41/44, firewall), Added (working sets + rename), Fixed (PO-40, PY-30). Steps
+renumber 4–9 on un-stage. Recount after it merges. The trellis notes keep "work list": that's RE's own term.

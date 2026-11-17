@@ -67,6 +67,11 @@ The current `[Unreleased]` section was written as items landed and stops around 
   Browse lists filtered by a Data Lens; select several results and add them to a work list; a breadcrumb back to the
   list with its search, filters, scroll and Show-more rows; "Resource Locator Home"; a Data Scope year, month or day means the whole of it;
   emptying a scope or pressing Clear clears it, after asking ([#893](https://github.com/odpi/egeria-workspaces/pull/893), [#894](https://github.com/odpi/egeria-workspaces/pull/894)).
+<!-- STAGED until #895 merges. Then change "work list(s)" to "working set(s)" in the Locator and Resource Browser
+  entries, and uncomment:
+- **Working sets**: called "working set" throughout (PO-42); the owner can delete one after a plan and a confirm, members
+  are never deleted, and Resource Explorer's own sets are refused (PO-43, [#895](https://github.com/odpi/egeria-workspaces/pull/895)).
+-->
 - **Mermaid Expand viewer** ([#781](https://github.com/odpi/egeria-workspaces/pull/781)).
 - **Filter and sort** on long relationship and property lists, and on schema, column and attribute-index tables
   ([#656](https://github.com/odpi/egeria-workspaces/pull/656), [#657](https://github.com/odpi/egeria-workspaces/pull/657));
@@ -156,6 +161,13 @@ The current `[Unreleased]` section was written as items landed and stops around 
 
 ### Fixed (append)
 
+<!-- STAGED until #895 merges. Then uncomment:
+- **Token reuse** (PO-40, [#895](https://github.com/odpi/egeria-workspaces/pull/895)): the Portal returns a still-valid token for the same user instead of signing in
+  again, so a reload no longer starts the per-user caches cold.
+- **Dr.Egeria run block** (PY-30, [#895](https://github.com/odpi/egeria-workspaces/pull/895)): a block that runs no command isn't a success, with hints naming the
+  line and the fix when pyegeria provides them (feature-detected).
+-->
+
 - **The Overview shows only what it measured** ([#783](https://github.com/odpi/egeria-workspaces/pull/783),
   [#785](https://github.com/odpi/egeria-workspaces/pull/785), [#791](https://github.com/odpi/egeria-workspaces/pull/791),
   [#807](https://github.com/odpi/egeria-workspaces/pull/807)); the Overview no longer stops running
@@ -197,10 +209,18 @@ The current `[Unreleased]` section was written as items landed and stops around 
 - **Ports bind to `127.0.0.1` by default** ([#644](https://github.com/odpi/egeria-workspaces/pull/644)); `--lan` opens them
   ([#687](https://github.com/odpi/egeria-workspaces/pull/687)).
 - **Jupyter no longer trusts the emSign ECC G3 root** ([#776](https://github.com/odpi/egeria-workspaces/pull/776)).
-<!-- STAGED until the PO-45 bundle PR merges. Then uncomment (add PO-40/41/44 entries from the same PR):
-- **No built-in Portal service passwords** (PO-45, #PR): the quickstart Portal and my-profile read
+<!-- STAGED until #895 merges. Then uncomment:
+- **No built-in Portal service passwords** (PO-45, [#895](https://github.com/odpi/egeria-workspaces/pull/895)): the quickstart Portal and my-profile read
   `QUICKSTART_PERSONA_PASSWORD` from `egeria-quickstart/.env` (written by `quick-start-local` if missing); freshstart's
-  `EGERIA_ADMIN_CALLER_PASSWORD` has no default and must be set (breaking).
+  `EGERIA_ADMIN_CALLER_PASSWORD` has no default and must be set (breaking). One getter refuses in words when the
+  password isn't configured, replacing the built-in fallbacks in both handler copies; freshstart's `gen-env.sh` no
+  longer drops a user's `EGERIA_ADMIN_CALLER_PASSWORD`.
+- **A named user needs their own token or password** (PO-41, [#895](https://github.com/odpi/egeria-workspaces/pull/895)): a request naming a user other than the
+  service user, without a token or password, is refused instead of running as that user on the service password;
+  `?user_id=…&user_pwd=…` in a URL is refused on every route (breaking).
+- **The MCP tools no longer publish the service password** (PO-44, [#895](https://github.com/odpi/egeria-workspaces/pull/895)): no credential defaults in the tool
+  schema; credentials are resolved at call time, the platform must be allow-listed, and the named-user rule applies.
+- **Optional firewall unit for the shared Postgres port 5442** (TR-28, [#895](https://github.com/odpi/egeria-workspaces/pull/895)).
 -->
 - **No default `egeria_advisor` password**: `init_egeria.sql` no longer creates the role with a well-known password
   (TR-27, [#887](https://github.com/odpi/egeria-workspaces/pull/887)).

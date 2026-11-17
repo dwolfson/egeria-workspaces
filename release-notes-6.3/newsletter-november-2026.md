@@ -80,13 +80,9 @@ Egeria Workspaces, our ready-to-run environment, now tracks the Egeria 6.3 build
 - **Airflow and Marquez start with the demo**, and Airflow's lineage flows into Egeria through OpenLineage.
 - **Coco Pharmaceuticals content**: a Chief Data Officer dashboard, security support, sustainability reference data, and Airflow pipelines that bring the digital products to life.
 
-<!-- TODO-IMAGE: Resource Browser page for one Coco resource. File: november-2026-resource-browser.png
-     Owner 2026-11-16: Resource Locator updates are in progress; retake this shot (and any Locator shots in the blog 11 tour) only after they land on laz.
-     Coordinator 2026-11-17 00:00:26Z: the Locator chain is LIVE on laz (L4 091bba00): search on columns and attributes, a multi-type filter,
-     hover help on terms, Data Scope / Data Lens editing, refreshed docs. Branches claude/rl-* (to claude/rl-docs 428a0155) go to odpi in the
-     next bundled PR; PR is odpi/egeria-workspaces#889 (open); entries staged in the workspaces notes. Show these features in the retake.
-     DRAFT shot taken 2026-11-13 as erinoverview on laz at 800x500 (pane limit); retake at full resolution before publishing. -->
-![The Resource Locator page for the Customer API: what it contains, its lineage, and its usage activity](november-2026-resource-browser.jpg)
+<!-- IMAGE retaken 2026-11-17 ~00:30Z as Erin Overview on laz (Portal L4 091bba00, Locator chain from odpi/egeria-workspaces#889,
+     open), 800x600: a search for "patient" filtered to Tables + Columns and attributes, with the Data Scope hover help open. -->
+![A Resource Locator search for "patient" across tables and columns, with the help for "has a data scope" open](november-2026-resource-browser.jpg)
 
 You can [try the live demo](https://egeria.pdr-associates.com){target=blank} without installing anything (signing up takes a minute), or run [Egeria Workspaces](https://egeria-project.org/egeria-workspaces/) locally with Docker or Podman.
 

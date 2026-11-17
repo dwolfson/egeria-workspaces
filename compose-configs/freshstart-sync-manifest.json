@@ -1,0 +1,304 @@
+{
+  "transforms": {
+    "view-server": [
+      [
+        "qs-view-server",
+        "fs-view-server"
+      ]
+    ],
+    "container-name": [
+      [
+        "quickstart-pyegeria-web",
+        "freshstart-pyegeria-web"
+      ]
+    ],
+    "env-path": [
+      [
+        "egeria-quickstart",
+        "egeria-freshstart"
+      ]
+    ]
+  },
+  "identical": [
+    ".gitignore",
+    "OVERVIEW_CONTEXT_INTELLIGENCE.md",
+    "action_center_handler.py",
+    "audit_handler.py",
+    "bootstrap_admin_handler.py",
+    "build_request_body_catalog.py",
+    "demo-privacy.html",
+    "demo_db.py",
+    "demo_feedback_handler.py",
+    "dr_egeria_md.py",
+    "egeria.png",
+    "egeria_feedback_handler.py",
+    "egeria_request_body_catalog.json",
+    "favorites_handler.py",
+    "lineage_handler.py",
+    "mcp_server.py",
+    "naming_vocabulary_handler.py",
+    "overview_containers.py",
+    "personas.json",
+    "policy_enforcement_handler.py",
+    "pyegeria_docs_handler.py",
+    "rate_limiter.py",
+    "report_spec_consumers.py",
+    "report_viewer.py",
+    "rest_api_handler.py",
+    "search_keywords_handler.py",
+    "static/app-bar.js",
+    "static/bootstrap-banner.js",
+    "static/egeria-logo.png",
+    "static/pdr-logo.png",
+    "static/type-nav-resolve.js",
+    "tests/test_fastapi_handler_health.py",
+    "tests/test_mcp_server_basic.py",
+    "tests/test_relationship_purpose.py",
+    "valid_values_handler.py"
+  ],
+  "transformed": {
+    "gen_overview_metrics.py": {
+      "transforms": [
+        "container-name"
+      ]
+    }
+  },
+  "pending": {
+    "Dockerfile-fast-api": {
+      "after": "#892"
+    },
+    "actor_handler.py": {
+      "after": "#891"
+    },
+    "business_capability_handler.py": {
+      "after": "#891"
+    },
+    "common_serialize.py": {
+      "after": "#891"
+    },
+    "community_handler.py": {
+      "after": "#891"
+    },
+    "context_events_handler.py": {
+      "after": "#891"
+    },
+    "duplicate_review_handler.py": {
+      "after": "#891"
+    },
+    "egeria_error_mapping.py": {
+      "after": "#891"
+    },
+    "graph_keys.py": {
+      "after": "#891"
+    },
+    "informal_tags_handler.py": {
+      "after": "#891"
+    },
+    "location_handler.py": {
+      "after": "#891"
+    },
+    "notelog_handler.py": {
+      "after": "#891"
+    },
+    "overview_handler.py": {
+      "after": "#892",
+      "transforms": [
+        "view-server"
+      ]
+    },
+    "overview_specs.py": {
+      "after": "#892"
+    },
+    "portal_logging.py": {
+      "after": "#891"
+    },
+    "project_handler.py": {
+      "after": "#891"
+    },
+    "reference_data_handler.py": {
+      "after": "#891"
+    },
+    "requirements.txt": {
+      "after": "#892"
+    },
+    "resource_browser_handler.py": {
+      "after": "#891"
+    },
+    "result_cache.py": {
+      "after": "#891"
+    },
+    "test_overview_asof.py": {
+      "after": "#892"
+    },
+    "test_overview_composition.py": {
+      "after": "#892"
+    },
+    "test_overview_scope.py": {
+      "after": "#892"
+    },
+    "test_overview_section_cache.py": {
+      "after": "#892"
+    },
+    "test_overview_specs.py": {
+      "after": "#892",
+      "transforms": [
+        "container-name"
+      ]
+    },
+    "test_overview_unconfirmed.py": {
+      "after": "#892"
+    },
+    "test_overview_viewer_total.py": {
+      "after": "#892"
+    },
+    "tests/test_overview_grounding_label_js.py": {
+      "after": "#892"
+    },
+    "tests/test_overview_p3_js.py": {
+      "after": "#892"
+    }
+  },
+  "by_design": {
+    "README.md": "each environment's own README",
+    "demo-admin.html": "SHARE-2: freshstart's portal uses Egeria server-managed auth, quickstart demo auth",
+    "demo-login.html": "SHARE-2: freshstart's portal uses Egeria server-managed auth, quickstart demo auth",
+    "demo-register.html": "SHARE-2: freshstart's portal uses Egeria server-managed auth, quickstart demo auth",
+    "demo-mode.md": "SHARE-2: freshstart's portal uses Egeria server-managed auth, quickstart demo auth",
+    "demo-portal.html": "SHARE-2: freshstart's portal uses Egeria server-managed auth, quickstart demo auth (no personas; trellis tiles hand off as the signed-in user)",
+    "demo_auth_handler.py": "SHARE-2: freshstart's portal uses Egeria server-managed auth, quickstart demo auth",
+    "demo_config.py": "SHARE-2: freshstart's portal uses Egeria server-managed auth, quickstart demo auth; freshstart ports and defaults",
+    "jupyter_lock_handler.py": "quickstart's demo workbench gate is not in freshstart",
+    "obsidian_lock_handler.py": "quickstart's demo workbench gate is not in freshstart",
+    "config_workspaces.json": "per-environment server names, ports and folders",
+    "static/type-nav-map.json": "freshstart's explorer navigation lists only the explorers it has",
+    "tests/test_canary_page_size_b5.py": "freshstart's copy omits the manual-step cases (freshstart has none)",
+    "OVERVIEW_PERSPECTIVES.dr-egeria.md": "freshstart-only",
+    "demo-profile.html": "freshstart-only (server-managed auth profile page)",
+    "dr_egeria_md_bdl.py": "freshstart-only",
+    "dr_egeria_md_prev.py": "freshstart-only",
+    "gen_perspectives.py": "freshstart-only",
+    "user-directory.omsecrets": "freshstart-only (server-managed auth user store template)",
+    "demo-reset-password.html": "quickstart-only: public demo site / Coco scenario layer (parity rows 14-15)",
+    "demo_auth_gate.py": "quickstart-only: public demo site / Coco scenario layer (parity rows 14-15)",
+    "demo_reset_handler.py": "quickstart-only: public demo site / Coco scenario layer (parity rows 14-15)",
+    "demo_target_pin.py": "quickstart-only: public demo site / Coco scenario layer (parity rows 14-15)",
+    "workbench_access.py": "quickstart-only: public demo site / Coco scenario layer (parity rows 14-15)",
+    "workbench_watchdog.py": "quickstart-only: public demo site / Coco scenario layer (parity rows 14-15)",
+    "main.py": "quickstart-only empty stub",
+    "portal-workloads/**": "quickstart-only: public demo site / Coco scenario layer (parity rows 14-15)",
+    "egeria-outbox/**": "quickstart-only: public demo site / Coco scenario layer (parity rows 14-15)",
+    "tests/golden_anchors.py": "Coco seed-data anchors (quickstart content)",
+    "tests/test_golden_anchors.py": "Coco seed-data anchors (quickstart content)",
+    "tests/fixtures/**": "quickstart test fixtures captured from its own deployment"
+  },
+  "not_yet": {
+    "bootstrap_batches.py": "parity row 6: mid drift, triage per file",
+    "bootstrap_monitor_handler.py": "parity row 6: mid drift, triage per file",
+    "call_pyegeria.py": "parity row 6: mid drift, triage per file",
+    "catalog_search_handler.py": "parity row 6: mid drift, triage per file",
+    "data_design_handler.py": "parity row 6: mid drift, triage per file",
+    "digital_products_handler.py": "parity row 6: mid drift, triage per file",
+    "dr_egeria_commands_handler.py": "parity row 6: mid drift, triage per file",
+    "egeria-audit.html": "parity row 6: mid drift, triage per file",
+    "egeria-operations.html": "parity row 6: mid drift, triage per file",
+    "glossary_handler.py": "parity row 6: mid drift, triage per file",
+    "governance_definitions_handler.py": "parity row 6: mid drift, triage per file",
+    "governance_zones_handler.py": "parity row 6: mid drift, triage per file",
+    "isc_handler.py": "parity row 6: mid drift, triage per file",
+    "lineage-explorer.html": "parity row 6: mid drift, triage per file",
+    "mermaid_handler.py": "parity row 6: mid drift, triage per file",
+    "operations_handler.py": "parity row 6: mid drift, triage per file",
+    "perspectives_handler.py": "parity row 6: mid drift, triage per file",
+    "semantic_links.py": "parity row 6: mid drift, triage per file",
+    "solution_architect_handler.py": "parity row 6: mid drift, triage per file",
+    "static/egeria-resize.js": "parity row 6: mid drift, triage per file",
+    "tech_catalog_handler.py": "parity row 6: mid drift, triage per file",
+    "type_system_handler.py": "parity row 6: mid drift, triage per file",
+    "resource-browser.html": "parity row 6: mid drift, triage per file",
+    "egeria_auth.py": "parity row 6: mid drift, triage per file; partly by design (auth seam)",
+    "pyegeria_handler.py": "parity row 6: mid drift, triage per file; partly by design (auth seam, router set)",
+    "tests/test_platform_allowlist.py": "parity row 6: mid drift, triage per file (follows egeria_auth)",
+    "tests/test_local_spec_fallback.py": "parity row 8: report-spec stack",
+    "type-explorer.html": "parity row 7: large drift (copy-and-gate)",
+    "static/egeria-shared-ui.js": "parity row 7: large drift (copy-and-gate)",
+    "tech-catalog.html": "parity row 7: large drift (copy-and-gate)",
+    "collections_handler.py": "parity row 7: large drift (copy-and-gate)",
+    "egeria-overview.html": "parity row 3: Overview (#892); after it the remaining differences are by design: move it to by_design then",
+    "test_overview_capped_counts.py": "parity row 3: freshstart's copy (#892) drops the handler-name test until the handlers it checks are synced",
+    "test_overview_strict.py": "parity row 3: fails in quickstart too (PO-8 paging contract); port when fixed",
+    "report_specs_handler.py": "parity row 8: report-spec stack",
+    "report_spec_sync.py": "parity row 8: report-spec stack",
+    "local_spec_fallback.py": "parity row 8: report-spec stack",
+    "spec_resolution.py": "parity row 8: report-spec stack",
+    "report_spec_restricted.py": "parity row 8: report-spec stack",
+    "report_spec_publish_handler.py": "parity row 8: report-spec stack",
+    "egeria-held-specs/**": "parity row 8: report-spec stack",
+    "report-spec-valid-values/**": "parity row 8: report-spec stack",
+    "gen_report_spec_valid_values.py": "parity row 8: report-spec stack",
+    "static/report-spec-source.js": "parity row 8: report-spec stack",
+    "test_report_spec_valid_values.py": "parity row 8: report-spec stack",
+    "tests/test_report_spec_*": "parity row 8: report-spec stack",
+    "tests/test_report_specs_*": "parity row 8: report-spec stack",
+    "tests/test_spec_resolution.py": "parity row 8: report-spec stack",
+    "tests/test_report_pinned_element_missing.py": "parity row 8: report-spec stack",
+    "agreements_handler.py": "parity row 9: Egeria-generic explorers",
+    "namespaces_handler.py": "parity row 9: Egeria-generic explorers",
+    "subject_area_handler.py": "parity row 9: Egeria-generic explorers",
+    "external_links_handler.py": "parity row 9: Egeria-generic explorers",
+    "soa_handler.py": "parity row 9: Egeria-generic explorers",
+    "governance_metrics_handler.py": "parity row 9: Egeria-generic explorers",
+    "governance-metrics.html": "parity row 9: Egeria-generic explorers",
+    "governance_classifications_handler.py": "parity row 9: Egeria-generic explorers",
+    "data_mesh_handler.py": "parity row 9: Egeria-generic explorers",
+    "data-mesh.html": "parity row 9: Egeria-generic explorers",
+    "analytics_registry_handler.py": "parity row 9: Egeria-generic explorers",
+    "gen_governance_metrics.py": "parity row 9: Egeria-generic explorers",
+    "gen_dashboard_glossary.py": "parity row 9: Egeria-generic explorers",
+    "_batch.json": "parity row 9: Egeria-generic explorers",
+    "static/egeria-not-measured.js": "parity row 9: Egeria-generic explorers",
+    "test_not_measured_render.py": "parity row 9: Egeria-generic explorers",
+    "tests/test_soa_*": "parity row 9: Egeria-generic explorers",
+    "tests/test_analytics_registry_handler.py": "parity row 9: Egeria-generic explorers",
+    "tests/test_governance_metrics_viewer_js.py": "parity row 9: Egeria-generic explorers",
+    "tests/test_classification_purpose*": "parity row 9: Egeria-generic explorers",
+    "insights_handler.py": "parity row 10: Query",
+    "egeria-insights.html": "parity row 10: Query",
+    "EGERIA_INSIGHTS_QUERY_MODEL.md": "parity row 10: Query",
+    "tests/test_saved_query_refresh.py": "parity row 10: Query",
+    "local_dashboards_handler.py": "parity row 11: Local Dashboards",
+    "local-dashboards.html": "parity row 11: Local Dashboards",
+    "static/egeria-table.js": "parity row 11: Local Dashboards",
+    "static/diagram-viewer.js": "parity row 11: Local Dashboards",
+    "tests/test_local_dashboard*": "parity row 11: Local Dashboards",
+    "tests/egeria_table_harness.js": "parity row 11: Local Dashboards",
+    "tests/test_egeria_table_js.py": "parity row 11: Local Dashboards",
+    "advisor_handler.py": "parity row 12: trellis handoffs (branch claude/freshstart-trellis-handoffs)",
+    "resource_explorer_handler.py": "parity row 12: trellis handoffs (branch claude/freshstart-trellis-handoffs)",
+    "trellis_sso.py": "parity row 12: trellis handoffs (branch claude/freshstart-trellis-handoffs)",
+    "re_analytics.py": "parity row 12: trellis handoffs (branch claude/freshstart-trellis-handoffs)",
+    "tests/test_browser_facing_url.py": "parity row 12: trellis handoffs (branch claude/freshstart-trellis-handoffs)",
+    "tests/test_re_analytics.py": "parity row 12: trellis handoffs (branch claude/freshstart-trellis-handoffs)",
+    "local-admin.html": "parity row 13: admin extras",
+    "egeria_resets_handler.py": "parity row 13: admin extras",
+    "static/egeria-resets-panel.js": "parity row 13: admin extras",
+    "static/infra-health-panel.js": "parity row 13: admin extras",
+    "tests/test_egeria_resets_panel.py": "parity row 13: admin extras",
+    "tests/test_egeria_upgrade_reset_cli.py": "parity row 13: admin extras",
+    "tests/test_infra_check.py": "parity row 13: admin extras",
+    "Extending the TypeExplorer.md": "parity row 20: docs, alongside each feature",
+    "OVERVIEW_METRICS.md": "parity row 20: docs, alongside each feature",
+    "OVERVIEW_REPORTING_MODEL.md": "parity row 20: docs, alongside each feature",
+    "type-explorer-architecture.md": "parity row 20: docs, alongside each feature",
+    "OVERVIEW_ANALYTICS_GLOSSARY.dr-egeria.md": "parity row 20: docs, alongside each feature",
+    "OVERVIEW_GOVERNANCE_METRICS.dr-egeria.md": "parity row 20: docs, alongside each feature",
+    "OVERVIEW_METRIC_GOVERNANCE.md": "parity row 20: docs, alongside each feature",
+    "OVERVIEW_NEXT_STEPS.md": "parity row 20: docs, alongside each feature",
+    "OVERVIEW_README.md": "parity row 20: docs, alongside each feature",
+    "PORTAL_STARTUP.md": "parity row 20: docs, alongside each feature",
+    "TESTING.md": "parity row 20: docs, alongside each feature",
+    "PYEGERIA_GAPS.md": "parity row 20: docs, alongside each feature",
+    "type-coverage-gap-analysis.html": "parity row 20: docs, alongside each feature",
+    "requirements-test.txt": "test tooling: with freshstart's test suite",
+    "tests/**": "quickstart's tests; each follows the code it covers (many already exercise both environments)"
+  }
+}

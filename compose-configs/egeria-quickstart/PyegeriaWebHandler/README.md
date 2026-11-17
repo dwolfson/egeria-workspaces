@@ -7,6 +7,25 @@ used to execute Dr.Egeria commands from anything that can make a REST call - and
 the Egeria runtime.
 
 ## Maintenance Notes
+### Shared files: edit quickstart, then sync (SHARE-3)
+Quickstart and freshstart share many Portal files. **Quickstart's copy is always the source.** When you change one, run the sync so freshstart's copy follows:
+
+```bash
+python3 compose-configs/sync-freshstart.py --write      # copy quickstart -> freshstart, applying the transforms
+python3 compose-configs/sync-freshstart.py --check      # what CI runs (tests/test_freshstart_sync.py)
+```
+
+Commit both copies. `compose-configs/freshstart-sync-manifest.json` puts every file of either tree in one category:
+- `identical`: byte-identical in both trees.
+- `transformed`: identical after named substitutions, such as `qs-view-server` → `fs-view-server`, or after keeping a
+  fenced `FRESHSTART-ONLY BEGIN`/`END` block.
+- `pending`: becomes identical when a named PR merges.
+- `by_design`: differs on purpose, with the reason given.
+- `not_yet`: not synced yet, with its parity row.
+
+A new Portal file must be classified there, or `--check` fails. When a `pending` or `not_yet` file comes into sync,
+`--check` asks you to move it to `identical`, so those lists only shrink.
+
 The Pyegeria Web Handler now uses the **Dr. Egeria v2** core, which features a dynamic registry-based dispatcher (`V2Dispatcher`).
 
 ### Dynamic Discovery

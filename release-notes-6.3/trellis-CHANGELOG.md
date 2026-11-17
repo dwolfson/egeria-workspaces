@@ -64,7 +64,8 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 - **Dashboard table tiles** are drawn by the Portal's own table renderer, with resizable columns (#1089).
 <!-- STAGED until the default-on PR merges: replace the next two lines with
   "- **Report-spec authoring on pyegeria's authoring API** (#1104, #1105, #PR), on by default (`EA_SPEC_AUTHORING_V2`,
-  `EA_SPEC_ELICITOR_FIXES`):" and add a Changed entry for the new default. -->
+  `EA_SPEC_ELICITOR_FIXES`):" and add a Changed entry: "Report-spec authoring on by default; `EA_SPEC_AUTHORING_V2=0`
+  turns it all off, `EA_SPEC_ELICITOR_FIXES=0` only the elicitor fixes; `EA_SPEC_STATUS_MERGE` stays off". -->
 - **Report-spec authoring on pyegeria's authoring API** (prototype, #1104, #1105), off unless `EA_SPEC_AUTHORING_V2`
   and `EA_SPEC_ELICITOR_FIXES` are set. With them on:
   - **Ordinal ranking** (TR-6): a property with an ordered scale, such as importance, is ranked by its scale. A capped

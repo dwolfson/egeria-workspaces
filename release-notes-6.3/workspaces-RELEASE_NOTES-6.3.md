@@ -101,6 +101,8 @@ In numbers: 499 commits and 253 merged pull requests between October 9 and Novem
   lists by a Data Lens, tick several results and add them to a work list at once, and follow a breadcrumb back to
   your list with its search and filters kept. A Data Scope of a year, month or day covers the whole of it
   ([#893](https://github.com/odpi/egeria-workspaces/pull/893)).
+<!-- STAGED until #894 merges. Then change "with its search and filters kept" above to "with its search, filters,
+  scroll and the rows you opened with Show more kept" and add [#894](https://github.com/odpi/egeria-workspaces/pull/894) to the line. -->
 - **The Overview marks figures it could not confirm.** When paging can't confirm that a count read to the end, the
   figure says "at least N" or "N found", with the reason, instead of a bare number that might be wrong
   ([#890](https://github.com/odpi/egeria-workspaces/pull/890)).
@@ -200,10 +202,24 @@ Thank you to everyone who contributed: Dan Wolfson (422 commits), Mandy Chessell
    `compose-configs/shared-infra/.env` (generated if missing, on existing installs too), and updates the runtime
    secrets and Airflow's connection to match, which is why Airflow must be restarted in the same run
    ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
+<!-- STAGED until #894 merges. Then append to step 5:
+   The `provisioner` role is shared, and the new password reaches only the stack you start. If one host runs both
+   the quickstart and a freshstart, run the other stack's start script too, or its provisioning connectors can't
+   sign in ([#894](https://github.com/odpi/egeria-workspaces/pull/894)).
+-->
 6. **Rebuild the images.** The quickstart needs pyegeria 6.3.0 or later
    ([#887](https://github.com/odpi/egeria-workspaces/pull/887)) and runs the released Egeria 6.3 image
    ([#885](https://github.com/odpi/egeria-workspaces/pull/885)). Freshstart now needs pyegeria 6.3.0 or later too
    ([#892](https://github.com/odpi/egeria-workspaces/pull/892)).
+<!-- STAGED until #894 merges. Then insert as step 7 and renumber the next step to 8:
+7. **If you run Resource Explorer and Egeria Advisor (Trellis), set `TRELLIS_DB_CREDENTIAL_KEY`.** It is now
+   required in `compose-configs/optional-associated-runtimes/trellis/.env`, and the Prefect Resource Explorer worker
+   needs the same value in `.env.re-worker`; without it Resource Explorer won't start. Generate it once (for example
+   `openssl rand -hex 32`) and keep it stable. Before this, the key that encrypts stored database passwords came from
+   the container's host name, so each recreate made them unreadable: re-enter each stored database password once.
+   If an older `.env` sets `RE_DB_CREDENTIAL_KEY`, that one takes precedence, so leave it unset or give it the same
+   value ([#894](https://github.com/odpi/egeria-workspaces/pull/894)).
+-->
 7. **To upgrade or reset the quickstart's Egeria itself**, use `compose-configs/egeria-quickstart/bin/egeria-upgrade-reset`
    (`plan` first, then `apply`); see *Upgrading or resetting the quickstart Egeria*
    ([#851](https://github.com/odpi/egeria-workspaces/pull/851)). `plan --stable` picks the newest released Egeria;

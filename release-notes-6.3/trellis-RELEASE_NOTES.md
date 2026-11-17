@@ -114,7 +114,9 @@ In numbers: 1,273 commits and about 541 merged pull requests across 12 packages 
 <!-- STAGED until the PR that turns EA_SPEC_AUTHORING_V2 and EA_SPEC_ELICITOR_FIXES on by default merges (Dan,
   2026-11-17: "Turn them on by default"). Then replace the bullet's first sentence with:
   "**Report-spec authoring in Egeria Advisor is built on pyegeria's authoring API** (#1104, #1105, #PR)." and
-  "With both on," with "Now,"; add the way to turn it off, if the PR gives one. -->
+  "With both on," with "Now,"; then add: "To turn it off, set `EA_SPEC_AUTHORING_V2=0`; `EA_SPEC_ELICITOR_FIXES=0`
+  turns off only the question handling (sort and status from your words)." Per the Coordinator 2026-11-17, from branch
+  claude/ea-rebase-on-by-default; check both switches in the merged code (U2) and the U3 live check before un-staging. -->
 - **Work in progress**: `trellis-ui` (#1062), and `trellis-accel`, which chooses a compute device at run time
   (#1073; design #1072).
 
@@ -146,6 +148,13 @@ Thank you to everyone who contributed: Dan Wolfson (1,257 commits) and dependabo
   Explorer's registry gains a `flow_run_results` table, created when Resource Explorer first starts; there is nothing
   to do (#1093).
 - **After an Egeria reset**, follow the recovery procedure in the operations guide (§2.0) (#1088).
+<!-- STAGED until odpi/egeria-workspaces #894 merges. Then uncomment:
+- **Stored database passwords survive a container recreate.** Set `RE_DB_CREDENTIAL_KEY` or
+  `TRELLIS_DB_CREDENTIAL_KEY` to a stable value; without either, Resource Explorer derives the key from the host name
+  and warns, and passwords stored before a recreate can't be read. Egeria Workspaces now requires
+  `TRELLIS_DB_CREDENTIAL_KEY` in its Trellis `.env` and the Prefect worker's `.env.re-worker`; re-enter each stored
+  database password once (Egeria Workspaces #894).
+-->
 - **Only JWT bearer tokens are accepted at login** (#827).
 - **Zones**: a zone with no access control is private, as it is in Egeria (#1043). Content in such a zone is visible
   only to its owner.

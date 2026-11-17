@@ -98,3 +98,7 @@ Architect PASS on 3eec815c. Un-stage the default-on wording only when all hold: 
 EA_SPEC_AUTHORING_V2=0/false (and FIXES) turns it off, and the notes say how; U3 checked through the real 8880 with no
 flag in any env file (resolved state shown at startup/health; C03, B05, B15 asked through the service); U4
 EA_SPEC_STATUS_MERGE stays off, so keep "says which values it didn't search".
+#894 staged 2026-11-17 (bundle/2026-11-17-b3 c1059fbb): workspaces RELEASE_NOTES 3 blocks (Locator scroll wording,
+step-5 shared-role note, new step 7 TRELLIS_DB_CREDENTIAL_KEY + renumber), CHANGELOG 2 (Locator wording; Changed:
+breaking key + README), trellis RELEASE_NOTES 1 (upgrade note). Recount after it merges. EA default-on: Dan confirmed
+in the Coordinator's session too; off switches per the Coordinator recorded in the staged comments (verify, U2).

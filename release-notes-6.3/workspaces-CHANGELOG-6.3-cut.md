@@ -67,6 +67,8 @@ The current `[Unreleased]` section was written as items landed and stops around 
   Browse lists filtered by a Data Lens; select several results and add them to a work list; a breadcrumb back to the
   list with its search and filters; "Resource Locator Home"; a Data Scope year, month or day means the whole of it;
   emptying a scope or pressing Clear clears it, after asking ([#893](https://github.com/odpi/egeria-workspaces/pull/893)).
+<!-- STAGED until #894 merges. Then change "with its search and filters" above to "with its search, filters, scroll
+  and Show-more rows" and add [#894](https://github.com/odpi/egeria-workspaces/pull/894). -->
 - **Mermaid Expand viewer** ([#781](https://github.com/odpi/egeria-workspaces/pull/781)).
 - **Filter and sort** on long relationship and property lists, and on schema, column and attribute-index tables
   ([#656](https://github.com/odpi/egeria-workspaces/pull/656), [#657](https://github.com/odpi/egeria-workspaces/pull/657));
@@ -110,6 +112,14 @@ The current `[Unreleased]` section was written as items landed and stops around 
   Update Relationship, Count Metadata Elements), the same as pyegeria 6.3.0's ([#888](https://github.com/odpi/egeria-workspaces/pull/888)).
 
 ### Changed (append)
+
+<!-- STAGED until #894 merges. Then uncomment:
+- **Breaking for Trellis deployments: `TRELLIS_DB_CREDENTIAL_KEY` is required** in the Trellis `.env` and the Prefect
+  Resource Explorer worker's `.env.re-worker`. Stored database passwords no longer become unreadable when a container
+  is recreated; re-enter each one once. An older `RE_DB_CREDENTIAL_KEY` takes precedence ([#894](https://github.com/odpi/egeria-workspaces/pull/894)).
+- **The shared-infra README says to re-run the other stack's start script** after the `provisioner` password changes,
+  on a host that runs both the quickstart and a freshstart (TR-28, [#894](https://github.com/odpi/egeria-workspaces/pull/894)).
+-->
 
 - **Platform**: quickstart and freshstart on Egeria 6.3-SNAPSHOT; the quickstart pin tracks the Pasteur build
   ([#647](https://github.com/odpi/egeria-workspaces/pull/647), [#748](https://github.com/odpi/egeria-workspaces/pull/748),

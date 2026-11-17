@@ -216,8 +216,8 @@ The current `[Unreleased]` section was written as items landed and stops around 
   password isn't configured, replacing the built-in fallbacks in both handler copies; freshstart's `gen-env.sh` no
   longer drops a user's `EGERIA_ADMIN_CALLER_PASSWORD`.
 - **A named user needs their own token or password** (PO-41, [#895](https://github.com/odpi/egeria-workspaces/pull/895)): a request naming a user other than the
-  service user, without a token or password, is refused instead of running as that user on the service password;
-  `?user_id=…&user_pwd=…` in a URL is refused on every route (breaking).
+  service user, without a token or password, is refused (HTTP 400, in words) instead of running as that user on the
+  service password; this includes `?user_id=` in a URL (breaking). No route reads a password from a URL.
 - **The MCP tools no longer publish the service password** (PO-44, [#895](https://github.com/odpi/egeria-workspaces/pull/895)): no credential defaults in the tool
   schema; credentials are resolved at call time, the platform must be allow-listed, and the named-user rule applies.
 - **Optional firewall unit for the shared Postgres port 5442** (TR-28, [#895](https://github.com/odpi/egeria-workspaces/pull/895)).

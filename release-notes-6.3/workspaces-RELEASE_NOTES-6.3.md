@@ -204,8 +204,9 @@ Thank you to everyone who contributed: Dan Wolfson (427 commits), Mandy Chessell
    - *Freshstart (breaking):* `freshstart-pyegeria-web` no longer has a built-in `EGERIA_ADMIN_CALLER_PASSWORD`. Set it
      in `compose-configs/egeria-freshstart/.env`, or export it, before the next start. `fresh-start-local` keeps it
      across runs and never makes one up.
-   - *Credentials in URLs are refused:* `?user_id=…&user_pwd=…` in a URL is refused on every route. A request that
-     names a user needs that user's token or password; the Portal says so in words (HTTP 400).
+   - *A URL can no longer act as another user:* `?user_id=` naming anyone but the Portal's own user needs a sign-in
+     token, and a request that names a user needs that user's token or password; otherwise the Portal refuses in words
+     (HTTP 400). No route reads a password from a URL.
 -->
 4. **Start the shared infrastructure.** The first time, Docker recreates the `egeria-shared-postgres` container once,
    because its configuration gained the `PGVECTOR_PASSWORD` setting; your data is kept

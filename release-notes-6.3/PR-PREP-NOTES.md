@@ -91,3 +91,6 @@ the C03 sort and the count wording all live in spec_authoring_v2.py, off unless 
 sort/status conditions also need EA_SPEC_ELICITOR_FIXES; `_on()` reads 1/true/yes/on, default unset). So the
 notes describe them as the opt-in prototype, not default behaviour.
 Trellis recount at b7837e6c: 1,273 commits, ~541 PRs, Dan 1,257, dependabot 16. Workspaces unchanged (65095b8b).
+Dan 2026-11-17, in this session: "Turn them on by default" (EA_SPEC_AUTHORING_V2 + EA_SPEC_ELICITOR_FIXES; not
+EA_SPEC_STATUS_MERGE). Relayed verbatim to the Coordinator. The default-on wording is staged in both trellis files; if
+the PR doesn't merge before the release, the opt-in text stays.

@@ -111,6 +111,10 @@ In numbers: 1,273 commits and about 541 merged pull requests across 12 packages 
   search; for properties that take one value it says which values it didn't search, and it refuses an invalid status.
   It doesn't claim a ranked or complete list, and counts say "at least N", unless Egeria confirmed the end of the
   results.
+<!-- STAGED until the PR that turns EA_SPEC_AUTHORING_V2 and EA_SPEC_ELICITOR_FIXES on by default merges (Dan,
+  2026-11-17: "Turn them on by default"). Then replace the bullet's first sentence with:
+  "**Report-spec authoring in Egeria Advisor is built on pyegeria's authoring API** (#1104, #1105, #PR)." and
+  "With both on," with "Now,"; add the way to turn it off, if the PR gives one. -->
 - **Work in progress**: `trellis-ui` (#1062), and `trellis-accel`, which chooses a compute device at run time
   (#1073; design #1072).
 

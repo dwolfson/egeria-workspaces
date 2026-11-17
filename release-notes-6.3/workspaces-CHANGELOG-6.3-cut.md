@@ -32,6 +32,13 @@ The current `[Unreleased]` section was written as items landed and stops around 
 
 ### Added (append)
 
+- **Coco systems feed Egeria, and Egeria feeds an operational data store** ([#870](https://github.com/odpi/egeria-workspaces/pull/870)).
+  Egeria subscribes to the Coco products for people, roles, user identities, departments and locations, and the new
+  Airflow DAG `coco_subscriptions_egeria` loads them into Egeria. A new `egeria_ods` database in the shared PostgreSQL,
+  with a `provisioner` role, is set up to receive Egeria's own digital products, one table per product; tables arrive
+  once Egeria's daily refresh subscriptions run on a schedule. `ensure-shared-infra.sh` runs `init_egeria_ods.sql` on
+  every start, creating only what is missing. The Open Lineage Cataloguer's account gains the publish zones Egeria 6.3
+  requires.
 - **Dashboards held in Egeria.** Dashboard sheets and their tiles can be held in Egeria as Egeria 6.3 Dashboard
   elements with an owner, behind a token-only dashboards API ([#818](https://github.com/odpi/egeria-workspaces/pull/818)).
   Local Dashboards shows a folder tree of Egeria-held sheets with a Used by row
@@ -163,7 +170,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
 <!-- STAGED until #889 merges. Then uncomment (and add the Locator line under Added):
 - **No well-known password for the `provisioner` database user.** It comes from `PROVISIONER_PASSWORD` in
   `shared-infra/.env`, generated when missing; the first start rotates it with the runtime secrets and Airflow, and
-  it is kept out of the statement log (TR-28, [#889](https://github.com/odpi/egeria-workspaces/pull/889)).
+  it is kept out of `pg_stat_statements`' query-text file (TR-28, [#889](https://github.com/odpi/egeria-workspaces/pull/889)).
 Added: - **Resource Locator**: search on columns, attributes and data fields; several kinds at once; hover help on terms;
   set, change and clear Data Scope; create and edit Data Lenses that govern work lists ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
 -->
@@ -172,14 +179,7 @@ Added: - **Resource Locator**: search on columns, attributes and data fields; se
 - **Continued hardening of the Portal environment** ([#640](https://github.com/odpi/egeria-workspaces/pull/640),
   [#642](https://github.com/odpi/egeria-workspaces/pull/642), [#643](https://github.com/odpi/egeria-workspaces/pull/643)).
 - **Ports bind to `127.0.0.1` by default** ([#644](https://github.com/odpi/egeria-workspaces/pull/644)); `--lan` opens them
-  ([#687](https://github.com/odpi/egeria-workspaces/pull/687)). Move the existing `--lan` entry here or cross-reference it.
+  ([#687](https://github.com/odpi/egeria-workspaces/pull/687)).
 - **Jupyter no longer trusts the emSign ECC G3 root** ([#776](https://github.com/odpi/egeria-workspaces/pull/776)).
-- **Obsidian plugin dependencies** ([#704](https://github.com/odpi/egeria-workspaces/pull/704)): already under Changed; move here.
 - **No default `egeria_advisor` password**: `init_egeria.sql` no longer creates the role with a well-known password
   (TR-27, [#887](https://github.com/odpi/egeria-workspaces/pull/887)).
-
-### Not itemised
-
-Docs-only PRs (design notes and Portal Docs reorganisation: #649, #683, #728, #778, #782, #786, #787, #792, #794,
-#797, #799, #813), CI chores (#744, #747, #768, #779) and the "keep RELEASE_NOTES per release" note. Dependabot bumps after #830 (#834–#837, #839, #841–#843) go under the existing
-Dependencies entry. Add any of them if the owner wants them listed.

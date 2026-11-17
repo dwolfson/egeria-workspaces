@@ -1,8 +1,3 @@
-<!-- DRAFT: new file RELEASE_NOTES.md at the root of dwolfson/trellis, mirroring egeria-workspaces' RELEASE_NOTES.md.
-     Range b74b07f9 (2026-10-09) to 73738df8 (#1086, 2026-11-12), plus #1095/#1099 by hand. Refresh the stats at the cut.
-     Owner decisions: label "6.3 Tech Preview", tag v6.3-tech-preview, released with Egeria 6.3 on Tuesday
-     2026-11-17; RE and EA are on the public demo. -->
-
 # Trellis 6.3 Tech Preview: Resource Explorer and Egeria Advisor
 
 Resource Explorer and Egeria Advisor were introduced as early previews in the October 2026 Egeria newsletter.
@@ -103,7 +98,8 @@ In numbers: 1,151 commits and about 523 merged pull requests across 12 packages 
   certifi.
 - **Survey steps can run on Prefect workers.** The Resource Explorer image can run as a Prefect worker; the configured
   pool decides where each step goes, and the status banner says when no worker can take it (#1091, #1092). A step
-  is never run twice, and a result that can't be stored exactly fails the run rather than publishing (#1093, #1094).
+  sent to a worker is not also run locally, and a result that can't be stored exactly fails the run rather than
+  publishing (#1093, #1094).
 - **Recovering after an Egeria reset**: Resource Explorer can reconnect its records to Egeria by the names it stored,
   and keeps the links that still work. The operations guide has the steps in order (#1087, #1088, #1097).
 - **Egeria Advisor asks before it changes anything**: actions from chat and plans need your confirmation, and commands
@@ -136,7 +132,8 @@ Thank you to everyone who contributed: Dan Wolfson (1,135 commits) and dependabo
   README, "Setting or changing the egeria_advisor password") (#1102). Without it, Resource Explorer and Egeria Advisor
   refuse to start and say which setting is missing (#1096).
 - **Prefect**: steps go to the pool named in `PREFECT_WORK_POOL`, so run your workers on that pool (#1092). Resource
-  Explorer's registry gains a `flow_run_results` table; see #1093 for how it is created on an existing install.
+  Explorer's registry gains a `flow_run_results` table, created when Resource Explorer first starts; there is nothing
+  to do (#1093).
 - **After an Egeria reset**, follow the recovery procedure in the operations guide (§2.0) (#1088).
 - **Only JWT bearer tokens are accepted at login** (#827).
 - **Zones**: a zone with no access control is private, as it is in Egeria (#1043). Content in such a zone is visible

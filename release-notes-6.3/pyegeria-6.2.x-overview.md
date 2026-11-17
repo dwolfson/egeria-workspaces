@@ -1,9 +1,3 @@
-<!-- DRAFT: new file docs/release-notes/6.3.0-egeria-6.3.md in odpi/egeria-python (was planned as 6.2.x-egeria-6.3.md).
-     pyegeria 6.3.0 = odpi/egeria-python#600, squash and tag v6.3.0 = 3af20c48, on PyPI 2026-11-16 15:50Z.
-     The 6.2 part covers v6.2.0 (c9dc7a43, 2026-10-08) to v6.2.42 (9b3eb8e9, 2026-11-15). Numbers are PRs in
-     odpi/egeria-python. 6.2.40–6.2.42 written 2026-11-17 from #593, #595, #598 and docs/release-notes/6.2.40.md;
-     there are no 6.2.41/6.2.42 note files (their notes were in next.md at v6.2.42). -->
-
 # pyegeria 6.3.0, with the 6.2 series that led to it
 
 pyegeria 6.3.0 is the Python client for **Egeria 6.3**. This page describes what's new in 6.3.0, then the 6.2 series of
@@ -29,9 +23,7 @@ from an earlier 6.2 release, [the 6.2 series](#the-62-series) below describes wh
   On Egeria 6.3, pyegeria can tell when it has read to the end of those results. On older platforms, counts are
   reported as "at least N".
 - **Known issue on Egeria 6.3:** a search for data assets with no filter can return fewer assets than the repository
-  holds, so treat its count as a lower bound. <!-- EG-15 (Rocky, 2026-11-16: 440 of 1797 DataAssets missing from an
-  unfiltered find_data_assets on released 6.3). Add the upstream issue link once one exists. -->
-- **A find's count says "at least N" unless the end was confirmed.** `result_count(result)`
+  holds, so treat its count as a lower bound.- **A find's count says "at least N" unless the end was confirmed.** `result_count(result)`
   (`pyegeria.view.format_set_executor`) gives the count, its wording, and the reason when it isn't final.
 - **MCP report runs page up to their maximum rows** and include a count, so a filtered first page no longer reads as
   "nothing".
@@ -92,7 +84,7 @@ These three releases, from November 12 to 15, came just before 6.3.0.
 - **The MetadataExpert commands** in Dr.Egeria (16 of them) work on type and enum definitions and raw elements.
   They aren't allowed from chat, and the destructive ones need the GUID or name typed back before anything is written.
 
-**6.2.42: complete paging, and no password you didn't give** (#598)
+**6.2.42: paging that doesn't stop early, and no password you didn't give** (#598)
 - **Paging:** every loop that pages goes through `pyegeria.core.paging`, and a short or empty page isn't taken as the
   end. A lookup answers found, absent or unknown; an error is never "absent".
 - **No password you didn't give:** pass `user_pwd=NO_PASSWORD` to hold no password, typically with a bearer token.
@@ -208,7 +200,7 @@ These three releases, from November 12 to 15, came just before 6.3.0.
 | 6.2.23 | Absence word `nothing_found`; the legacy `measured_nothing` is still read (#535). | Write `nothing_found`. |
 | 6.2.24 | `population=` replaces `scope=` on overview counts; `scope=` is deprecated (#538). | Rename the keyword. |
 | 6.2.26 | The analytic binder is removed; inputs are supplied by role (#552, #553). A spec that still carries `analytic_binders` warns (#561). | Declare `inputs` on the routine. |
-| 6.2.27 | Totals count the whole repository by default (#556). | Expect larger, correct totals. |
+| 6.2.27 | Totals count the whole repository by default (#556). | Expect larger totals. |
 | 6.2.34 | An element hidden by zone security is reported as `AUTHORIZATION_ERROR_403`, not `_401`; the exception class is unchanged and a 403 is never retried (#585, ISSUE-182). | If you match `AUTHORIZATION_ERROR_401` in the text, match `AUTHORIZATION_ERROR` instead. |
 | 6.2.36 | With `body=` and no paging in the body, the method's `page_size` default now applies on 19 methods (#588). | Put `pageSize` in the body, or pass `page_size`, if you relied on Egeria's default page. See [6.2.36](6.2.36.md). |
 | 6.2.37 | Rendered **text** changes (REPORT, LIST, MD, FORM, HTML, the CLI table): LIST cells are drawn by what the value is, and capped results say "more may exist" (#589). Result shapes are unchanged. | Re-check anything that parses pyegeria's rendered text; read DICT or JSON instead. See [6.2.37](6.2.37.md). |

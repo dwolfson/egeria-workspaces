@@ -1,12 +1,3 @@
-<!-- DRAFT: new top section for odpi/egeria-workspaces RELEASE_NOTES.md.
-     At release: put this above "# Egeria Workspaces 6.2", demote 6.2's H1 if the file should hold several
-     releases, and REMOVE the 6.2 file's "## Since 6.2 (unreleased, on main)" section (folded in below).
-     Move 6.2's "Report specs held in Egeria are read from the Portal's consumer folder" upgrade note here
-     (it describes 6.3 behaviour). Stats are from 903e8eeb (#619, 2026-10-09) to 3b8ac7e2 (#857, 2026-11-12);
-     refresh them at the cut. Release tentatively Monday 2026-11-16, alongside Egeria 6.3 (owner, 2026-11-11);
-     v6.2 is tagged at 903e8eeb. These notes are also our piece of the Egeria project's 6.3 release notes.
-     Resource Explorer and Egeria Advisor ship as the "6.3 Tech Preview" (dwolfson/trellis). -->
-
 # Egeria Workspaces 6.3
 
 Since the 6.2 release on October 9, our work on `egeria-workspaces` has focused on:
@@ -94,7 +85,7 @@ In numbers: 377 commits and 217 merged pull requests over five weeks.
 - **Lineage Explorer** hop limit and cut markers ([#749](https://github.com/odpi/egeria-workspaces/pull/749));
   Mermaid diagrams get an Expand viewer ([#781](https://github.com/odpi/egeria-workspaces/pull/781)).
 - **The Overview only shows numbers it has actually measured.** Counts cover the whole repository, slow sections
-  are measured in the background, and a card says "not measured" rather than showing a guess ([#783](https://github.com/odpi/egeria-workspaces/pull/783),
+  are measured in the background, and a card says "not measured" rather than showing a guess (see the note on data-asset counts under Upgrade notes) ([#783](https://github.com/odpi/egeria-workspaces/pull/783),
   [#785](https://github.com/odpi/egeria-workspaces/pull/785), [#788](https://github.com/odpi/egeria-workspaces/pull/788),
   [#790](https://github.com/odpi/egeria-workspaces/pull/790), [#793](https://github.com/odpi/egeria-workspaces/pull/793),
   [#807](https://github.com/odpi/egeria-workspaces/pull/807)).
@@ -103,7 +94,7 @@ In numbers: 377 commits and 217 merged pull requests over five weeks.
 
 ## November 8 to 16: dashboards and report specs held in Egeria
 
-<!-- STAGED until #889 merges (open 2026-11-17, Coordinator's bundle; live on laz since 00:00Z). Then uncomment:
+<!-- STAGED until #889 merges. Then uncomment:
 - **The Resource Locator searches more and explains itself.** Search finds columns, attributes and data fields, and
   can search several kinds at once. Hover over a term on the page to see what it means. You can set, change and clear
   a resource's Data Scope, and create and edit Data Lenses that govern work lists ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
@@ -142,10 +133,15 @@ In numbers: 377 commits and 217 merged pull requests over five weeks.
 - **Data Initialization shows each batch's status**, and only one run of a batch can be in progress at a time. Three
   Coco notebooks can now be run again safely, and new portal docs cover techniques and best practices for them
   ([#883](https://github.com/odpi/egeria-workspaces/pull/883)).
+- **Coco's own systems feed Egeria, and Egeria feeds a SQL store** ([#870](https://github.com/odpi/egeria-workspaces/pull/870)).
+  Egeria subscribes to the Coco products that describe people, roles, user identities, departments and locations,
+  and a new Airflow DAG, `coco_subscriptions_egeria`, loads the deliveries into Egeria. A new `egeria_ods` database in
+  the shared PostgreSQL is set up to receive Egeria's own digital products, one table per product, so open metadata
+  can be queried with SQL. Its tables arrive once Egeria's daily refresh subscriptions run on a schedule, which needs
+  a companion Egeria change (see the PR).
 - **Statements of applicability**: Egeria Explorer has a new Statements of Applicability view, with an implementation
   summary and a table of controls you can sort and filter ([#882](https://github.com/odpi/egeria-workspaces/pull/882)), and Coco has a sample for ISO/IEC 27001
   ([#881](https://github.com/odpi/egeria-workspaces/pull/881)).
-<!-- At the cut: the 6.3 bundle (RK-22 no hard-coded Portal folder GUID, Rocky's five-status branches, floor 6.3.0) (#885/#886 and #882 are merged and included). -->
 
 ## Platform, infrastructure and dependencies
 
@@ -158,6 +154,9 @@ In numbers: 377 commits and 217 merged pull requests over five weeks.
 - **pyegeria**: the image floors rose step by step from 6.2.7 to 6.2.24, and the images run newer releases
   (see PRs [#667](https://github.com/odpi/egeria-workspaces/pull/667) to [#802](https://github.com/odpi/egeria-workspaces/pull/802)).
   Freshstart is capped below 6.2.27 ([#807](https://github.com/odpi/egeria-workspaces/pull/807)).
+<!-- STAGED: when #892 merges, replace the line above with:
+  Freshstart now needs pyegeria 6.3.0 or later too, and its Overview matches the quickstart's ([#892](https://github.com/odpi/egeria-workspaces/pull/892)).
+-->
 - **Shared infrastructure**: autoheal started, Postgres tuning and `pg_stat_statements` ([#686](https://github.com/odpi/egeria-workspaces/pull/686),
   [#804](https://github.com/odpi/egeria-workspaces/pull/804)); Kafka log size cap
   ([#820](https://github.com/odpi/egeria-workspaces/pull/820)); Marquez restarts after a reboot ([#857](https://github.com/odpi/egeria-workspaces/pull/857)); heap dump on out-of-memory
@@ -173,6 +172,42 @@ Thank you to everyone who contributed: Dan Wolfson (313 commits), Mandy Chessell
 
 ## Upgrade notes
 
+### Upgrading an existing install, in order
+
+1. **Stop everything that uses the shared PostgreSQL**: the quickstart or freshstart stack, Airflow and Marquez, and
+   the AI applications.
+2. **Update your checkout** to this release.
+3. **Set `PGVECTOR_PASSWORD`** in `compose-configs/shared-infra/.env`. The database used by the AI applications no
+   longer has a default password. `gen-env.sh` generates one only when the data volume is new; on an existing
+   install whose `egeria_advisor` role still has the old well-known password, change it first (see the shared-infra
+   README, "Setting or changing the egeria_advisor password"), then put the new value in `.env`
+   ([#887](https://github.com/odpi/egeria-workspaces/pull/887)).
+4. **Start the shared infrastructure.** The first time, Docker recreates the `egeria-shared-postgres` container once,
+   because its configuration gained the `PGVECTOR_PASSWORD` setting; your data is kept
+   ([#887](https://github.com/odpi/egeria-workspaces/pull/887)). Other shared containers are recreated too if their
+   images changed. Every start now also creates the `egeria_ods` database and the `provisioner` role if they are
+   missing ([#870](https://github.com/odpi/egeria-workspaces/pull/870)).
+5. **Start with `--with-airflow-marquez`**, so the Airflow containers are recreated and get the new `egeria`
+   connection. Until they are, the new DAG `coco_subscriptions_egeria`, which starts unpaused, fails on every run
+   because that connection is missing. If you don't want it yet, pause it in Airflow
+   ([#870](https://github.com/odpi/egeria-workspaces/pull/870)).
+<!-- STAGED until #889 merges. Then append to step 5:
+   The same start gives the `provisioner` database user its own password, kept in `PROVISIONER_PASSWORD` in
+   `compose-configs/shared-infra/.env` (generated if missing, on existing installs too), and updates the runtime
+   secrets and Airflow's connection to match, which is why Airflow must be restarted in the same run
+   ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
+-->
+6. **Rebuild the images.** The quickstart needs pyegeria 6.3.0 or later
+   ([#887](https://github.com/odpi/egeria-workspaces/pull/887)) and runs the released Egeria 6.3 image
+   ([#885](https://github.com/odpi/egeria-workspaces/pull/885)). Freshstart still needs pyegeria `>=6.2.21,<6.2.27`.
+<!-- STAGED: when #892 merges, replace the freshstart sentence above with "Freshstart now needs pyegeria 6.3.0 or later too ([#892](https://github.com/odpi/egeria-workspaces/pull/892))." -->
+7. **To upgrade or reset the quickstart's Egeria itself**, use `compose-configs/egeria-quickstart/bin/egeria-upgrade-reset`
+   (`plan` first, then `apply`); see *Upgrading or resetting the quickstart Egeria*
+   ([#851](https://github.com/odpi/egeria-workspaces/pull/851)). `plan --stable` picks the newest released Egeria;
+   `--latest` is now another name for it ([#886](https://github.com/odpi/egeria-workspaces/pull/886)).
+
+### Other changes to know about
+
 - **Ports bind to `127.0.0.1`.** Add `--lan` to `quick-start-local` / `fresh-start-local` to reach the stack by
   machine name or from other machines.
 - **Bearer tokens last two hours** ([#651](https://github.com/odpi/egeria-workspaces/pull/651)).
@@ -184,33 +219,18 @@ Thank you to everyone who contributed: Dan Wolfson (313 commits), Mandy Chessell
   once with Dr.Egeria (run `--validate` first). Until it has run, the Portal uses its local copies of its two
   specs, and the "Used by" row says "not read". To keep the old folder, set
   `PYEGERIA_REPORT_SPEC_FOLDERS=ReportSpecFolder::EgeriaPortal`.
-- **Dashboard sheets held in Egeria** need the dashboard folder seeds (see PR
-  [#829](https://github.com/odpi/egeria-workspaces/pull/829)). <!-- TODO: confirm the exact step for an existing Egeria. -->
+- **Dashboard sheets held in Egeria are listed from the dashboard folders.** On an existing Egeria, run the
+  **Dashboard Folders** batch and then **Useful Dashboards** from Data Initialization in Portal Admin; on a new
+  install they run by default ([#829](https://github.com/odpi/egeria-workspaces/pull/829)).
 - **Dashboard placements**: `emphasis` is renamed `presentationStyle`, and MeasurementSpecification references
   become relationships ([#796](https://github.com/odpi/egeria-workspaces/pull/796),
   [#795](https://github.com/odpi/egeria-workspaces/pull/795)).
-- **Upgrading or resetting the quickstart Egeria**: use `compose-configs/egeria-quickstart/bin/egeria-upgrade-reset`
-  (`plan` first, then `apply`); see *Upgrading or resetting the quickstart Egeria* ([#851](https://github.com/odpi/egeria-workspaces/pull/851)).
 - **Rendered report text changed with pyegeria 6.2.37** (LIST cells, "more may exist" notes). Anything that parses
   the Portal's rendered tables should be re-checked; see the *Report Specs* tutorial, Part C ([#853](https://github.com/odpi/egeria-workspaces/pull/853)).
 - **Postgres templates take a secrets store** ([#679](https://github.com/odpi/egeria-workspaces/pull/679)).
 - **Egeria Advisor runs as `egeriaadvisornpa`** in quickstart ([#828](https://github.com/odpi/egeria-workspaces/pull/828)).
-- **The quickstart needs pyegeria 6.3.0 or later** ([#887](https://github.com/odpi/egeria-workspaces/pull/887)), and runs the released Egeria 6.3 image (#885). Freshstart
-  still needs pyegeria `>=6.2.21,<6.2.27`.
-- **`egeria-upgrade-reset plan --latest` is now `--stable`** and picks the newest released Egeria rather than the
-  next release's development build. `--latest` still works (#886).
-- **The Trellis database password no longer has a default.** Set `PGVECTOR_PASSWORD` in `compose-configs/shared-infra/.env`;
-  `gen-env.sh` generates one for a new install. On an older install whose `egeria_advisor` role still uses the well-known
-  password, change it first (see the shared-infra README, "Setting or changing the egeria_advisor password") ([#887](https://github.com/odpi/egeria-workspaces/pull/887)).
-- **The first time shared infrastructure starts after this upgrade, Docker recreates the `egeria-shared-postgres`
-  container once**, because its configuration gained the `PGVECTOR_PASSWORD` setting. Your data is kept, but plan for
-  a short database outage and stop anything that uses it first ([#887](https://github.com/odpi/egeria-workspaces/pull/887)).
-<!-- STAGED until #889 merges. Then uncomment:
-- **The `provisioner` database user no longer has a well-known password.** `gen-env.sh` keeps `PROVISIONER_PASSWORD` in
-  `compose-configs/shared-infra/.env` and generates one if it is missing, on existing installs too. The first start after
-  this upgrade changes the password, the runtime secrets and (with `--with-airflow-marquez`) Airflow's connection together,
-  so restart Airflow in the same run ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
--->
+- **Counts of data assets can be low on Egeria 6.3.** An unfiltered search for data assets can return fewer than the
+  repository holds, so treat such totals as a lower bound.
 
 ## Where the detail lives
 

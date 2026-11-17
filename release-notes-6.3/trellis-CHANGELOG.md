@@ -1,9 +1,3 @@
-<!-- DRAFT: new file CHANGELOG.md at the root of dwolfson/trellis.
-     Baseline b74b07f9 (2026-10-09, the October 2026 newsletter) to 73738df8 (#1086, 2026-11-12).
-     Owner decision 2026-11-11: the release is "6.3 Tech Preview", tagged and released (GitHub release) to coincide
-     with the Egeria 6.3 release on Tuesday 2026-11-17 (owner, 2026-11-16). Tag name: v6.3-tech-preview (owner, 2026-11-13).
-     Package versions (resource-explorer 0.1.0, egeria-advisor 0.1.2, ...) are left as they are. -->
-
 # Changelog
 
 All notable changes to this repository (Resource Explorer, Egeria Advisor and the shared `trellis-*` packages)
@@ -15,7 +9,6 @@ Egeria release they ship with. Pull requests are `#N` in this repository.
 ## [Unreleased]
 
 ## [6.3 Tech Preview] - 2026-11-17
-<!-- Folded in 2026-11-17: #1087–#1103 (all merged; #1090 and #1095 were already in). Was: fold in #1087–#1102. #1099 (RE pyegeria floor 6.2.42, 825e496e) and #1100 (RE fix batch TR-1/2/15/22/24) merged 2026-11-16; #1101 (floor 6.3.0 for RE/EA/Studio/trellis-auth) merged 16:50Z, main 34dbddb5; #1102 (TR-27 docs) merged 17:21Z, 389a14ff. #1100 described from its PR and commits. -->
 
 First recorded release, a Tech Preview released with Egeria 6.3. It covers everything merged since the October 2026 Egeria newsletter, which introduced
 Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the narrative.
@@ -102,7 +95,7 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
     with 409, naming the run already in progress and how to cancel it, and nothing is queued (TR-1);
   - cancelling a queued run also closes its activity entry, which used to stay "running" (TR-2);
   - if a run can't be queued, its activity entry is closed as an error (TR-1).
-- **Survey steps on Prefect** (#1093, #1094): once a Prefect flow run may exist, the step is never run a second time
+- **Survey steps on Prefect** (#1093, #1094): once a Prefect flow run may exist for a step, that step is not also run
   locally, and its result is read from Resource Explorer's registry. A step output that can't be stored exactly fails
   the run, so nothing is published from a damaged result.
 - **Egeria Advisor's Dashboards tab keeps you signed in**, and report parameter names are converted to snake case before a report runs (#1091).

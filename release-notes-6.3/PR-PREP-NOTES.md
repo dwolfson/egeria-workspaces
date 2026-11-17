@@ -107,3 +107,6 @@ path even with the flags on. The live text now says "work in progress … chat d
 un-stage also waits for the per-request client + Execute fix (same trellis PR) and U3 through 8880's chat.
 EA default-on PR = dwolfson/trellis#1106 (8e6124af): default-on flags, signed-in user's client in chat, Execute ==
 chat, draft owners / per-user drafts; drafts from before the update aren't carried over (staged upgrade note).
+PO-45 staged 2026-11-17 from the Coordinator's text (no PR yet): new upgrade step 4 (renumber 4→5 … 8→9 when
+un-staging, along with #894's step 7) and a CHANGELOG Security entry. The same bundle brings PO-40/41/44, PY-30 and
+PO-42/43 (working set wording: change "work list" in the Locator lines). Write those from the PR body when it opens.

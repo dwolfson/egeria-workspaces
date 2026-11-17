@@ -189,6 +189,17 @@ Thank you to everyone who contributed: Dan Wolfson (422 commits), Mandy Chessell
    install whose `egeria_advisor` role still has the old well-known password, change it first (see the shared-infra
    README, "Setting or changing the egeria_advisor password"), then put the new value in `.env`
    ([#887](https://github.com/odpi/egeria-workspaces/pull/887)).
+<!-- STAGED until the PO-45 bundle PR merges (Architect read-back pending; PR number to come; check the names in the
+  merged code first). Then insert here as step 4 and renumber the steps after it:
+4. **Set the Portal's service passwords; there are no built-in defaults now** (#PR).
+   - *Quickstart:* the Portal and my-profile take their Egeria password from `QUICKSTART_PERSONA_PASSWORD` in
+     `compose-configs/egeria-quickstart/.env`. `./quick-start-local` writes the Coco demo password there if it is
+     missing (an exported value wins). If you start with plain `docker compose`, run `./quick-start-local` once or add
+     the variable first.
+   - *Freshstart (breaking):* `freshstart-pyegeria-web` no longer has a built-in `EGERIA_ADMIN_CALLER_PASSWORD`. Set it
+     in `compose-configs/egeria-freshstart/.env`, or export it, before the next start. `fresh-start-local` keeps it
+     across runs and never makes one up.
+-->
 4. **Start the shared infrastructure.** The first time, Docker recreates the `egeria-shared-postgres` container once,
    because its configuration gained the `PGVECTOR_PASSWORD` setting; your data is kept
    ([#887](https://github.com/odpi/egeria-workspaces/pull/887)). Other shared containers are recreated too if their

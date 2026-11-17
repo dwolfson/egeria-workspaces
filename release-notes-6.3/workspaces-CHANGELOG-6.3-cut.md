@@ -201,5 +201,10 @@ The current `[Unreleased]` section was written as items landed and stops around 
 - **Ports bind to `127.0.0.1` by default** ([#644](https://github.com/odpi/egeria-workspaces/pull/644)); `--lan` opens them
   ([#687](https://github.com/odpi/egeria-workspaces/pull/687)).
 - **Jupyter no longer trusts the emSign ECC G3 root** ([#776](https://github.com/odpi/egeria-workspaces/pull/776)).
+<!-- STAGED until the PO-45 bundle PR merges. Then uncomment (add PO-40/41/44 entries from the same PR):
+- **No built-in Portal service passwords** (PO-45, #PR): the quickstart Portal and my-profile read
+  `QUICKSTART_PERSONA_PASSWORD` from `egeria-quickstart/.env` (written by `quick-start-local` if missing); freshstart's
+  `EGERIA_ADMIN_CALLER_PASSWORD` has no default and must be set (breaking).
+-->
 - **No default `egeria_advisor` password**: `init_egeria.sql` no longer creates the role with a well-known password
   (TR-27, [#887](https://github.com/odpi/egeria-workspaces/pull/887)).

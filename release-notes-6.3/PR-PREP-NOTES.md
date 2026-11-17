@@ -58,3 +58,8 @@ Dan, typed in the Architect's session, relayed verbatim: "Merge #889 before the 
 No security-warning line. Once #889 merges, before the release PRs, un-stage the three #889 blocks:
 the Resource Locator line (RELEASE_NOTES, Nov 8-16 section), the provisioner text in upgrade step 5, and the
 CHANGELOG Security + Added entries. R1 and R3 fixed in f2258115.
+
+## Resource Locator L6 (live on laz 2026-11-17 04:23:20Z, Coordinator)
+Browse lists gain a Lens filter (inside / outside / cannot be compared) and a "Data scope recorded / none recorded"
+facet. Goes to odpi in a PR after #889 merges, so probably not in the 6.3 release. If that PR merges before the
+release PRs, add it to the Resource Locator line and the CHANGELOG Added entry. Not in any draft yet.

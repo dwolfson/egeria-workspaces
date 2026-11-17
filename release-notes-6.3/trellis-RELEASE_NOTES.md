@@ -104,9 +104,10 @@ In numbers: 1,273 commits and about 541 merged pull requests across 12 packages 
   and keeps the links that still work. The operations guide has the steps in order (#1087, #1088, #1097).
 - **Egeria Advisor asks before it changes anything**: actions from chat and plans need your confirmation, and commands
   that aren't safe to repeat ask before a re-run (#1091). Its dashboard tables look and behave like the Portal's (#1089).
-- **A prototype of report-spec authoring in Egeria Advisor, built on pyegeria's authoring API**, off unless you set
-  `EA_SPEC_AUTHORING_V2` and `EA_SPEC_ELICITOR_FIXES` (#1104, #1105). With both on, a question such as "which risks
-  have the highest importance?" is sorted on that property, and a property with an ordered scale is ranked by that
+- **Work in progress: report-spec authoring in Egeria Advisor on pyegeria's authoring API** (#1104, #1105). It is
+  off by default, behind `EA_SPEC_AUTHORING_V2` and `EA_SPEC_ELICITOR_FIXES`, and Egeria Advisor's chat doesn't use it
+  yet, even with them on. It has been tested against a live Egeria, where a question such as "which risks have the
+  highest importance?" is sorted on that property, and a property with an ordered scale is ranked by that
   scale rather than alphabetically. A question about content status searches every status you asked for in one
   search; for properties that take one value it says which values it didn't search, and it refuses an invalid status.
   It doesn't claim a ranked or complete list, and counts say "at least N", unless Egeria confirmed the end of the
@@ -114,9 +115,10 @@ In numbers: 1,273 commits and about 541 merged pull requests across 12 packages 
 <!-- STAGED until the PR that turns EA_SPEC_AUTHORING_V2 and EA_SPEC_ELICITOR_FIXES on by default merges (Dan,
   2026-11-17: "Turn them on by default"). Then replace the bullet's first sentence with:
   "**Report-spec authoring in Egeria Advisor is built on pyegeria's authoring API** (#1104, #1105, #PR)." and
-  "With both on," with "Now,"; then add: "To turn it off, set `EA_SPEC_AUTHORING_V2=0`; `EA_SPEC_ELICITOR_FIXES=0`
+  "It has been tested against a live Egeria, where" with "In chat,"; then add: "To turn it off, set `EA_SPEC_AUTHORING_V2=0`; `EA_SPEC_ELICITOR_FIXES=0`
   turns off only the question handling (sort and status from your words)." Per the Coordinator 2026-11-17, from branch
-  claude/ea-rebase-on-by-default; check both switches in the merged code (U2) and the U3 live check before un-staging. -->
+  claude/ea-rebase-on-by-default; check both switches in the merged code (U2), the U3 live check through 8880's
+  chat, and U5 (per-request user client; Execute runs what chat shows) before un-staging. -->
 - **Work in progress**: `trellis-ui` (#1062), and `trellis-accel`, which chooses a compute device at run time
   (#1073; design #1072).
 

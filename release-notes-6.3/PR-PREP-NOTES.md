@@ -102,3 +102,6 @@ EA_SPEC_STATUS_MERGE stays off, so keep "says which values it didn't search".
 step-5 shared-role note, new step 7 TRELLIS_DB_CREDENTIAL_KEY + renumber), CHANGELOG 2 (Locator wording; Changed:
 breaking key + README), trellis RELEASE_NOTES 1 (upgrade note). Recount after it merges. EA default-on: Dan confirmed
 in the Coordinator's session too; off switches per the Coordinator recorded in the staged comments (verify, U2).
+U5 (Architect 2026-11-17): chat gets no signed-in client and Execute bypasses v2.answer, so no user reaches the v2
+path even with the flags on. The live text now says "work in progress … chat doesn't use it yet"; the default-on
+un-stage also waits for the per-request client + Execute fix (same trellis PR) and U3 through 8880's chat.

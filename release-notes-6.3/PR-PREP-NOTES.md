@@ -70,3 +70,8 @@ and #890/#891 entries added. Before the PRs, recount the contributor commit numb
 Recount once, after the last merge before the release PRs, over one window for all of: the RELEASE_NOTES "In numbers"
 line (377 commits / 217 PRs), the overview's "By the numbers (October 9 to November 12)" heading and figures, and the
 "Thank you" counts (Architect R2, 5bd4437f read-back).
+
+**#893 staged 2026-11-17** (bundle/2026-11-17-rl-followups f8cdb91e): four STAGED blocks, two in RELEASE_NOTES
+(Locator line after #889's; freshstart line under Other changes) and two in the CHANGELOG (Added; Fixed). #893 also
+carries the L6 features above (Lens filter on Browse, "no data scope recorded" count), so they're covered by it.
+Un-stage all four when it merges, then do the recount.

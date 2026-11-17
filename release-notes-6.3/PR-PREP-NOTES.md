@@ -52,3 +52,9 @@ The `--lan` entry: if the existing `[Unreleased]` already lists #687, keep one e
 
 <!-- DRAFT: cross-repo overview of the Egeria 6.3 release, about one page, for someone new to the project.
      It is also the source for video-script-egeria-6.3.md. -->
+
+## Release gate R2 (2026-11-17)
+Dan, typed in the Architect's session, relayed verbatim: "Merge #889 before the 6.3 release - will be tomorrow".
+No security-warning line. Once #889 merges, before the release PRs, un-stage the three #889 blocks:
+the Resource Locator line (RELEASE_NOTES, Nov 8-16 section), the provisioner text in upgrade step 5, and the
+CHANGELOG Security + Added entries. R1 and R3 fixed in f2258115.

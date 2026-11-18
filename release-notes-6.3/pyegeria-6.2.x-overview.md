@@ -79,7 +79,6 @@ from an earlier 6.2 release, [the 6.2 series](#the-62-series) below describes wh
 
 ### Planned for pyegeria 6.4 or the next release
 
-
 - **`load_egeria_report_specs` will be removed in pyegeria 6.4 or the next release.** It has been deprecated since 6.2.42 (#598) and
   logs a warning once. Report specs held in Egeria load through the spec cache (`pyegeria.view.egeria_spec_cache.sync_report_specs`).
 - **Set `EGERIA_USER_PASSWORD` now.** pyegeria's command-line tools (`hey_egeria` and the other CLIs) still fall

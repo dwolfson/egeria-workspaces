@@ -121,3 +121,6 @@ for 6.4"). Checked at v6.3.0: commands/cat/*.py default EGERIA_USER_PASSWORD to 
 for the held pyegeria batch; publish only with that release.
 pyegeria 6.3.1 staged 2026-11-18 from odpi/egeria-python#603 (ea793782, open): a full section above 6.3.0, with
 un-stage steps in its comment (retitle, release table, 44 releases in 3 files, drop the PY-33/35 staged bullet).
+pyegeria 6.3.1 un-staged 2026-11-18: tag v6.3.1 = b4beb91a (#603), PyPI upload 14:25:49Z. The tag's tree = reviewed
+head ea793782 + af96ce5b (password page config.json caution; the section doesn't mention config.json, so no
+contradiction). The release count is 44 in the page, overview and newsletter. Workspaces/trellis floors stay >=6.3.0.

@@ -1,20 +1,15 @@
-# pyegeria 6.3.0, with the 6.2 series that led to it
+# pyegeria 6.3.1, with 6.3.0 and the 6.2 series that led to it
 
-pyegeria 6.3.0 is the Python client for **Egeria 6.3**. This page describes what's new in 6.3.0, then the 6.2 series of
-releases that led up to it.
+pyegeria 6.3.1 is the Python client for **Egeria 6.3**. This page describes what's new in 6.3.1 and 6.3.0, then the
+6.2 series of releases that led up to them.
 
 ```bash
 pip install -U pyegeria
 ```
 
-<!-- STAGED until odpi/egeria-python#603 merges and v6.3.1 is on PyPI (Coordinator signals). Then: retitle the page
-  "pyegeria 6.3.1, with 6.3.0 and the 6.2 series that led to it", say "6.3.1" in the intro, uncomment this section,
-  remove the staged PY-33/35 bullet under "Planned for pyegeria 6.4", add "| 6.3.1 | <date> | #603 |" to the release
-  table, and make the counts 44 releases (here, overview-egeria-6.3.md l.46, newsletter l.120). Re-check every item
-  against the v6.3.1 tag.
 ## pyegeria 6.3.1
 
-Released <date> ([odpi/egeria-python#603](https://github.com/odpi/egeria-python/pull/603), [release](https://github.com/odpi/egeria-python/releases/tag/v6.3.1)).
+Released 2026-11-18 ([odpi/egeria-python#603](https://github.com/odpi/egeria-python/pull/603), [release](https://github.com/odpi/egeria-python/releases/tag/v6.3.1)).
 
 ### Behaviour changes
 
@@ -44,7 +39,6 @@ Released <date> ([odpi/egeria-python#603](https://github.com/odpi/egeria-python/
 - **My Profile works with communities directly**: resources, joining, and feedback on posts and resources
   ([#601](https://github.com/odpi/egeria-python/pull/601)).
 - My Egeria no longer prints voice gender in the episode roster ([#602](https://github.com/odpi/egeria-python/pull/602)).
--->
 
 ## pyegeria 6.3.0
 
@@ -94,16 +88,11 @@ from an earlier 6.2 release, [the 6.2 series](#the-62-series) below describes wh
   environment).
 - **pyegeria 6.4 or the next release drops the default password** and any built-in identity, except in a demo profile
   that is named explicitly.
-<!-- STAGED for the held pyegeria batch (PY-33/PY-35); publish only when that release ships, and check against its tag:
-- **The library has no built-in password or admin credential.** Signing in with no password fails with a clear
-  message (`PyegeriaInvalidParameterException`) before any request goes to Egeria, instead of reaching Egeria with an
-  empty or guessed password and getting a 401. If your code catches that 401, catch the new exception as well.
--->
 
 ## The 6.2 series
 
 We released pyegeria 42 times between 6.2.0 (October 8, 2026) and 6.2.42 (November 15, 2026), about four releases a
-week. (6.2.38 was tagged but not published to PyPI; 6.2.39 includes its fixes.) Together with 6.3.0 they make up the
+week. (6.2.38 was tagged but not published to PyPI; 6.2.39 includes its fixes.) Together with 6.3.0 and 6.3.1 they make up the
 Python side of **Egeria 6.3**. This page groups the releases by theme, so you can see what changed without reading each one. The per-release notes from 6.2.26 onwards are in this folder; earlier releases are
 described in their release PRs.
 
@@ -277,6 +266,7 @@ These three releases, from November 12 to 15, came just before 6.3.0.
 | 6.2.31 – 6.2.39 | Nov 10 – Nov 12 | #578, #581, #583, #585, #587, #588, #589, #590, #591 |
 | 6.2.40 – 6.2.42 | Nov 12 – Nov 15 | #593, #595, #598 |
 | 6.3.0 | Nov 16 | #600 |
+| 6.3.1 | Nov 18 | #603 |
 
 Detailed notes: [6.2.26](6.2.26.md) · [6.2.27](6.2.27.md) · [6.2.28](6.2.28.md) · [6.2.29](6.2.29.md) ·
 [6.2.30](6.2.30.md) · [6.2.31](6.2.31.md) · [6.2.32](6.2.32.md) · [6.2.33](6.2.33.md) · [6.2.34](6.2.34.md) ·

@@ -43,7 +43,7 @@ dashboards, and Resource Explorer has a six-part tutorial.
 
 - **Egeria Workspaces:** 254 merged changes.
 - **Resource Explorer and Egeria Advisor:** more than 500 merged PRs.
-- **pyegeria:** 43 releases, 6.2.1 to 6.2.42 and then 6.3.0, the release that matches Egeria 6.3.
+- **pyegeria:** 44 releases, 6.2.1 to 6.2.42 and then 6.3.0 and 6.3.1, the releases that match Egeria 6.3.
 
 ## Try it
 

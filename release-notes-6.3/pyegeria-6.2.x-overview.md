@@ -7,6 +7,45 @@ releases that led up to it.
 pip install -U pyegeria
 ```
 
+<!-- STAGED until odpi/egeria-python#603 merges and v6.3.1 is on PyPI (Coordinator signals). Then: retitle the page
+  "pyegeria 6.3.1, with 6.3.0 and the 6.2 series that led to it", say "6.3.1" in the intro, uncomment this section,
+  remove the staged PY-33/35 bullet under "Planned for pyegeria 6.4", add "| 6.3.1 | <date> | #603 |" to the release
+  table, and make the counts 44 releases (here, overview-egeria-6.3.md l.46, newsletter l.120). Re-check every item
+  against the v6.3.1 tag.
+## pyegeria 6.3.1
+
+Released <date> ([odpi/egeria-python#603](https://github.com/odpi/egeria-python/pull/603), [release](https://github.com/odpi/egeria-python/releases/tag/v6.3.1)).
+
+### Behaviour changes
+
+- **The library has no built-in password or admin credential.** With no password configured, signing in fails with a
+  clear message (`PyegeriaInvalidParameterException`) before any request goes to Egeria, instead of reaching Egeria
+  with an empty or guessed password and getting a 401. If your code catches that 401, catch the new exception as
+  well. `resolve_egeria_credentials`, the `ADMIN_USER` / `ADMIN_PASSWORD` settings and `UserProfileConfig.user_pwd` no
+  longer have built-in values (PY-33, PY-35).
+- **The command-line tools keep their demo-password fallback until 6.4**, so set `EGERIA_USER_PASSWORD` now in the
+  shell where you run them (never in a server's or container's environment). *Setting your Egeria password*
+  (`docs/setting-your-egeria-password.md`) explains where pyegeria looks for it.
+- **In a process declared multi-user, a report run with no user is refused** instead of running as the service
+  account. This covers Egeria Advisor, Studio and pyegeria's MCP HTTP server. Single-user use, such as the
+  command-line tools and notebooks, is unchanged (PY-32).
+
+### Fixes
+
+- `add_like_to_element` sends the emoji you choose and doesn't fix a zone (PY-29).
+- Dr.Egeria's MCP `run_block`: a block whose headings are a level off no longer reports "0 commands, success"; it
+  gives hints naming the line and the fix (PY-30).
+- `delete_collection`'s documentation matches the code: cascade defaults to off (PY-31).
+- Report-spec authoring checks `find_authored_elements` against the element type the spec fixes, instead of warning
+  that the type is unknown (PY-34).
+
+### Also included
+
+- **My Profile works with communities directly**: resources, joining, and feedback on posts and resources
+  ([#601](https://github.com/odpi/egeria-python/pull/601)).
+- My Egeria no longer prints voice gender in the episode roster ([#602](https://github.com/odpi/egeria-python/pull/602)).
+-->
+
 ## pyegeria 6.3.0
 
 Released 2026-11-16 ([odpi/egeria-python#600](https://github.com/odpi/egeria-python/pull/600), [release](https://github.com/odpi/egeria-python/releases/tag/v6.3.0)).

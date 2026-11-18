@@ -119,3 +119,5 @@ renumber 4–9 on un-stage. Recount after it merges. The trellis notes keep "wor
 pyegeria page 2026-11-18: the CLI fallback line is added under "Planned for pyegeria 6.4" (Architect ruling; Dan "wait
 for 6.4"). Checked at v6.3.0: commands/cat/*.py default EGERIA_USER_PASSWORD to the demo value. PY-33/PY-35 is staged
 for the held pyegeria batch; publish only with that release.
+pyegeria 6.3.1 staged 2026-11-18 from odpi/egeria-python#603 (ea793782, open): a full section above 6.3.0, with
+un-stage steps in its comment (retitle, release table, 44 releases in 3 files, drop the PY-33/35 staged bullet).

@@ -51,7 +51,8 @@ from an earlier 6.2 release, [the 6.2 series](#the-62-series) below describes wh
   logs a warning once. Report specs held in Egeria load through the spec cache (`pyegeria.view.egeria_spec_cache.sync_report_specs`).
 - **Set `EGERIA_USER_PASSWORD` now.** pyegeria's command-line tools (`hey_egeria` and the other CLIs) still fall
   back to the QuickStart demo password when `EGERIA_USER_PASSWORD` isn't set. pyegeria 6.4 removes that fallback, so
-  set `EGERIA_USER_PASSWORD` (or pass `--password`) now.
+  set `EGERIA_USER_PASSWORD` now in the shell where you run the command-line tools (never in a server's or container's
+  environment).
 - **pyegeria 6.4 or the next release drops the default password** and any built-in identity, except in a demo profile
   that is named explicitly.
 <!-- STAGED for the held pyegeria batch (PY-33/PY-35); publish only when that release ships, and check against its tag:

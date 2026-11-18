@@ -116,3 +116,6 @@ PO-42/43 (working set wording: change "work list" in the Locator lines). Write t
 recreate, + URLs refused), Locator working-set block (+ rename work list → working set), Other changes (PY-30,
 firewall). CHANGELOG: Security (PO-45/41/44, firewall), Added (working sets + rename), Fixed (PO-40, PY-30). Steps
 renumber 4–9 on un-stage. Recount after it merges. The trellis notes keep "work list": that's RE's own term.
+pyegeria page 2026-11-18: the CLI fallback line is added under "Planned for pyegeria 6.4" (Architect ruling; Dan "wait
+for 6.4"). Checked at v6.3.0: commands/cat/*.py default EGERIA_USER_PASSWORD to the demo value. PY-33/PY-35 is staged
+for the held pyegeria batch; publish only with that release.

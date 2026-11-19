@@ -140,3 +140,11 @@ contradiction). The release count is 44 in the page, overview and newsletter. Wo
   Dan 1,322, dependabot 16. Window now October 9 to November 19. Recount again after #901/#902/#1116/#126.
 - **Dates:** both CHANGELOG release dates are placeholders now (the planned 2026-11-17 has passed).
 - TR-89 (GitHub repo as SourceControlLibrary) is not mentioned: the drafts have no "coming next" section.
+
+## 2026-11-19 release (Dan: "Lets release today"; staged PRs: "Wait for them today"; "All release-note PRs")
+#901, #902, trellis #1116, odpi trellis #126 (+#121/#122) merged; trellis #1117 synced back. All un-staged, dates
+2026-11-19. Recount: workspaces at ceada467 532 / 260 (Dan 454, Mandy 28, dependabot 50); trellis at 1e96b273
+1,343 / ~556 (Dan 1,325, NopeCharon 2, dependabot 16). PRs opened: odpi/egeria-workspaces#903 (baccd79b),
+dwolfson/trellis#1118 (adfdf239), odpi/egeria-python#606 (83d0748, docs/release-notes/6.3.x-egeria-6.3.md).
+Tags v6.3 (workspaces) and v6.3-tech-preview (trellis) are the Coordinator's, at the release commits.
+Not opened: newsletter / Mandy's egeria-docs additions (images still to retake).

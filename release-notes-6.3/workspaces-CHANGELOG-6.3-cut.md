@@ -8,7 +8,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
    ```markdown
    ## [Unreleased]
 
-   ## [6.3] - YYYY-MM-DD (the release date; placeholder)
+   ## [6.3] - 2026-11-19
 
    This release goes with Egeria 6.3 and needs pyegeria 6.3.0 or later. [RELEASE_NOTES.md](RELEASE_NOTES.md) summarizes the main changes.
    ```
@@ -24,7 +24,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
    ```
 
    `v6.2` is tagged at `903e8eeb` (#619), as the owner agreed on 2026-11-11. Tag `v6.3` at the release commit, on the
-   release date, alongside Egeria 6.3 (owner, 2026-11-16; the planned date, Tuesday 2026-11-17, has passed, so the date is a placeholder).
+   release date, alongside Egeria 6.3 (owner: release on 2026-11-19).
 
 5. Remove the "Since 6.2 (unreleased, on `main`)" section from RELEASE_NOTES.md, since the new 6.3 section covers it.
 
@@ -180,11 +180,9 @@ The current `[Unreleased]` section was written as items landed and stops around 
   isn't part of The Catalog ([#897](https://github.com/odpi/egeria-workspaces/pull/897)).
 - **Three dead README links**, and freshstart's `demo-mode.md`, which described the quickstart
   ([#897](https://github.com/odpi/egeria-workspaces/pull/897)).
-<!-- STAGED until #902 merges. Then uncomment:
 - **The Type Explorer shows each type's real Egeria area**, read first from the type's Egeria wiki link; the fallback
   list no longer puts data stores in an invented Area 6. Report is Area 2, SurveyReport Area 6
   ([#902](https://github.com/odpi/egeria-workspaces/pull/902)).
--->
 
 - **The Overview shows only what it measured** ([#783](https://github.com/odpi/egeria-workspaces/pull/783),
   [#785](https://github.com/odpi/egeria-workspaces/pull/785), [#791](https://github.com/odpi/egeria-workspaces/pull/791),
@@ -241,9 +239,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
 - **Freshstart's session key is generated and kept** (RK-24b, [#897](https://github.com/odpi/egeria-workspaces/pull/897)): `gen-env.sh` no longer drops
   `JWT_SECRET`, so sessions are no longer signed with a value published in this repository; the compose file has no
   default. The next start generates a new key, so everyone signs in again once.
-<!-- STAGED until #901 merges. Then uncomment:
 - **The quickstart's session key is kept or generated** (PO-46b, [#901](https://github.com/odpi/egeria-workspaces/pull/901)): `gen-env.sh` keeps `JWT_SECRET`
   or generates one; the compose file requires it; a published value is refused, and sign-in answers 503 in words.
--->
 - **No default `egeria_advisor` password**: `init_egeria.sql` no longer creates the role with a well-known password
   (TR-27, [#887](https://github.com/odpi/egeria-workspaces/pull/887)).

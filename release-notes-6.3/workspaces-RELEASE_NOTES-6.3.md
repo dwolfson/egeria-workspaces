@@ -11,7 +11,7 @@ This release goes with **Egeria 6.3** and needs **pyegeria 6.3.0 or later**, the
 platform itself, see the [Egeria 6.3 release notes](https://egeria-project.org/release-notes/latest/) and the
 [November 2026 newsletter](https://egeria-project.org/release-notes/november-2026/).
 
-In numbers: 530 commits and 258 merged pull requests between October 9 and November 19.
+In numbers: 532 commits and 260 merged pull requests between October 9 and November 19.
 
 ## Try it
 
@@ -162,15 +162,11 @@ In numbers: 530 commits and 258 merged pull requests between October 9 and Novem
   admin password they need, and its session key is generated and kept rather than taken from a value published in
   this repository. The Catalog opens plain Assets, such as the GitHub repositories Resource Explorer catalogs, under
   Data Assets ([#897](https://github.com/odpi/egeria-workspaces/pull/897)).
-<!-- STAGED until #901 merges. Then uncomment:
 - **The quickstart's session key is generated and kept too**, never a value published in this repository
   ([#901](https://github.com/odpi/egeria-workspaces/pull/901)).
--->
-<!-- STAGED until #902 merges. Then uncomment:
 - **The Type Explorer shows each type's real Egeria area**, read from the type's own Egeria documentation link. Report
   is in Area 2 (Assets), and Area 6 is Discovery, Surveys and Analysis
   ([#902](https://github.com/odpi/egeria-workspaces/pull/902)).
--->
 
 ## Platform, infrastructure and dependencies
 
@@ -196,7 +192,7 @@ In numbers: 530 commits and 258 merged pull requests between October 9 and Novem
   mcp, schemathesis, pytest, Python base images, Prefect, certbot, docker) and the OpenSSF Scorecard workflow, which
   now runs.
 
-Thank you to everyone who contributed: Dan Wolfson (452 commits), Mandy Chessell (28) and dependabot (50).
+Thank you to everyone who contributed: Dan Wolfson (454 commits), Mandy Chessell (28) and dependabot (50).
 
 ---
 
@@ -224,11 +220,9 @@ Thank you to everyone who contributed: Dan Wolfson (452 commits), Mandy Chessell
      ([#897](https://github.com/odpi/egeria-workspaces/pull/897)).
    - *Freshstart's session key:* the next `./fresh-start-local` generates a new `JWT_SECRET` and keeps it, so everyone
      signs in again once ([#897](https://github.com/odpi/egeria-workspaces/pull/897)).
-<!-- STAGED until #901 merges. Then uncomment:
    - *Quickstart's session key:* `./quick-start-local` keeps a `JWT_SECRET` you have set, or generates one on its first
      run. The compose file now requires it, and a published value is refused, so sessions signed with one end and
      everyone signs in again once ([#901](https://github.com/odpi/egeria-workspaces/pull/901)).
--->
    - *A URL can no longer act as another user:* `?user_id=` naming anyone but the Portal's own user needs a sign-in
      token, and a request that names a user needs that user's token or password; otherwise the Portal refuses in words
      (HTTP 400). No route reads a password from a URL.

@@ -8,7 +8,7 @@ Egeria release they ship with. Pull requests are `#N` in this repository.
 
 ## [Unreleased]
 
-## [6.3 Tech Preview] - YYYY-MM-DD (the release date; placeholder)
+## [6.3 Tech Preview] - 2026-11-19
 
 First recorded release, a Tech Preview released with Egeria 6.3. It covers everything merged since the October 2026 Egeria newsletter, which introduced
 Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the narrative.
@@ -131,9 +131,7 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
   rate-limit wait past 60 s fails the step and names the reset time, and a 30 s heartbeat shows in the timeout line.
 - **A cancelled step writes nothing** (TR-62b, #1115): Resource Explorer asks Prefect to cancel, the flow checks its
   state before every write, and readers refuse a result from a cancelled run.
-<!-- STAGED until dwolfson/trellis#1116 merges. Then uncomment:
 - **A cancel Prefect accepts is never reported as failed** (TR-62c, #1116), including a run cancelled before it started.
--->
 - **The Prefect worker script advertises its commit** again; a `pipefail` check always failed before (#1108).
 - **`.env.example` comments moved off the value lines**, so an empty setting isn't read as its comment (TR-46, #1111).
 - **`resource-explorer add`** exits 1 with "Nothing was added." when it adds nothing (TR-46, #1111).
@@ -141,10 +139,8 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
   unknown collection and fails when every file fails (TR-50/51); DocAgent and ExamplesAgent report the sources they
   retrieved (TR-51c) (#1111).
 - **The status banner has a close box**; a changed condition shows it again (#1108).
-<!-- STAGED until odpi/egeria-trellis#126 merges. Then uncomment:
 - **`trellis-context`**: `pack()` admits required sections before optional ones (odpi/egeria-trellis#121, thanks to @NopeCharon).
 - **`trellis-querycache`**: an unavailable Redis is read as a cache miss (odpi/egeria-trellis#122, thanks to @NopeCharon).
--->
 - **Survey runs** (#1100):
   - only one run of a survey definition can be queued or running on a resource at a time. Another request is refused
     with 409, naming the run already in progress and how to cancel it, and nothing is queued (TR-1);
@@ -211,7 +207,7 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 - Tests no longer write tracked files, and fail if a check passes without doing anything; a pyegeria contract test; the spec-sync test double answers an
   empty page the way Egeria does (#595, #1048, #1056, #1085). Database tests fail rather than skip when a database is
   required (#1096); Egeria Advisor tests show its shared report-spec sync can't pick up a user's private draft (#1103).
-- Dr.Egeria templates synced (#91, #103, #104, #639, #858, #874, #1004); odpi sync and DCO remediation (#108, #981, #112).
+- Dr.Egeria templates synced (#91, #103, #104, #639, #858, #874, #1004); odpi sync and DCO remediation (#108, #981, #112, odpi/egeria-trellis#125, #126); sync back from odpi (#1117).
 
 ### Docs
 - **No default database password** (TR-27, #1102): the QUICKSTART, READMEs, Resource Explorer admin

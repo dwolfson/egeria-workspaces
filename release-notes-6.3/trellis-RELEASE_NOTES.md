@@ -16,7 +16,7 @@ Both remain a **Tech Preview**: they are changing quickly, and your feedback sha
 goes with **Egeria 6.3** and needs **pyegeria 6.3.0 or later**, the release that matches Egeria 6.3. For the changes to the Egeria platform itself, see
 the [Egeria 6.3 release notes](https://egeria-project.org/release-notes/latest/).
 
-In numbers: 1,338 commits and about 551 merged pull requests across 12 packages between October 9 and November 19.
+In numbers: 1,343 commits and about 556 merged pull requests across 12 packages between October 9 and November 19.
 
 ## Try it
 
@@ -121,9 +121,7 @@ In numbers: 1,338 commits and about 551 merged pull requests across 12 packages 
 - **A survey step can't hang, and a cancelled step writes nothing** (#1115). GitHub requests have timeouts, a
   rate-limit wait past 60 s fails the step and names the reset time, and a timeout says when the step was last heard
   from and what it was doing. A cancel lets the step stop and keeps its results out.
-<!-- STAGED until dwolfson/trellis#1116 merges. Then uncomment:
 - **A cancel that Prefect accepts is reported as cancelled**, including a run cancelled before it started (#1116).
--->
 - **Prefect runs**: a whole survey definition is one run, and a repository is fetched once per run;
   `PREFECT_DISPATCH_STEPS` chooses which steps go to a worker, and the run report says where each step ran (#1110).
 - **Getting started is up to date** (#1111): the install docs match the code, `make up` starts Resource Explorer,
@@ -145,11 +143,9 @@ In numbers: 1,338 commits and about 551 merged pull requests across 12 packages 
 - **Documentation**: user and administrator guides, and design notes for files, open data, quality, extensibility,
   local dashboards, OSI metric exchange, feedback, re-indexing and hardware acceleration.
 
-Thank you to everyone who contributed: Dan Wolfson (1,322 commits) and dependabot (16).
-<!-- STAGED until odpi/egeria-trellis#126 merges (it brings odpi/egeria-trellis#121 and #122). Then replace the line above with:
-Thank you to everyone who contributed: Dan Wolfson (1,322 commits), @NopeCharon, whose fixes make `trellis-context`
-pack required sections first and let `trellis-querycache` treat an unavailable Redis as a cache miss
-(odpi/egeria-trellis#121, #122), and dependabot (16). Recount after the merge. -->
+Thank you to everyone who contributed: Dan Wolfson (1,325 commits), @NopeCharon (2), whose fixes make
+`trellis-context` pack required sections first and let `trellis-querycache` treat an unavailable Redis as a cache miss
+(odpi/egeria-trellis#121, #122), and dependabot (16).
 
 ---
 

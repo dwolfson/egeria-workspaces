@@ -16,7 +16,7 @@ Both remain a **Tech Preview**: they are changing quickly, and your feedback sha
 goes with **Egeria 6.3** and needs **pyegeria 6.3.0 or later**, the release that matches Egeria 6.3. For the changes to the Egeria platform itself, see
 the [Egeria 6.3 release notes](https://egeria-project.org/release-notes/latest/).
 
-In numbers: 1,273 commits and about 541 merged pull requests across 12 packages between October 9 and November 17.
+In numbers: 1,338 commits and about 551 merged pull requests across 12 packages between October 9 and November 19.
 
 ## Try it
 
@@ -73,7 +73,7 @@ In numbers: 1,273 commits and about 541 merged pull requests across 12 packages 
 - **A zone with no access control is private**, as it is in Egeria (#1043); an expired token gets the same response
   everywhere (#997); and the certifi minimum version no longer trusts the emSign ECC G3 root (#989).
 
-## November 8 to 17: feedback, Egeria Advisor on dashboards held in Egeria, and Studio
+## November 8 to 19: feedback, Egeria Advisor on dashboards held in Egeria, and Studio
 
 - **`trellis-feedback`**, a shared feedback library (0.1 to 0.3): when you rate an answer you can say why and attach
   evidence; an administrator reviews the feedback and can trace a problem back to a gap in the documents (#1012,
@@ -104,22 +104,35 @@ In numbers: 1,273 commits and about 541 merged pull requests across 12 packages 
   and keeps the links that still work. The operations guide has the steps in order (#1087, #1088, #1097).
 - **Egeria Advisor asks before it changes anything**: actions from chat and plans need your confirmation, and commands
   that aren't safe to repeat ask before a re-run (#1091). Its dashboard tables look and behave like the Portal's (#1089).
-- **Work in progress: report-spec authoring in Egeria Advisor on pyegeria's authoring API** (#1104, #1105). It is
-  off by default, behind `EA_SPEC_AUTHORING_V2` and `EA_SPEC_ELICITOR_FIXES`. With them on, chat builds the spec with
-  it, but the answers in chat and from Execute Spec don't show its ranking and counts yet. Tested against a live
-  Egeria in a test harness, a question such as "which risks have the highest importance?" is sorted on that property, and a property with an ordered scale is ranked by that
+- **Report-spec authoring in Egeria Advisor is built on pyegeria's authoring API** (#1104, #1105, #1106). In chat, a question such as "which risks have the highest importance?" is sorted on that property, and a property with an ordered scale is ranked by that
   scale rather than alphabetically. A question about content status searches every status you asked for in one
   search; for properties that take one value it says which values it didn't search, and it refuses an invalid status.
   It doesn't claim a ranked or complete list, and counts say "at least N", unless Egeria confirmed the end of the
-  results.
-<!-- STAGED until the PR that turns EA_SPEC_AUTHORING_V2 and EA_SPEC_ELICITOR_FIXES on by default merges (Dan,
-  2026-11-17: "Turn them on by default"). Then replace the bullet's first sentence with:
-  "**Report-spec authoring in Egeria Advisor is built on pyegeria's authoring API** (#1104, #1105, #1106)." and
-  "With them on, chat builds … don't show its ranking and counts yet. Tested against a live Egeria in a test
-  harness," with "In chat,", and drop "off by default, behind … and" from "It is …"; then add: "To turn it off, set `EA_SPEC_AUTHORING_V2=0`; `EA_SPEC_ELICITOR_FIXES=0`
-  turns off only the question handling (sort and status from your words)." Per the Coordinator 2026-11-17, from branch
-  claude/ea-rebase-on-by-default; check both switches in the merged code (U2), the U3 live check through 8880's
-  chat, and U5 (per-request user client; Execute runs what chat shows) before un-staging. -->
+  results. Execute Spec gives the same answer as chat. It is on by default: to turn it off, set
+  `EA_SPEC_AUTHORING_V2=0`; `EA_SPEC_ELICITOR_FIXES=0` turns off only the question handling (sort and status from
+  your words).
+- **Egeria Advisor answers as you.** Chat and Execute Spec read Egeria with your own sign-in, never EA's service
+  account (#1106, #1107). Tools that can only run as the service account aren't used for your requests; a spec search
+  then covers EA's local copy only, and says so (#1109).
+- **File-system surveys** (#1114): a binary file no longer stops the narrative read, and the files skipped are named
+  (TR-69); the phone-number pattern no longer matches dates, IP addresses and IDs (TR-75). Questions about a file
+  system are answered from the runs that answer them; the survey card says what it really knows and updates without
+  a reload; Publish says what it will do and can run again without duplicates; Curate reviews the proposals.
+- **A survey step can't hang, and a cancelled step writes nothing** (#1115). GitHub requests have timeouts, a
+  rate-limit wait past 60 s fails the step and names the reset time, and a timeout says when the step was last heard
+  from and what it was doing. A cancel lets the step stop and keeps its results out.
+<!-- STAGED until dwolfson/trellis#1116 merges. Then uncomment:
+- **A cancel that Prefect accepts is reported as cancelled**, including a run cancelled before it started (#1116).
+-->
+- **Prefect runs**: a whole survey definition is one run, and a repository is fetched once per run;
+  `PREFECT_DISPATCH_STEPS` chooses which steps go to a worker, and the run report says where each step ran (#1110).
+- **Getting started is up to date** (#1111): the install docs match the code, `make up` starts Resource Explorer,
+  Egeria Advisor and Studio and names any that fails, and Egeria Advisor says plainly when its knowledge base hasn't
+  been built yet, with the commands to build it.
+- **Studio sessions are short-lived and refresh while you work**, re-checking your Egeria sign-in each time (#1113).
+- **Service accounts have their own settings**: `RE_DAEMON_USER_ID` / `RE_DAEMON_USER_PASSWORD` for Resource Explorer
+  (#1108) and `EA_DAEMON_USER_ID` / `EA_DAEMON_USER_PASSWORD` for Egeria Advisor (#1109). The status banner has a
+  close box (#1108).
 - **Work in progress**: `trellis-ui` (#1062), and `trellis-accel`, which chooses a compute device at run time
   (#1073; design #1072).
 
@@ -132,7 +145,11 @@ In numbers: 1,273 commits and about 541 merged pull requests across 12 packages 
 - **Documentation**: user and administrator guides, and design notes for files, open data, quality, extensibility,
   local dashboards, OSI metric exchange, feedback, re-indexing and hardware acceleration.
 
-Thank you to everyone who contributed: Dan Wolfson (1,257 commits) and dependabot (16).
+Thank you to everyone who contributed: Dan Wolfson (1,322 commits) and dependabot (16).
+<!-- STAGED until odpi/egeria-trellis#126 merges (it brings odpi/egeria-trellis#121 and #122). Then replace the line above with:
+Thank you to everyone who contributed: Dan Wolfson (1,322 commits), @NopeCharon, whose fixes make `trellis-context`
+pack required sections first and let `trellis-querycache` treat an unavailable Redis as a cache miss
+(odpi/egeria-trellis#121, #122), and dependabot (16). Recount after the merge. -->
 
 ---
 
@@ -151,10 +168,20 @@ Thank you to everyone who contributed: Dan Wolfson (1,257 commits) and dependabo
   Explorer's registry gains a `flow_run_results` table, created when Resource Explorer first starts; there is nothing
   to do (#1093).
 - **After an Egeria reset**, follow the recovery procedure in the operations guide (§2.0) (#1088).
-<!-- STAGED until #1106 merges and U2, U3 (through 8880's chat) and U5 hold. Then uncomment:
 - **Egeria Advisor's report-spec drafts now belong to the user who started them.** Drafts started before this
   update aren't carried over; start them again (#1106).
--->
+- **Service-account settings are renamed.** Resource Explorer reads `RE_DAEMON_USER_ID` / `RE_DAEMON_USER_PASSWORD`
+  (#1108) and Egeria Advisor `EA_DAEMON_USER_ID` / `EA_DAEMON_USER_PASSWORD` (#1109). The old names still work for now,
+  with a warning. Egeria Advisor no longer has a built-in default account: without one, its service tasks refuse and
+  say why. Keep `EGERIA_USER` and `EGERIA_USER_PASSWORD` out of server environments; they are for the command line.
+- **Prefect**: the default work pool is now `resource-explorer-pool`, the pool the workers serve (#1111). In a
+  whole-definition run, a step declared `executes_at: prefect` now goes to a worker, which must run the same commit;
+  dispatch adds 10–15 s a step, so it isn't a speed-up (#1110, #1111). With no worker online the step runs in-process,
+  recorded as a fallback.
+- **Studio**: `STUDIO_JWT_TTL_HOURS` is replaced by `STUDIO_JWT_TTL_MINUTES` (default 15) and
+  `STUDIO_SESSION_MAX_HOURS` (default 8), after which you sign in again (#1113).
+- **`.env.example` comments are on their own lines** now. If you copied an older example, check for empty settings
+  followed by a comment (`KEY=  # comment`): the comment was read as the value (#1111).
 - **Stored database passwords survive a container recreate.** Set `RE_DB_CREDENTIAL_KEY` or
   `TRELLIS_DB_CREDENTIAL_KEY` to a stable value; without either, Resource Explorer derives the key from the host name
   and warns, and passwords stored before a recreate can't be read. Egeria Workspaces now requires

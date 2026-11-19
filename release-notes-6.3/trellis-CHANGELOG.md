@@ -8,7 +8,7 @@ Egeria release they ship with. Pull requests are `#N` in this repository.
 
 ## [Unreleased]
 
-## [6.3 Tech Preview] - 2026-11-17
+## [6.3 Tech Preview] - YYYY-MM-DD (the release date; placeholder)
 
 First recorded release, a Tech Preview released with Egeria 6.3. It covers everything merged since the October 2026 Egeria newsletter, which introduced
 Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the narrative.
@@ -44,6 +44,12 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
   worker running the same commit. The status banner reports workers from Prefect's own status, and says separately
   when the Prefect server can't be reached or the pool is missing (#1091). The configured pool (`PREFECT_WORK_POOL`)
   decides where a step goes, and Resource Explorer names any of its workers that are running on a different pool (#1092).
+- **File-system survey bundle** (#1114): file-system questions answer from the runs that answer them (C1); the
+  survey card tells the truth and updates without a reload (C2, TR-70); Publish says what it does and re-publishes
+  without duplicates, and Curate reviews the proposals (C3). The data-class send to Egeria is built but off, behind
+  `RE_FS_DATA_CLASS_PUBLISH`.
+- **Per-step Prefect dispatch** (#1110): `PREFECT_DISPATCH_STEPS` takes step keys, `heavy` or `all` (default: none);
+  each step's placement (worker, in-process, or fallback with its reason) is recorded and shown in `/prefect/status`.
 - **Recovery after an Egeria reset**: a new Alignment step, *re-attach by name*, reconnects Resource Explorer's records
   to Egeria using the qualified names it stored, with a dry run first. Alignment Apply now writes an activity entry for
   each step it applies (#1087). The recovery is one ordered procedure in the operations guide (#1088).
@@ -62,13 +68,8 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
   needs your confirmation, and so does running a plan. Commands that aren't safe to repeat ask you to acknowledge a
   re-run (#1091).
 - **Dashboard table tiles** are drawn by the Portal's own table renderer, with resizable columns (#1089).
-<!-- STAGED until the default-on PR merges (and U2, U3 through 8880's chat, U5 hold): replace the next three lines with
-  "- **Report-spec authoring on pyegeria's authoring API** (#1104, #1105, #1106), on by default (`EA_SPEC_AUTHORING_V2`,
-  `EA_SPEC_ELICITOR_FIXES`):" and add a Changed entry: "Report-spec authoring on by default; `EA_SPEC_AUTHORING_V2=0`
-  turns it all off, `EA_SPEC_ELICITOR_FIXES=0` only the elicitor fixes; `EA_SPEC_STATUS_MERGE` stays off". -->
-- **Report-spec authoring on pyegeria's authoring API** (work in progress, #1104, #1105), off unless
-  `EA_SPEC_AUTHORING_V2` and `EA_SPEC_ELICITOR_FIXES` are set; with them on, chat builds the spec with it, but chat and
-  Execute Spec don't show its answers yet. Tested against a live Egeria in a test harness, it gives:
+- **Report-spec authoring on pyegeria's authoring API** (#1104, #1105, #1106), on by default (`EA_SPEC_AUTHORING_V2`,
+  `EA_SPEC_ELICITOR_FIXES`). Chat and Execute Spec give the same answer, read with the signed-in user's own client:
   - **Ordinal ranking** (TR-6): a property with an ordered scale, such as importance, is ranked by its scale. A capped
     preview is re-read (up to `RANK_READ_ROWS`, 500) before ranking, and "ranked all N" appears only on a confirmed end.
   - **A sort from the question's words** (C03, #1105): "highest / lowest <attribute>" or "most / least <adjective>"
@@ -76,12 +77,22 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
   - **Content-status questions in one search** (TR-7 phase 2): every status asked for, in one type-scoped search;
     one-value properties name the values not searched; an invalid status is refused first.
   - Counts say "at least N", and no list is called ranked or complete, unless Egeria confirmed the end.
+- **Drafts have owners** (#1106): another user's draft can't be edited, generated or executed (`NOT_YOUR_DRAFT`), and
+  chat drafts land in the user's own folder.
+- **`/health` shows the report-spec authoring switches** (`spec_authoring`), as booleans (#1106).
 
 #### Studio
 - **Studio**, a new application for authoring report specs, reports and dashboard sheets, with forms, preview and
   lifecycle, built on pyegeria's authoring API. It has no language model of its own; AI-assisted authoring comes from
   Egeria Advisor, shown as a panel. Started with `packages/studio/scripts/start-studio.sh`, with its own CI workflow
   (#1095).
+
+- **Short-lived sessions with a rotating refresh** (TR-10, #1113): `STUDIO_JWT_TTL_MINUTES` (default 15) and
+  `STUDIO_SESSION_MAX_HOURS` (default 8); each refresh re-checks the Egeria sign-in, a replayed refresh token revokes
+  the session, and sign-out ends refresh.
+- **`make up` (`trellis-up`)** starts Resource Explorer, Egeria Advisor and Studio, checks ports first, names an app
+  that fails with its first error line and log, and writes the shared JWT secret to all three `.env` files (TR-47/48,
+  #1111).
 
 #### Shared packages
 - **`trellis-feedback`** 0.1 to 0.3: a shared feedback store with append-only triage (#1012 onwards).
@@ -90,6 +101,15 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
 - **The Analytic Library moved out** as `egeria-trellis-analytics` 0.2.0 on PyPI (#996).
 
 ### Changed
+- **Report-spec authoring is on by default**: `EA_SPEC_AUTHORING_V2=0` turns it all off, `EA_SPEC_ELICITOR_FIXES=0`
+  only the elicitor fixes; `EA_SPEC_STATUS_MERGE` stays off unless set (#1106).
+- **Service-account settings renamed**: `RE_DAEMON_USER_ID` / `RE_DAEMON_USER_PASSWORD` (TR-37, #1108) and
+  `EA_DAEMON_USER_ID` / `EA_DAEMON_USER_PASSWORD` (TR-34, #1109); the old names are deprecated aliases that warn.
+- **A whole-definition Prefect run is one run** with one `surveyed_at`, and fetches a repository once (F-AB-1/2,
+  #1110). A step declared `executes_at: prefect` now goes to a worker in a whole-definition run (#1110).
+- **RE's default Prefect work pool is `resource-explorer-pool`** (TR-45, #1111).
+- **Install docs** match the code: the public `odpi/egeria-trellis` clone, the real Egeria variable names, each app's
+  own service account, building EA's knowledge base first, and Studio as the third app (#1111).
 - The plaintext database-credential fallback is retired; credentials come only from the secrets store (#823).
 - Reports say "published" rather than the old not-yet-published wording (#618, #619).
 - A held rebuild is "held", not done, and admins can cancel it (#1053, #1054).
@@ -104,6 +124,27 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
   can be re-attached (#1087). The cleanup after an Egeria reset keeps the pointers that still resolve (#1097).
 
 ### Fixed
+- **File-system surveys** (#1114): a NUL byte no longer aborts the narrative read; binary files are skipped and named,
+  and a failed store keeps the previous index (TR-69). The `e164_phone` pattern no longer matches dates, IPs, decimals,
+  IDs or epochs (TR-75).
+- **A dispatched step can't hang** (TR-62a, #1115): per-request GitHub timeouts, a bound on the repository download, a
+  rate-limit wait past 60 s fails the step and names the reset time, and a 30 s heartbeat shows in the timeout line.
+- **A cancelled step writes nothing** (TR-62b, #1115): Resource Explorer asks Prefect to cancel, the flow checks its
+  state before every write, and readers refuse a result from a cancelled run.
+<!-- STAGED until dwolfson/trellis#1116 merges. Then uncomment:
+- **A cancel Prefect accepts is never reported as failed** (TR-62c, #1116), including a run cancelled before it started.
+-->
+- **The Prefect worker script advertises its commit** again; a `pipefail` check always failed before (#1108).
+- **`.env.example` comments moved off the value lines**, so an empty setting isn't read as its comment (TR-46, #1111).
+- **`resource-explorer add`** exits 1 with "Nothing was added." when it adds nothing (TR-46, #1111).
+- **Egeria Advisor** says plainly when its knowledge base isn't built (TR-49); the indexer refuses a disabled or
+  unknown collection and fails when every file fails (TR-50/51); DocAgent and ExamplesAgent report the sources they
+  retrieved (TR-51c) (#1111).
+- **The status banner has a close box**; a changed condition shows it again (#1108).
+<!-- STAGED until odpi/egeria-trellis#126 merges. Then uncomment:
+- **`trellis-context`**: `pack()` admits required sections before optional ones (odpi/egeria-trellis#121, thanks to @NopeCharon).
+- **`trellis-querycache`**: an unavailable Redis is read as a cache miss (odpi/egeria-trellis#122, thanks to @NopeCharon).
+-->
 - **Survey runs** (#1100):
   - only one run of a survey definition can be queued or running on a resource at a time. Another request is refused
     with 409, naming the run already in progress and how to cancel it, and nothing is queued (TR-1);
@@ -139,6 +180,11 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
   number (#1081).
 
 ### Security
+- **Egeria Advisor answers as the signed-in user** (TR-33, #1106, #1107): chat and Execute Spec build a per-request
+  client from the user's own token, never the service account; with no token, the reply asks you to sign in.
+- **No built-in Egeria Advisor account** (TR-34, #1109): the default account is removed, and the service paths refuse
+  in words without one. A user's request never reaches an MCP child, which can only run as the service account.
+- **Studio refresh tokens rotate**; a replayed one revokes the session (TR-10, #1113).
 - **The `trellis-auth` token check never signs in with a configured password.** It checks the token as the token's
   own user, so a token Egeria has refused can no longer pass by signing in again as the service account (TR-24,
   #1100).
@@ -157,6 +203,8 @@ Resource Explorer and Egeria Advisor as early previews. See [RELEASE_NOTES.md](R
   via the sync (#112), and patch updates from the 2026-11-16 Dependabot review (#1098).
 
 ### CI and tests
+- The ea_rebase A/B run evidence is out of the repository and git-ignored (TR-56, #1112).
+- A new `scripts.yml` workflow runs `scripts/tests` and fails on 0 collected (#1111).
 - Resource Explorer tests on main and PRs only; job timeout raised to 60, then 90 minutes; stale image runs cancelled;
   PR images built only when their inputs change; ea-tests cover querycache; builder and runtime image stages copy the same workspace packages
   (#884, #601, #891, #670, #1075, #1063, #1079).

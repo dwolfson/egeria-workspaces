@@ -8,7 +8,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
    ```markdown
    ## [Unreleased]
 
-   ## [6.3] - 2026-11-17
+   ## [6.3] - YYYY-MM-DD (the release date; placeholder)
 
    This release goes with Egeria 6.3 and needs pyegeria 6.3.0 or later. [RELEASE_NOTES.md](RELEASE_NOTES.md) summarizes the main changes.
    ```
@@ -24,7 +24,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
    ```
 
    `v6.2` is tagged at `903e8eeb` (#619), as the owner agreed on 2026-11-11. Tag `v6.3` at the release commit, on the
-   release date, Tuesday 2026-11-17, alongside Egeria 6.3 (owner, 2026-11-16).
+   release date, alongside Egeria 6.3 (owner, 2026-11-16; the planned date, Tuesday 2026-11-17, has passed, so the date is a placeholder).
 
 5. Remove the "Since 6.2 (unreleased, on `main`)" section from RELEASE_NOTES.md, since the new 6.3 section covers it.
 
@@ -50,7 +50,7 @@ The current `[Unreleased]` section was written as items landed and stops around 
 - **Report spec declarations, resolution and refusals in the Portal**: each spec shows what it declares, whether it
   can run and why not ([#809](https://github.com/odpi/egeria-workspaces/pull/809)); the Portal supplies a spec's
   inputs by role ([#806](https://github.com/odpi/egeria-workspaces/pull/806)).
-- **Resource Browser** phases 1 to 3 and the contents view: a page per resource, search, home, browse, work lists and
+- **Resource Browser** phases 1 to 3 and the contents view: a page per resource, search, home, browse, working sets and
   team sharing ([#620](https://github.com/odpi/egeria-workspaces/pull/620), [#621](https://github.com/odpi/egeria-workspaces/pull/621),
   [#622](https://github.com/odpi/egeria-workspaces/pull/622), [#625](https://github.com/odpi/egeria-workspaces/pull/625)).
   **Curation Coverage** tile ([#628](https://github.com/odpi/egeria-workspaces/pull/628)).
@@ -59,19 +59,16 @@ The current `[Unreleased]` section was written as items landed and stops around 
   [#790](https://github.com/odpi/egeria-workspaces/pull/790)).
 - **Lineage Explorer** hop limit and cut markers ([#749](https://github.com/odpi/egeria-workspaces/pull/749)).
 - **Resource Locator**: search on columns, attributes and data fields; several kinds at once; hover help on terms;
-  set, change and clear Data Scope; create and edit Data Lenses that govern work lists ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
+  set, change and clear Data Scope; create and edit Data Lenses that govern working sets ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
 - **The Overview marks unconfirmed figures**: "at least N" or "N found", with the reason, when paging can't confirm
   a count read to the end, in the counts, viewer totals and the Ownership and Semantic Grounding tiles
   ([#890](https://github.com/odpi/egeria-workspaces/pull/890)).
 - **Resource Locator follow-ups**: Browse by folder, search keyword and category; glossary terms as a search kind;
-  Browse lists filtered by a Data Lens; select several results and add them to a work list; a breadcrumb back to the
+  Browse lists filtered by a Data Lens; select several results and add them to a working set; a breadcrumb back to the
   list with its search, filters, scroll and Show-more rows; "Resource Locator Home"; a Data Scope year, month or day means the whole of it;
   emptying a scope or pressing Clear clears it, after asking ([#893](https://github.com/odpi/egeria-workspaces/pull/893), [#894](https://github.com/odpi/egeria-workspaces/pull/894)).
-<!-- STAGED until #895 merges. Then change "work list(s)" to "working set(s)" in the Locator and Resource Browser
-  entries, and uncomment:
 - **Working sets**: called "working set" throughout (PO-42); the owner can delete one after a plan and a confirm, members
   are never deleted, and Resource Explorer's own sets are refused (PO-43, [#895](https://github.com/odpi/egeria-workspaces/pull/895)).
--->
 - **Mermaid Expand viewer** ([#781](https://github.com/odpi/egeria-workspaces/pull/781)).
 - **Filter and sort** on long relationship and property lists, and on schema, column and attribute-index tables
   ([#656](https://github.com/odpi/egeria-workspaces/pull/656), [#657](https://github.com/odpi/egeria-workspaces/pull/657));
@@ -113,6 +110,12 @@ The current `[Unreleased]` section was written as items landed and stops around 
   setting or changing its password (TR-27, [#887](https://github.com/odpi/egeria-workspaces/pull/887)).
 - **The 16 MetadataExpert Dr.Egeria templates** (type and enum definitions, instances, classify, link and publish,
   Update Relationship, Count Metadata Elements), the same as pyegeria 6.3.0's ([#888](https://github.com/odpi/egeria-workspaces/pull/888)).
+- **Coco security operational data store**: `init_security_ods.sql` creates `security_ods`, which only `provisioner`
+  (delivery) and `surveyor` (read) can connect to, and `ensure-shared-infra.sh` runs it on every start. The Security
+  Observability subscription moves to a new workbook run as Ivor Padlock, because Peter Profile can't see the security
+  zone; the OpenLineage notebook joins the Data Hub batch. `4. keeping-safe` gains Simon Burr's STRIDE threat models
+  for the Batch Manufacturing and Release supply chain, with links from four Austin systems
+  ([#896](https://github.com/odpi/egeria-workspaces/pull/896)).
 
 ### Changed (append)
 
@@ -122,6 +125,11 @@ The current `[Unreleased]` section was written as items landed and stops around 
 - **The shared-infra README says to re-run the other stack's start script** after the `provisioner` password changes,
   on a host that runs both the quickstart and a freshstart (TR-28, [#894](https://github.com/odpi/egeria-workspaces/pull/894)).
 
+- **Freshstart pins the released `egeria-platform:6.3`**, at the same digest as the quickstart. Both start scripts
+  re-pin the image their Dockerfile uses, and `pin-latest-digest.sh` fails when it finds nothing to re-pin
+  (TR-36, [#897](https://github.com/odpi/egeria-workspaces/pull/897)).
+- **The start scripts say what "healthy" means**: the platform's web server is up, and Egeria's servers need about 4
+  more minutes ([#897](https://github.com/odpi/egeria-workspaces/pull/897)).
 - **Platform**: quickstart and freshstart on Egeria 6.3-SNAPSHOT; the quickstart pin tracks the Pasteur build
   ([#647](https://github.com/odpi/egeria-workspaces/pull/647), [#748](https://github.com/odpi/egeria-workspaces/pull/748),
   [#740](https://github.com/odpi/egeria-workspaces/pull/740), [#798](https://github.com/odpi/egeria-workspaces/pull/798),
@@ -161,11 +169,21 @@ The current `[Unreleased]` section was written as items landed and stops around 
 
 ### Fixed (append)
 
-<!-- STAGED until #895 merges. Then uncomment:
 - **Token reuse** (PO-40, [#895](https://github.com/odpi/egeria-workspaces/pull/895)): the Portal returns a still-valid token for the same user instead of signing in
   again, so a reload no longer starts the per-user caches cold.
 - **Dr.Egeria run block** (PY-30, [#895](https://github.com/odpi/egeria-workspaces/pull/895)): a block that runs no command isn't a success, with hints naming the
   line and the fix when pyegeria provides them (feature-detected).
+- **Freshstart on a fresh clone**: it no longer crash-loops on a platform image older than `DCATContentPack`, and the
+  start scripts stop and explain a missing `EGERIA_ADMIN_CALLER_PASSWORD` instead of failing after 3 s (TR-36,
+  [#897](https://github.com/odpi/egeria-workspaces/pull/897)).
+- **The Catalog opens a plain Asset**, and Asset subtypes it doesn't know, under Data Assets, instead of saying it
+  isn't part of The Catalog ([#897](https://github.com/odpi/egeria-workspaces/pull/897)).
+- **Three dead README links**, and freshstart's `demo-mode.md`, which described the quickstart
+  ([#897](https://github.com/odpi/egeria-workspaces/pull/897)).
+<!-- STAGED until #902 merges. Then uncomment:
+- **The Type Explorer shows each type's real Egeria area**, read first from the type's Egeria wiki link; the fallback
+  list no longer puts data stores in an invented Area 6. Report is Area 2, SurveyReport Area 6
+  ([#902](https://github.com/odpi/egeria-workspaces/pull/902)).
 -->
 
 - **The Overview shows only what it measured** ([#783](https://github.com/odpi/egeria-workspaces/pull/783),
@@ -209,7 +227,6 @@ The current `[Unreleased]` section was written as items landed and stops around 
 - **Ports bind to `127.0.0.1` by default** ([#644](https://github.com/odpi/egeria-workspaces/pull/644)); `--lan` opens them
   ([#687](https://github.com/odpi/egeria-workspaces/pull/687)).
 - **Jupyter no longer trusts the emSign ECC G3 root** ([#776](https://github.com/odpi/egeria-workspaces/pull/776)).
-<!-- STAGED until #895 merges. Then uncomment:
 - **No built-in Portal service passwords** (PO-45, [#895](https://github.com/odpi/egeria-workspaces/pull/895)): the quickstart Portal and my-profile read
   `QUICKSTART_PERSONA_PASSWORD` from `egeria-quickstart/.env` (written by `quick-start-local` if missing); freshstart's
   `EGERIA_ADMIN_CALLER_PASSWORD` has no default and must be set (breaking). One getter refuses in words when the
@@ -221,6 +238,12 @@ The current `[Unreleased]` section was written as items landed and stops around 
 - **The MCP tools no longer publish the service password** (PO-44, [#895](https://github.com/odpi/egeria-workspaces/pull/895)): no credential defaults in the tool
   schema; credentials are resolved at call time, the platform must be allow-listed, and the named-user rule applies.
 - **Optional firewall unit for the shared Postgres port 5442** (TR-28, [#895](https://github.com/odpi/egeria-workspaces/pull/895)).
+- **Freshstart's session key is generated and kept** (RK-24b, [#897](https://github.com/odpi/egeria-workspaces/pull/897)): `gen-env.sh` no longer drops
+  `JWT_SECRET`, so sessions are no longer signed with a value published in this repository; the compose file has no
+  default. The next start generates a new key, so everyone signs in again once.
+<!-- STAGED until #901 merges. Then uncomment:
+- **The quickstart's session key is kept or generated** (PO-46b, [#901](https://github.com/odpi/egeria-workspaces/pull/901)): `gen-env.sh` keeps `JWT_SECRET`
+  or generates one; the compose file requires it; a published value is refused, and sign-in answers 503 in words.
 -->
 - **No default `egeria_advisor` password**: `init_egeria.sql` no longer creates the role with a well-known password
   (TR-27, [#887](https://github.com/odpi/egeria-workspaces/pull/887)).

@@ -73,7 +73,7 @@ The demo environment is now locked down by default. Published ports answer only 
 
 Egeria Workspaces, our ready-to-run environment, now tracks the Egeria 6.3 builds. Along with Egeria-held dashboards and report specs, it adds:
 
-- **Resource Browser and Resource Locator**: a page for each resource showing what it contains, what it means, and notes on its parts, with search, work lists and team sharing.
+- **Resource Browser and Resource Locator**: a page for each resource showing what it contains, what it means, and notes on its parts, with search, working sets and team sharing.
 - **The Catalog**: a tab for each kind of infrastructure, View buttons on schema rows, lists that page to the end, and data assets shown as a tree of their types.
 - **Lineage Explorer**: a hop limit, with markers where the graph was cut.
 - **Data initialization runs notebooks** as well as Dr.Egeria files.

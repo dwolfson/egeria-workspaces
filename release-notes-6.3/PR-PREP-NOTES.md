@@ -124,3 +124,19 @@ un-stage steps in its comment (retitle, release table, 44 releases in 3 files, d
 pyegeria 6.3.1 un-staged 2026-11-18: tag v6.3.1 = b4beb91a (#603), PyPI upload 14:25:49Z. The tag's tree = reviewed
 head ea793782 + af96ce5b (password page config.json caution; the section doesn't mention config.json, so no
 contradiction). The release count is 44 in the page, overview and newsletter. Workspaces/trellis floors stay >=6.3.0.
+
+## 2026-11-19 update (Thursday Coordinator's request, relaying Dan's "Yes, send it")
+- **Un-staged:** #895 (merged 2026-11-18 07:44Z, aef06791): upgrade step 4, working-set rename and delete bullet, PY-30
+  and firewall lines, CHANGELOG Security/Fixed/Added; steps renumbered 1–9. EA default-on (#1106 merged 11-17 22:43Z):
+  U2 checked at trellis main 852b6966 (spec_authoring_v2.py l.157/162/176: on unless 0/false/no/off; STATUS_MERGE
+  off unless set); U3 PASS on 8880 after #1107 (Coordinator 11-18 record); U5 = #1106 per-request client + Execute
+  matches chat, #1107 identity fix. Drafts note un-staged.
+- **Added from merged PRs:** workspaces #896 (Mandy: security_ods, threat models), #897 (freshstart newcomer fixes,
+  JWT key kept, plain Assets, honest start messages); trellis #1107–#1115.
+- **Still STAGED:** workspaces #901 (PO-46b, 3 blocks) and #902 (Type Explorer area, 2 blocks); trellis #1116 (TR-62c,
+  2 blocks) and odpi/egeria-trellis#126 (NopeCharon #121/#122: thank-you line + 2 CHANGELOG lines).
+- **Recount** (method above): workspaces at upstream 6e30391f: 530 commits / 258 PRs; Dan 452, Mandy 28, dependabot
+  50. Trellis at 852b6966: 1,338 commits / ~551 PRs (distinct #N in all subjects; first-parent alone gives 136);
+  Dan 1,322, dependabot 16. Window now October 9 to November 19. Recount again after #901/#902/#1116/#126.
+- **Dates:** both CHANGELOG release dates are placeholders now (the planned 2026-11-17 has passed).
+- TR-89 (GitHub repo as SourceControlLibrary) is not mentioned: the drafts have no "coming next" section.

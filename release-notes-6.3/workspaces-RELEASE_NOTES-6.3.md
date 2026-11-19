@@ -11,7 +11,7 @@ This release goes with **Egeria 6.3** and needs **pyegeria 6.3.0 or later**, the
 platform itself, see the [Egeria 6.3 release notes](https://egeria-project.org/release-notes/latest/) and the
 [November 2026 newsletter](https://egeria-project.org/release-notes/november-2026/).
 
-In numbers: 504 commits and 254 merged pull requests between October 9 and November 17.
+In numbers: 530 commits and 258 merged pull requests between October 9 and November 19.
 
 ## Try it
 
@@ -31,7 +31,7 @@ In numbers: 504 commits and 254 merged pull requests between October 9 and Novem
 - **Resource Browser** ([#620](https://github.com/odpi/egeria-workspaces/pull/620),
   [#621](https://github.com/odpi/egeria-workspaces/pull/621), [#622](https://github.com/odpi/egeria-workspaces/pull/622),
   [#625](https://github.com/odpi/egeria-workspaces/pull/625)): a page per resource with what it contains, its
-  meaning and notes on its parts; search, home and browse; work lists and team sharing. Resource Explorer's
+  meaning and notes on its parts; search, home and browse; working sets and team sharing. Resource Explorer's
   **Curation Coverage** appears as a Dashboard Sheet tile ([#628](https://github.com/odpi/egeria-workspaces/pull/628)).
 - **We continue to harden the Portal environment** ([#640](https://github.com/odpi/egeria-workspaces/pull/640),
   [#642](https://github.com/odpi/egeria-workspaces/pull/642), [#643](https://github.com/odpi/egeria-workspaces/pull/643)).
@@ -92,21 +92,18 @@ In numbers: 504 commits and 254 merged pull requests between October 9 and Novem
 - A **Chief Data Officer dashboard** for Jules Keeper ([#780](https://github.com/odpi/egeria-workspaces/pull/780)).
 - **Jupyter no longer trusts the emSign ECC G3 root** ([#776](https://github.com/odpi/egeria-workspaces/pull/776)).
 
-## November 8 to 17: dashboards and report specs held in Egeria
+## November 8 to 19: dashboards and report specs held in Egeria
 
 - **The Resource Locator searches more and explains itself.** Search finds columns, attributes and data fields, and
   can search several kinds at once. Hover over a term on the page to see what it means. You can set, change and clear
-  a resource's Data Scope, and create and edit Data Lenses that govern work lists ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
+  a resource's Data Scope, and create and edit Data Lenses that govern working sets ([#889](https://github.com/odpi/egeria-workspaces/pull/889)).
 - **Browse the Resource Locator by folder, search keyword or category**, and search glossary terms too. Filter Browse
-  lists by a Data Lens, tick several results and add them to a work list at once, and follow a breadcrumb back to
+  lists by a Data Lens, tick several results and add them to a working set at once, and follow a breadcrumb back to
   your list with its search, filters, scroll and the rows you opened with Show more kept. A Data Scope of a year,
   month or day covers the whole of it ([#893](https://github.com/odpi/egeria-workspaces/pull/893), [#894](https://github.com/odpi/egeria-workspaces/pull/894)).
-<!-- STAGED until #895 merges. Then (1) change "work list(s)" to "working set(s)" in this section's Locator lines and
-  in the Resource Browser line near the top (l.~34), and (2) uncomment:
 - **Delete a working set you own.** The Resource Locator shows what will change (members, shares, lenses) and asks
   first. Members are never deleted, and anything that would block the delete is named before anything is written
   ([#895](https://github.com/odpi/egeria-workspaces/pull/895)).
--->
 - **The Overview marks figures it could not confirm.** When paging can't confirm that a count read to the end, the
   figure says "at least N" or "N found", with the reason, instead of a bare number that might be wrong
   ([#890](https://github.com/odpi/egeria-workspaces/pull/890)).
@@ -153,10 +150,32 @@ In numbers: 504 commits and 254 merged pull requests between October 9 and Novem
 - **Statements of applicability**: Egeria Explorer has a new Statements of Applicability view, with an implementation
   summary and a table of controls you can sort and filter ([#882](https://github.com/odpi/egeria-workspaces/pull/882)), and Coco has a sample for ISO/IEC 27001
   ([#881](https://github.com/odpi/egeria-workspaces/pull/881)).
+- **Coco's security products have their own data store**, `security_ods`, which only the delivery and survey roles
+  can connect to; Ivor Padlock subscribes to the Security Observability products there. Coco also gains Simon Burr's
+  STRIDE threat models for the Batch Manufacturing and Release supply chain
+  ([#896](https://github.com/odpi/egeria-workspaces/pull/896)).
+- **The Portal has no built-in service password.** It refuses in words when one isn't configured; the MCP tools no
+  longer publish the service password in their tool schemas; a request that names another user needs that user's
+  token or password. A reload or direct link reuses your still-valid sign-in, so pages no longer start cold
+  ([#895](https://github.com/odpi/egeria-workspaces/pull/895)).
+- **Freshstart works on a fresh clone**: it runs the released Egeria 6.3 platform, its start scripts explain the
+  admin password they need, and its session key is generated and kept rather than taken from a value published in
+  this repository. The Catalog opens plain Assets, such as the GitHub repositories Resource Explorer catalogs, under
+  Data Assets ([#897](https://github.com/odpi/egeria-workspaces/pull/897)).
+<!-- STAGED until #901 merges. Then uncomment:
+- **The quickstart's session key is generated and kept too**, never a value published in this repository
+  ([#901](https://github.com/odpi/egeria-workspaces/pull/901)).
+-->
+<!-- STAGED until #902 merges. Then uncomment:
+- **The Type Explorer shows each type's real Egeria area**, read from the type's own Egeria documentation link. Report
+  is in Area 2 (Assets), and Area 6 is Discovery, Surveys and Analysis
+  ([#902](https://github.com/odpi/egeria-workspaces/pull/902)).
+-->
 
 ## Platform, infrastructure and dependencies
 
-- **Platform**: the quickstart is pinned to the released Egeria 6.3 image, `odpi/egeria-platform:6.3` (#885).
+- **Platform**: quickstart and freshstart are pinned to the released Egeria 6.3 image, `egeria-platform:6.3`
+  ([#885](https://github.com/odpi/egeria-workspaces/pull/885), [#897](https://github.com/odpi/egeria-workspaces/pull/897)).
   During the release cycle, quickstart and freshstart followed the Egeria 6.3-SNAPSHOT builds
   ([#647](https://github.com/odpi/egeria-workspaces/pull/647), [#748](https://github.com/odpi/egeria-workspaces/pull/748),
   [#798](https://github.com/odpi/egeria-workspaces/pull/798), [#800](https://github.com/odpi/egeria-workspaces/pull/800),
@@ -177,7 +196,7 @@ In numbers: 504 commits and 254 merged pull requests between October 9 and Novem
   mcp, schemathesis, pytest, Python base images, Prefect, certbot, docker) and the OpenSSF Scorecard workflow, which
   now runs.
 
-Thank you to everyone who contributed: Dan Wolfson (427 commits), Mandy Chessell (27) and dependabot (50).
+Thank you to everyone who contributed: Dan Wolfson (452 commits), Mandy Chessell (28) and dependabot (50).
 
 ---
 
@@ -193,8 +212,6 @@ Thank you to everyone who contributed: Dan Wolfson (427 commits), Mandy Chessell
    install whose `egeria_advisor` role still has the old well-known password, change it first (see the shared-infra
    README, "Setting or changing the egeria_advisor password"), then put the new value in `.env`
    ([#887](https://github.com/odpi/egeria-workspaces/pull/887)).
-<!-- STAGED until #895 merges (names checked at its head 3e9c50ef: egeria-quickstart.yaml l.314/441,
-  egeria-freshstart.yaml l.183). Then insert here as step 4 and renumber the steps after it (5 to 9):
 4. **Set the Portal's service passwords; there are no built-in defaults now** ([#895](https://github.com/odpi/egeria-workspaces/pull/895)).
    - *Quickstart:* the Portal and my-profile take their Egeria password from `QUICKSTART_PERSONA_PASSWORD` in
      `compose-configs/egeria-quickstart/.env`. `./quick-start-local` writes the Coco demo password there if it is
@@ -203,17 +220,25 @@ Thank you to everyone who contributed: Dan Wolfson (427 commits), Mandy Chessell
      environment.
    - *Freshstart (breaking):* `freshstart-pyegeria-web` no longer has a built-in `EGERIA_ADMIN_CALLER_PASSWORD`. Set it
      in `compose-configs/egeria-freshstart/.env`, or export it, before the next start. `fresh-start-local` keeps it
-     across runs and never makes one up.
+     across runs and never makes one up; the start scripts stop and explain if it's missing
+     ([#897](https://github.com/odpi/egeria-workspaces/pull/897)).
+   - *Freshstart's session key:* the next `./fresh-start-local` generates a new `JWT_SECRET` and keeps it, so everyone
+     signs in again once ([#897](https://github.com/odpi/egeria-workspaces/pull/897)).
+<!-- STAGED until #901 merges. Then uncomment:
+   - *Quickstart's session key:* `./quick-start-local` keeps a `JWT_SECRET` you have set, or generates one on its first
+     run. The compose file now requires it, and a published value is refused, so sessions signed with one end and
+     everyone signs in again once ([#901](https://github.com/odpi/egeria-workspaces/pull/901)).
+-->
    - *A URL can no longer act as another user:* `?user_id=` naming anyone but the Portal's own user needs a sign-in
      token, and a request that names a user needs that user's token or password; otherwise the Portal refuses in words
      (HTTP 400). No route reads a password from a URL.
--->
-4. **Start the shared infrastructure.** The first time, Docker recreates the `egeria-shared-postgres` container once,
+5. **Start the shared infrastructure.** The first time, Docker recreates the `egeria-shared-postgres` container once,
    because its configuration gained the `PGVECTOR_PASSWORD` setting; your data is kept
    ([#887](https://github.com/odpi/egeria-workspaces/pull/887)). Other shared containers are recreated too if their
    images changed. Every start now also creates the `egeria_ods` database and the `provisioner` role if they are
-   missing ([#870](https://github.com/odpi/egeria-workspaces/pull/870)).
-5. **Start with `--with-airflow-marquez`**, so the Airflow containers are recreated and get the new `egeria`
+   missing ([#870](https://github.com/odpi/egeria-workspaces/pull/870)), and the `security_ods` database
+   ([#896](https://github.com/odpi/egeria-workspaces/pull/896)).
+6. **Start with `--with-airflow-marquez`**, so the Airflow containers are recreated and get the new `egeria`
    connection. Until they are, the new DAG `coco_subscriptions_egeria`, which starts unpaused, fails on every run
    because that connection is missing. If you don't want it yet, pause it in Airflow
    ([#870](https://github.com/odpi/egeria-workspaces/pull/870)).
@@ -224,11 +249,11 @@ Thank you to everyone who contributed: Dan Wolfson (427 commits), Mandy Chessell
    The `provisioner` role is shared, and the new password reaches only the stack you start. If one host runs both
    the quickstart and a freshstart, run the other stack's start script too, or its provisioning connectors can't
    sign in ([#894](https://github.com/odpi/egeria-workspaces/pull/894)).
-6. **Rebuild the images.** The quickstart needs pyegeria 6.3.0 or later
+7. **Rebuild the images.** The quickstart needs pyegeria 6.3.0 or later
    ([#887](https://github.com/odpi/egeria-workspaces/pull/887)) and runs the released Egeria 6.3 image
    ([#885](https://github.com/odpi/egeria-workspaces/pull/885)). Freshstart now needs pyegeria 6.3.0 or later too
    ([#892](https://github.com/odpi/egeria-workspaces/pull/892)).
-7. **If you run Resource Explorer and Egeria Advisor (Trellis), set `TRELLIS_DB_CREDENTIAL_KEY`.** It is now
+8. **If you run Resource Explorer and Egeria Advisor (Trellis), set `TRELLIS_DB_CREDENTIAL_KEY`.** It is now
    required in `compose-configs/optional-associated-runtimes/trellis/.env`, and the Prefect Resource Explorer worker
    needs the same value in `.env.re-worker`; without it, compose won't start the Resource Explorer containers (a
    Resource Explorer you run on the host falls back to a host-name key and warns). Generate it once (for example
@@ -236,7 +261,7 @@ Thank you to everyone who contributed: Dan Wolfson (427 commits), Mandy Chessell
    the container's host name, so each recreate made them unreadable: re-enter each stored database password once.
    If an older `.env` sets `RE_DB_CREDENTIAL_KEY`, that one takes precedence, so leave it unset or give it the same
    value ([#894](https://github.com/odpi/egeria-workspaces/pull/894)).
-8. **To upgrade or reset the quickstart's Egeria itself**, use `compose-configs/egeria-quickstart/bin/egeria-upgrade-reset`
+9. **To upgrade or reset the quickstart's Egeria itself**, use `compose-configs/egeria-quickstart/bin/egeria-upgrade-reset`
    (`plan` first, then `apply`); see *Upgrading or resetting the quickstart Egeria*
    ([#851](https://github.com/odpi/egeria-workspaces/pull/851)). `plan --stable` picks the newest released Egeria;
    `--latest` is now another name for it ([#886](https://github.com/odpi/egeria-workspaces/pull/886)).
@@ -268,17 +293,17 @@ Thank you to everyone who contributed: Dan Wolfson (427 commits), Mandy Chessell
   the Promise / Memento toggle on, and content in a governance zone appears only to users with access to that zone.
 - **If you call pyegeria's `find_data_assets` yourself** (in notebooks or scripts), it returns only ACTIVE assets by
   default; pass `content_status_list=[]` to include assets with no content status. The Portal's lists already do.
-<!-- STAGED until #895 merges. Then uncomment:
 - **A Dr.Egeria block that runs nothing is no longer reported as a success.** Through the Portal's MCP tool
   `dr_egeria_run_block`, a block whose headings are a level off says so, with hints that name the line and the fix
   once pyegeria provides them ([#895](https://github.com/odpi/egeria-workspaces/pull/895)).
 - **Optional firewall for the shared Postgres port.** `compose-configs/shared-infra/systemd/egeria-pg-firewall.service`
   drops connections to 5442 unless they come from a Docker network; the README there has the check and its limits
   (IPv4 only) ([#895](https://github.com/odpi/egeria-workspaces/pull/895)).
--->
 - **`fresh-start-local` waits for the platform to report healthy**, and handles Podman the way `quick-start-local`
   does. Re-running a start script keeps the `provisioner` password; the shared-infra README says when a new one is
   made ([#893](https://github.com/odpi/egeria-workspaces/pull/893)).
+- **"Healthy" means the platform's web server is up.** Egeria's servers take about 4 more minutes, and The Catalog
+  keeps filling in after that; the start scripts now say so ([#897](https://github.com/odpi/egeria-workspaces/pull/897)).
 
 ## Where the detail lives
 

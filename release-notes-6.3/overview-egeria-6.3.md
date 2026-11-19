@@ -39,9 +39,9 @@ an egress allow-list, credentials go only to approved platforms, and no request 
 **5. Easier to learn.** New tutorials and worked examples cover saved queries, analytic functions, report specs and
 dashboards, and Resource Explorer has a six-part tutorial.
 
-## By the numbers (October 9 to November 17, 2026)
+## By the numbers (October 9 to November 19, 2026)
 
-- **Egeria Workspaces:** 254 merged changes.
+- **Egeria Workspaces:** 258 merged changes.
 - **Resource Explorer and Egeria Advisor:** more than 500 merged PRs.
 - **pyegeria:** 44 releases, 6.2.1 to 6.2.42 and then 6.3.0 and 6.3.1, the releases that match Egeria 6.3.
 

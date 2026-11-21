@@ -60,6 +60,60 @@ Marks assets containing sensitive information.
 
 ---
 
+## Decisions and data values (Egeria 6.4)
+
+These commands need Egeria 6.4. On an earlier platform Dr. Egeria says "needs Egeria 6.4" and sends nothing.
+
+### Record a decision
+```markdown
+## Create Decision
+### Display Name
+Adopt Egeria 6.4
+
+### Summary
+Move the demo platform to Egeria 6.4.
+
+### Importance
+High
+
+### Next Review Time
+2027-01-15T00:00:00Z
+```
+
+### Record an assessment that informed it
+```markdown
+## Link Assessment
+### Element
+[qualified name of the element that was assessed]
+
+### Decision
+Decision::Adopt Egeria 6.4
+
+### Label
+fit
+
+### Assessment Time
+2026-11-21T10:00:00Z
+```
+The processed document gains an `Assessment GUID` section. Keep it: `Update Assessment` and
+`Detach Assessment` use it to pick this assessment, since the same element can be assessed many times.
+Without it they need Element, Decision and Label (and Assessment Time, with a zone, if more than one matches).
+
+### Create a literal data value
+```markdown
+## Create Data Value
+### Display Name
+Retry limit
+
+### Data Type
+int
+
+### Literal Value
+3
+```
+
+---
+
 ## Security Officer
 
 ### Create a statement of applicability

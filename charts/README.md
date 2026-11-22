@@ -114,7 +114,13 @@ helm test st -n egeria      # both canaries
     would not match the keystore a running platform already loaded (the platform canary then hangs on TLS verification).
   * **Portal canary: PO-68 check.** On a gated Portal (freshstart, or demoMode) the canary also posts `{}` with no session and requires 401. On OpenShift
     only freshstart was run live (the demoMode half is from reading the code and the render tests); it passes with the image built with c6aedd12 and FAILS (HTTP 200) with the a79109b7 image, so it catches a Portal image that predates the fix.
-  * Not run: demoMode, Ingress/Route on OpenShift.
+  * **Route on OpenShift Local** (`tests/crc_route.sh`, no chart change): OpenShift turns the chart's Ingress into a Route, so `portal.ingress.enabled=true`,
+    `portal.ingress.host=<name>.apps-crc.testing`, the annotation `route.openshift.io/termination=edge` and `portal.networkPolicy.enabled=true` (which the chart requires with an
+    Ingress) give an edge Route with the router's default certificate, plain http redirected to https. The Route targets the Apache Service only. Checked from the host through
+    the Route on the demo stack: `/portal` 302 to the login page, `/login` 200, `POST {}` to `/api/egeria-token` 401 (PO-68), an authenticated API 401 for an anonymous caller,
+    http redirected; `helm test` passes. The in-cluster canary still goes to the Portal Service on 8000 under demoMode (the Apache edge header trips the demo gate).
+    Not run: the Route with a production-style stack, and a Route with its own certificate.
+  * Not run: demoMode on kind.
 * **Public demo keystore password:** when `tls.existingSecret` holds the public demo password (the image's own keystore), the demo posture prints a
   WARNING in NOTES, and the **production posture refuses to install or upgrade** (`fail`, naming `tls.existingSecret`), in the platform chart and in the
   umbrella (`core.tls.existingSecret`). Both use `lookup`, so they act only against a real cluster (not `helm template` or `--dry-run=client`);

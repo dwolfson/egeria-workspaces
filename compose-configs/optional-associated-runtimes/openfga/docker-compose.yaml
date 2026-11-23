@@ -1,0 +1,86 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright Contributors to the Egeria project
+#
+# OpenFGA as an optional runtime, for fine-grained authorization experiments
+# beside Egeria. Nothing in the quickstart or freshstart stacks starts it or
+# depends on it. See README.md in this directory.
+#
+#   * Datastore: an `openfga` database on shared-infra's egeria-shared-postgres
+#     (port 5442), owned by an `openfga_admin` role. Create both once with the
+#     psql in README.md; this config does not create them.
+#   * `openfga-migrate` runs `openfga migrate` and exits; `openfga` runs only
+#     after it has completed successfully, so every start brings the schema up
+#     to date first.
+#   * Playground off by default (OPENFGA_PLAYGROUND_ENABLED=true to turn it on).
+#   * Host ports bind to 127.0.0.1 only. They are moved off OpenFGA's own 8080,
+#     8081 and 3000, which Airflow, Spark and Marquez already use here.
+#
+# Usage (from this directory, with shared-infra already up):
+#   cp .env.example .env      # then set OPENFGA_DB_PASSWORD
+#   docker compose up -d
+#   docker compose down
+
+name: egeria-optional-openfga
+
+x-openfga-datastore: &openfga-datastore
+  OPENFGA_DATASTORE_ENGINE: postgres
+  # The password is not in the URI: OPENFGA_DATASTORE_PASSWORD overrides it,
+  # so it needs no URL-escaping and is not echoed in a logged connection string.
+  OPENFGA_DATASTORE_URI: "postgres://openfga_admin@${OPENFGA_DB_HOST:-egeria-shared-postgres}:${OPENFGA_DB_PORT:-5442}/${OPENFGA_DB_NAME:-openfga}?sslmode=${OPENFGA_DB_SSLMODE:-disable}"
+  OPENFGA_DATASTORE_USERNAME: "${OPENFGA_DB_USER:-openfga_admin}"
+  OPENFGA_DATASTORE_PASSWORD: "${OPENFGA_DB_PASSWORD:?set OPENFGA_DB_PASSWORD in .env}"
+
+services:
+  openfga-migrate:
+    image: "${OPENFGA_IMAGE:-openfga/openfga:v1.23.0}"
+    container_name: egeria-optional-openfga-migrate
+    command: migrate
+    environment:
+      <<: *openfga-datastore
+    networks:
+      - egeria_network
+    restart: "no"
+
+  openfga:
+    image: "${OPENFGA_IMAGE:-openfga/openfga:v1.23.0}"
+    container_name: egeria-optional-openfga
+    command: run
+    depends_on:
+      openfga-migrate:
+        condition: service_completed_successfully
+    environment:
+      <<: *openfga-datastore
+      # Upstream marks the built-in playground deprecated. Unless its address
+      # is set, it listens on the container's own 127.0.0.1 and the port
+      # mapping below cannot reach it.
+      OPENFGA_PLAYGROUND_ENABLED: "${OPENFGA_PLAYGROUND_ENABLED:-false}"
+      OPENFGA_PLAYGROUND_ADDR: "0.0.0.0:3000"
+      # Authentication of API callers: `none` (default; host ports are
+      # localhost-only) or `preshared` with OPENFGA_AUTHN_PRESHARED_KEYS.
+      OPENFGA_AUTHN_METHOD: "${OPENFGA_AUTHN_METHOD:-none}"
+      OPENFGA_AUTHN_PRESHARED_KEYS: "${OPENFGA_AUTHN_PRESHARED_KEYS:-}"
+      OPENFGA_LOG_FORMAT: "${OPENFGA_LOG_FORMAT:-text}"
+    ports:
+      - "127.0.0.1:${OPENFGA_HTTP_PORT:-8090}:8080"
+      - "127.0.0.1:${OPENFGA_GRPC_PORT:-8091}:8081"
+      # Served only when OPENFGA_PLAYGROUND_ENABLED=true.
+      - "127.0.0.1:${OPENFGA_PLAYGROUND_PORT:-3030}:3000"
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/grpc_health_probe", "-addr=127.0.0.1:8081"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 5s
+    networks:
+      - egeria_network
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  egeria_network:
+    name: egeria_network
+    external: true

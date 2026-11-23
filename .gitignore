@@ -296,3 +296,6 @@ compose-configs/*/.env.pyegeria
 
 # egeria-upgrade-reset plans, state and database backups (host-only CLI)
 runtime-volumes/egeria-resets/
+
+# NATS JetStream store (optional-associated-runtimes/nats)
+/runtime-volumes/nats/

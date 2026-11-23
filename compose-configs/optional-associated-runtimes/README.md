@@ -33,6 +33,12 @@ Currently there are compose configurations for:
         comparing its profiles and generated tests with Resource Explorer's quality checks;
         metadata in the shared Postgres; UI 8501 / API 8531 bound to 127.0.0.1 only. See
         testgen/README.md.
+    * NATS - a NATS server with JetStream (persistent streams, KV and object stores), for eventing
+        experiments; client 4222 and monitoring 8222 bound to 127.0.0.1 only; no consumer yet. See
+        nats/README.md.
+    * OpenFGA - a fine-grained (Zanzibar-style) authorization server, for authorization experiments;
+        datastore an `openfga` database in the shared Postgres; HTTP 8090, gRPC 8091 and an optional
+        playground 3030, bound to 127.0.0.1 only; no consumer yet. See openfga/README.md.
         
 
 As always, your feedback and participation are welcome. 

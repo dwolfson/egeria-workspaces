@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright Contributors to the Egeria project
+#
+# NATS with JetStream as an optional runtime, for eventing experiments beside
+# Egeria. Nothing in the quickstart or freshstart stacks starts it or depends
+# on it. See README.md in this directory.
+#
+#   * JetStream is on (-js); its streams and KV/object stores persist under
+#     runtime-volumes/nats/jetstream (git-ignored).
+#   * Joins egeria_network, so other containers reach it as egeria-optional-nats:4222.
+#   * Host ports bind to 127.0.0.1 only: this config has no client auth.
+#
+# Usage (from this directory; shared-infra must have created egeria_network):
+#   cp .env.example .env      # optional: only to change the defaults
+#   docker compose up -d
+#   docker compose down
+
+name: egeria-optional-nats
+
+services:
+  nats:
+    image: "${NATS_IMAGE:-nats:2.15.3-alpine}"
+    container_name: egeria-optional-nats
+    restart: unless-stopped
+    command:
+      - "--name=egeria-optional-nats"
+      - "--jetstream"
+      - "--store_dir=/data/jetstream"
+      - "--http_port=8222"
+    volumes:
+      - ../../../runtime-volumes/nats:/data
+    ports:
+      - "127.0.0.1:${NATS_CLIENT_PORT:-4222}:4222"
+      - "127.0.0.1:${NATS_MONITOR_PORT:-8222}:8222"
+    healthcheck:
+      # /healthz fails while JetStream is not ready, not only when the server is down.
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8222/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 5s
+    networks:
+      - egeria_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  egeria_network:
+    name: egeria_network
+    external: true

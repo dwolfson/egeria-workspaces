@@ -79,7 +79,7 @@ Open **Settings → Call Dr. Egeria Settings (MCP)**:
 
 - **MCP Server URL** — see table above
 - **MCP Access Token** — must match `MCP_ACCESS_TOKEN` in the backend. There is no default value.
-  - The Portal's own Obsidian (the containerised vault opened from the Portal): you don't set it. When you take the Obsidian lock and pick a persona, the Portal writes the token, with the persona's user ID and password, into the plugin's settings, and clears them when the lock is released.
+  - The Portal's own Obsidian (the containerised vault opened from the Portal): you don't set it. When you take the Obsidian lock and pick a persona (when the lock is enabled and the persona has a password set in `personas.json`), the Portal writes the token, with the persona's user ID and password, into the plugin's settings, and clears them when the lock is released.
   - Your own desktop Obsidian, or any other MCP client: paste it yourself. It's the `MCP_ACCESS_TOKEN=` line in the stack's `.env` (`compose-configs/egeria-quickstart/.env`, or `compose-configs/egeria-freshstart/.env`). `quick-start-local` (or `fresh-start-local`) generates it on the first run and keeps it on later runs, so paste it again only if that `.env` is recreated or the token is changed.
 - **Egeria User ID / Password** — your persona credentials. In the Portal's own Obsidian, the Portal fills them in when you take the lock with a persona; in your own Obsidian, enter them yourself
 - **Default Directive** — `process` / `validate` / `display`

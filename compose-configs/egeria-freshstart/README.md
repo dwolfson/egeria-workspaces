@@ -179,7 +179,8 @@ EGERIA_ADMIN_CALLER_PASSWORD=bootstraps-current-password
 
 - `MCP_ACCESS_TOKEN` (the token the Portal's MCP endpoints require, sent as `X-API-Key` or `?token=`): you don't need to
   set it. `./fresh-start-local` generates a random one into `.env` on the first run and keeps it; the Portal's own
-  Obsidian gets it automatically when you take the Obsidian lock with a persona. For your own desktop Obsidian, or
+  Obsidian gets it automatically when you take the Obsidian lock with a persona
+  (when the lock is enabled and the persona has a password set in `personas.json`). For your own desktop Obsidian, or
   any other MCP client, copy it from the `MCP_ACCESS_TOKEN=` line in `.env`. If it is unset the MCP endpoints are off and
   say so. The value this stack used to publish is refused (`./fresh-start-local` stops, and the
   Portal won't start with it), because anyone who could reach the Portal's port could drive the MCP tools with it.

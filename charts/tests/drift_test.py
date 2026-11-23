@@ -211,15 +211,20 @@ def main():
         check("portal %s demo canary password for omagspcatnpa equals the tracked user directory's" % penv,
               open(os.path.join(CHART, "..", "egeria-portal", "files", penv, "canary-password")).read().strip() == canary)
 
-    # TR-141: RE's own service account in the freshstart demo directory, separate from the platform's integration identity
+    # TR-141: RE's own service account in the freshstart demo directory: the same name and the same group set as on quickstart (proven there),
+    # and not omagspcatnpa's groups (no runtimeManager, integrationConnector or securityManager: no purge rights)
     fsd = yaml.safe_load(open(os.path.join(CHART, "files", "freshstart", "secrets", "egeria-user-directory.omsecrets")))["secretsCollections"]["userDirectory"]
-    re_u = fsd["users"].get("trellisrenpa", {})
-    check("freshstart demo directory has RE's own account trellisrenpa (DIGITAL, available, own password)",
+    qsd = yaml.safe_load(open(os.path.join(CHART, "files", "quickstart", "secrets", "coco-user-directory.omsecrets")))["secretsCollections"]["cocoUserDirectory"]
+    re_u = fsd["users"].get("resourceexplorernpa", {})
+    check("freshstart demo directory has RE's own account resourceexplorernpa (DIGITAL, available, own password)",
           re_u.get("userAccountType") == "DIGITAL" and re_u.get("userAccountStatus") == "AVAILABLE" and re_u.get("secrets", {}).get("clearPassword")
           and re_u["secrets"]["clearPassword"] != fsd["users"]["omagspcatnpa"]["secrets"]["clearPassword"])
-    lists = fsd["namedLists"]
-    check("trellisrenpa can list active servers (runtimeManager) and manage what RE heals (integrationConnector), as omagspcatnpa can",
-          all("trellisrenpa" in lists[g].get("userMembers", []) and "omagspcatnpa" in lists[g].get("userMembers", []) for g in ("runtimeManager", "integrationConnector")))
+    groups = lambda d, u: sorted(g for g, v in d["namedLists"].items() if u in (v.get("userMembers") or []))
+    check("resourceexplorernpa has the same group set on freshstart as on quickstart (%s)" % groups(qsd, "resourceexplorernpa"),
+          groups(fsd, "resourceexplorernpa") == groups(qsd, "resourceexplorernpa") and groups(qsd, "resourceexplorernpa") == ["governanceEngine", "omagServer", "serverOperator"], str(groups(fsd, "resourceexplorernpa")))
+    check("resourceexplorernpa holds no purge or admin group (runtimeManager, integrationConnector, securityManager)",
+          not set(groups(fsd, "resourceexplorernpa")) & {"runtimeManager", "integrationConnector", "securityManager"})
+
     # the umbrella's copy of the public demo keystore password (for its NOTES warning)
     mine = open(os.path.join(CHART, "..", "egeria-stack", "files", "demo-keystore-password")).read().strip()
     for penv in ("quickstart", "freshstart"):

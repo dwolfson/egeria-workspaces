@@ -9,4 +9,4 @@ re:
   egeria:
     daemon:
       # RE's own account in the tracked freshstart demo user directory (not the platform's integration identity). The Secret is yours (re.egeria.daemon.existingSecret).
-      userId: trellisrenpa
+      userId: resourceexplorernpa

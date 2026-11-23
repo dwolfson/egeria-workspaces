@@ -37,11 +37,11 @@ SQL
 unset OPW RPW
 kubectl -n "$NS" create secret generic re-owner-db --from-file=password="$W/owner-pw" --dry-run=client -o yaml | kubectl apply -f - >/dev/null
 kubectl -n "$NS" create secret generic re-db --from-file=password="$W/rt-pw" --dry-run=client -o yaml | kubectl apply -f - >/dev/null
-# RE's own Egeria service account (trellisrenpa, TR-141) and the sign-in account for the Portal checks (omagspcatnpa): both from the tracked freshstart user directory
+# RE's own Egeria service account (resourceexplorernpa, TR-141) and the sign-in account for the Portal checks (omagspcatnpa): both from the tracked freshstart user directory
 python3 -I - "$CHARTS/egeria-platform/files/freshstart/secrets/egeria-user-directory.omsecrets" "$W" <<'PY'
 import sys, yaml
 u = yaml.safe_load(open(sys.argv[1]))["secretsCollections"]["userDirectory"]["users"]
-open(sys.argv[2] + "/egeria-pw", "w").write(u["trellisrenpa"]["secrets"]["clearPassword"])
+open(sys.argv[2] + "/egeria-pw", "w").write(u["resourceexplorernpa"]["secrets"]["clearPassword"])
 open(sys.argv[2] + "/portal-pw", "w").write(u["omagspcatnpa"]["secrets"]["clearPassword"])
 PY
 kubectl -n "$NS" create secret generic re-egeria --from-file=password="$W/egeria-pw" --dry-run=client -o yaml | kubectl apply -f - >/dev/null

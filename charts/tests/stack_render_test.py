@@ -225,7 +225,7 @@ def main():
     wk = next(d for d in dsf if d["kind"] == "Deployment" and d["metadata"]["name"].endswith("re-worker"))["spec"]["template"]["spec"]
     env = {e["name"]: e.get("value") for e in wk["containers"][0]["env"]}
     wenv = {e["name"]: e.get("value") for e in wk["initContainers"][0]["env"]}
-    check("freshstart: RE's daemon account is trellisrenpa by default (worker and its wait)", env.get("RE_DAEMON_USER_ID") == "trellisrenpa" and wenv.get("WAIT_USER") == "trellisrenpa", str((env.get("RE_DAEMON_USER_ID"), wenv.get("WAIT_USER"))))
+    check("freshstart: RE's daemon account is resourceexplorernpa by default (worker and its wait)", env.get("RE_DAEMON_USER_ID") == "resourceexplorernpa" and wenv.get("WAIT_USER") == "resourceexplorernpa", str((env.get("RE_DAEMON_USER_ID"), wenv.get("WAIT_USER"))))
     if failures:
         print("\n%d FAILED" % len(failures))
         sys.exit(1)

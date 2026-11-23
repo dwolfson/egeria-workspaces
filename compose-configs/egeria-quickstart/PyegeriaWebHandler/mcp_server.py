@@ -142,6 +142,11 @@ def _write_block_to_inbox(markdown_block: str) -> str:
 
 import json as _json
 
+# PY-48: the only statuses that count as succeeded. Anything else, a new status or a missing one included, is a
+# failure with words, so a status the wrapper has not heard of can never be a silent success.
+_GOOD_STATUSES = ("success", "deferred", "read")
+
+
 def _build_structured_response(raw: dict, directive: str) -> str:
     """Convert the per-command result list into the structured JSON response contract."""
     results = raw.get("results", [])
@@ -173,7 +178,7 @@ def _build_structured_response(raw: dict, directive: str) -> str:
         if not res.get("is_command", True):
             continue  # skip preserved non-command blocks
         commands_total += 1
-        status  = res.get("status", "success")
+        status  = res.get("status")
         verb    = res.get("verb", "")
         obj     = res.get("object_type", "")
         command = f"{verb} {obj}".strip() or "(unknown)"
@@ -185,7 +190,7 @@ def _build_structured_response(raw: dict, directive: str) -> str:
         detail = {
             "step": step,
             "command": command,
-            "status": status,
+            "status": status or "unknown",
             "guid": guid,
             "qualified_name": qn,
             "display_name": dn,
@@ -203,6 +208,13 @@ def _build_structured_response(raw: dict, directive: str) -> str:
             else:
                 # Runtime / Egeria execution error — plan may be partially applied
                 execution_errors.append({"step": step, "command": command, "message": message or res.get("error", "Unknown error")})
+        elif status not in _GOOD_STATUSES:
+            # PY-48: not a known good status (a new one, "warning", or none at all): it did not do what it was asked
+            commands_failed += 1
+            shown = f"status {status!r}" if status else "no status"
+            execution_errors.append({"step": step, "command": command,
+                                     "message": (f"{command} came back with {shown}, which is not a known good status "
+                                                 f"(success, deferred, read), so it is counted as failed. {message}").strip()})
         else:
             commands_succeeded += 1
 

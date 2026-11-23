@@ -52,8 +52,11 @@ After deploying, reload the plugin in Obsidian: **Settings → Community Plugins
 Open **Settings → Call Dr. Egeria Settings (MCP)**:
 
 - **MCP Server URL** — SSE endpoint (see table above)
-- **MCP Access Token** — must match `MCP_ACCESS_TOKEN` in the backend container. There is no default: `quick-start-local` (or `fresh-start-local`) generates one into the stack's `.env` (`compose-configs/egeria-quickstart/.env`) on the first run; copy it from there. In demo mode the portal fills it in when you take the Obsidian lock. The value the stack used to publish is refused. `node deploy.mjs <vault> --container` takes it from the `MCP_ACCESS_TOKEN` environment variable if set.
-- **Egeria User ID / Password** — persona credentials; auto-populated by the portal in demo mode
+- **MCP Access Token** — must match `MCP_ACCESS_TOKEN` in the backend container. There is no default value.
+  - The Portal's own Obsidian (the containerised vault opened from the Portal): you don't set it. When you take the Obsidian lock and pick a persona, the Portal writes the token, with the persona's user ID and password, into the plugin's settings, and clears them when the lock is released.
+  - Your own desktop Obsidian, or any other MCP client: paste it yourself. It's the `MCP_ACCESS_TOKEN=` line in the stack's `.env` (`compose-configs/egeria-quickstart/.env`, or `compose-configs/egeria-freshstart/.env`). `quick-start-local` (or `fresh-start-local`) generates it on the first run and keeps it on later runs, so paste it again only if that `.env` is recreated or the token is changed.
+  - The value the stack used to publish is refused. `node deploy.mjs <vault> --container` takes it from the `MCP_ACCESS_TOKEN` environment variable if set.
+- **Egeria User ID / Password** — persona credentials; filled in by the Portal when you take its Obsidian lock with a persona, otherwise enter them yourself
 - **Default Directive** — `process` / `validate` / `display`
 - **Outbox Path** — where results are saved (relative to vault root)
 - **Vault Root** — absolute path to vault inside the pyegeria-web container (e.g. `/coco-workbooks`)

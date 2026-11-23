@@ -65,10 +65,12 @@ Open **Settings → Call Dr. Egeria Settings (MCP)**:
 
 ### MCP Settings
 - **MCP Server URL** — See table above. Auto-set by `deploy:coco` for container use.
-- **MCP Access Token** — Must match `MCP_ACCESS_TOKEN` in the backend container. There is no default: `quick-start-local` (or `fresh-start-local`) generates one into the stack's `.env` on the first run; copy it from there. With it unset the MCP endpoints are off; the value the stack used to publish is refused.
+- **MCP Access Token** — Must match `MCP_ACCESS_TOKEN` in the backend container. There is no default value. With it unset the MCP endpoints are off; the value the stack used to publish is refused.
+  - The Portal's own Obsidian (the containerised vault opened from the Portal): you don't set it. When you take the Obsidian lock and pick a persona, the Portal writes the token, with the persona's user ID and password, into the plugin's settings, and clears them when the lock is released. See *Persona auto-configuration* below.
+  - Your own desktop Obsidian, or any other MCP client: paste it yourself. It's the `MCP_ACCESS_TOKEN=` line in the stack's `.env` (`compose-configs/egeria-quickstart/.env`, or `compose-configs/egeria-freshstart/.env`). `quick-start-local` (or `fresh-start-local`) generates it on the first run and keeps it on later runs, so paste it again only if that `.env` is recreated or the token is changed.
 
 ### Egeria Settings
-- **User ID / Password** — Your Egeria persona credentials. In demo mode the portal writes these automatically when you acquire the Obsidian session.
+- **User ID / Password** — Your Egeria persona credentials. In the Portal's own Obsidian the Portal writes these when you acquire the Obsidian session with a persona; in your own Obsidian, enter them yourself.
 - **Platform URL** — Default: `https://host.docker.internal:9443`.
 - **View Server** — Default: `qs-view-server`.
 - **Default Directive** — `process` (execute), `validate` (check syntax), or `display` (view metadata).
@@ -79,9 +81,9 @@ Open **Settings → Call Dr. Egeria Settings (MCP)**:
 
 ---
 
-## Persona auto-configuration (demo mode)
+## Persona auto-configuration (the Portal's own Obsidian)
 
-In demo mode the portal manages an Obsidian session lock. When you acquire the lock, the portal writes your persona's credentials (`userId`, `userPass`, `mcpToken`) directly into the plugin's `data.json`. The plugin detects this change via a file-watcher and reloads settings automatically — a notice appears: *"Dr. Egeria: session updated — persona is now `{userId}`"*. No manual settings change is needed.
+The Portal manages a session lock for its own containerised Obsidian vault. When you acquire the lock with a persona, the Portal writes your persona's credentials (`userId`, `userPass`, `mcpToken`) directly into the plugin's `data.json`. The plugin detects this change via a file-watcher and reloads settings automatically — a notice appears: *"Dr. Egeria: session updated — persona is now `{userId}`"*. No manual settings change is needed. This applies only to the Portal's own vault: the Portal can't reach the settings of an Obsidian running on your own machine, so there you set the token and credentials yourself (see *MCP Access Token* above).
 
 ---
 

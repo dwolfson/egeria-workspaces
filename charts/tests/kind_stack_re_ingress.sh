@@ -37,11 +37,12 @@ SQL
 unset OPW RPW
 kubectl -n "$NS" create secret generic re-owner-db --from-file=password="$W/owner-pw" --dry-run=client -o yaml | kubectl apply -f - >/dev/null
 kubectl -n "$NS" create secret generic re-db --from-file=password="$W/rt-pw" --dry-run=client -o yaml | kubectl apply -f - >/dev/null
-# RE's Egeria service account (and the sign-in account used below): the non-personal account of the tracked freshstart user directory
+# RE's own Egeria service account (trellisrenpa, TR-141) and the sign-in account for the Portal checks (omagspcatnpa): both from the tracked freshstart user directory
 python3 -I - "$CHARTS/egeria-platform/files/freshstart/secrets/egeria-user-directory.omsecrets" "$W" <<'PY'
 import sys, yaml
-u = yaml.safe_load(open(sys.argv[1]))["secretsCollections"]["userDirectory"]["users"]["omagspcatnpa"]["secrets"]["clearPassword"]
-open(sys.argv[2] + "/egeria-pw", "w").write(u)
+u = yaml.safe_load(open(sys.argv[1]))["secretsCollections"]["userDirectory"]["users"]
+open(sys.argv[2] + "/egeria-pw", "w").write(u["trellisrenpa"]["secrets"]["clearPassword"])
+open(sys.argv[2] + "/portal-pw", "w").write(u["omagspcatnpa"]["secrets"]["clearPassword"])
 PY
 kubectl -n "$NS" create secret generic re-egeria --from-file=password="$W/egeria-pw" --dry-run=client -o yaml | kubectl apply -f - >/dev/null
 
@@ -57,7 +58,7 @@ helm upgrade --install "$REL" "$CHARTS/egeria-stack" -n "$NS" -f "$CHARTS/egeria
   --set re.enabled=true --set re.image.repository="$REG/trellis/resource-explorer" --set re.image.tag="$RTAG" \
   --set re.database.host=postgres --set re.database.port=5442 --set re.database.name=re_proof --set re.database.user=re_rt --set re.database.existingSecret=re-db \
   --set re.database.owner.user=re_owner --set re.database.owner.existingSecret=re-owner-db \
-  --set re.egeria.daemon.userId=omagspcatnpa --set re.egeria.daemon.existingSecret=re-egeria \
+  --set re.egeria.daemon.existingSecret=re-egeria \
   --set re.persistence.storageClassName=standard --set 're.persistence.accessModes={ReadWriteOnce}' >/dev/null
 echo "installed $REL in $NS at $(date -u +%T)"
 POD=$REL-platform-0
@@ -86,7 +87,7 @@ echo "anonymous GET /portal: HTTP $(curl -s -o /dev/null -m 20 -w '%{http_code} 
 python3 -I - "$W" <<'PY'
 import json, sys
 w = sys.argv[1]
-open(w + "/login.json", "w").write(json.dumps({"user_id": "omagspcatnpa", "password": open(w + "/egeria-pw").read()}))
+open(w + "/login.json", "w").write(json.dumps({"user_id": "omagspcatnpa", "password": open(w + "/portal-pw").read()}))
 PY
 # The password goes in a file (umask 077), never in curl's argv. An Egeria token alone is not a Portal session (PO-78): sign in at /api/auth/login and keep the demo_token cookie.
 LOGIN=$(curl -s -m 30 -o /dev/null -w '%{http_code}' -c "$W/jar" -H "Host: $HOST" -H 'Content-Type: application/json' --data @"$W/login.json" $IN/api/auth/login)

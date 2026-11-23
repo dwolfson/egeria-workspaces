@@ -219,6 +219,13 @@ def main():
     check("stack on port 9444: the worker waits at https://s-platform:9444", e.get("BASE") == "https://s-platform:9444", str(e))
     off = renders(V("values-demo.yaml") + V("values-quickstart.yaml") + IMGS)
     check("RE off: no wait-for-egeria init container anywhere", not any(c["name"] == "wait-for-egeria" for d in off if d["kind"] in ("Deployment", "StatefulSet", "Job") for c in d["spec"]["template"]["spec"].get("initContainers", [])))
+    # TR-141: on freshstart RE runs as its own account, not omagspcatnpa (the platform's integration identity)
+    k = RE_.index("re.egeria.daemon.userId=re"); RE_NOUSER = RE_[:k - 1] + RE_[k + 1:]
+    dsf = renders(V("values-demo.yaml") + V("values-freshstart.yaml") + IMGS + RE_NOUSER)
+    wk = next(d for d in dsf if d["kind"] == "Deployment" and d["metadata"]["name"].endswith("re-worker"))["spec"]["template"]["spec"]
+    env = {e["name"]: e.get("value") for e in wk["containers"][0]["env"]}
+    wenv = {e["name"]: e.get("value") for e in wk["initContainers"][0]["env"]}
+    check("freshstart: RE's daemon account is trellisrenpa by default (worker and its wait)", env.get("RE_DAEMON_USER_ID") == "trellisrenpa" and wenv.get("WAIT_USER") == "trellisrenpa", str((env.get("RE_DAEMON_USER_ID"), wenv.get("WAIT_USER"))))
     if failures:
         print("\n%d FAILED" % len(failures))
         sys.exit(1)

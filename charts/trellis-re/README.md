@@ -7,7 +7,7 @@ extension that you run yourself. The image is built from the trellis repo (`dock
 helm install re charts/trellis-re -n <ns> -f charts/trellis-re/values-demo.yaml \
   --set image.repository=<registry>/trellis/resource-explorer --set image.tag=<tag> \
   --set database.host=<host> --set database.name=<db> --set database.user=<runtime role> --set database.existingSecret=<secret> \
-  --set egeria.platformUrl=https://<platform>:9443 --set egeria.daemon.userId=<account> --set egeria.daemon.existingSecret=<secret>
+  --set egeria.platformUrl=https://<platform>:9443 --set egeria.daemon.userId=<account>   # RE's own service account, not the platform's integration identity or a person --set egeria.daemon.existingSecret=<secret>
 ```
 
 Tested: `charts/tests/re_render_test.py` (no cluster) and `charts/tests/kind_re.sh` (kind, demo and `MODE=production`). With `tls.verify=true` the platform's CA must pass strict verification (the image runs Python 3.13: a CA needs `keyUsage` with `keyCertSign` and key identifiers). See `charts/docs/testing.md`.

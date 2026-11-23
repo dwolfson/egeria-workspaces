@@ -64,7 +64,8 @@ egeria:
   waitTimeoutSeconds: 900
   viewServer: ""           # empty: qs-view-server (quickstart) or fs-view-server (freshstart)
   daemon:
-    userId: ""             # REQUIRED, RE's service account (RE_DAEMON_USER_ID)
+    userId: ""             # REQUIRED (RE_DAEMON_USER_ID). RE's own service account: not the platform's integration identity (omagspcatnpa) and not a person.
+                           # It must be allowed to list active servers and to read and write what RE manages. egeria-stack's values-freshstart.yaml sets trellisrenpa from the demo user directory.
     # REQUIRED. A Secret with the service account's password under passwordKey.
     existingSecret: ""
     passwordKey: password

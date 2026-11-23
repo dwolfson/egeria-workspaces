@@ -79,6 +79,10 @@ from rate_limiter import limiter
 
 @asynccontextmanager
 async def _lifespan(app: FastAPI):
+    # TR-134: in DEMO_MODE the demo sign-in database must be configured explicitly (DEMO_DB_HOST/DEMO_DB_URL for Postgres, or
+    # DEMO_DB_PATH for SQLite). Refuse to start, in words, rather than guess one: every sign-in would be a 500 otherwise.
+    from demo_config import require_demo_db
+    require_demo_db()
     # pyegeria's logging config leaves the console at ERROR, so Portal info/warning lines were invisible in
     # `docker logs`. Add a Portal-only sink here, after that config has run (see portal_logging.py).
     from portal_logging import ensure_portal_log_sink

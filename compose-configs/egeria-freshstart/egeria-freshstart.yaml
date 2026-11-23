@@ -187,6 +187,9 @@ services:
       MCP_ACCESS_TOKEN: "egeria-secret-mcp-token"
       # ── Auth (Egeria-backed, no SQLite) ──────────────────────────────────────
       DEMO_MODE: "false"
+      # TR-134: the demo database (feedback, favorites, locks) is chosen explicitly; the image has no default host. Compose
+      # has the shared Postgres, so say so.
+      DEMO_DB_HOST: "egeria-shared-postgres"
       FEEDBACK_DB_PATH: "/app/demo-data/feedback.db"
       # No published default (RK-24b): gen-env.sh generates JWT_SECRET into .env on the first run and keeps it.
       JWT_SECRET: "${JWT_SECRET:?JWT_SECRET is not set: run ./fresh-start-local, which generates one into compose-configs/egeria-freshstart/.env}"

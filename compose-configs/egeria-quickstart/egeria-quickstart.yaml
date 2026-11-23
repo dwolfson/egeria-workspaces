@@ -315,6 +315,10 @@ services:
       MCP_ACCESS_TOKEN: "egeria-secret-mcp-token"
       # ── Demo mode — set DEMO_MODE=true to enable public access with auth ──────
       DEMO_MODE: "false"
+      # TR-134: the demo sign-in database is chosen explicitly; there is no default host in the image. Compose has the shared
+      # Postgres, so say so (the public-demo override sets its own host). DEMO_DB_PATH here only locates config.js beside it:
+      # DEMO_DB_HOST wins, so the database stays Postgres.
+      DEMO_DB_HOST: "egeria-shared-postgres"
       DEMO_DB_PATH: "/app/demo-data/demo.db"
       FEEDBACK_DB_PATH: "/app/demo-data/feedback.db"
       # No published default (PO-46b): quick-start-local's gen-env.sh generates JWT_SECRET into .env and keeps it.

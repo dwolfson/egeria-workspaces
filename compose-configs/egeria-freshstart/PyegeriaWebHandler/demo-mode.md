@@ -120,12 +120,16 @@ The demo auth tables (`users`, `events`, `config`) live in the **`demo_auth` sch
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `DEMO_DB_HOST` | `egeria-shared-postgres` | PostgreSQL host |
+| `DEMO_DB_HOST` | none (set it) | PostgreSQL host. The compose files set `egeria-shared-postgres` explicitly. Setting this (or `DEMO_DB_URL`) selects Postgres |
 | `DEMO_DB_PORT` | `5442` | PostgreSQL port |
 | `DEMO_DB_NAME` | `coco_pharma` | Database name |
 | `DEMO_DB_SCHEMA` | `demo_auth` | Schema for auth tables |
 | `DEMO_DB_USER` | `demo_user` | DB user |
 | `DEMO_DB_PASSWORD` | `demo4egeria` | DB password — **set in `.env`, never in yaml** |
+
+The database is chosen **explicitly** (TR-134), with no default host: `DEMO_DB_HOST` or `DEMO_DB_URL` set means PostgreSQL;
+otherwise `DEMO_DB_PATH` set means SQLite at that file (the Helm chart's case); otherwise, in `DEMO_MODE`, the Portal refuses to
+start and says which settings are missing. An explicit `DEMO_DB_HOST` that cannot be reached is an error, never a quiet switch to SQLite.
 
 Schema and tables are created automatically on first startup via SQLAlchemy (`Base.metadata.create_all`).
 

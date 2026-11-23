@@ -79,6 +79,10 @@ from rate_limiter import limiter
 
 @asynccontextmanager
 async def _lifespan(app: FastAPI):
+    # TR-134: in DEMO_MODE the demo sign-in database must be configured explicitly (DEMO_DB_HOST/DEMO_DB_URL for Postgres, or
+    # DEMO_DB_PATH for SQLite). Refuse to start, in words, rather than guess one: every sign-in would be a 500 otherwise.
+    from demo_config import require_demo_db
+    require_demo_db()
     from obsidian_lock_handler import start_scheduler as obs_start, stop_scheduler as obs_stop
     from jupyter_lock_handler import start_scheduler as jup_start, stop_scheduler as jup_stop
     from bootstrap_monitor_handler import start_scheduler as boot_start, stop_scheduler as boot_stop

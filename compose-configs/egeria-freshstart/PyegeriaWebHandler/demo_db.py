@@ -2,9 +2,13 @@
 SPDX-License-Identifier: Apache-2.0
 Copyright Contributors to the ODPi Egeria project.
 
-Demo-mode database — PostgreSQL via SQLAlchemy.
-Tables live in the `demo_auth` schema inside the `coco_pharma` database on
-egeria-shared-postgres:5442.  The Egeria metadata store is separate and unaffected.
+Demo-mode database via SQLAlchemy, chosen EXPLICITLY (TR-134, demo_config.select_demo_db):
+  * DEMO_DB_HOST or DEMO_DB_URL set -> PostgreSQL; tables live in the `demo_auth` schema of the `coco_pharma` database
+    (the compose files name the shared Postgres with DEMO_DB_HOST; there is no default host);
+  * else DEMO_DB_PATH set           -> SQLite at that file (the Helm chart's case; no schemas);
+  * else                            -> refused in words (DemoDbNotConfigured), never a guessed default.
+An explicit Postgres host that is unreachable fails loudly; it never falls back to SQLite.
+The Egeria metadata store is separate and unaffected.
 """
 
 import json
@@ -16,7 +20,10 @@ from typing import Generator, Optional
 from sqlalchemy import Boolean, Column, DateTime, Integer, String, Text, create_engine, text
 from sqlalchemy.orm import DeclarativeBase, Session
 
-from demo_config import DEMO_DB_SCHEMA, DEMO_DB_URL
+from demo_config import DEMO_DB_CHOICE, DEMO_DB_SCHEMA, DEMO_DB_URL, DemoDbNotConfigured
+
+# SQLite has no schemas: its tables are unqualified. Postgres keeps the demo_auth schema.
+_SCHEMA = None if DEMO_DB_CHOICE.kind == "sqlite" else DEMO_DB_SCHEMA
 
 # ── Models ─────────────────────────────────────────────────────────────────────
 
@@ -26,7 +33,7 @@ class Base(DeclarativeBase):
 
 class User(Base):
     __tablename__ = "users"
-    __table_args__ = {"schema": DEMO_DB_SCHEMA}
+    __table_args__ = {"schema": _SCHEMA}
 
     id            = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     display_name  = Column(String(200), nullable=False)
@@ -44,7 +51,7 @@ class User(Base):
 
 class Event(Base):
     __tablename__ = "events"
-    __table_args__ = {"schema": DEMO_DB_SCHEMA}
+    __table_args__ = {"schema": _SCHEMA}
 
     id                = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     user_id           = Column(String(36))       # user UUID (kept for reference)
@@ -59,7 +66,7 @@ class Event(Base):
 
 class Favorite(Base):
     __tablename__ = "favorites"
-    __table_args__ = {"schema": DEMO_DB_SCHEMA}
+    __table_args__ = {"schema": _SCHEMA}
 
     id         = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     user_email = Column(String(200), nullable=False, index=True)
@@ -75,7 +82,7 @@ class Favorite(Base):
 
 class Config(Base):
     __tablename__ = "config"
-    __table_args__ = {"schema": DEMO_DB_SCHEMA}
+    __table_args__ = {"schema": _SCHEMA}
 
     key   = Column(String(100), primary_key=True)
     value = Column(Text)
@@ -105,22 +112,36 @@ _CONFIG_DEFAULTS = {
 
 
 def get_engine():
+    """The demo database's engine, built once. A failed first attempt keeps nothing: the next call tries again and fails the same
+    way, loudly. Nothing here falls back from one kind of database to another."""
     global _engine
-    if _engine is None:
-        _engine = create_engine(
+    if _engine is not None:
+        return _engine
+    choice = DEMO_DB_CHOICE
+    if choice.kind == "none":
+        raise DemoDbNotConfigured(choice.words)
+    if choice.kind == "sqlite":
+        from pathlib import Path
+
+        Path(choice.path).expanduser().parent.mkdir(parents=True, exist_ok=True)
+        engine = create_engine(DEMO_DB_URL, connect_args={"check_same_thread": False})
+        Base.metadata.create_all(engine)
+    else:
+        engine = create_engine(
             DEMO_DB_URL,
             pool_pre_ping=True,
             connect_args={"options": f"-csearch_path={DEMO_DB_SCHEMA},public"},
         )
         # Ensure the schema exists before creating tables
-        with _engine.connect() as conn:
+        with engine.connect() as conn:
             conn.execute(text(f"CREATE SCHEMA IF NOT EXISTS {DEMO_DB_SCHEMA}"))
             conn.commit()
-        Base.metadata.create_all(_engine)
-        _migrate_events_table(_engine)
-        _migrate_favorites_table(_engine)
-        _seed_config()
-    return _engine
+        Base.metadata.create_all(engine)
+        _migrate_events_table(engine)
+        _migrate_favorites_table(engine)
+    _seed_config(engine)
+    _engine = engine
+    return engine
 
 
 def _migrate_events_table(engine) -> None:
@@ -148,8 +169,8 @@ def _migrate_favorites_table(engine) -> None:
         conn.commit()
 
 
-def _seed_config() -> None:
-    with Session(get_engine()) as session:
+def _seed_config(engine) -> None:
+    with Session(engine) as session:
         for key, value in _CONFIG_DEFAULTS.items():
             if not session.get(Config, key):
                 session.add(Config(key=key, value=value))

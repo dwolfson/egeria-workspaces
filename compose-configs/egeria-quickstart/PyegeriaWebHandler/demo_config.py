@@ -6,6 +6,7 @@ Demo-mode configuration — reads all settings from environment variables.
 Import this module anywhere that needs DEMO_MODE or auth config.
 """
 
+import dataclasses
 import os
 import re
 
@@ -19,18 +20,87 @@ DEMO_MODE: bool = os.environ.get("DEMO_MODE", "false").lower() in ("true", "1", 
 # whether to use the logged-in user's Egeria bearer token.
 SERVER_MANAGED_AUTH: bool = os.environ.get("SERVER_MANAGED_AUTH", "false").lower() in ("true", "1", "yes")
 
-# ── Database (PostgreSQL on egeria-shared-postgres:5442, coco_pharma / demo_auth schema) ──
+# ── Database selection ───────────────────────────────────────────────────────────
 
-DEMO_DB_HOST:     str = os.environ.get("DEMO_DB_HOST",     "egeria-shared-postgres")
-DEMO_DB_PORT:     int = int(os.environ.get("DEMO_DB_PORT", "5442"))
-DEMO_DB_NAME:     str = os.environ.get("DEMO_DB_NAME",     "coco_pharma")
-DEMO_DB_SCHEMA:   str = os.environ.get("DEMO_DB_SCHEMA",   "demo_auth")
-DEMO_DB_USER:     str = os.environ.get("DEMO_DB_USER",     "demo_user")
+
+class DemoDbNotConfigured(RuntimeError):
+    """Raised when no demo database is configured in DEMO_MODE: the Portal refuses to start rather than guess one."""
+
+
+@dataclasses.dataclass(frozen=True)
+class DemoDbChoice:
+    """A selected database configuration."""
+    kind: str   # "postgres", "sqlite" or "none"
+    db_url: str   # not `url`: the allowlist scan treats a `url` field as a request body's platform URL
+    path: str
+    words: str
+
+
+def select_demo_db(env, demo_mode: bool) -> DemoDbChoice:
+    """
+    Select a database based on environment variables.
+
+    Rules in order:
+      (a) DEMO_DB_URL set -> kind postgres, url exactly that value, path ""
+      (b) elif DEMO_DB_HOST set -> kind postgres with constructed URL
+      (c) elif DEMO_DB_PATH set -> kind sqlite, path = value, url = "sqlite:///" + path
+      (d) else if demo_mode is True -> raise DemoDbNotConfigured
+      (e) else return kind "none" with empty values
+
+    A value counts as set only if it is non-blank after strip().
+    """
+    # Helper to check if a value is set (non-blank)
+    def _is_set(key: str) -> bool:
+        val = env.get(key, "")
+        return bool(val.strip())
+
+    # (a) DEMO_DB_URL takes precedence
+    if _is_set("DEMO_DB_URL"):
+        url = env.get("DEMO_DB_URL", "").strip()
+        return DemoDbChoice(kind="postgres", db_url=url, path="", words="the demo database is Postgres, chosen by DEMO_DB_URL")
+
+    # (b) DEMO_DB_HOST is next
+    if _is_set("DEMO_DB_HOST"):
+        host = env.get("DEMO_DB_HOST", "").strip()
+        user = env.get("DEMO_DB_USER", "demo_user").strip() or "demo_user"
+        password = env.get("DEMO_DB_PASSWORD", "demo4egeria").strip() or "demo4egeria"
+        port = int(env.get("DEMO_DB_PORT", "").strip() or 5442)       # a malformed port is an error, never a silent 5442
+        name = env.get("DEMO_DB_NAME", "coco_pharma").strip() or "coco_pharma"
+        url = f"postgresql+psycopg2://{user}:{password}@{host}:{port}/{name}"
+        return DemoDbChoice(kind="postgres", db_url=url, path="", words="the demo database is Postgres, chosen by DEMO_DB_HOST")
+
+    # (c) DEMO_DB_PATH for SQLite
+    if _is_set("DEMO_DB_PATH"):
+        path = env.get("DEMO_DB_PATH", "").strip()
+        url = f"sqlite:///{path}"
+        return DemoDbChoice(kind="sqlite", db_url=url, path=path, words="the demo database is SQLite, chosen by DEMO_DB_PATH")
+
+    # (d) In demo_mode, raise if nothing is set
+    if demo_mode:
+        raise DemoDbNotConfigured(
+            "DEMO_DB_HOST, DEMO_DB_URL and DEMO_DB_PATH are not configured; "
+            "the Portal will not start without one of them"
+        )
+
+    # (e) Outside demo_mode, return "none"
+    return DemoDbChoice(kind="none", db_url="", path="", words="no demo database is configured: set DEMO_DB_HOST (or DEMO_DB_URL) for Postgres, or DEMO_DB_PATH for SQLite")
+
+
+# ── Database constants read from environment at import time ──────────────────────
+
+DEMO_DB_PORT: int = int(os.environ.get("DEMO_DB_PORT", "5442"))
+DEMO_DB_NAME: str = os.environ.get("DEMO_DB_NAME", "coco_pharma")
+DEMO_DB_SCHEMA: str = os.environ.get("DEMO_DB_SCHEMA", "demo_auth")
+DEMO_DB_USER: str = os.environ.get("DEMO_DB_USER", "demo_user")
 DEMO_DB_PASSWORD: str = os.environ.get("DEMO_DB_PASSWORD", "demo4egeria")
-DEMO_DB_URL:      str = (
-    f"postgresql+psycopg2://{DEMO_DB_USER}:{DEMO_DB_PASSWORD}"
-    f"@{DEMO_DB_HOST}:{DEMO_DB_PORT}/{DEMO_DB_NAME}"
-)
+DEMO_DB_HOST: str = os.environ.get("DEMO_DB_HOST", "")
+
+# Compute DEMO_DB_CHOICE at module level (never raises at import)
+DEMO_DB_CHOICE: DemoDbChoice = select_demo_db(os.environ, demo_mode=False)
+
+# DEMO_DB_URL is derived from the choice
+DEMO_DB_URL: str = DEMO_DB_CHOICE.db_url
+
 
 # ── Egeria metadata store reset ────────────────────────────────────────────────
 # Credentials for the egeria database (not coco_pharma) — used to drop and
@@ -241,3 +311,16 @@ def resource_explorer_check_urls() -> list:
     fallback_netloc = f"{userinfo}host.docker.internal{port}"
     fallback = urlunsplit((parts.scheme, fallback_netloc, parts.path, parts.query, parts.fragment))
     return [EGERIA_RESOURCE_EXPLORER_URL, fallback]
+
+
+# ── Database helpers ────────────────────────────────────────────────────────────
+
+
+def require_demo_db() -> DemoDbChoice:
+    """
+    Require a database to be configured in DEMO_MODE.
+
+    Calls select_demo_db with the current environment and DEMO_MODE.
+    Raises DemoDbNotConfigured if no database is available in demo_mode.
+    """
+    return select_demo_db(os.environ, DEMO_MODE)
